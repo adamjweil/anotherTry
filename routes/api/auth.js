@@ -21,17 +21,18 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-// @ route  GEPOSTT api/auth
+// @ route  POST api/auth
 // @desc    Authenticate user & get token
 // @access  Public
 router.post(
   "/",
   [
-    check("password", "Password is required").exists(),
-    check("email", "Please enter a valid email").isEmail()
+    check("email", "Please enter a valid email").isEmail(),
+    check("password", "Password is required").exists()
   ],
   async (req, res) => {
     const errors = validationResult(req);
+
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
