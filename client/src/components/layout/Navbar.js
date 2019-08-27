@@ -1,6 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
@@ -10,14 +9,14 @@ const Navbar = () => {
       </Link>
       <div className="right menu">
         <Link to="/login" className="item">
-          Login
+        Login
         </Link>
         <Link to="/register" className="item">
-          Register
+        Register
         </Link>
       </div>
     </div>
   );
-};
+}
 
 export default Navbar;
