@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { setAlert } from "./../../actions/alert";
 import { register } from "./../../actions/auth";
 import PropTypes from "prop-types";
-import { loadUser } from "./../../actions/auth";
+import { loadUser } from "./../actions/auth";
 
 import {
   Button,
