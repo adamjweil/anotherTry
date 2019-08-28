@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Tickets from './Tickets';
 
-const Dashboard = props => {
+const Dashboard = () => {
   return (
     <div>
       Dashboard
