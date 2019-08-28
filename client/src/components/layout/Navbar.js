@@ -40,16 +40,45 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   );
   // If user isn't logged in already (doesn't have a token)
 
-return (
-  <nav className="fas fa-code">
-    <h1>
-      <Link to="/">
-        <i className="fas fa-code"> DevConnector (Social)</i>
-      </Link>
-    </h1>
-    { !loading && (<Fragment>{ isAuthenticated ? authLinks : guestLinks }</Fragment>) }
-  </nav>
-  )
+
+  if (isAuthenticated) {
+    return (
+      <div className="ui secondary pointing menu">
+        <Link to="/" className="item">
+          Home
+        </Link>
+        <div className="right menu">
+          <Link to="/dashboard" className="item">
+            Dashboard
+          </Link><Link to="/profile" className="item">
+            My Profile
+          </Link>
+          <Link onClick={logout} href="/logout">
+            <i className="fas fa-sign-out-alt" />{` `}
+            <span className="item">Logout</span>
+          </Link>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="ui secondary pointing menu">
+        <Link to="/" className="item">
+          Home
+        </Link>
+        <div className="right menu">
+          <Link to="/login" className="item">
+          Login
+          </Link>
+          <Link to="/register" className="item">
+            Register
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+
 };
 
 Navbar.propTypes = {

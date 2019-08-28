@@ -7,13 +7,14 @@ import { Grid, Column } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 const Profile = ({ loadUser, setAlert }) => {
+  const grav = "https://react.semantic-ui.com/images/avatar/large/matthew.png"
   return (
     <div className='ui card'>
       <div className='image'>
-        <img src="http://www.example.com/demo-image.jpg" title="Title of image" alt="alt text here" />
+        <img src="https://react.semantic-ui.com/images/avatar/large/matthew.png" />
       </div>
       <div className="content">
-        <div className="header"> xyz </div>
+        <div className="header"> xys </div>
         <div className="description"> zyx </div>
       </div>
       <div className="extra content">
@@ -27,9 +28,7 @@ const Profile = ({ loadUser, setAlert }) => {
 }
 
 Profile.propTypes = {
-  loadUser: PropTypes.func.isRequired,
+  loadUser: PropTypes.func.isRequired
 }
 
-export default connect(
-  { loadUser }
-)(Profile);
+export default connect(null, { loadUser })(Profile);
