@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
 import {
@@ -13,8 +14,9 @@ import {
   Segment,
 } from 'semantic-ui-react';
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, register }) => {
   const [formData, setFormData] = useState({
+    username: '',
     email: '',
     password: ''
   });
@@ -23,15 +25,21 @@ const Register = ({ setAlert }) => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value })
 
-  const onSubmit = ({ formData }) => async dispatch =>
-    console.log(formData);
+  const onSubmit = async e => {
+    e.preventDefault();
+    if (password !== password2) {
+      setAlert('Passwords do not match', 'danger');
+    } else {
+      register({ username, email, password })
+    }
+  };
 
 
     return (
         <Grid centered columns={2}>
           <Grid.Column>
             <Header as="h2" textAlign="center">
-              Register
+              Create New Account!
             </Header>
             <Segment>
               <Form size="large" onSubmit={e => onSubmit(e)} >
@@ -80,7 +88,7 @@ const Register = ({ setAlert }) => {
             </Segment>
             <Message>
                  Not registered yet?
-                 <Link to="/register">
+                 <Link to="/register" className="item">
                   Sign up here...
                  </Link>
                </Message>
@@ -89,11 +97,17 @@ const Register = ({ setAlert }) => {
      );
   };
 
-  Register.propTypes = {
-    register: PropTypes.func.isRequired
-  }
+Register.propTypes = {
+  register: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired
+}
 
+const mapStateToProps = state => ({
+  register: state.auth,
+  alerts: state.alerts
+});
 
-export default connect(null,
-{ setAlert }
+export default connect(
+  mapStateToProps,
+{ setAlert, register }
 )(Register);

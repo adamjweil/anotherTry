@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
 import PropTypes from 'prop-types';
 
+
 import {
   Button,
   Form,
@@ -23,8 +24,9 @@ const Login = ({ setAlert }) => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value })
 
-  const onSubmit = ({ formData }) => async dispatch =>
-    console.log(formData);
+  const onSubmit = ({ formData }) => async dispatch => {
+    console.log('-----');
+  }
 
     return (
         <Grid centered columns={2}>
@@ -36,7 +38,7 @@ const Login = ({ setAlert }) => {
               <Form size="large" onSubmit={e => onSubmit(e)} >
                 <Form.Input
                   fluid
-                  icon="email"
+                  icon="mail"
                   type="text"
                   name='email'
                   placeholder="Email address"
@@ -46,7 +48,6 @@ const Login = ({ setAlert }) => {
                 />
                 <Form.Input
                   fluid
-                  icon="password"
                   type="password"
                   name='password'
                   placeholder="Email a password"
@@ -70,11 +71,14 @@ const Login = ({ setAlert }) => {
      );
   };
 
+Login.propTypes = {
+  alerts: PropTypes.array.isRequired
+}
 
-  const mapStateToProps = state => {
-    return ({ user: state.auth }
-  )};
-
+const mapStateToProps = state => ({
+  user: state.auth,
+  alerts: state.alert
+});
 
 export default connect(
   mapStateToProps,
