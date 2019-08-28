@@ -5,13 +5,16 @@ import { Route } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Landing from './components/layout/Landing';
+import Alert from './components/layout/Alert';
 
+import { Message } from 'semantic-ui-react';
 
 function App() {
   return (
     <div className="ui container">
       <Navbar />
       <h1>My App</h1>
+      <Alert />
         <Route exact path="/" component={Landing} />
       <section className="container">
         <Route exact path="/register" component={Register} />
