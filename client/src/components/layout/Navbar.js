@@ -6,26 +6,7 @@ import { connect } from 'react-redux';
 import { logout } from '../../actions/auth';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
-  const authLinks = (
-    <ul>
-      <li>
-        <Link onClick={logout} href="/logout">
-          <i className="fas fa-sign-out-alt" />{` `}
-          <span className="hide-sm">Logout</span>
-        </Link>
-      </li>
-      </ul>
-    );
-
   const guestLinks = () => (
-    <div>
-      <ul>
-        <li>
-          <Link to="/" className="item">
-            Home
-          </Link>
-        </li>
-      </ul>
       <div className="ui secondary pointing menu">
         <Link to="/" className="item">
           Home
@@ -39,10 +20,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           </Link>
         </div>
       </div>
-    </div>
   );
 
-  const authLink = () => (
+  const authLinks = () => (
     <div className="ui secondary pointing menu">
       <Link to="/" className="item">
         Home
@@ -51,9 +31,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <Link to="/profile" className="item">
           Profile
         </Link>
-        <Link to="/logout" onClick={logout} className="item">
-        <i className="fas fa-sign-out-alt"></i>{` `}
-          Logout
+        <Link onClick={logout} href="/logout">
+          <i className="fas fa-sign-out-alt" />{` `}
+          <span className="hide-sm">Logout</span>
         </Link>
       </div>
     </div>
