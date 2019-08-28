@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
-
+import Profile from './Profile';
 
 import {
   Button,
@@ -38,7 +38,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
   // Redirect if logged in
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />
+    return <Redirect to="/profile" />
   }
 
   return (
