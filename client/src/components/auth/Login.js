@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { setAlert } from '../../actions/alert';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+// Redux
+import { connect } from 'react-redux';
+import { setAlert } from '../../actions/alert';
+import { login } from '../../actions/auth';
 
 import {
   Button,
@@ -14,7 +15,7 @@ import {
   Segment,
 } from 'semantic-ui-react';
 
-const Login = ({ setAlert }) => {
+const Login = ({ login, isAuthenticated, setAlert }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -24,8 +25,14 @@ const Login = ({ setAlert }) => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value })
 
-  const onSubmit = ({ formData }) => async dispatch => {
-    console.log('-----');
+  const onSubmit = async e => {
+    e.preventDefault();
+    login(email, password);
+  };
+
+  // Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />
   }
 
     return (
@@ -69,18 +76,22 @@ const Login = ({ setAlert }) => {
              </Grid.Column>
            </Grid>
      );
+
   };
 
 Login.propTypes = {
-  alerts: PropTypes.array.isRequired
+  login: PropTypes.func.isRequired,
+  alerts: PropTypes.array.isRequired,
+  isAuthenticated: PropTypes.bool
 }
 
 const mapStateToProps = state => ({
-  user: state.auth,
+  isAuthenticated: state.auth.isAuthenticated,
+  login: state.auth,
   alerts: state.alert
 });
 
 export default connect(
   mapStateToProps,
-  { setAlert }
+  { setAlert, login }
 )(Login);
