@@ -1,17 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Tickets from './Tickets';
 
 const Dashboard = () => {
   return (
     <div>
-      Dashboard
+      <h3>Dashboard</h3>
+      <Tickets />
     </div>
   )
 }
 
-Dashboard.propTypes = {
-
-}
 
 export default Dashboard;
