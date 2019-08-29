@@ -7,20 +7,19 @@ import { getCurrentProfile } from '../../actions/profile';
 import { Grid, Column } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-const Profile = ({ loadUser, setAlert, getCurrentProfile, auth, profile: { profile } }) => {
+const Profile = ({ loadUser, setAlert, getCurrentProfile, auth: { user } }) => {
   useEffect(() => {
       getCurrentProfile()
-  });
-  const tempGravatar = "https://react.semantic-ui.com/images/avatar/large/matthew.png"
+  }, []);
 
   return (
     <div className='ui card'>
       <div className='image'>
-        <img src="https://as1.ftcdn.net/jpg/02/59/94/92/500_F_259949239_KKDiZphlWffdaE5zsugujCQtaZ8nyWW9.jpg" />
+        <img src={user && user.avatar} alt="https://as1.ftcdn.net/jpg/02/59/94/92/500_F_259949239_KKDiZphlWffdaE5zsugujCQtaZ8nyWW9.jpg" />
       </div>
       <div className="content">
-        <div className="header"> xyz </div>
-        <div className="description"> zyx </div>
+        <div className="header"> {user && user.name} </div>
+        <div className="description"> {user && user.email} </div>
       </div>
       <div className="extra content">
         <Link to="#" className="">
@@ -33,7 +32,9 @@ const Profile = ({ loadUser, setAlert, getCurrentProfile, auth, profile: { profi
 }
 
 Profile.propTypes = {
-  loadUser: PropTypes.func.isRequired
+  loadUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -41,4 +42,7 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, { loadUser, getCurrentProfile })(Profile);
+export default connect(
+  mapStateToProps,
+  { loadUser, getCurrentProfile }
+)(Profile);
