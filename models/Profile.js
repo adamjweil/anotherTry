@@ -6,6 +6,14 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "user"
   },
+  reportingTo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user'
+  },
+  directReports: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user'
+  },
   team: {
     type: String
   },

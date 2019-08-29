@@ -13,7 +13,7 @@ const Landing = ({ isAuthenticated }) => {
   }
 
   return (
-    <Grid columns={2}>
+    <Grid columns={3}>
       <Grid.Column>
         <section>
           <div className="ui container landing">
@@ -28,8 +28,13 @@ const Landing = ({ isAuthenticated }) => {
         <Grid.Row>
           <Login />
         </Grid.Row>
-      </Grid.Column>
 
+      </Grid.Column>
+      <Grid.Column>
+        <div className='ui vertical divider'>
+          Or
+        </div>
+      </Grid.Column>
       <Grid.Column>
         <div className="content">
           <h1>IMPORTANT CONTENT</h1>
