@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
 // Redux
-import { connect } from 'react-redux';
-import { setAlert } from '../../actions/alert';
-import { login } from '../../actions/auth';
+import { connect } from "react-redux";
+import { setAlert } from "../../actions/alert";
+import { login } from "../../actions/auth";
 
 import {
   Button,
@@ -12,18 +12,18 @@ import {
   Grid,
   Header,
   Message,
-  Segment,
-} from 'semantic-ui-react';
+  Segment
+} from "semantic-ui-react";
 
 const Login = ({ login, isAuthenticated, setAlert }) => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: ""
   });
 
   const { email, password } = formData;
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+  const onChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async e => {
     e.preventDefault();
@@ -32,58 +32,55 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
 
   // Redirect if logged in
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />
+    return <Redirect to="/dashboard" />;
   }
 
-    return (
-        <Grid centered columns={2}>
-          <Grid.Column>
-            <Header as="h2" textAlign="center">
+  return (
+    <Grid centered columns={1}>
+      <Grid.Column>
+        <Header as="h4" textAlign="center">
+          Login
+        </Header>
+        <Segment>
+          <Form size="large" onSubmit={e => onSubmit(e)}>
+            <Form.Input
+              fluid
+              icon="mail"
+              type="text"
+              name="email"
+              placeholder="Email address"
+              value={email}
+              onChange={e => onChange(e)}
+              iconPosition="left"
+            />
+            <Form.Input
+              fluid
+              type="password"
+              name="password"
+              placeholder="Email a password"
+              value={password}
+              onChange={e => onChange(e)}
+              iconPosition="left"
+            />
+            <Button color="blue" fluid size="large">
               Login
-            </Header>
-            <Segment>
-              <Form size="large" onSubmit={e => onSubmit(e)} >
-                <Form.Input
-                  fluid
-                  icon="mail"
-                  type="text"
-                  name='email'
-                  placeholder="Email address"
-                  value={email}
-                  onChange={e => onChange(e)}
-                  iconPosition="left"
-                />
-                <Form.Input
-                  fluid
-                  type="password"
-                  name='password'
-                  placeholder="Email a password"
-                  value={password}
-                  onChange={e => onChange(e)}
-                  iconPosition="left"
-                />
-                <Button color="blue" fluid size="large">
-                  Login
-                </Button>
-              </Form>
-            </Segment>
-            <Message>
-                 Not registered yet?
-                 <Link to="/register">
-                  Sign up here...
-                 </Link>
-               </Message>
-             </Grid.Column>
-           </Grid>
-     );
-
-  };
+            </Button>
+          </Form>
+        </Segment>
+        <Message>
+          Not registered yet?
+          <Link to="/register">Sign up here...</Link>
+        </Message>
+      </Grid.Column>
+    </Grid>
+  );
+};
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
   alerts: PropTypes.array.isRequired,
   isAuthenticated: PropTypes.bool
-}
+};
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,

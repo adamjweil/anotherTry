@@ -1,15 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { Grid } from "semantic-ui-react";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import Register from "./../auth/Register";
 import Login from "./../auth/Login";
+import Register from "./../auth/Register";
 
-import { Grid } from 'semantic-ui-react';
+const Landing = ({ isAuthenticated }) => {
+  if (isAuthenticated !== (null || false)) {
+    return <Redirect to='/dashboard' />;
+  }
 
-const Landing = () => {
   return (
-    <Grid centered columns={6}>
-      <Grid.Row>
+    <Grid columns={3}>
       <Grid.Column>
         <section>
           <div className="ui container landing">
@@ -18,24 +22,34 @@ const Landing = () => {
                 meZocliQ
                 <h4 className="x-large">Online Portal</h4>
               </h1>
-              <div className="content">
-                <p>Hello this is the body</p>
-              </div>
             </div>
           </div>
         </section>
+        <Grid.Row>
+          <Login />
+        </Grid.Row>
       </Grid.Column>
-      </Grid.Row>
 
-      <Grid.Row>
-        <Grid.Column>
+      <Grid.Column>
         <div className="content">
-          <p>Hello this is the body</p>
+          <h1>IMPORTANT CONTENT</h1>
+          <h1>- - - - - - - - - </h1>
+          <h1>IMPORTANT CONTENT</h1>
+          <h1>- - - - - - - - - </h1>
+          <h1>IMPORTANT CONTENT</h1>
+          <h1>- - - - - - - - - </h1>
         </div>
-        </Grid.Column>
-      </Grid.Row>
+      </Grid.Column>
     </Grid>
   );
 };
 
-export default Landing;
+Landing.propTypes = {
+  isAuthenticated: PropTypes.bool
+}
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps)(Landing);

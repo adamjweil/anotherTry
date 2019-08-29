@@ -8,6 +8,7 @@ import Landing from './components/layout/Landing';
 import Alert from './components/layout/Alert';
 import Profile from './components/auth/Profile';
 import Dashboard from './components/Dashboard/Dashboard';
+import PrivateRoute from './components/routing/PrivateRoute';
 
 // Reducx
 import { Provider } from 'react-redux';
@@ -33,7 +34,7 @@ const App = () => {
         <Route exact path="/" component={Landing} />
       <section className="container">
         <Route exact path="/profile" component={Profile} />
-        <Route exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
       </section>
