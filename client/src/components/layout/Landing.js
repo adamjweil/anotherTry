@@ -1,11 +1,10 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { Grid } from "semantic-ui-react";
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Login from "./../auth/Login";
-import Register from "./../auth/Register";
 
 const Landing = ({ isAuthenticated }) => {
   if (isAuthenticated !== (null || false)) {
@@ -13,7 +12,7 @@ const Landing = ({ isAuthenticated }) => {
   }
 
   return (
-    <Grid columns={3}>
+    <Grid columns={2}>
       <Grid.Column>
         <section>
           <div className="ui container landing">
@@ -30,11 +29,7 @@ const Landing = ({ isAuthenticated }) => {
         </Grid.Row>
 
       </Grid.Column>
-      <Grid.Column>
-        <div className='ui vertical divider'>
-          Or
-        </div>
-      </Grid.Column>
+
       <Grid.Column>
         <div className="content">
           <h1>IMPORTANT CONTENT</h1>
