@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import Tickets from './Tickets';
 import { getCurrentProfile, createProfile } from '../../actions/profile';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -7,9 +6,9 @@ import Spinner from '../layout/Spinner';
 import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
 
 const Dashboard = ({ createProfile, getCurrentProfile, auth: { user }, profile: { profile, loading } }) => {
-  useEffect(() => {
-    getCurrentProfile()
-  }, []);
+  // useEffect(() => {
+  //   getCurrentProfile()
+  // }, []);
 
 const [formData, setFormData] = useState({
   team: '',
@@ -20,8 +19,8 @@ const [formData, setFormData] = useState({
   githubusername: ''
 });
 
+getCurrentProfile();
 const { team, title, bio, hireDate, skills, githubusername } = formData;
-
 const onChange = e => {
   setFormData({ ...formData, [e.target.name]: e.target.value });
 }

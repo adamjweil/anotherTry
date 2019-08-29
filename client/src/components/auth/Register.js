@@ -45,7 +45,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       <Grid centered columns={2}>
         <Grid.Column>
           <Header as="h2" textAlign="center">
-            Create New Account!
+            <i className="coffee icon"></i>Create New Account!
           </Header>
           <Segment>
             <Form size="large" onSubmit={e => onSubmit(e)} >

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -6,46 +6,14 @@ import { connect } from 'react-redux';
 import { logout } from '../../actions/auth';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
-  const guestLinks = () => (
-      <div className="ui secondary pointing menu">
-        <Link to="/" className="item">
-          Home
-        </Link>
-        <div className="right menu">
-          <Link to="/login" className="item">
-          Login
-          </Link>
-          <Link to="/register" className="item">
-            Register
-          </Link>
-        </div>
-      </div>
-  );
-
-  const authLinks = () => (
-    <div className="ui secondary pointing menu">
-      <Link to="/" className="item">
-        Home
-      </Link>
-      <div className="right menu">
-        <Link to="/profile" className="item">
-          Profile
-        </Link>
-        <Link onClick={logout} href="/logout">
-          <i className="fas fa-sign-out-alt" />{` `}
-          <span className="hide-sm">Logout</span>
-        </Link>
-      </div>
-    </div>
-  );
-  // If user isn't logged in already (doesn't have a token)
-
-
   if (isAuthenticated) {
     return (
       <div className="ui secondary pointing menu">
         <Link to="/" className="item">
           Home
+        </Link>
+        <Link to="/directory" className="item">
+          Directory
         </Link>
         <div className="right menu">
           <Link to="/dashboard" className="item">
@@ -67,8 +35,8 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           Home
         </Link>
         <div className="right menu">
-          <Link to="/login" className="item">
-          Login
+          <Link to="/directory" className="item">
+            Directory
           </Link>
           <Link to="/register" className="item">
             Register

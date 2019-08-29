@@ -36,7 +36,7 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
   }
 
   return (
-    <Grid centered columns={1}>
+    <Grid centered columns={1} style={{ padding: '10px'}}>
       <Grid.Column>
         <Header as="h4" textAlign="center">
           Login
@@ -69,7 +69,7 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
         </Segment>
         <Message>
           Not registered yet?
-          <Link to="/register">Sign up here...</Link>
+          <Link to="/register"> Sign up here . . .</Link>
         </Message>
       </Grid.Column>
     </Grid>
