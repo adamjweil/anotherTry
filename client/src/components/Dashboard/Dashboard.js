@@ -18,7 +18,8 @@ const [formData, setFormData] = useState({
   hireDate: '',
   skills: '',
   githubusername: ''
-})
+});
+
 const { team, title, bio, hireDate, skills, githubusername } = formData;
 
 const onChange = e => {
@@ -32,16 +33,25 @@ const onSubmit = async e => {
   return loading && profile === null ? (
     <Spinner />
   ) : (
-    <Grid columns={3}>
+    <Grid columns={2} className="very relaxed stackable grid">
       <Grid.Column>
     <Fragment>
-      <h1 className="">Dashboard</h1>
+      <h2 className="">Dashboard</h2>
       <p className="load">
-        <i className="fas fa-user"></i> Welcome, <br /> {user && user.name }
-
+        <i className="fas fa-user"></i> Welcome, {user && user.name }
       </p>
+      <div className='ui divided list'>
+        <h3>
+          <div className=''>Team:</div>
+          { profile && profile.team}
+        </h3>      <h3>
+          <div className=''>Title:</div>
+          { profile && profile.title}
+        </h3>
+      </div>
     </Fragment>
     </Grid.Column>
+
     <Grid.Column>
       <Header as='h2' textAlign='center'>
         Create a Profile
@@ -49,8 +59,8 @@ const onSubmit = async e => {
       <Segment>
         <Form size='large' onSubmit={e => onSubmit(e)}>
 
-          <select className='ui dropdown'>
-            <option value="">Team</option>
+          <select name="team" className='ui dropdown'>
+            <option value="">Select Your team...</option>
             <option value="Dev">Dev</option>
             <option value="LogiQ">LogiQ</option>
             <option value="Admin">Admin</option>
@@ -71,6 +81,7 @@ const onSubmit = async e => {
           </Button>
         </Form>
       </Segment>
+
     </Grid.Column>
     </Grid>
   );
