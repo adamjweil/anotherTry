@@ -29,7 +29,6 @@ const App = () => {
   return (
     <div className="ui container">
       <Navbar />
-      <h1>My App</h1>
       <Alert />
         <Route exact path="/" component={Landing} />
       <section className="container">

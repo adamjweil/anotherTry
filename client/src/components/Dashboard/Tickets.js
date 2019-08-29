@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 const Tickets = () => {
   return (
-    <div>
+    <h4>
       Tickets
-    </div>
+    </h4>
   )
 }
 
