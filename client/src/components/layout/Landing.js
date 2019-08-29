@@ -13,7 +13,7 @@ const Landing = ({ isAuthenticated }) => {
   }
 
   return (
-    <Grid columns={3}>
+    <Grid columns={2}>
       <Grid.Column>
         <section>
           <div className="ui container landing">
