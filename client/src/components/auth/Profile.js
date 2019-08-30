@@ -7,10 +7,11 @@ import { getCurrentProfile } from '../../actions/profile';
 import { Grid, Column } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-const Profile = ({ loadUser, setAlert, getCurrentProfile, auth: { user } }) => {
+const Profile = ({ loadUser, setAlert, getCurrentProfile, auth: { user }, profile: { profile, loading } } ) => {
   // useEffect(() => {
   //     getCurrentProfile()
   // }, []);
+  getCurrentProfile();
 
   return (
     <div className='ui card'>
@@ -18,13 +19,13 @@ const Profile = ({ loadUser, setAlert, getCurrentProfile, auth: { user } }) => {
         <img src={user && user.avatar} alt="https://as1.ftcdn.net/jpg/02/59/94/92/500_F_259949239_KKDiZphlWffdaE5zsugujCQtaZ8nyWW9.jpg" />
       </div>
       <div className="content">
-        <div className="header"> {user && user.name} </div>
-        <div className="description"> {user && user.email} </div>
+        <div className="header"> {profile && profile.team} Team </div>
+        <div className="description"> {profile && profile.title} </div>
       </div>
       <div className="extra content">
         <Link to="#" className="">
-          <i aria-hidden="true" className="user icon"></i>
-          xyz Friends
+          <i aria-hidden="true" className="mail icon"></i>
+          { user && user.email }
         </Link>
       </div>
     </div>

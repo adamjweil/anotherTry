@@ -25,15 +25,14 @@ export const getCurrentProfile = () => async dispatch => {
   }
 };
 
-export const createProfile = ({ team, title }) => async dispatch => {
+// Create profile
+export const createProfile = ({ formData }) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
     }
   }
-
-  const body = JSON.stringify({ team, title });
-
+  const body = JSON.stringify({ formData });
   try {
     const res = await axios.post('/api/profile', body, config);
     dispatch({

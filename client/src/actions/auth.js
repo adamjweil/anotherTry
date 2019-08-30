@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOGIN_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, LOGOUT, LOAD_ALL_USERS } from "./types";
+import { LOGIN_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, LOGOUT, GET_USERS, CLEAR_PROFILE } from "./types";
 import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
 
@@ -81,18 +81,21 @@ export const login = (email, password) => async dispatch => {
 // LOUTOUT A USER / CLEAR PROFILE
 export const logout = () => async dispatch => {
   dispatch({
+    type: CLEAR_PROFILE
+  });
+  dispatch({
     type: LOGOUT
-  })
+  });
 }
 
 
 // Load all Users
 export const loadAllUsers = () => async dispatch => {
   try {
-    const res = await axios.get('/api/user');
+    const res = await axios.get('/api/users');
     dispatch({
-      type: LOAD_ALL_USERS,
-      payload: res.data
+      type: GET_USERS,
+      payload: res.json()
     });
   }  catch (err) {
       dispatch({
