@@ -23,7 +23,6 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
             <i className="user circle icon"></i>My Profile
           </Link>
           <Link onClick={logout} href="/logout">
-
             <span className="item"><i className="logout icon"></i>Logout</span>
           </Link>
         </div>
