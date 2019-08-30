@@ -8,10 +8,10 @@ import { Grid, Column } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 const Profile = ({ loadUser, setAlert, getCurrentProfile, auth: { user }, profile: { profile, loading } } ) => {
-  // useEffect(() => {
-  //     getCurrentProfile()
-  // }, []);
-  getCurrentProfile();
+  useEffect(() => {
+      getCurrentProfile()
+  }, []);
+  // getCurrentProfile();
 
   return (
     <div className='ui card'>

@@ -4,7 +4,7 @@ import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs';
 import { Link } from 'react-router-dom';
 
 
-const Menu = () => {
+const ProfileMenu = () => {
   return (
     <Tabs
       defaultTab="one"
@@ -26,7 +26,7 @@ const Menu = () => {
             </div>
           </div>
         </div>
-        </div> 
+        </div>
         <TabPanel tabId='one'>
           <p>Tab 1 content</p>
         </TabPanel>
@@ -40,4 +40,4 @@ const Menu = () => {
   );
 }
 
-export default Menu;
+export default ProfileMenu;

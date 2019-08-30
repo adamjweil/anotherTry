@@ -44,13 +44,13 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       <Grid centered columns={2}>
         <Grid.Column>
           <Header as="h2" textAlign="center">
-            <i className="coffee icon"></i>Create New Account!
+            <i className="hand point left icon"></i>Create New Account!
           </Header>
           <Segment>
             <Form size="large" onSubmit={e => onSubmit(e)} >
               <Form.Input
                 fluid
-                icon="mail"
+                icon="at"
                 type="text"
                 name='email'
                 placeholder="Email address"

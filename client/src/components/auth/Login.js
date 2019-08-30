@@ -45,7 +45,7 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
           <Form size="medium" onSubmit={e => onSubmit(e)}>
             <Form.Input
               fluid
-              icon="mail"
+              icon="at"
               type="text"
               name="email"
               placeholder="Email address"
