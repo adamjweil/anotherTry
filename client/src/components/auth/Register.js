@@ -18,12 +18,11 @@ import {
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
-    username: '',
     email: '',
     password: ''
   });
 
-  const { username, email, password, password2 } = formData;
+  const { email, password, password2 } = formData;
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value })
 
@@ -32,7 +31,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
     } else {
-      register({ username, email, password })
+      register({ email, password })
     }
   };
 
@@ -49,16 +48,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           </Header>
           <Segment>
             <Form size="large" onSubmit={e => onSubmit(e)} >
-              <Form.Input
-                fluid
-                icon="user"
-                type="text"
-                name='username'
-                placeholder="Username"
-                value={username}
-                onChange={e => onChange(e)}
-                iconPosition="left"
-              />
               <Form.Input
                 fluid
                 icon="mail"
