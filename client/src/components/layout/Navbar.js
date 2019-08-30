@@ -10,20 +10,21 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     return (
       <div className="ui secondary pointing menu">
         <Link to="/" className="item">
-          Home
+          <i className="home icon"></i>Home
         </Link>
         <Link to="/directory" className="item">
-          Directory
+          <i className="address card icon"></i>Directory
         </Link>
         <div className="right menu">
           <Link to="/dashboard" className="item">
-            Dashboard
-          </Link><Link to="/profile" className="item">
-            My Profile
+            <i className="magic icon"></i>Dashboard
+          </Link>
+          <Link to="/profile" className="item">
+            <i className="user circle icon"></i>My Profile
           </Link>
           <Link onClick={logout} href="/logout">
-            <i className="fas fa-sign-out-alt" />{` `}
-            <span className="item">Logout</span>
+
+            <span className="item"><i className="logout icon"></i>Logout</span>
           </Link>
         </div>
       </div>
@@ -32,11 +33,11 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     return (
       <div className="ui secondary pointing menu">
         <Link to="/" className="item">
-          Home
+          <i className="home icon"></i>Home
         </Link>
         <div className="right menu">
           <Link to="/directory" className="item">
-            Directory
+            <i className="address card icon"></i>Directory
           </Link>
           <Link to="/register" className="item">
             Register
