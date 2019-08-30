@@ -4,9 +4,6 @@ import PropTypes from 'prop-types';
 import { loadAllUsers } from '../../actions/auth';
 
 const Directory = ({ loadAllUsers }) => {
-  useEffect(() => {
-    loadAllUsers()
-  }, []);
 
   return (
     <div>
