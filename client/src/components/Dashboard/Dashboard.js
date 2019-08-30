@@ -6,9 +6,9 @@ import Spinner from '../layout/Spinner';
 import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
 
 const Dashboard = ({ createProfile, getCurrentProfile, auth: { user }, profile: { profile, loading } }) => {
-  // useEffect(() => {
-  //   getCurrentProfile()
-  // }, []);
+  useEffect(() => {
+    getCurrentProfile()
+  }, []);
 
 const [formData, setFormData] = useState({
   team: '',
@@ -19,7 +19,7 @@ const [formData, setFormData] = useState({
   githubusername: ''
 });
 
-getCurrentProfile();
+// getCurrentProfile();
 const { team, title, bio, hireDate, skills, githubusername } = formData;
 const onChange = e => {
   setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,8 +27,8 @@ const onChange = e => {
 const onSubmit = async e => {
   e.preventDefault();
   createProfile(formData);
-
 };
+
   return loading && profile === null ? (
     <Spinner />
   ) : (
@@ -55,25 +55,37 @@ const onSubmit = async e => {
       <Header as='h2' textAlign='center'>
         Create a Profile
       </Header>
+
       <Segment>
         <Form size='large' onSubmit={e => onSubmit(e)}>
 
-          <select name="team" className='ui dropdown'>
+          <select
+            name="team"
+            value={team}
+            onChange={e => onChange(e)}
+            className='ui dropdown'>
             <option value="">Select Your team...</option>
             <option value="Dev">Dev</option>
             <option value="LogiQ">LogiQ</option>
             <option value="Admin">Admin</option>
           </select>
 
-          <Form.Input
-            fluid
-            type='text'
-            name='title'
+            <br />
+
+          <select
+            name="title"
             value={title}
-            placeholder="Please enter your Title"
             onChange={e => onChange(e)}
-            iconPosition='left'
-          />
+            className='ui dropdown'>
+            <option value="">Select Your title...</option>
+            <option value="Analyst">Analyst</option>
+            <option value="Associate">Associate</option>
+            <option value="Director">Director</option>
+            <option value="Senior Director">Senior Director</option>
+            <option value="Managing Director">Managing Director</option>
+          </select>
+
+            <br />
 
           <Button color='blye'fluid size="small">
             Save and Continue

@@ -38,9 +38,10 @@ export const createProfile = ({ team, title }) => async dispatch => {
     const res = await axios.post('/api/profile', body, config);
     dispatch({
       type: CREATE_PROFILE,
-      payload: res
+      payload: res.data
     });
   } catch (err) {
+    console.log(err);
     const errors = err.response.res.error;
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));

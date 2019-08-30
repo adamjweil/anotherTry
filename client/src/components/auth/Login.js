@@ -36,13 +36,13 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
   }
 
   return (
-    <Grid centered columns={1} style={{ padding: '10px'}}>
+    <Grid centered columns={1} style={{ paddingRight: '30px'}}>
       <Grid.Column>
         <Header as="h4" textAlign="center">
           Login
         </Header>
         <Segment>
-          <Form size="large" onSubmit={e => onSubmit(e)}>
+          <Form size="medium" onSubmit={e => onSubmit(e)}>
             <Form.Input
               fluid
               icon="mail"
@@ -62,7 +62,7 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
               onChange={e => onChange(e)}
               iconPosition="left"
             />
-            <Button color="blue" fluid size="large">
+            <Button color="blue" fluid size="small">
               Login
             </Button>
           </Form>
