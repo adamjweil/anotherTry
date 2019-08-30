@@ -6,6 +6,7 @@ import { getCurrentProfile } from '../../actions/profile';
 
 import { Grid, Column } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import ProfileMenu from './Profile/ProfileMenu';
 
 const Profile = ({ loadUser, setAlert, getCurrentProfile, auth: { user }, profile: { profile, loading } } ) => {
   useEffect(() => {
@@ -15,6 +16,7 @@ const Profile = ({ loadUser, setAlert, getCurrentProfile, auth: { user }, profil
 
   return (
     <Grid columns={3}>
+
       <Grid.Column>
         <div className='ui card'>
           <div className='image'>
@@ -33,11 +35,16 @@ const Profile = ({ loadUser, setAlert, getCurrentProfile, auth: { user }, profil
         </div>
       </Grid.Column>
       <Grid.Column>
+      <Grid.Row>
+        <ProfileMenu />
+      </Grid.Row>
         <div>
           <p>Bio: { profile && profile.bio }</p>
           <p>Skills: { profile && profile.skills }</p>
         </div>
       </Grid.Column>
+
+
     </Grid>
   );
 }
