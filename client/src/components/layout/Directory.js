@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { loadAllUsers } from '../../actions/auth';
 
-const Directory = () => {
+const Directory = ({ loadAllUsers }) => {
+  useEffect(() => {
+    loadAllUsers()
+  }, []);
 
   return (
     <div>
@@ -16,4 +20,4 @@ const mapStateToProps = state => {
   return { users: state.users }
 }
 
-export default connect(mapStateToProps)(Directory);
+export default connect(mapStateToProps, { loadAllUsers })(Directory);

@@ -4,11 +4,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
+import { Link } from 'react-router-dom';
+import Menu from './Menu';
 
-const Dashboard = ({ createProfile, getCurrentProfile, auth: { user }, profile: { profile, loading } }) => {
-  useEffect(() => {
-    getCurrentProfile()
-  }, []);
+const Dashboard = ({
+  createProfile,
+  getCurrentProfile, auth: { user },
+  profile: { profile, loading } }) => {
+    useEffect(() => {
+      getCurrentProfile()
+    }, []);
 
 const [formData, setFormData] = useState({
   team: '',
@@ -34,66 +39,35 @@ const onSubmit = async e => {
   ) : (
     <Grid columns={2} className="very relaxed stackable grid">
       <Grid.Column>
-    <Fragment>
-      <h2 className="">Dashboard</h2>
-      <p className="load">
-        <i className="fas fa-user"></i> Welcome, {user && user.name }
+        <Fragment>
+          <h2 className="">Dashboard</h2>
+          <h3>{ profile && profile.team } Team<h4>{ profile && profile.title }</h4></h3>
+
+          <p className="load">
+            <i className="fas fa-user"></i> Welcome, { user && user.email }
+          </p>
+          <p className='load'>
+          { profile &&
+            "Thank you for setting up a Profile! You can always go back and edit any information from your Profile page, shoudl you need to.."
+          }
+          </p>
+        </Fragment>
+      </Grid.Column>
+
+
+    { profile !== null ? <Fragment> <Menu /> </Fragment>
+      : <Fragment>
+      <Grid.Column>
+      <p>
+        You have not yet setup a profile, please add some info
       </p>
-      <div className='ui divided list'>
-        <h3>
-          <div className=''>Team:</div>
-          { profile && profile.team}
-        </h3>      <h3>
-          <div className=''>Title:</div>
-          { profile && profile.title}
-        </h3>
-      </div>
-    </Fragment>
-    </Grid.Column>
+      <Link to='/create-profile' className='btn btn-primary'>
+        Create Profile
+      </Link>
 
-    <Grid.Column>
-      <Header as='h2' textAlign='center'>
-        Create a Profile
-      </Header>
+      </Grid.Column>
+      </Fragment>}
 
-      <Segment>
-        <Form size='large' onSubmit={e => onSubmit(e)}>
-
-          <select
-            name="team"
-            value={team}
-            onChange={e => onChange(e)}
-            className='ui dropdown'>
-            <option value="">Select Your team...</option>
-            <option value="Dev">Dev</option>
-            <option value="LogiQ">LogiQ</option>
-            <option value="Admin">Admin</option>
-          </select>
-
-            <br />
-
-          <select
-            name="title"
-            value={title}
-            onChange={e => onChange(e)}
-            className='ui dropdown'>
-            <option value="">Select Your title...</option>
-            <option value="Analyst">Analyst</option>
-            <option value="Associate">Associate</option>
-            <option value="Director">Director</option>
-            <option value="Senior Director">Senior Director</option>
-            <option value="Managing Director">Managing Director</option>
-          </select>
-
-            <br />
-
-          <Button color='blye'fluid size="small">
-            Save and Continue
-          </Button>
-        </Form>
-      </Segment>
-
-    </Grid.Column>
     </Grid>
   );
 };
