@@ -13,6 +13,9 @@ const UserSchema = new mongoose.Schema({
   avatar: {
     type: String
   },
+  notification_count: {
+    type: Number
+  },
   date: {
     type: Date,
     default: Date.now

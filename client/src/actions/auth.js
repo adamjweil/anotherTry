@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LOGIN_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, LOGOUT, GET_USERS, CLEAR_PROFILE } from "./types";
+import { LOGIN_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, LOGOUT, GET_USERS, CLEAR_PROFILE, NOTIFCATION_INCREMENT, NOTIFCATION_DECREMENT } from "./types";
 import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
 
@@ -92,7 +92,7 @@ export const logout = () => async dispatch => {
 // Load all Users
 export const loadAllUsers = () => async dispatch => {
   try {
-    const res = await axios.get('/api/users');
+    const res = await axios.get('/api/user');
     dispatch({
       type: GET_USERS,
       payload: res.json()
@@ -101,5 +101,30 @@ export const loadAllUsers = () => async dispatch => {
       dispatch({
         type: AUTH_ERROR
       })
+  }
+}
+
+export const incrementNotificationCount = () => async dispatch => {
+  try {
+    dispatch({
+      type: NOTIFCATION_INCREMENT
+    });
+  } catch(err) {
+    dispatch({
+      type: AUTH_ERROR
+    })
+  }
+}
+
+
+export const decrementNotificationCount = () => async dispatch => {
+  try {
+    dispatch({
+      type: NOTIFCATION_DECREMENT
+    });
+  } catch(err) {
+    dispatch({
+      type: AUTH_ERROR
+    })
   }
 }

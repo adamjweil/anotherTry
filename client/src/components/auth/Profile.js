@@ -3,16 +3,22 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loadUser } from '../../actions/auth';
 import { getCurrentProfile } from '../../actions/profile';
-
-import { Grid, Column } from 'semantic-ui-react';
+import { incrementNotificationCount, decrementNotificationCount } from '../../actions/auth';
+import { Grid, Column, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import ProfileMenu from './Profile/ProfileMenu';
 
-const Profile = ({ loadUser, setAlert, getCurrentProfile, auth: { user }, profile: { profile, loading } } ) => {
+const Profile = ({ loadUser, setAlert, getCurrentProfile, auth: { user }, profile: { profile, loading }, incrementNotificationCount, decrementNotificationCount } ) => {
   useEffect(() => {
       getCurrentProfile()
   }, []);
   // getCurrentProfile();
+const onIncrementSubmit = () => {
+    incrementNotificationCount()
+  }
+const onDecrementSubmit = () => {
+    decrementNotificationCount()
+  }
 
   return (
     <Grid columns={3}>
@@ -41,9 +47,21 @@ const Profile = ({ loadUser, setAlert, getCurrentProfile, auth: { user }, profil
         <div>
           <p>Bio: { profile && profile.bio }</p>
           <p>Skills: { profile && profile.skills }</p>
+          <p>Notifications: { user && user.notification_count }</p>
         </div>
       </Grid.Column>
 
+      <Button
+        onClick={e => onIncrementSubmit(e) }
+      >
+        Increment Notifications
+      </Button>
+      <Button
+        style={{size: 'small'}}
+        onClick={e => onDecrementSubmit(e) }
+      >
+        Decrement Notifications
+      </Button>
 
     </Grid>
   );
@@ -62,5 +80,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loadUser, getCurrentProfile }
+  { loadUser, getCurrentProfile, incrementNotificationCount }
 )(Profile);
