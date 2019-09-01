@@ -79,7 +79,9 @@ export default function(state = initialState, action) {
         loading: false
       }
     case GET_USERS:
-      return [...state, payload];
+      return  {
+        ...state
+      };
     case NOTIFCATION_INCREMENT:
       return {
         ...state,

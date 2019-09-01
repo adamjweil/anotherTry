@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loadUser } from '../../actions/auth';
+import { loadUser, incrementNotificationCount, decrementNotificationCount } from '../../actions/user';
 import { getCurrentProfile } from '../../actions/profile';
-import { incrementNotificationCount, decrementNotificationCount } from '../../actions/auth';
 import { Grid, Column, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import ProfileMenu from './Profile/ProfileMenu';
@@ -51,15 +50,11 @@ const onDecrementSubmit = () => {
         </div>
       </Grid.Column>
 
-      <Button
-        onClick={e => onIncrementSubmit(e) }
-      >
+
+      <Button onClick={e => onIncrementSubmit(e) } >
         Increment Notifications
       </Button>
-      <Button
-        style={{size: 'small'}}
-        onClick={e => onDecrementSubmit(e) }
-      >
+      <Button onClick={e => onDecrementSubmit(e) }>
         Decrement Notifications
       </Button>
 

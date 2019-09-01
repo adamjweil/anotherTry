@@ -13,7 +13,7 @@ import PrivateRoute from './components/routing/PrivateRoute';
 
 // Redux
 import store from './store';
-import { loadUser } from './actions/auth';
+import { loadUser } from './actions/user';
 import setAuthToken from './utils/setAuthToken';
 
 

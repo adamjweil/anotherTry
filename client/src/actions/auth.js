@@ -1,29 +1,8 @@
 import axios from 'axios';
-import { LOGIN_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_FAIL, USER_LOADED, AUTH_ERROR, LOGOUT, GET_USERS, CLEAR_PROFILE, NOTIFCATION_INCREMENT, NOTIFCATION_DECREMENT } from "./types";
+import { LOGIN_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_FAIL, AUTH_ERROR, LOGOUT, GET_USERS, CLEAR_PROFILE } from "./types";
 import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
-
-// LOAD USER
-export const loadUser = (setAlert) => async dispatch => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
-  }
-  try {
-    const res = await axios.get('/api/auth');
-    dispatch({
-      type: USER_LOADED,
-      payload: res.data
-    });
-  } catch (err) {
-    const errors = err.response.data.errors;
-      if(errors) {
-        errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-      }
-    dispatch({
-      type: AUTH_ERROR
-    });
-  }
-};
+import { loadUser } from './user';
 
 // REGISTER USER
 export const register = ({ email, password }) => async dispatch => {
@@ -65,7 +44,6 @@ export const login = (email, password) => async dispatch => {
       type: LOGIN_SUCCESS,
       payload: res.data
     });
-
     dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
@@ -86,45 +64,4 @@ export const logout = () => async dispatch => {
   dispatch({
     type: LOGOUT
   });
-}
-
-
-// Load all Users
-export const loadAllUsers = () => async dispatch => {
-  try {
-    const res = await axios.get('/api/user');
-    dispatch({
-      type: GET_USERS,
-      payload: res.json()
-    });
-  }  catch (err) {
-      dispatch({
-        type: AUTH_ERROR
-      })
-  }
-}
-
-export const incrementNotificationCount = () => async dispatch => {
-  try {
-    dispatch({
-      type: NOTIFCATION_INCREMENT
-    });
-  } catch(err) {
-    dispatch({
-      type: AUTH_ERROR
-    })
-  }
-}
-
-
-export const decrementNotificationCount = () => async dispatch => {
-  try {
-    dispatch({
-      type: NOTIFCATION_DECREMENT
-    });
-  } catch(err) {
-    dispatch({
-      type: AUTH_ERROR
-    })
-  }
 }
