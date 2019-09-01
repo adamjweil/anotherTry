@@ -13,9 +13,12 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           <i className="home icon"></i>Home
         </Link>
         <Link to="/directory" className="item">
-          <i className="address card icon"></i>Directory
+          <i className="info icon"></i>Directory
         </Link>
         <div className="right menu">
+          <Link to="/tickethub" className="item">
+            <i className="ticket icon"></i>TktHub
+          </Link>
           <Link to="/dashboard" className="item">
             <i className="magic icon"></i>Dashboard
           </Link>
@@ -23,7 +26,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
             <i className="user circle icon"></i>My Profile
           </Link>
           <Link onClick={logout} href="/logout">
-            <span className="item"><i className="logout icon"></i>Logout</span>
+            <span className="item"><i className="logout icon"></i></span>
           </Link>
         </div>
       </div>
@@ -36,7 +39,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         </Link>
         <div className="right menu">
           <Link to="/directory" className="item">
-            <i className="address card icon"></i>Directory
+            <i className="info icon"></i>Directory
           </Link>
           <Link to="/register" className="item">
             Register
