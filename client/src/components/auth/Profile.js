@@ -20,21 +20,23 @@ const onDecrementSubmit = () => {
   }
 
   return (
-    <Grid columns={3}>
+    <Grid columns={2}>
 
-      <Grid.Column>
+      <Grid.Column columns={1}>
         <div className='ui card'>
           <div className='image'>
             <img src={user && user.avatar} alt="https://as1.ftcdn.net/jpg/02/59/94/92/500_F_259949239_KKDiZphlWffdaE5zsugujCQtaZ8nyWW9.jpg" />
           </div>
           <div className="content">
+            <div className="header"> {user && user.firstName}  </div>
+            <div className="header"> {user && user.lastName}  </div>
             <div className="header"> {profile && profile.team} Team </div>
             <div className="description"> {profile && profile.title} </div>
           </div>
           <div className="extra content">
             <Link to="#" className="">
               <i aria-hidden="true" className="mail icon"></i>
-              { user && user.email } &nbsp; &nbsp;
+              { user && user.email } &nbsp;
               <Link className="ui button sm yellow" to='/api/profile/edit'> Edit User</Link>
             </Link>
           </div>

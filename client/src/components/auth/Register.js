@@ -5,20 +5,27 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
-
+import { toggleCheck } from '../../actions/auth';
 import { Form, Grid } from 'semantic-ui-react';
 
-const Register = ({ setAlert, register, isAuthenticated }) => {
+const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    terms: false,
     email: '',
-    password: ''
+    password: '',
+    password2: ''
   });
 
   const { firstName, lastName, email, terms, password, password2 } = formData;
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value })
+  const onCheck = (e) => {
+    toggleCheck();
+  }
 
-  const onSubmit = async e => {
+  const onRegister = async e => {
     e.preventDefault();
     if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
@@ -31,7 +38,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
   // Redirect if logged in
   if (isAuthenticated) {
-    return <Redirect to="/profile" />
+    return <Redirect to="/dashboard" />
   }
 
   return (
@@ -45,7 +52,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
            <i className="hand point left icon"></i>Create New Account!
           </p>
         </div>
-          <form className='ui form attached fluid segment' size="large" onSubmit={e => onSubmit(e)} >
+          <form className='ui form attached fluid segment' >
             <div className='field'>
               <label>enter your email:</label>
               <input
@@ -106,12 +113,21 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
               <div className="inline field">
                 <div className='ui checkbox'>
-                  <input type='checkbox' id='terms' name='terms' />
+                  <input
+                    type='checkbox'
+                    id='terms'
+                    name='terms'
+                    onClick={onCheck}
+                    value={terms} />
                   <label>I agree to the T&C</label>
                 </div>
               </div>
               <div className='ui blue submit button'>
+                <button
+                  onClick={onRegister}
+                  >
                 Register
+                </button>
               </div>
           </form>
           <div className='ui bottom attached warning message'>
@@ -137,5 +153,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-{ setAlert, register }
+{ setAlert, register, toggleCheck }
 )(Register);

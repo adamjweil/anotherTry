@@ -5,6 +5,7 @@ import {
   LOGIN_FAIL,
   USER_LOADED,
   AUTH_ERROR,
+  TOGGLE_TERMS,
   LOGOUT,
   GET_USERS,
   NOTIFCATION_INCREMENT,
@@ -14,6 +15,7 @@ import {
 const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: null,
+  terms: false,
   loading: true,
   notification_count: 0,
   user: null
@@ -52,6 +54,7 @@ export default function(state = initialState, action) {
         ...state,
         ...payload,
         isAuthenticated: true,
+
         loading: false
       }
     case REGISTER_FAIL:
@@ -69,6 +72,11 @@ export default function(state = initialState, action) {
         token: null,
         isAuthenticated: false,
         loading: false
+      }
+    case TOGGLE_TERMS:
+      state.terms = !state.terms
+      return {
+        ...state
       }
     case LOGOUT:
       localStorage.removeItem('token');
