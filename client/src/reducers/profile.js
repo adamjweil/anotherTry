@@ -1,6 +1,14 @@
 import { GET_PROFILE, PROFILE_ERROR, CREATE_PROFILE, CREATE_PROFILE_FAIL, CLEAR_PROFILE } from '../actions/types';
 
 const initialState = {
+  team: '',
+  title: '',
+  reportingTo: '',
+  directReports: '',
+  hireDate: '',
+  bio: '',
+  skills: [],
+  githubusername: '',
   profile: null,
   profiles: [],
   repos: [],

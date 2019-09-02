@@ -10,6 +10,7 @@ export const LOGOUT = "LOGOUT";
 export const GET_PROFILE = "GET_PROFILE";
 export const PROFILE_ERROR = "PROFILE_ERROR";
 export const CREATE_PROFILE = "CREATE_PROFILE";
+export const TOGGLE_TERMS = "TOGGLE_TERMS";
 export const CREATE_PROFILE_FAIL = "CREATE_PROFILE_FAIL";
 export const GET_USERS = "GET_USERS";
 export const CLEAR_PROFILE = "CLEAR_PROFILE";
