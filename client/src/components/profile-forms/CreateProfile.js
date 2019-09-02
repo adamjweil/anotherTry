@@ -75,7 +75,7 @@ const onSubmit = (e) => {
         </textarea>
           <br />
           <br />
-        <Button color='blye'fluid size="small">
+        <Button color='blue' fluid size="small">
           Save and Continue
         </Button>
         </Form>
@@ -85,11 +85,13 @@ const onSubmit = (e) => {
 
 
 CreateProfile.propTypes = {
-
+  createProfile: PropTypes.func.isRequired,
+  users: PropTypes.array.isRequired
 }
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile,
+  users: state.users
 });
 
 export default connect(mapStateToProps, { createProfile })(CreateProfile);

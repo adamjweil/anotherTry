@@ -17,10 +17,10 @@ const Landing = ({ isAuthenticated }) => {
         <section>
           <div className="ui container landing">
             <div className="landing-inner">
-              <h1 className="x-large">
-                meZocliQ
-                <h4 className="x-large">Online Portal</h4>
-              </h1>
+              <h4 className="x-large">
+                <h1>meZocliQ</h1>
+                Online Portal
+              </h4>
             </div>
           </div>
         </section>

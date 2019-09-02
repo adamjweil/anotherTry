@@ -5,16 +5,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
-import Profile from './Profile';
 
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Message,
-  Segment,
-} from 'semantic-ui-react';
+import { Form, Grid } from 'semantic-ui-react';
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -22,7 +14,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     password: ''
   });
 
-  const { email, password, password2 } = formData;
+  const { firstName, lastName, email, terms, password, password2 } = formData;
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value })
 
@@ -30,8 +22,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     e.preventDefault();
     if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
+    } else if (terms === null) {
+      setAlert('Please read and agree to our Terms and Conditions');
     } else {
-      register({ email, password })
+      register({ firstName, lastName, email, terms, password })
     }
   };
 
@@ -43,52 +37,90 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   return (
       <Grid centered columns={2}>
         <Grid.Column>
-          <Header as="h2" textAlign="center">
-            <i className="hand point left icon"></i>Create New Account!
-          </Header>
-          <Segment>
-            <Form size="large" onSubmit={e => onSubmit(e)} >
-              <Form.Input
-                fluid
-                icon="at"
-                type="text"
+        <div className='ui attached message'>
+          <div className='header'>
+            Welcome to the meZocliQ Online Portal
+          </div>
+          <p>
+           <i className="hand point left icon"></i>Create New Account!
+          </p>
+        </div>
+          <form className='ui form attached fluid segment' size="large" onSubmit={e => onSubmit(e)} >
+            <div className='field'>
+              <label>enter your email:</label>
+              <input
+                placeholder='Email'
+                type='text'
                 name='email'
-                placeholder="Email address"
+                iconPosition='left'
                 value={email}
-                onChange={e => onChange(e)}
-                iconPosition="left"
-              />
-              <Form.Input
-                fluid
-                type="password"
-                name='password'
-                placeholder="Email a password"
-                value={password}
-                onChange={e => onChange(e)}
-                iconPosition="left"
-              />
-              <Form.Input
-                fluid
-                type="password"
-                name='password2'
-                placeholder="Pls confirm password"
-                value={password2}
-                onChange={e => onChange(e)}
-                iconPosition="left"
-              />
-              <Button color="blue" fluid size="large">
+                onChange={e => onChange(e)} />
+            </div>
+            <div className='two fields'>
+              <div className='field'>
+                <label>first name:</label>
+                  <Form.Input
+                    fluid
+                    type="test"
+                    name='firstName'
+                    placeholder="FirstName"
+                    value={firstName}
+                    onChange={e => onChange(e)}
+                  />
+                </div>
+                <div className='field'>
+                  <label>last name:</label>
+                  <Form.Input
+                    fluid
+                    type="text"
+                    name='lastName'
+                    placeholder="last name"
+                    value={lastName}
+                    onChange={e => onChange(e)}
+                  />
+                </div>
+              </div>
+
+            <div className='field'>
+              <label>password:</label>
+                <Form.Input
+                  fluid
+                  type="password"
+                  name='password'
+                  placeholder="password"
+                  value={password}
+                  onChange={e => onChange(e)}
+                />
+              </div>
+              <div className='field'>
+                <label>confirm password:</label>
+                <Form.Input
+                  fluid
+                  type="password"
+                  name='password2'
+                  placeholder="confirm password"
+                  value={password2}
+                  onChange={e => onChange(e)}
+                />
+              </div>
+
+              <div className="inline field">
+                <div className='ui checkbox'>
+                  <input type='checkbox' id='terms' name='terms' />
+                  <label>I agree to the T&C</label>
+                </div>
+              </div>
+              <div className='ui blue submit button'>
                 Register
-              </Button>
-            </Form>
-          </Segment>
-          <Message>
-               Not registered yet?
-               <Link to="/register" className="item">
-                Sign up here...
-               </Link>
-             </Message>
-           </Grid.Column>
-         </Grid>
+              </div>
+          </form>
+          <div className='ui bottom attached warning message'>
+            <i className='icon help'></i>
+            Already have an account? <Link to="/" className='item'>Login here</Link>
+          </div>
+
+         </Grid.Column>
+       </Grid>
      );
   };
 

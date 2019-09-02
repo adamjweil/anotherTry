@@ -8,12 +8,15 @@ import { GET_USERS, AUTH_ERROR, USER_LOADED, NOTIFCATION_INCREMENT, NOTIFCATION_
 export const loadAllUsers = () => async dispatch => {
   try {
     const res = await axios.get('/');
-    console.log(JSON.stringify(res))
     dispatch({
       type: GET_USERS,
-      payload: res.json()
+      payload: res.data
     });
   }  catch (err) {
+    const errors = err.response.res.errors;
+      if(errors) {
+        errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      }
     dispatch({
       type: AUTH_ERROR
     });

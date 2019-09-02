@@ -6,6 +6,12 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  firstName: {
+    type: String
+  },
+  lastName: {
+    type: String
+  },
   password: {
     type: String,
     required: true
@@ -15,6 +21,10 @@ const UserSchema = new mongoose.Schema({
   },
   notification_count: {
     type: Number
+  },
+  terms: {
+    type: Boolean,
+    required: true
   },
   date: {
     type: Date,
