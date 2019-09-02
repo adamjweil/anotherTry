@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { loadUser, incrementNotificationCount, decrementNotificationCount } from '../../actions/user';
 import { getCurrentProfile } from '../../actions/profile';
-import { Grid, Column, Button } from 'semantic-ui-react';
+import { Grid, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import ProfileMenu from './Profile/ProfileMenu';
 
@@ -34,7 +34,8 @@ const onDecrementSubmit = () => {
           <div className="extra content">
             <Link to="#" className="">
               <i aria-hidden="true" className="mail icon"></i>
-              { user && user.email }
+              { user && user.email } &nbsp; &nbsp;
+              <Link className="ui button sm yellow" to='/api/profile/edit'> Edit User</Link>
             </Link>
           </div>
         </div>
@@ -75,5 +76,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loadUser, getCurrentProfile, incrementNotificationCount }
+  { loadUser, getCurrentProfile, incrementNotificationCount, decrementNotificationCount }
 )(Profile);

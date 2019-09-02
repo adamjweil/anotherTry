@@ -1,17 +1,18 @@
 import axios from 'axios';
-import { LOGIN_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_FAIL, AUTH_ERROR, LOGOUT, GET_USERS, CLEAR_PROFILE } from "./types";
+import { LOGIN_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_FAIL, LOGOUT, CLEAR_PROFILE } from "./types";
 import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
 import { loadUser } from './user';
 
 // REGISTER USER
-export const register = ({ email, password }) => async dispatch => {
+export const register = ({ firstName, lastName, terms, email, password }) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
     }
   }
-  const body = JSON.stringify({ email, password });
+  const body = JSON.stringify({ firstName, lastName, terms,
+    email, password });
   try {
     const res = await axios.post('/api/users', body, config);
     dispatch({

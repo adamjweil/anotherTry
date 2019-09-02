@@ -3,7 +3,7 @@ import { getCurrentProfile, createProfile } from '../../actions/profile';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
-import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import { Link } from 'react-router-dom';
 import Menu from './Menu';
 

@@ -8,6 +8,8 @@ import {
 
   const initialState = {
     token: localStorage.getItem('token'),
+    firstName: '',
+    lastName: '',
     isAuthenticated: null,
     loading: true,
     notification_count: 0,
@@ -41,14 +43,14 @@ import {
           users: payload
         };
       case NOTIFCATION_INCREMENT:
+        state.notification_count = state.notification_count + 1
         return {
-          ...state,
-          notification_count: state.notification_count =+1,
+          ...state
         }
-      case NOTIFCATION_INCREMENT:
+      case NOTIFCATION_DECREMENT:
+        state.notification_count = state.notification_count - 1
         return {
-          ...state,
-          notification_count: state.notification_count =-1,
+          ...state
         }
       case GET_NOTIFICATION_COUNT:
         return {

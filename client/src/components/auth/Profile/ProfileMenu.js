@@ -1,7 +1,5 @@
-import React, { component } from 'react';
-import { render } from 'react-dom';
+import React from 'react';
 import { Tabs, Tab, TabPanel, TabList } from 'react-web-tabs';
-import { Link } from 'react-router-dom';
 
 
 const ProfileMenu = () => {
