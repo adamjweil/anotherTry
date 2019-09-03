@@ -4,6 +4,7 @@ import {
   REGISTER_FAIL,
   LOGIN_FAIL,
   AUTH_ERROR,
+  USER_LOADED,
   TOGGLE_TERMS,
   LOGOUT,
   GET_USERS
@@ -12,9 +13,7 @@ import {
 const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
-  terms: false,
   loading: true,
-  notification_count: 0,
   user: null
 };
 
@@ -22,6 +21,13 @@ export default function(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+    case USER_LOADED:
+      return {
+        ...state,
+        isAuthenticated: true,
+        loading: false,
+        user: payload
+      };
     case LOGIN_SUCCESS:
       localStorage.setItem("token", payload.token);
       return {
@@ -42,7 +48,6 @@ export default function(state = initialState, action) {
       localStorage.setItem("token", payload.token);
       return {
         ...state,
-        ...payload,
         isAuthenticated: true,
         loading: false
       };

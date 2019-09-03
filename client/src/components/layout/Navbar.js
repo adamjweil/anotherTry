@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-import { logout } from '../../actions/auth';
+import { logout } from "../../actions/auth";
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   if (isAuthenticated) {
@@ -25,8 +25,15 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           <Link to="/profile" className="item">
             <i className="user circle icon"></i>My Profile
           </Link>
-          <Link onClick={logout} to="/logout">
-            <span className="item"><i className="logout icon"></i></span>
+          <Link
+            onClick={logout}
+            to="/logout"
+            className="ui vertical animated button"
+          >
+            <div className="hidden content">Logout</div>
+            <div className="visible content">
+              <i area-hidden="true" className="logout icon"></i>
+            </div>
           </Link>
         </div>
       </div>
@@ -52,8 +59,8 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
 Navbar.propTypes = {
   logout: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-}
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth
