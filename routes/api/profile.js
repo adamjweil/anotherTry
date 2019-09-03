@@ -30,87 +30,74 @@ router.get("/me", auth, async (req, res) => {
 // @ route POST api/profile/
 // @desc   Create users profile
 // @access Public
-router.post(
-  "/",
-  [
-    auth,
-    [
-      check("team", "Team is required")
-        .not()
-        .isEmpty()
-    ]
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+router.post("/", auth, async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
-    const {
-      team,
-      title,
-      hireDate,
-      bio,
-      skills,
-      githubusername,
-      twitter,
-      linkedin,
-      facebook,
-      youtube
-    } = req.body;
+  const {
+    team,
+    title,
+    hireDate,
+    bio,
+    skills,
+    githubusername,
+    twitter,
+    linkedin,
+    facebook,
+    youtube
+  } = req.body;
 
-    // Build Profile object
-    const profileFields = {};
-    profileFields.user = req.user.id;
-    if (team) profileFields.team = team;
-    if (title) profileFields.title = title;
-    if (hireDate) profileFields.hireDate = hireDate;
-    if (bio) profileFields.bio = bio;
-    if (githubusername) profileFields.githubusername = githubusername;
-    if (skills) {
-      profileFields.skills = skills.split(",").map(skill => skill.trim());
-    }
+  // Build Profile object
+  const profileFields = {};
+  profileFields.user = req.user.id;
+  if (team) profileFields.team = team;
+  if (title) profileFields.title = title;
+  if (hireDate) profileFields.hireDate = hireDate;
+  if (bio) profileFields.bio = bio;
+  if (githubusername) profileFields.githubusername = githubusername;
+  if (skills) {
+    profileFields.skills = skills.split(",").map(skill => skill.trim());
+  }
 
-    profileFields.social = {};
-    if (twitter) profileFields.social.twitter = twitter;
-    if (linkedin) profileFields.social.linkedin = linkedin;
-    if (facebook) profileFields.social.facebook = facebook;
-    if (youtube) profileFields.social.youtube = youtube;
+  profileFields.social = {};
+  if (twitter) profileFields.social.twitter = twitter;
+  if (linkedin) profileFields.social.linkedin = linkedin;
+  if (facebook) profileFields.social.facebook = facebook;
+  if (youtube) profileFields.social.youtube = youtube;
 
-    try {
-      let profile = await Profile.findOne({ user: req.user.id });
+  try {
+    let profile = await Profile.findOne({ user: req.user.id });
 
-      if (profile) {
-        // Update
-        profile = await Profile.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        );
+    if (profile) {
+      // Update
+      profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true }
+      );
 
-        return res.json(profile);
-      }
-
+      return res.json(profile);
+    } else {
       // Create
-      profile = new Profile(profileFields);
+      profile = new Profile({ profileFields });
 
       await profile.save();
       res.json(profile);
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send("Server Error");
     }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
   }
-);
+});
 
 // @ route GET api/profile
 // @desc   Get all Profile
 // @access Public
 router.get("/", async (req, res) => {
   try {
-    const profiles = await Profile.find().populate("user", [
-      "avatar"
-    ]);
+    const profiles = await Profile.find().populate("user", ["avatar"]);
     res.json(profiles);
   } catch (err) {
     console.error(err.message);

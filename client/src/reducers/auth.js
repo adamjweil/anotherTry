@@ -3,17 +3,14 @@ import {
   LOGIN_SUCCESS,
   REGISTER_FAIL,
   LOGIN_FAIL,
-  USER_LOADED,
   AUTH_ERROR,
   TOGGLE_TERMS,
   LOGOUT,
-  GET_USERS,
-  NOTIFCATION_INCREMENT,
-  NOTIFCATION_DECREMENT,
-  GET_NOTIFICATION_COUNT } from "../actions/types";
+  GET_USERS
+} from "../actions/types";
 
 const initialState = {
-  token: localStorage.getItem('token'),
+  token: localStorage.getItem("token"),
   isAuthenticated: null,
   terms: false,
   loading: true,
@@ -26,85 +23,63 @@ export default function(state = initialState, action) {
 
   switch (type) {
     case LOGIN_SUCCESS:
-      localStorage.setItem('token', payload.token);
+      localStorage.setItem("token", payload.token);
       return {
         ...state,
         ...payload,
         isAuthenticated: true,
         loading: false
-      }
+      };
     case LOGIN_FAIL:
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
       return {
         ...state,
         token: null,
         isAuthenticated: false,
         loading: false
-      }
-    case USER_LOADED:
-      return {
-        ...state,
-        isAuthenticated: true,
-        loading: false,
-        user: payload
-      }
+      };
     case REGISTER_SUCCESS:
-      localStorage.setItem('token', payload.token);
+      localStorage.setItem("token", payload.token);
       return {
         ...state,
         ...payload,
         isAuthenticated: true,
-
         loading: false
-      }
+      };
     case REGISTER_FAIL:
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
       return {
         ...state,
         token: null,
         isAuthenticated: false,
         loading: false
-      }
+      };
     case AUTH_ERROR:
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
       return {
         ...state,
         token: null,
         isAuthenticated: false,
         loading: false
-      }
+      };
     case TOGGLE_TERMS:
-      state.terms = !state.terms
+      state.terms = !state.terms;
       return {
-        ...state
-      }
-    case LOGOUT:
-      localStorage.removeItem('token');
-      return {
-        ...state,
-        token: null,
-        isAuthenticated: false,
-        loading: false
-      }
-    case GET_USERS:
-      return  {
         ...state
       };
-    case NOTIFCATION_INCREMENT:
-      state.notification_count = state.notification_count + 1
+    case LOGOUT:
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        token: null,
+        isAuthenticated: false,
+        loading: false
+      };
+    case GET_USERS:
       return {
         ...state
-      }
-    case NOTIFCATION_DECREMENT:
-      state.notification_count = state.notification_count - 1
-      return {
-        ...state
-      }
-    case GET_NOTIFICATION_COUNT:
-      return {
-        ...state
-      }
+      };
     default:
-      return state
+      return state;
   }
 }
