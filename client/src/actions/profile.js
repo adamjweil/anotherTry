@@ -1,12 +1,7 @@
 import axios from "axios";
 import { setAlert } from "./alert";
 
-import {
-  GET_PROFILE,
-  PROFILE_ERROR,
-  CREATE_PROFILE,
-  CREATE_PROFILE_FAIL
-} from "./types";
+import { GET_PROFILE, PROFILE_ERROR, CREATE_PROFILE } from "./types";
 
 // Get current users Profile
 export const getCurrentProfile = () => async dispatch => {
@@ -45,9 +40,5 @@ export const createProfile = ({ formData }) => async dispatch => {
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
     }
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusTest, status: err.response.data }
-    });
   }
 };

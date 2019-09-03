@@ -18,7 +18,7 @@ const initialState = {
   profile: null,
   profiles: [],
   repos: [],
-  loading: true,
+  loading: false,
   error: {}
 };
 export default function(state = initialState, action) {

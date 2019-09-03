@@ -1,5 +1,4 @@
 import {
-  USER_LOADED,
   GET_USERS,
   NOTIFCATION_INCREMENT,
   NOTIFCATION_DECREMENT,
@@ -8,25 +7,14 @@ import {
 
 const initialState = {
   token: localStorage.getItem("token"),
-  firstName: "",
-  lastName: "",
   isAuthenticated: null,
   loading: true,
-  notification_count: 0,
-  user: null
+  notification_count: 0
 };
 
 export default function(state = initialState, action) {
   const { type, payload } = action;
-
   switch (type) {
-    case USER_LOADED:
-      return {
-        ...state,
-        isAuthenticated: true,
-        loading: false,
-        user: payload
-      };
     case GET_USERS:
       return {
         ...state,

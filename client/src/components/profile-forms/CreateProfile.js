@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createProfile } from "../../actions/profile";
-import { Form, Button, Grid, Column } from "semantic-ui-react";
 
 import SelectSkills from "./SelectSkills";
 
@@ -12,39 +11,25 @@ const CreateProfile = ({ createProfile }) => {
     team: "",
     title: "",
     bio: "",
-    reportingTo: "",
-    directReports: "",
     hireDate: "",
-    skills: [],
-    githubusername: "",
-    twitter: "",
-    linkedin: "",
-    facebook: "",
-    youtube: ""
+    skills: []
   });
 
-  const {
-    title,
-    team,
-    bio,
-    reportingTo,
-    directReports,
-    hireDate,
-    skills,
-    githubusername,
-    twitter,
-    linkedin,
-    facebook,
-    youtube
-  } = formData;
+  const { title, team, bio, hireDate, skills } = formData;
 
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const onProfileSaveClick = async e => {
+  const onProfileSaveClick = ({
+    title,
+    team,
+    bio,
+    hireDate,
+    skills
+  }) => async e => {
     e.preventDefault();
-    console.log({ ...formData });
-    createProfile({ ...formData });
+    console.log({ formData });
+    await createProfile(title, team, bio, hireDate, skills);
     return <Redirect to="/" />;
   };
 
@@ -52,10 +37,13 @@ const CreateProfile = ({ createProfile }) => {
     <div className="ui internally celled grid">
       <div className="row">
         <div className="three wide column">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Mezocliq_logo.png/240px-Mezocliq_logo.png" />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Mezocliq_logo.png/240px-Mezocliq_logo.png"
+            alt="fail"
+          />
         </div>
 
-        <div class="ten wide column">
+        <div className="ten wide column">
           <div className="ui attached message">
             <div className="header">Start Setting Your Profile Up Below!</div>
             <p>
@@ -64,14 +52,17 @@ const CreateProfile = ({ createProfile }) => {
             </p>
           </div>
 
-          <Form className="ui form attached fluid segment">
+          <form
+            className="ui form attached fluid segment"
+            onSubmit={onProfileSaveClick}
+          >
             <div className="field">
               <label>Select your team:</label>
               <select
                 name="team"
                 value={team}
-                onChange={e => onChange(e)}
                 className="ui dropdown"
+                onChange={e => onChange(e)}
               >
                 <option value="">Team...</option>
                 <option value="Dev">Dev</option>
@@ -86,8 +77,8 @@ const CreateProfile = ({ createProfile }) => {
               <select
                 name="title"
                 value={title}
-                onChange={e => onChange(e)}
                 className="ui dropdown"
+                onChange={e => onChange(e)}
               >
                 <option value="">Title...</option>
                 <option value="Analyst">Analyst</option>
@@ -121,18 +112,17 @@ const CreateProfile = ({ createProfile }) => {
               <SelectSkills />
             </div>
             <div className="field">
-              <button
-                className="ui blue submit button"
-                onClick={onProfileSaveClick}
-                size="small"
-              >
+              <button className="ui blue submit button" size="small">
                 Save
               </button>
             </div>
-          </Form>
+          </form>
         </div>
-        <div class="three wide column">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Mezocliq_logo.png/240px-Mezocliq_logo.png" />
+        <div className="three wide column">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Mezocliq_logo.png/240px-Mezocliq_logo.png"
+            alt="fail"
+          />
         </div>
       </div>
     </div>
@@ -146,7 +136,8 @@ CreateProfile.propTypes = {
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  users: state.users
+  users: state.users,
+  skills: state.profile.skills
 });
 
 export default connect(

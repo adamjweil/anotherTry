@@ -13,20 +13,18 @@ const User = require("../../models/User");
 // @access  Public
 router.post(
   "/",
-  [
-    check("email", "Please enter a valid email").isEmail()
-  ],
+  [check("email", "Please enter a valid email").isEmail()],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password } = req.body;
+    const { email, password, terms } = req.body;
 
     try {
       let user = await User.findOne({ email });
-
+      // Update
       if (user) {
         return res
           .status(400)
@@ -37,8 +35,9 @@ router.post(
         r: "pg",
         d: "mm"
       });
-
+      // Create
       user = new User({
+        terms,
         email,
         avatar,
         password
@@ -75,13 +74,13 @@ router.post(
 // @ route GET api/users
 // @desc   Get all Users
 // @access Public
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const users = await User.find()
+    const users = await User.find();
     res.json(users);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).send("Server Error");
   }
 });
 

@@ -36,7 +36,7 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
   }
 
   return (
-    <Grid centered columns={1} style={{ paddingRight: '30px'}}>
+    <Grid centered columns={1} style={{ paddingRight: "30px" }}>
       <Grid.Column>
         <Header as="h4" textAlign="center">
           Login
