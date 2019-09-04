@@ -1,4 +1,5 @@
 import axios from "axios";
+import { browserHistory } from "react-router";
 import {
   LOGIN_SUCCESS,
   REGISTER_SUCCESS,
@@ -9,30 +10,32 @@ import {
   TOGGLE_TERMS
 } from "./types";
 import { setAlert } from "./alert";
+import { push } from "react-router-redux";
 import setAuthToken from "../utils/setAuthToken";
+import store from "./../store";
 import { loadUser } from "./user";
+const { check, validationResult } = require("express-validator");
 
 // REGISTER USER
-export const register = ({ terms, email, password }) => async dispatch => {
+export const register = (email, terms, password) => async dispatch => {
+  // e.preventDefault();
   const config = {
     headers: {
       "Content-Type": "application/json"
     }
   };
-  const body = JSON.stringify({ terms, email, password });
+  const formData = { email, terms, password };
+  const body = JSON.stringify({ formData });
   try {
-    const res = await axios.post("/api/users", body, config);
+    const res = axios.post("/api/users", body, config);
     dispatch({
       type: REGISTER_SUCCESS,
-      payload: res.data
+      isAuthenticated: true,
+      loading: false,
+      user: res.data
     });
-    dispatch(setAuthToken());
+    dispatch(loadUser());
   } catch (err) {
-    // const errors = err.response.res.errors;
-    const errors = err.response.data.errors;
-    if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
-    }
     dispatch({
       type: REGISTER_FAIL
     });
@@ -57,7 +60,7 @@ export const login = (email, password) => async dispatch => {
     dispatch(loadUser());
     dispatch(setAuthToken());
   } catch (err) {
-    const errors = err.response.data.errors;
+    const errors = err.response;
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
     }
@@ -82,4 +85,5 @@ export const logout = () => async dispatch => {
   dispatch({
     type: LOGOUT
   });
+  store.dispatch(push("/"));
 };

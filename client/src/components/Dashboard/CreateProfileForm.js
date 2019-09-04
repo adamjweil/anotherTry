@@ -10,7 +10,7 @@ const CreateProfileForm = ({ isAuthenticated, createProfile }) => {
     directReports: '',
     hireDate: '',
     bio: '',
-    skills: []
+    skills: 
   });
 
 const { team, title, reportingTo, directReports, hireDate, bio, skills } = formData;

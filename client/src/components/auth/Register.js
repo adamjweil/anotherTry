@@ -52,32 +52,38 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
           <div className="field">
             <label>enter your email:</label>
             <input
+              icon="mail"
               placeholder="Email"
               type="text"
               name="email"
               value={email}
               onChange={e => onChange(e)}
+              iconPosition="left"
             />
           </div>
           <div className="two fields">
             <div className="field">
               <label>password:</label>
               <input
+                icon="user"
                 type="password"
                 name="password"
                 placeholder="password"
                 value={password}
                 onChange={e => onChange(e)}
+                iconPosition="left"
               />
             </div>
             <div className="field">
               <label>confirm password:</label>
               <input
+                icon="lock"
                 type="password"
                 name="password2"
                 placeholder="confirm password"
                 value={password2}
                 onChange={e => onChange(e)}
+                iconPosition="left"
               />
             </div>
           </div>
