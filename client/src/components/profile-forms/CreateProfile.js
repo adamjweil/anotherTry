@@ -12,25 +12,26 @@ const CreateProfile = ({ createProfile }) => {
     title: "",
     bio: "",
     hireDate: "",
-    skills: []
+    skills: "",
+    githubusername: "",
+    twitter: "",
+    linkedin: "",
+    youtube: "",
+    facebook: ""
   });
+
+  const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
   const { title, team, bio, hireDate, skills } = formData;
 
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const onProfileSaveClick = ({
-    title,
-    team,
-    bio,
-    hireDate,
-    skills
-  }) => async e => {
+  const onProfileSaveClick = async e => {
     e.preventDefault();
+    await createProfile({ formData });
     console.log({ formData });
-    await createProfile(title, team, bio, hireDate, skills);
-    return <Redirect to="/" />;
+    // await createProfile(title, team, bio, hireDate, skills);
   };
 
   return (
@@ -112,8 +113,11 @@ const CreateProfile = ({ createProfile }) => {
               <SelectSkills />
             </div>
             <div className="field">
-              <button className="ui blue submit button" size="small">
-                Save
+              <button className="ui positive animated button" size="small">
+                <div className="visible content">Next</div>
+                <div className="hidden content">
+                  <i aria-hidden="true" className="arrow right icon"></i>
+                </div>
               </button>
             </div>
           </form>
@@ -124,6 +128,15 @@ const CreateProfile = ({ createProfile }) => {
             alt="fail"
           />
         </div>
+      </div>
+      <div className="my-2">
+        <button
+          onClick={() => toggleSocialInputs(!displaySocialInputs)}
+          type="button"
+          className="btn btn-light"
+        >
+          Add Social Network Links
+        </button>
       </div>
     </div>
   );

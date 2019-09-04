@@ -7,7 +7,6 @@ import {
 
 const initialState = {
   token: localStorage.getItem("token"),
-  isAuthenticated: null,
   loading: true,
   notification_count: 0
 };
@@ -19,8 +18,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: true,
-        loading: false,
-        user: payload
+        loading: false
       };
     case NOTIFCATION_INCREMENT:
       state.notification_count = state.notification_count + 1;
