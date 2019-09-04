@@ -10,6 +10,8 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Directory from "./components/layout/Directory";
 import CreateProfile from "./components/profile-forms/CreateProfile";
 import PrivateRoute from "./components/routing/PrivateRoute";
+import ThemeingLayout from "./components/layout/ThemeingLayout";
+import ResponsiveLayout from "./components/layout/ResponsiveLayout";
 
 // Redux
 import store from "./store";
@@ -32,6 +34,8 @@ const App = () => {
           <Navbar />
           <Alert />
           <Route exact path="/" component={Landing} />
+          <Route exact path="/themeing" component={ThemeingLayout} />
+          <Route exact path="/responsive" component={ResponsiveLayout} />
           <section className="container">
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/register" component={Register} />
