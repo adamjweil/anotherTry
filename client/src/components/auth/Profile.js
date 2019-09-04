@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   loadUser,
+  isAuthenticated,
   incrementNotificationCount,
   decrementNotificationCount
 } from "../../actions/user";
@@ -11,18 +12,25 @@ import { Grid, Button } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import ProfileMenu from "./Profile/ProfileMenu";
 
+
 const Profile = ({
+  getCurrentProfile,
   loadUser,
   setAlert,
+  isAuthenticated,
   auth: { user },
   profile: { profile, loading },
   incrementNotificationCount,
   decrementNotificationCount
-}) => {
-  useEffect(() => {
-    getCurrentProfile();
-  }, []);
-  // getCurrentProfile();
+}) => async e => {
+
+
+
+
+  if (isAuthenticated !== (null || false)) {
+    return <Redirect to='/' />
+  };
+  getCurrentProfile();
   const onIncrementSubmit = () => {
     incrementNotificationCount();
   };
@@ -74,18 +82,21 @@ const Profile = ({
         Decrement Notifications
       </Button>
     </Grid>
+
   );
-};
+}
 
 Profile.propTypes = {
   loadUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.profile
+  profile: state.profile,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(

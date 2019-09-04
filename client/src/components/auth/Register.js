@@ -100,8 +100,8 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
               <label>I agree to the T&C</label>
             </div>
           </div>
-          <div className="ui blue submit button">
-            <button onClick={onRegister}>Register</button>
+          <div className="ui blue submit button" onClick={onRegister}>
+            Submit
           </div>
         </form>
         <div className="ui bottom attached warning message">
