@@ -71,19 +71,22 @@ const Landing = ({ isAuthenticated }) => {
           <Step
             icon="ticket"
             title="Improved Ticket Mgmt"
-            description="Choose your shipping options"
+            description="Enter, fix, comment and help out with tickets, all from one place"
+            style={{ textAlign: 'center', minWidth: '200px', maxWidth: '33%' }}
           />
           <Step
             active
             icon="paper plane"
             title="Improved Communications"
-            description="Enter billing information"
+            description="Clearer organizational channels that will reduce reducdency"
+            style={{ textAlign: 'center', minWidth: '200px', maxWidth: '33%' }}
           />
           <Step
             active
             icon="angellist"
             title="Teamwork"
-            description="Verify order details"
+            description="Become more invested in the success of our company?"
+            style={{textAlign: 'center', minWidth: '200px', maxWidth: '33%'}}
           />
         </Step.Group>
       </div>
