@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { createProfile } from "../../actions/profile";
-
+import { withRouter } from 'react-router-dom';
 import SelectSkills from "./SelectSkills";
 
-const CreateProfile = ({ createProfile }) => {
+const CreateProfile = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({
     team: "",
     title: "",
@@ -22,15 +21,13 @@ const CreateProfile = ({ createProfile }) => {
 
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
-  const { title, team, bio, hireDate, skills } = formData;
-
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const onProfileSaveClick = async e => {
+  const onProfileSaveClick = e => {
     e.preventDefault();
-    createProfile({ formData });
-    console.log({ formData });
+    createProfile(formData, history);
+
     // await createProfile(title, team, bio, hireDate, skills);
   };
 
@@ -61,7 +58,7 @@ const CreateProfile = ({ createProfile }) => {
               <label>Select your team:</label>
               <select
                 name="team"
-                value={team}
+
                 className="ui dropdown"
                 onChange={e => onChange(e)}
               >
@@ -77,7 +74,7 @@ const CreateProfile = ({ createProfile }) => {
               <label>Select your title:</label>
               <select
                 name="title"
-                value={title}
+
                 className="ui dropdown"
                 onChange={e => onChange(e)}
               >
@@ -94,7 +91,7 @@ const CreateProfile = ({ createProfile }) => {
               <input
                 type="date"
                 name="hireDate"
-                value={hireDate}
+
                 onChange={e => onChange(e)}
               />
             </div>
@@ -104,7 +101,7 @@ const CreateProfile = ({ createProfile }) => {
                 placeholder="Enter a brief Bio here!"
                 rows="3"
                 name="bio"
-                value={bio}
+
                 onChange={e => onChange(e)}
               ></textarea>
             </div>
@@ -143,17 +140,10 @@ const CreateProfile = ({ createProfile }) => {
 };
 
 CreateProfile.propTypes = {
-  createProfile: PropTypes.func.isRequired,
-  users: PropTypes.object.isRequired
+  createProfile: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
-  profile: state.profile,
-  users: state.users,
-  skills: state.profile.skills
-});
-
 export default connect(
-  mapStateToProps,
+  null,
   { createProfile }
-)(CreateProfile);
+)(withRouter(CreateProfile));
