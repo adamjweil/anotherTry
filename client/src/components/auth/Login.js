@@ -51,7 +51,6 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
               placeholder="Email address"
               value={email}
               onChange={e => onChange(e)}
-              iconPosition="left"
             />
             <Form.Input
               fluid
@@ -61,7 +60,6 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
               placeholder="Email a password"
               value={password}
               onChange={e => onChange(e)}
-              iconPosition="left"
             />
             <Button color="blue" fluid size="small">
               Login

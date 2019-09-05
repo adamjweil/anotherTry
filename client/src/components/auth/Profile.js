@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -12,7 +12,6 @@ import { Grid, Button } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import ProfileMenu from "./Profile/ProfileMenu";
 
-
 const Profile = ({
   getCurrentProfile,
   loadUser,
@@ -22,15 +21,21 @@ const Profile = ({
   profile: { profile, loading },
   incrementNotificationCount,
   decrementNotificationCount
-}) => async e => {
-
-
-
-
-  if (isAuthenticated !== (null || false)) {
-    return <Redirect to='/' />
-  };
+}) => {
+  const [formData, setFormData] = useState(
+    {
+      team: "",
+      title: "",
+      bio: "",
+      hireDate: "",
+      skills: []
+    },
+    []
+  );
   getCurrentProfile();
+  if (isAuthenticated === false) {
+    return <Redirect to="/" />;
+  }
   const onIncrementSubmit = () => {
     incrementNotificationCount();
   };
@@ -82,21 +87,12 @@ const Profile = ({
         Decrement Notifications
       </Button>
     </Grid>
-
   );
-}
-
-Profile.propTypes = {
-  loadUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
-  isAuthenticated: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.profile,
-  isAuthenticated: state.auth.isAuthenticated
+  profile: state.profile
 });
 
 export default connect(

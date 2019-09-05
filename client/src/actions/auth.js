@@ -17,25 +17,28 @@ import { loadUser } from "./user";
 const { check, validationResult } = require("express-validator");
 
 // REGISTER USER
-export const register = (email, terms, password) => async dispatch => {
-  // e.preventDefault();
+export const register = ({ email, terms, password }) => async dispatch => {
   const config = {
     headers: {
       "Content-Type": "application/json"
     }
   };
-  const formData = { email, terms, password };
-  const body = JSON.stringify({ formData });
+  // const formData = { email, terms, password };
+  const body = JSON.stringify({ email, terms, password });
+  console.log(body);
   try {
-    const res = axios.post("/api/users", body, config);
+    const res = await axios.post("/api/users", body, config);
     dispatch({
       type: REGISTER_SUCCESS,
-      isAuthenticated: true,
-      loading: false,
-      user: res.data
+      payload: res.data
     });
     dispatch(loadUser());
   } catch (err) {
+    console.log(err);
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(err.msg, "danger")));
+    }
     dispatch({
       type: REGISTER_FAIL
     });
@@ -60,7 +63,7 @@ export const login = (email, password) => async dispatch => {
     dispatch(loadUser());
     dispatch(setAuthToken());
   } catch (err) {
-    const errors = err.response;
+    const errors = err.response.data.errors;
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
     }
