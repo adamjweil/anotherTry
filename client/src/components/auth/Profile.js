@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   loadUser,
-  isAuthenticated,
   incrementNotificationCount,
   decrementNotificationCount
 } from "../../actions/user";
@@ -17,22 +16,13 @@ const Profile = ({
   loadUser,
   setAlert,
   isAuthenticated,
-  auth: { user },
+  auth,
+  user,
   profile: { profile, loading },
   incrementNotificationCount,
   decrementNotificationCount
 }) => {
-  const [formData, setFormData] = useState(
-    {
-      team: "",
-      title: "",
-      bio: "",
-      hireDate: "",
-      skills: []
-    },
-    []
-  );
-  getCurrentProfile();
+
   if (isAuthenticated === false) {
     return <Redirect to="/" />;
   }
@@ -49,7 +39,7 @@ const Profile = ({
         <div className="ui card">
           <div className="image">
             <img
-              src={user && user.avatar}
+              src={auth.user && auth.user.avatar}
               alt="https://as1.ftcdn.net/jpg/02/59/94/92/500_F_259949239_KKDiZphlWffdaE5zsugujCQtaZ8nyWW9.jpg"
             />
           </div>
@@ -60,7 +50,7 @@ const Profile = ({
           <div className="extra content">
             <Link to="#" className="">
               <i aria-hidden="true" className="mail icon"></i>
-              {user && user.email} &nbsp;
+              {auth.user && auth.user.email} &nbsp;
               <Link className="ui button sm yellow" to="/api/profile/edit">
                 {" "}
                 Edit User
@@ -76,7 +66,7 @@ const Profile = ({
         <div>
           <p>Bio: {profile && profile.bio}</p>
           <p>Skills: {profile && profile.skills}</p>
-          <p>Notifications: {user && user.notification_count}</p>
+          <p>Notifications: {auth && auth.notification_count}</p>
         </div>
       </Grid.Column>
 
@@ -90,9 +80,16 @@ const Profile = ({
   );
 };
 
+Profile.propTypes = {
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
+}
+
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.profile
+  profile: state.profile,
+  user: state.users
 });
 
 export default connect(

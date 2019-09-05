@@ -7,14 +7,18 @@ import {
   USER_LOADED,
   TOGGLE_TERMS,
   LOGOUT,
-  GET_USERS
+  GET_USERS,
+  NOTIFCATION_INCREMENT,
+  NOTIFCATION_DECREMENT,
+  GET_NOTIFICATION_COUNT
 } from "../actions/types";
 
 const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
   loading: true,
-  user: null
+  user: null,
+  notification_count: 0
 };
 
 export default function(state = initialState, action) {
@@ -25,7 +29,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: true,
-        loading: false
+        loading: false,
+        user: payload,
       };
     case LOGIN_SUCCESS:
       localStorage.setItem("token", payload.token);
@@ -80,6 +85,20 @@ export default function(state = initialState, action) {
         loading: false
       };
     case GET_USERS:
+      return {
+        ...state
+      };
+    case NOTIFCATION_INCREMENT:
+    state.notification_count = state.notification_count + 1;
+      return {
+        ...state,
+      }
+    case NOTIFCATION_DECREMENT:
+      state.notification_count = state.notification_count - 1;
+      return {
+        ...state
+      };
+    case GET_NOTIFICATION_COUNT:
       return {
         ...state
       };
