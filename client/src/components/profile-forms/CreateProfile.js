@@ -29,7 +29,7 @@ const CreateProfile = ({ createProfile }) => {
   };
   const onProfileSaveClick = async e => {
     e.preventDefault();
-    await createProfile({ formData });
+    createProfile({ formData });
     console.log({ formData });
     // await createProfile(title, team, bio, hireDate, skills);
   };

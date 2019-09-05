@@ -12,6 +12,7 @@ export const getCurrentProfile = () => async dispatch => {
       type: GET_PROFILE,
       payload: res.data
     });
+    
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
@@ -22,20 +23,25 @@ export const getCurrentProfile = () => async dispatch => {
 
 // Create profile
 export const createProfile = ({ formData }) => async dispatch => {
+
   const config = {
     headers: {
       "Content-Type": "application/json"
     }
   };
-  // const body = JSON.stringify({ formData });
+
+  const body = JSON.stringify({ formData });
+
   try {
-    const body = JSON.stringify({ formData });
     const res = await axios.post("/api/profile", body, config);
+
     dispatch({
       type: CREATE_PROFILE,
       payload: res.data
     });
+
   } catch (err) {
+
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, "danger")));

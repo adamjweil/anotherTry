@@ -19,7 +19,7 @@ const initialState = {
   profiles: [],
   repos: [],
   loading: false,
-  error: {}
+  user: null
 };
 export default function(state = initialState, action) {
   const { type, payload } = action;
@@ -27,7 +27,7 @@ export default function(state = initialState, action) {
     case GET_PROFILE:
       return {
         ...state,
-        profile: payload,
+        ...payload,
         loading: false
       };
     case PROFILE_ERROR:

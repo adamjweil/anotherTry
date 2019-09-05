@@ -1,5 +1,5 @@
 import axios from "axios";
-import { browserHistory } from "react-router";
+// import { browserHistory } from "react-router";
 import {
   LOGIN_SUCCESS,
   REGISTER_SUCCESS,
@@ -14,7 +14,6 @@ import { push } from "react-router-redux";
 import setAuthToken from "../utils/setAuthToken";
 import store from "./../store";
 import { loadUser } from "./user";
-const { check, validationResult } = require("express-validator");
 
 // REGISTER USER
 export const register = ({ email, terms, password }) => async dispatch => {
@@ -23,18 +22,21 @@ export const register = ({ email, terms, password }) => async dispatch => {
       "Content-Type": "application/json"
     }
   };
-  // const formData = { email, terms, password };
+
   const body = JSON.stringify({ email, terms, password });
-  console.log(body);
+
   try {
     const res = await axios.post("/api/users", body, config);
+
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data
     });
+
     dispatch(loadUser());
+
   } catch (err) {
-    console.log(err);
+    console.log({err});
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach(error => dispatch(setAlert(err.msg, "danger")));
