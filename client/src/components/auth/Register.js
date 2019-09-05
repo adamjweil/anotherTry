@@ -9,18 +9,21 @@ import { toggleCheck } from "../../actions/auth";
 import { Grid } from "semantic-ui-react";
 
 const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
-  const [formData, setFormData] = useState({
-    terms: false,
-    email: "",
-    password: "",
-    password2: ""
-  });
+  const [formData, setFormData] = useState(
+    {
+      terms: false,
+      email: "",
+      password: "",
+      password2: ""
+    },
+    []
+  );
 
   const { email, terms, password, password2 } = formData;
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const onCheck = e => {
-    toggleCheck();
+    toggleCheck(e);
   };
 
   const onRegister = async e => {
@@ -30,7 +33,7 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
     } else if (terms) {
       setAlert("Please read and agree to our Terms and Conditions");
     } else {
-      await register({ email, terms, password });
+      register({ email, terms, password });
     }
   };
 
@@ -58,20 +61,18 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
               name="email"
               value={email}
               onChange={e => onChange(e)}
-              iconPosition="left"
             />
           </div>
           <div className="two fields">
             <div className="field">
               <label>password:</label>
               <input
-                icon="user"
+                icon="lock"
                 type="password"
                 name="password"
                 placeholder="password"
                 value={password}
                 onChange={e => onChange(e)}
-                iconPosition="left"
               />
             </div>
             <div className="field">
@@ -83,7 +84,6 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
                 placeholder="confirm password"
                 value={password2}
                 onChange={e => onChange(e)}
-                iconPosition="left"
               />
             </div>
           </div>
