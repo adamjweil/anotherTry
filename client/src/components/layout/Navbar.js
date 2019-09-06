@@ -9,9 +9,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   if (isAuthenticated) {
     return (
       <div className="ui secondary pointing menu">
-        <div className='item'>
-  <img src={process.env.PUBLIC_URL + '/img/mezLogo120px.png'} alt=""/>
-         </div>
+      
         <Link to="/" className="item">
           <i className="home icon"></i>Home
         </Link>

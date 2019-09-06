@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
 import { register } from "../../actions/auth";
 import { toggleCheck } from "../../actions/auth";
-import { Grid } from "semantic-ui-react";
+import { Grid, Form } from "semantic-ui-react";
 
 const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
   const [formData, setFormData] = useState(
@@ -51,25 +51,28 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
             <i className="hand point left icon"></i>Create New Account!
           </p>
         </div>
-        <form className="ui form attached fluid segment">
+        <Form className="ui form attached fluid segment" onSubmit={onRegister}>
           <div className="field">
-            <label>enter your email:</label>
-            <input
+
+            <Form.Input
               icon="mail"
-              placeholder="Email"
+              iconPosition="left"
+              placeholder="Enter your eMail Here!"
               type="text"
               name="email"
               value={email}
               onChange={e => onChange(e)}
             />
           </div>
-          <div className="two fields">
+
             <div className="field">
               <label>password:</label>
-              <input
+              <Form.Input
                 icon="lock"
+                iconPosition="left"
                 type="password"
                 name="password"
+                style={{ width:'50%'}}
                 placeholder="password"
                 value={password}
                 onChange={e => onChange(e)}
@@ -77,33 +80,36 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
             </div>
             <div className="field">
               <label>confirm password:</label>
-              <input
+              <Form.Input
                 icon="lock"
+                iconPosition="left"
                 type="password"
+                style={{ width:'50%'}}
                 name="password2"
                 placeholder="confirm password"
                 value={password2}
                 onChange={e => onChange(e)}
               />
             </div>
-          </div>
+
 
           <div className="inline field">
             <div className="ui checkbox">
-              <input
-                type="checkbox"
+              <Form.Checkbox
                 id="terms"
                 name="terms"
+                label="I agree to the Terms & Conditions"
                 onClick={onCheck}
                 value={terms}
               />
-              <label>I agree to the T&C</label>
+
             </div>
           </div>
-          <div className="ui blue submit button" onClick={onRegister}>
-            Submit
-          </div>
-        </form>
+
+          <button className="ui blue submit button" style={{ marginLeft: '40%'}}>
+            Register
+          </button>
+        </Form>
         <div className="ui bottom attached warning message">
           <i className="icon help"></i>
           Already have an account?{" "}
