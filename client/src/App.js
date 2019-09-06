@@ -28,7 +28,7 @@ const App = () => {
   }, []);
 
   return (
-    <Provider store={store}>
+    <Provider store={store} style={{display: 'flex', minHeight: '100vh', flexDirection: 'column'}}>
       <Router>
         <div className="ui container">
           <Navbar />
@@ -36,7 +36,7 @@ const App = () => {
           <Route exact path="/" component={Landing} />
           <Route exact path="/themeing" component={ThemeingLayout} />
           <Route exact path="/responsive" component={ResponsiveLayout} />
-          <section className="container">
+          <section className="container" style={{flex: '1'}}>
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/directory" component={Directory} />

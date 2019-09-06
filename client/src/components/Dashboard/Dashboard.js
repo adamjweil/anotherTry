@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect } from "react";
 import { getCurrentProfile, createProfile } from "../../actions/profile";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import Spinner from "../layout/Spinner";
-import { Grid, Header } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import Menu from "./Menu";
+import PropTypes from "prop-types";
+import { Grid, Header } from "semantic-ui-react";
+import Spinner from "../layout/Spinner";
+import Footer from '../layout/Footer';
 
 const Dashboard = ({
   createProfile,
@@ -16,14 +16,11 @@ const Dashboard = ({
     getCurrentProfile();
   }, []);
 
-  // getCurrentProfile();
-
   return loading && profile === null ? (
     <Spinner />
-  ) : (
-
+      ) : (
     <Grid style={{marginTop: '10px'}} container columns={2} divided relaxed stackable>
-      <Grid.Column>
+      <Grid.Column >
         <Fragment>
         <img
           src={process.env.PUBLIC_URL + '/img/mezLogo120px.png'}
@@ -67,7 +64,7 @@ const Dashboard = ({
           <div className="ui message">
             <div className="content">
               <Header as='h2'>Dashboard</Header>
-              
+
               <ul className="list">
                 <li className="content">This page will be where you are spending most of your time</li>
                 <li className="content">Any outstanding tickets or requests that your name is associated with, can be viewed here</li>
@@ -76,6 +73,7 @@ const Dashboard = ({
             </div>
           </div>
         </Grid.Column>
+      <Footer />
     </Grid>
   );
 };

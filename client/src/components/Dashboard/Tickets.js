@@ -10,7 +10,7 @@ const Tickets = () => {
 }
 
 Tickets.propTypes = {
-
+  
 }
 
 export default Tickets;
