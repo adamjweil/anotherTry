@@ -27,7 +27,7 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    login(email, password);
+   login(email, password);
   };
 
   // Redirect if logged in
@@ -46,6 +46,7 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
             <Form.Input
               fluid
               icon="user"
+              iconPosition="left"
               type="text"
               name="email"
               placeholder="Email address"
@@ -55,6 +56,7 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
             <Form.Input
               fluid
               icon="lock"
+              iconPosition="left"
               type="password"
               name="password"
               placeholder="Email a password"

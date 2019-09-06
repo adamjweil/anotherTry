@@ -49,14 +49,14 @@ export const register = ({ email, terms, password }) => async dispatch => {
 
 // LOGIN USER
 export const login = (email, password) => async dispatch => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-  const body = JSON.stringify({ email, password });
 
   try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+    const body = JSON.stringify({ email, password });
     const res = await axios.post("/api/auth", body, config);
     dispatch({
       type: LOGIN_SUCCESS,
@@ -65,7 +65,7 @@ export const login = (email, password) => async dispatch => {
     dispatch(loadUser());
     dispatch(setAuthToken());
   } catch (err) {
-    const errors = err.response.data.errors;
+    const errors = err.data;
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
     }
