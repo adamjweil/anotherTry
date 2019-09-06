@@ -44,19 +44,26 @@ const Profile = ({
             />
           </div>
           <div className="content">
-            <div className="header"> {profile && profile.team} Team </div>
+            <div className="extra content" style={{ display: 'flex', justifyContent: 'space-between' }}>
+
+            <h4>Name PlaceHolder </h4>
+            <Link className="ui button sm yellow" to="/api/profile/edit">
+              {" "}
+              Edit User
+            </Link>
+            </div>
             <div className="description"> {profile && profile.title} </div>
           </div>
-          <div className="extra content">
-            <Link to="#" className="">
+
+          <div className="extra content" style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <span>eMail:</span>
+
+            <span>
               <i aria-hidden="true" className="mail icon"></i>
-              {auth.user && auth.user.email} &nbsp;
-              <Link className="ui button sm yellow" to="/api/profile/edit">
-                {" "}
-                Edit User
-              </Link>
-            </Link>
+              {auth.user && auth.user.email}
+            </span>
           </div>
+
         </div>
       </Grid.Column>
       <Grid.Column>
@@ -89,7 +96,7 @@ Profile.propTypes = {
 const mapStateToProps = state => ({
   auth: state.auth,
   profile: state.profile,
-  user: state.users
+  user: state.user
 });
 
 export default connect(

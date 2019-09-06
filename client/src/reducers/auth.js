@@ -8,6 +8,7 @@ import {
   TOGGLE_TERMS,
   LOGOUT,
   GET_USERS,
+  GET_USER,
   NOTIFCATION_INCREMENT,
   NOTIFCATION_DECREMENT,
   GET_NOTIFICATION_COUNT
@@ -87,6 +88,13 @@ export default function(state = initialState, action) {
     case GET_USERS:
       return {
         ...state
+      };
+    case GET_USER:
+      return {
+        ...state,
+        user: payload,
+        isAuthenticated: true,
+        loading: false
       };
     case NOTIFCATION_INCREMENT:
     state.notification_count = state.notification_count + 1;
