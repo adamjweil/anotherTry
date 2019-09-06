@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
+import { Grid, Form } from "semantic-ui-react";
 // Redux
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
-import { register } from "../../actions/auth";
-import { toggleCheck } from "../../actions/auth";
-import { Grid, Form } from "semantic-ui-react";
+import { register, toggleCheck } from "../../actions/auth";
+// import { toggleCheck } from "../../actions/auth";
+import GoogleAuth from '../../GoogleAuth';
 
 const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
   const [formData, setFormData] = useState(
@@ -109,6 +110,7 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
           <button className="ui blue submit button" style={{ marginLeft: '40%'}}>
             Register
           </button>
+          <GoogleAuth />
         </Form>
         <div className="ui bottom attached warning message">
           <i className="icon help"></i>

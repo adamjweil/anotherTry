@@ -11,7 +11,9 @@ import {
   GET_USER,
   NOTIFCATION_INCREMENT,
   NOTIFCATION_DECREMENT,
-  GET_NOTIFICATION_COUNT
+  GET_NOTIFICATION_COUNT,
+  SIGN_IN,
+  SIGN_OUT
 } from "../actions/types";
 
 const initialState = {
@@ -109,6 +111,18 @@ export default function(state = initialState, action) {
     case GET_NOTIFICATION_COUNT:
       return {
         ...state
+      };
+    case SIGN_IN:
+      return {
+        ...state,
+        isAuthenticated: true,
+        userId: action.payload
+      };
+    case SIGN_OUT:
+      return {
+        ...state,
+        isAuthenticated: false,
+        userId: null
       };
     default:
       return state;
