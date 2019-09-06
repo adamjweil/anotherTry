@@ -1,39 +1,11 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import { Container, Grid, Header } from "semantic-ui-react";
 import PropTypes from "prop-types";
 
+import Footer from './Footer';
 import Login from "./../auth/Login";
-import {
-  Button,
-  Container,
-  Grid,
-  Header,
-  Icon,
-  Image,
-  Item,
-  Label,
-  Menu,
-  Segment,
-  Step,
-  Table
-} from "semantic-ui-react";
-
-const style = {
-  h1: {
-    marginTop: "3em"
-  },
-  h2: {
-    margin: "4em 0em 2em"
-  },
-  h3: {
-    marginTop: "2em",
-    padding: "2em 0em"
-  },
-  last: {
-    marginBottom: "300px"
-  }
-};
 
 const Landing = ({ isAuthenticated }) => {
   if (isAuthenticated !== (null || false)) {
@@ -66,31 +38,7 @@ const Landing = ({ isAuthenticated }) => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      <div style={style.last}>
-        <Step.Group fluid>
-          <Step
-            active
-            icon="ticket"
-            title="Improved Ticket Mgmt"
-            description="Enter, fix, comment and help out with tickets, all from one place"
-            style={{ textAlign: "center", minWidth: "200px", maxWidth: "33%" }}
-          />
-          <Step
-            active
-            icon="paper plane"
-            title="Improved Communications"
-            description="Clearer organizational channels that will reduce reducdency"
-            style={{ textAlign: "center", minWidth: "200px", maxWidth: "33%" }}
-          />
-          <Step
-            active
-            icon="angellist"
-            title="Teamwork"
-            description="Become more invested in the success of our company?"
-            style={{ textAlign: "center", minWidth: "200px", maxWidth: "33%" }}
-          />
-        </Step.Group>
-      </div>
+      <Footer />
     </Container>
   );
 };
