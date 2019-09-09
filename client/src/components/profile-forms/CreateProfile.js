@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile } from "../../actions/profile";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 import SelectSkills from "./SelectSkills";
 
 const CreateProfile = ({ createProfile, history }) => {
@@ -26,7 +26,7 @@ const CreateProfile = ({ createProfile, history }) => {
   };
   const onProfileSaveClick = e => {
     e.preventDefault();
-    createProfile(formData, history);
+    createProfile(formData);
 
     // await createProfile(title, team, bio, hireDate, skills);
   };
@@ -58,7 +58,6 @@ const CreateProfile = ({ createProfile, history }) => {
               <label>Select your team:</label>
               <select
                 name="team"
-
                 className="ui dropdown"
                 onChange={e => onChange(e)}
               >
@@ -74,7 +73,6 @@ const CreateProfile = ({ createProfile, history }) => {
               <label>Select your title:</label>
               <select
                 name="title"
-
                 className="ui dropdown"
                 onChange={e => onChange(e)}
               >
@@ -88,12 +86,7 @@ const CreateProfile = ({ createProfile, history }) => {
             </div>
             <div className="ui selection">
               <label>Date of Hire:</label>
-              <input
-                type="date"
-                name="hireDate"
-
-                onChange={e => onChange(e)}
-              />
+              <input type="date" name="hireDate" onChange={e => onChange(e)} />
             </div>
             <br />
             <div className="field">
@@ -101,7 +94,6 @@ const CreateProfile = ({ createProfile, history }) => {
                 placeholder="Enter a brief Bio here!"
                 rows="3"
                 name="bio"
-
                 onChange={e => onChange(e)}
               ></textarea>
             </div>
