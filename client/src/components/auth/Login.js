@@ -1,30 +1,22 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
+import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
 // Redux
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
-import { login } from "../../actions/auth";
+import { login, signIn } from "../../actions/auth";
+// Local Imports
+import GoogleAuth from '../../GoogleAuth';
 
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Message,
-  Segment
-} from "semantic-ui-react";
-
-const Login = ({ login, isAuthenticated, setAlert }) => {
+const Login = ({ login, isAuthenticated, setAlert, signIn }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   });
-
   const { email, password } = formData;
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-
   const onSubmit = async e => {
     e.preventDefault();
    login(email, password);
@@ -38,11 +30,8 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
   return (
     <Grid centered columns={1} style={{ paddingRight: "30px" }}>
       <Grid.Column>
-        <Header as="h4" textAlign="center">
-          Login
-        </Header>
         <Segment>
-          <Form size="medium" onSubmit={e => onSubmit(e)}>
+          <Form size="small" onSubmit={e => onSubmit(e)}>
             <Form.Input
               fluid
               icon="user"
@@ -63,14 +52,15 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
               value={password}
               onChange={e => onChange(e)}
             />
-            <Button color="blue" fluid size="small">
+            <Button color="blue" fluid size="small" style={{ marginBottom: '5px'}}>
               Login
             </Button>
-          </Form>
+            </Form>
+            <GoogleAuth />
         </Segment>
         <Message>
           Not registered yet?
-          <Link to="/register"> Sign up here . . .</Link>
+          <Link to="/register"> Sign up here . . ., or</Link>
         </Message>
       </Grid.Column>
     </Grid>
@@ -86,10 +76,11 @@ Login.propTypes = {
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   login: state.auth,
+  signIn: state.auth,
   alerts: state.alert
 });
 
 export default connect(
   mapStateToProps,
-  { setAlert, login }
+  { setAlert, login, signIn }
 )(Login);
