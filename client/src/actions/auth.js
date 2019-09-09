@@ -7,9 +7,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_PROFILE,
-  TOGGLE_TERMS,
-  SIGN_IN,
-  SIGN_OUT
+  TOGGLE_TERMS
 } from "./types";
 import { setAlert } from "./alert";
 import { push } from "react-router-redux";
@@ -25,6 +23,7 @@ export const register = ({ email, terms, password }) => async dispatch => {
     }
   };
   const body = JSON.stringify({ email, terms, password });
+
   try {
     const res = await axios.post("/api/users", body, config);
     dispatch({
@@ -87,18 +86,4 @@ export const logout = () => async dispatch => {
     type: LOGOUT
   });
   store.dispatch(push("/"));
-};
-
-// Sign in w GoogleAuth
-export const signIn = userId => {
-  return {
-    type: SIGN_IN,
-    payload: userId
-  };
-};
-
-export const signOut = () => {
-  return {
-    type: SIGN_OUT
-  };
 };

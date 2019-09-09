@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { Container, Grid, Header } from "semantic-ui-react";
@@ -13,33 +13,37 @@ const Landing = ({ isAuthenticated }) => {
   }
 
   return (
-    <Container style={{ marginTop: "10px" }}>
+    <Fragment>
+    <Container style={{ marginTop: "10px", display: 'flex', flex: '1', flexDirection: 'column' }}>
       <Grid columns={2}>
         <Grid.Row>
           <Grid.Column>
             <img
-              style={{ marginTop: "20px", marginBottom: "0px" }}
+              style={{ marginTop: "20px", marginBottom: "0px", width: '80%', justifyContent: 'center' }}
               src={process.env.PUBLIC_URL + "/img/mezologo1.png"}
               alt=""
             />
+
             <Header
               style={{
-                marginLeft: "5px",
-                paddingBottom: "50px",
-                fontSize: "40px"
+                marginLeft: "px",
+                marginBottom: '100px',
+                fontSize: "35px"
               }}
-              dividing
-            >
-              <center>Online Portal</center>
+              dividing >
+
+            Online Portal
             </Header>
+
           </Grid.Column>
           <Grid.Column>
             <Login />
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      <Footer />
     </Container>
+    <Footer />
+  </Fragment>
   );
 };
 

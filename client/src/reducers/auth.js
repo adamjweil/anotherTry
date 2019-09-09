@@ -111,12 +111,10 @@ export default (state = INITIAL_STATE, action) => {
         ...state
       };
     case SIGN_IN:
-      localStorage.setItem("token", action.payload.token);
       return {
         ...state,
-        isAuthenticated: true,
-        userId: action.payload,
-        loading: false
+        isSignedIn: true,
+        userId: action.payload
       };
     case SIGN_OUT:
       return {
