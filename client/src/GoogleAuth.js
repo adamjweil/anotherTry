@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { signIn, signOut } from './actions/auth';
+import { signIn, signOut } from './actions/gAuth';
 import PropTypes from 'prop-types';
 
 class GoogleAuth extends React.Component {
@@ -8,14 +8,13 @@ class GoogleAuth extends React.Component {
     window.gapi.load('client:auth2', () => {
       window.gapi.client
         .init({
-          // clientId: '47395222832-s1l9u9r4549upoqchm7v4kbq40k2jdc2.apps.googleusercontent.com',
-          clientId: '797401886567-9cumct9mrt3v2va409rasa7fa6fq02hh.apps.googleusercontent.com',
+          clientId: '984913872053-18mjie93d0ri9o9p6m2m41587rkmkbjp.apps.googleusercontent.com',
           scope: 'email'
         })
         .then(() => {
           this.auth = window.gapi.auth2.getAuthInstance();
           // this.auth = window.gapi2.getAuthInstance();
-          this.onAuthChange(this.auth.isAuthenticated.get());
+          this.onAuthChange(this.isAuthenticated.get());
           this.auth.isAuthenticated.listen(this.onAuthChange);
         });
     });
@@ -29,8 +28,10 @@ class GoogleAuth extends React.Component {
       }
     };
 
-   onSignInClick = (e) => {
-    this.auth.signIn();
+   onSignInClick = async e => {
+     e.preventDefault();
+     this.auth.signIn();
+
   };
 
    onSignOutClick = (e) => {
@@ -58,7 +59,9 @@ class GoogleAuth extends React.Component {
 };
 
 render() {
+  console.log(this.state)
   return (
+
       <div>
         {this.renderAuthButton()}
       </div>

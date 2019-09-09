@@ -5,7 +5,8 @@ import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
 // Redux
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
-import { login, signIn } from "../../actions/auth";
+import { signIn } from "../../actions/gAuth";
+import { login } from "../../actions/auth";
 // Local Imports
 import GoogleAuth from '../../GoogleAuth';
 

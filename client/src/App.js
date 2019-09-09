@@ -7,6 +7,7 @@ import Landing from "./components/layout/Landing";
 import Alert from "./components/layout/Alert";
 import Profile from "./components/auth/Profile";
 import Dashboard from "./components/Dashboard/Dashboard";
+import Tickets from "./components/Dashboard/Tickets";
 import Directory from "./components/layout/Directory";
 import CreateProfile from "./components/profile-forms/CreateProfile";
 import PrivateRoute from "./components/routing/PrivateRoute";
@@ -36,6 +37,7 @@ const App = () => {
           <Route exact path="/" component={Landing} />
           <Route exact path="/themeing" component={ThemeingLayout} />
           <Route exact path="/responsive" component={ResponsiveLayout} />
+          <Route exact path="/tickethub" component={Tickets} />
           <section className="container" style={{flex: '1'}}>
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/register" component={Register} />
