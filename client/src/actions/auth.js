@@ -90,38 +90,15 @@ export const logout = () => async dispatch => {
 };
 
 // Sign in w GoogleAuth
-export const signIn = (email, password) => async dispatch => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
+export const signIn = userId => {
+  return {
+    type: SIGN_IN,
+    payload: userId
   };
-  const body = JSON.stringify({ email, password });
-  const res = await axios.post('/api/auth', body, config)
-  try {
-    dispatch({
-      type: SIGN_IN,
-      payload: res.data
-    });
-    dispatch(setAuthToken());
-  } catch (err) {
-      console.log({err});
-      const errors = err.response.data.errors;
-      if (errors) {
-        errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
-      }
-      dispatch({
-        type: LOGIN_FAIL
-      });
-  }
 };
 
-export const signOut = () => async dispatch => {
-  dispatch({
-    type: CLEAR_PROFILE
-  });
-  dispatch({
+export const signOut = () => {
+  return {
     type: SIGN_OUT
-  });
-  store.dispatch(push("/"));
+  };
 };

@@ -16,7 +16,7 @@ import {
   SIGN_OUT
 } from "../actions/types";
 
-const initialState = {
+const INITIAL_STATE = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
   loading: true,
@@ -24,19 +24,17 @@ const initialState = {
   notification_count: 0
 };
 
-export default function(state = initialState, action) {
-  const { type, payload } = action;
-
-  switch (type) {
+export default (state = INITIAL_STATE, action) => {
+  switch (action.type) {
     case USER_LOADED:
       return {
         ...state,
         isAuthenticated: true,
         loading: false,
-        user: payload,
+        user: action.payload,
       };
     case LOGIN_SUCCESS:
-      localStorage.setItem("token", payload.token);
+      localStorage.setItem("token", action.payload.token);
       return {
         ...state,
         isAuthenticated: true,
@@ -51,10 +49,10 @@ export default function(state = initialState, action) {
         loading: false
       };
     case REGISTER_SUCCESS:
-      localStorage.setItem("token", payload.token);
+      localStorage.setItem("token", action.payload.token);
       return {
         ...state,
-        ...payload,
+        ...action.payload,
         isAuthenticated: true,
         loading: false
       };
@@ -94,7 +92,7 @@ export default function(state = initialState, action) {
     case GET_USER:
       return {
         ...state,
-        user: payload,
+        user: action.payload,
         isAuthenticated: true,
         loading: false
       };
@@ -113,10 +111,12 @@ export default function(state = initialState, action) {
         ...state
       };
     case SIGN_IN:
+      localStorage.setItem("token", action.payload.token);
       return {
         ...state,
         isAuthenticated: true,
-        userId: action.payload
+        userId: action.payload,
+        loading: false
       };
     case SIGN_OUT:
       return {

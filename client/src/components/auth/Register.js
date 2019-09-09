@@ -6,7 +6,7 @@ import { Grid, Form } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
 import { register, toggleCheck } from "../../actions/auth";
-// import { toggleCheck } from "../../actions/auth";
+// Local Imports
 import GoogleAuth from '../../GoogleAuth';
 
 const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
@@ -16,9 +16,7 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
       email: "",
       password: "",
       password2: ""
-    },
-    []
-  );
+    }, [] );
 
   const { email, terms, password, password2 } = formData;
   const onChange = e =>
@@ -50,11 +48,11 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
           <div className="header">Welcome to the meZocliQ Online Portal</div>
           <p>
             <i className="hand point left icon"></i>Create New Account!
+            <GoogleAuth />
           </p>
         </div>
         <Form className="ui form attached fluid segment" onSubmit={onRegister}>
           <div className="field">
-
             <Form.Input
               icon="mail"
               iconPosition="left"
@@ -66,33 +64,32 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
             />
           </div>
 
-            <div className="field">
-              <label>password:</label>
-              <Form.Input
-                icon="lock"
-                iconPosition="left"
-                type="password"
-                name="password"
-                style={{ width:'50%'}}
-                placeholder="password"
-                value={password}
-                onChange={e => onChange(e)}
-              />
-            </div>
-            <div className="field">
-              <label>confirm password:</label>
-              <Form.Input
-                icon="lock"
-                iconPosition="left"
-                type="password"
-                style={{ width:'50%'}}
-                name="password2"
-                placeholder="confirm password"
-                value={password2}
-                onChange={e => onChange(e)}
-              />
-            </div>
-
+          <div className="field">
+            <label>password:</label>
+            <Form.Input
+              icon="lock"
+              iconPosition="left"
+              type="password"
+              name="password"
+              style={{ width:'50%'}}
+              placeholder="password"
+              value={password}
+              onChange={e => onChange(e)}
+            />
+          </div>
+          <div className="field">
+            <label>confirm password:</label>
+            <Form.Input
+              icon="lock"
+              iconPosition="left"
+              type="password"
+              style={{ width:'50%'}}
+              name="password2"
+              placeholder="confirm password"
+              value={password2}
+              onChange={e => onChange(e)}
+            />
+          </div>
 
           <div className="inline field">
             <div className="ui checkbox">
@@ -107,11 +104,18 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
             </div>
           </div>
 
-          <button className="ui blue submit button" style={{ marginLeft: '40%'}}>
-            Register
-          </button>
-          <GoogleAuth />
+          <Grid columns={2} centered>
+            <Grid.Column>
+              <button className="ui blue submit button">
+                Register
+              </button>
+            </Grid.Column>
+            <Grid.Column>
+
+            </Grid.Column>
+          </Grid>
         </Form>
+
         <div className="ui bottom attached warning message">
           <i className="icon help"></i>
           Already have an account?{" "}
