@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setAlert } from "./alert";
-import { GET_PROFILE, PROFILE_ERROR } from "./types";
+import { GET_PROFILE, CREATE_PROFILE, PROFILE_ERROR } from "./types";
 
 // Get current users Profile
 export const getCurrentProfile = () => async dispatch => {
@@ -11,7 +11,6 @@ export const getCurrentProfile = () => async dispatch => {
       type: GET_PROFILE,
       payload: res.data
     });
-
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
@@ -21,23 +20,27 @@ export const getCurrentProfile = () => async dispatch => {
 };
 
 // Create profile
-export const createProfile = (formData, history, edit = false) => async dispatch => {
+export const createProfile = (
+  formData,
+  history,
+  edit = false
+) => async dispatch => {
   try {
     const config = {
       headers: {
         "Content-Type": "application/json"
       }
     };
-  const res = await axios.post("/api/profile", formData, config);
-
+    const body = JSON.stringify(formData);
+    const res = await axios.post("/api/profile", body, config);
     dispatch({
-      type: GET_PROFILE,
+      type: CREATE_PROFILE,
       payload: res.data
     });
-    dispatch(setAlert(edit ? 'Profile Update' : 'Profile Created', 'success'));
+    dispatch(setAlert(edit ? "Profile Update" : "Profile Created", "success"));
 
     if (!edit) {
-      history.push('/dashboard')
+      history.push("/dashboard");
     }
   } catch (err) {
     const errors = err.response.data.errors;
@@ -51,5 +54,4 @@ export const createProfile = (formData, history, edit = false) => async dispatch
       payload: { msg: err.response.statusText, status: err.response.status }
     });
   }
-
-}
+};

@@ -21,16 +21,15 @@ const INITIAL_STATE = {
   isAuthenticated: null,
   loading: true,
   user: null,
-  userId: null,
   notification_count: 0
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SIGN_IN:
-      return { ...state, isAuthenticated: true, userId: action.payload };
+      return { ...state, isAuthenticated: true, user: action.payload };
     case SIGN_OUT:
-      return { ...state, isAuthenticated: false, userId: null };
+      return { ...state, isAuthenticated: false, user: null };
     case USER_LOADED:
       return {
         ...state,
@@ -114,18 +113,6 @@ export default (state = INITIAL_STATE, action) => {
     case GET_NOTIFICATION_COUNT:
       return {
         ...state
-      };
-    case SIGN_IN:
-      return {
-        ...state,
-        isSignedIn: true,
-        userId: action.payload
-      };
-    case SIGN_OUT:
-      return {
-        ...state,
-        isAuthenticated: false,
-        userId: null
       };
     default:
       return state;

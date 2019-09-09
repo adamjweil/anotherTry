@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
 import { register, toggleCheck } from "../../actions/auth";
 // Local Imports
-import GoogleAuth from '../../GoogleAuth';
+import GoogleAuth from "../../GoogleAuth";
 
 const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
   const [formData, setFormData] = useState(
@@ -16,7 +16,9 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
       email: "",
       password: "",
       password2: ""
-    }, [] );
+    },
+    []
+  );
 
   const { email, terms, password, password2 } = formData;
   const onChange = e =>
@@ -48,11 +50,11 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
           <div className="header">Welcome to the meZocliQ Online Portal</div>
           <p>
             <i className="hand point left icon"></i>Create New Account!
-            <GoogleAuth />
           </p>
         </div>
         <Form className="ui form attached fluid segment" onSubmit={onRegister}>
           <div className="field">
+            <label>Enter your eMail address (@mezocliq.com):</label>
             <Form.Input
               icon="mail"
               iconPosition="left"
@@ -63,32 +65,31 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
               onChange={e => onChange(e)}
             />
           </div>
-
-          <div className="field">
-            <label>password:</label>
-            <Form.Input
-              icon="lock"
-              iconPosition="left"
-              type="password"
-              name="password"
-              style={{ width:'50%'}}
-              placeholder="password"
-              value={password}
-              onChange={e => onChange(e)}
-            />
-          </div>
-          <div className="field">
-            <label>confirm password:</label>
-            <Form.Input
-              icon="lock"
-              iconPosition="left"
-              type="password"
-              style={{ width:'50%'}}
-              name="password2"
-              placeholder="confirm password"
-              value={password2}
-              onChange={e => onChange(e)}
-            />
+          <div className="equal width fields">
+            <div className="field">
+              <label>password:</label>
+              <Form.Input
+                icon="lock"
+                iconPosition="left"
+                type="password"
+                name="password"
+                placeholder="password"
+                value={password}
+                onChange={e => onChange(e)}
+              />
+            </div>
+            <div className="field">
+              <label>confirm password:</label>
+              <Form.Input
+                icon="lock"
+                iconPosition="left"
+                type="password"
+                name="password2"
+                placeholder="confirm password"
+                value={password2}
+                onChange={e => onChange(e)}
+              />
+            </div>
           </div>
 
           <div className="inline field">
@@ -99,20 +100,16 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
                 label="I agree to the Terms & Conditions"
                 onClick={onCheck}
                 value={terms}
+                required
               />
-
             </div>
           </div>
 
           <Grid columns={2} centered>
             <Grid.Column>
-              <button className="ui blue submit button">
-                Register
-              </button>
+              <button className="ui blue submit button">Register</button>
             </Grid.Column>
-            <Grid.Column>
-
-            </Grid.Column>
+            <Grid.Column></Grid.Column>
           </Grid>
         </Form>
 

@@ -15,11 +15,9 @@ router.get("/me", auth, async (req, res) => {
       "user",
       ["email", "avatar"]
     );
-
     if (!profile) {
       return res.status(400).json({ msg: "There is no profile for this user" });
     }
-
     res.json(profile);
   } catch (err) {
     console.error(err.message);
@@ -77,13 +75,12 @@ router.post("/", auth, async (req, res) => {
         { $set: profileFields },
         { new: true }
       );
+      await profile.save();
 
       return res.json(profile);
     } else {
       // Create
-      profile = new Profile({ profileFields });
-
-      await profile.save();
+      profile = new Profile(profileFields);
       res.json(profile);
     }
   } catch (err) {

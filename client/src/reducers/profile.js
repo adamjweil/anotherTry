@@ -3,10 +3,11 @@ import {
   PROFILE_ERROR,
   CREATE_PROFILE,
   CREATE_PROFILE_FAIL,
-  CLEAR_PROFILE
+  CLEAR_PROFILE,
+  GET_CURRENT_PROFILE
 } from "../actions/types";
 
-const initialState = {
+const INITIAL_STATE = {
   team: "",
   title: "",
   reportingTo: "",
@@ -21,7 +22,8 @@ const initialState = {
   loading: false,
   user: null
 };
-export default function(state = initialState, action) {
+
+export default function(state = INITIAL_STATE, action) {
   const { type, payload } = action;
   switch (type) {
     case GET_PROFILE:
@@ -54,6 +56,10 @@ export default function(state = initialState, action) {
         profile: null,
         repos: [],
         loading: false
+      };
+    case GET_CURRENT_PROFILE:
+      return {
+        ...state
       };
     default:
       return state;

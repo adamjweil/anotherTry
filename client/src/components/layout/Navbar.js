@@ -9,7 +9,6 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   if (isAuthenticated) {
     return (
       <div className="ui secondary pointing menu">
-      
         <Link to="/" className="item">
           <i className="home icon"></i>Home
         </Link>
@@ -41,7 +40,6 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     );
   } else {
     return (
-
       <div className="ui secondary pointing menu">
         <Link to="/" className="item">
           <i className="home icon"></i>Home
