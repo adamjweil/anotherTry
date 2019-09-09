@@ -1,13 +1,10 @@
-import { combineReducers } from 'redux';
-import alert from './alert';
-import auth from './auth';
-import profile from './profile';
-import googleAuth from './googleAuthReducer';
+import { combineReducers } from "redux";
+import alert from "./alert";
+import auth from "./auth";
+import profile from "./profile";
 
 export default combineReducers({
   alert: alert,
   auth: auth,
-  profile: profile,
-  gauth: googleAuth
-
+  profile: profile
 });
