@@ -5,10 +5,9 @@ import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
 // Redux
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
-import { signIn } from "../../actions/gAuth";
-import { login } from "../../actions/auth";
+import { signIn, login } from "../../actions/auth";
 // Local Imports
-import GoogleAuth from '../../GoogleAuth';
+import GoogleAuth from "../../GoogleAuth";
 
 const Login = ({ login, isAuthenticated, setAlert, signIn }) => {
   const [formData, setFormData] = useState({
@@ -20,7 +19,7 @@ const Login = ({ login, isAuthenticated, setAlert, signIn }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const onSubmit = async e => {
     e.preventDefault();
-   login(email, password);
+    login(email, password);
   };
 
   // Redirect if logged in
@@ -53,11 +52,16 @@ const Login = ({ login, isAuthenticated, setAlert, signIn }) => {
               value={password}
               onChange={e => onChange(e)}
             />
-            <Button color="blue" fluid size="small" style={{ marginBottom: '5px'}}>
+            <Button
+              color="blue"
+              fluid
+              size="small"
+              style={{ marginBottom: "5px" }}
+            >
               Login
             </Button>
-            </Form>
-            <GoogleAuth />
+          </Form>
+          <GoogleAuth />
         </Segment>
         <Message>
           Not registered yet?

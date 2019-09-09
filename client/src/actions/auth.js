@@ -7,7 +7,10 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_PROFILE,
-  TOGGLE_TERMS
+  TOGGLE_TERMS,
+  SIGN_IN,
+  SIGN_OUT,
+  AUTH_ERROR
 } from "./types";
 import { setAlert } from "./alert";
 import { push } from "react-router-redux";
@@ -32,7 +35,7 @@ export const register = ({ email, terms, password }) => async dispatch => {
     });
     dispatch(loadUser());
   } catch (err) {
-    console.log({err});
+    console.log({ err });
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach(error => dispatch(setAlert(err.msg, "danger")));
@@ -86,4 +89,24 @@ export const logout = () => async dispatch => {
     type: LOGOUT
   });
   store.dispatch(push("/"));
+};
+
+// Sign in w GoogleAuth
+export const signIn = userId => async dispatch => {
+  try {
+    dispatch({
+      type: SIGN_IN,
+      payload: userId
+    });
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR
+    });
+  }
+};
+
+export const signOut = () => {
+  return {
+    type: SIGN_OUT
+  };
 };
