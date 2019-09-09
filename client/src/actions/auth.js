@@ -9,7 +9,8 @@ import {
   CLEAR_PROFILE,
   TOGGLE_TERMS,
   SIGN_IN,
-  SIGN_OUT
+  SIGN_OUT,
+  ACTIVE_ITEM_TOGGLE
 } from "./types";
 import { setAlert } from "./alert";
 import { push } from "react-router-redux";
@@ -116,6 +117,7 @@ export const signIn = (email, password) => async dispatch => {
   }
 };
 
+//Sign out w Google Auth
 export const signOut = () => async dispatch => {
   dispatch({
     type: CLEAR_PROFILE
@@ -125,3 +127,10 @@ export const signOut = () => async dispatch => {
   });
   store.dispatch(push("/"));
 };
+
+export const activeItemToggle = (name) => dispatch => {
+  dispatch({
+    type: ACTIVE_ITEM_TOGGLE,
+    payload: name
+  })
+}

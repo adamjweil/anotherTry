@@ -13,7 +13,8 @@ import {
   NOTIFCATION_DECREMENT,
   GET_NOTIFICATION_COUNT,
   SIGN_IN,
-  SIGN_OUT
+  SIGN_OUT,
+  ACTIVE_ITEM_TOGGLE
 } from "../actions/types";
 
 const initialState = {
@@ -21,7 +22,8 @@ const initialState = {
   isAuthenticated: null,
   loading: true,
   user: null,
-  notification_count: 0
+  notification_count: 0,
+  activeItem: 'search'
 };
 
 export default function(state = initialState, action) {
@@ -124,6 +126,11 @@ export default function(state = initialState, action) {
         isAuthenticated: false,
         userId: null
       };
+    case ACTIVE_ITEM_TOGGLE:
+      return {
+        ...state,
+        activeItem: action.payload
+      }
     default:
       return state;
   }

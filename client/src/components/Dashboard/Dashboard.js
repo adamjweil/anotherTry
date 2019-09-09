@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { Grid, Header } from "semantic-ui-react";
 import Spinner from "../layout/Spinner";
 import Footer from '../layout/Footer';
+import LeftMenu from './LeftMenu';
 
 const Dashboard = ({
   createProfile,
@@ -16,9 +17,12 @@ const Dashboard = ({
     getCurrentProfile();
   }, []);
 
-  return loading && profile === null ? (
-    <Spinner />
-      ) : (
+  return (
+    <Fragment>
+      <LeftMenu />
+     { loading && profile === null ? (
+      <Spinner />
+    ) : (
     <Grid style={{marginTop: '10px'}} container columns={2} divided relaxed stackable>
       <Grid.Column >
         <Fragment>
@@ -28,9 +32,10 @@ const Dashboard = ({
           alt=""/>
           <br />
           <Header as='h3'>Welcome to the meZocliQ Online Portal, {user && user.email}!</Header>
-
-          {profile === null ? (
+        )}
+          { profile === null ? (
             <Fragment>
+              <LeftMenu />
               <div className='ui warning message'>
                 <div className='content'>
                   <div className='header'>
@@ -60,7 +65,6 @@ const Dashboard = ({
             </Fragment>
           </Grid.Column>
         <Grid.Column>
-
           <div className="ui message">
             <div className="content">
               <Header as='h2'>Dashboard</Header>
@@ -75,11 +79,11 @@ const Dashboard = ({
         </Grid.Column>
       <Footer />
     </Grid>
-  );
-};
+)
+}
 
 Dashboard.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
+  // getCurrentProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 };

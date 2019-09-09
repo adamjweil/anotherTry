@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import Navbar from "./components/layout/Navbar";
 import Register from "./components/auth/Register";
 import Landing from "./components/layout/Landing";
+import LandingAlt from "./components/layout/LandingAlt";
 import Alert from "./components/layout/Alert";
 import Profile from "./components/auth/Profile";
 import Dashboard from "./components/Dashboard/Dashboard";
