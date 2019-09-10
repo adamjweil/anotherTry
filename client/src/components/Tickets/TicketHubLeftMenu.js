@@ -20,7 +20,7 @@ const TicketHubLeftMenu = () => {
           <a href="/" className="item">
             Filter
           </a>
-          <a href="/" className="item">
+          <a href="/" className="active item">
             Add New
           </a>
           <a href="/" className="item">

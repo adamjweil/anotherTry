@@ -7,22 +7,12 @@ const CreateProfileForm = ({ isAuthenticated, createProfile }) => {
   const [formData, setFormData] = useState({
     team: "",
     title: "",
-    reportingTo: "",
-    directReports: "",
     hireDate: "",
     bio: "",
     skills: []
   });
 
-  const {
-    team,
-    title,
-    reportingTo,
-    directReports,
-    hireDate,
-    bio,
-    skills
-  } = formData;
+  const { team, title, hireDate, bio, skills } = formData;
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const onSubmit = formData => {

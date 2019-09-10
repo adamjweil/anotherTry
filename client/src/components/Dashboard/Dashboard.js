@@ -33,6 +33,7 @@ const Dashboard = ({
 
             <Fragment>
               <div className='ui warning message'>
+                <i className="close icon"></i>
                 <div className='content'>
                   <div className='header'>
                     You have not yet setup a profile!

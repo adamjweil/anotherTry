@@ -31,14 +31,21 @@ const Login = ({ login, isAuthenticated, setAlert, signIn }) => {
 
   // Redirect if logged in
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect push to="/dashboard" />;
   }
 
   return (
     <Grid centered columns={1} style={{ paddingRight: "30px" }}>
       <Grid.Column>
         <Segment>
-          <Header as="h3">Have an Account? Sign in Here!</Header>
+          <center>
+            <Header as="h3">
+              Already Have An Account?
+              <Header as="h5" style={{ fontWeight: "300" }}>
+                Sign in Below!
+              </Header>
+            </Header>
+          </center>
           <Form size="small" onSubmit={e => onSubmit(e)}>
             <Form.Input
               fluid
@@ -77,21 +84,31 @@ const Login = ({ login, isAuthenticated, setAlert, signIn }) => {
             </Grid>
           </Form>
         </Segment>
-        <Message>
-          Not registered yet?
-          <Button
-            color="grey"
-            size="small"
-            style={{
-              marginLeft: "30px",
-              borderRadius: "20px",
-              display: "in-line"
-            }}
-          >
-            <Link to="/register" style={{ color: "white" }}>
-              Sign up here . . .
-            </Link>
-          </Button>
+        <Message className="ui yellow message" style={{ textAlign: "center" }}>
+          <Grid>
+            <div className="header">
+              Not registered yet? Create your accunt now!
+            </div>
+
+            <Button
+              color="positive"
+              size="tiny"
+              style={{
+                marginLeft: "10px",
+                borderRadius: "20px",
+                display: "inLine"
+              }}
+            >
+              <Link to="/register" style={{ color: "white" }}>
+                Sign up here . . .
+              </Link>
+            </Button>
+
+            <p>
+              Whether you're a new employee, or just setting up an account on
+              our online portal
+            </p>
+          </Grid>
         </Message>
       </Grid.Column>
     </Grid>

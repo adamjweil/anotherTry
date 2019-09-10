@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Grid, Form, Header } from "semantic-ui-react";
+import { Grid, Container, Form, Header } from "semantic-ui-react";
 // Redux
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
 import { register, toggleCheck } from "../../actions/auth";
 // Local Imports
-import GoogleAuth from "../../GoogleAuth";
 
 const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
   const [formData, setFormData] = useState(
@@ -40,91 +39,89 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
 
   // Redirect if logged in
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect push to="/dashboard" />;
   }
 
   return (
-    <Grid centered columns={1}>
-      <Grid.Column>
-        <div className="ui attached message">
-          <div className="header">
-            <Header as="h2">NEW ACCOUNT REGISTRATION!!</Header>
-          </div>
-          <p>
-            <i className="hand point right icon"></i>
-            Welcome to the meZocliQ Online Portal
-          </p>
+    <Container>
+      <div className="ui attached message">
+        <div className="header">
+          <Header as="h2">NEW ACCOUNT REGISTRATION!!</Header>
         </div>
-        <Form className="ui form attached fluid segment" onSubmit={onRegister}>
+        <p>
+          <i className="hand point right icon"></i>
+          Welcome to the meZocliQ Online Portal
+        </p>
+      </div>
+      <Form className="ui form attached fluid segment" onSubmit={onRegister}>
+        <div className="field">
+          <label>Enter your eMail address (@mezocliq.com):</label>
+          <Form.Input
+            icon="mail"
+            iconPosition="left"
+            placeholder="Enter your eMail Here!"
+            type="text"
+            name="email"
+            value={email}
+            onChange={e => onChange(e)}
+          />
+        </div>
+        <div className="equal width fields">
           <div className="field">
-            <label>Enter your eMail address (@mezocliq.com):</label>
+            <label>password:</label>
             <Form.Input
-              icon="mail"
+              icon="lock"
               iconPosition="left"
-              placeholder="Enter your eMail Here!"
-              type="text"
-              name="email"
-              value={email}
+              type="password"
+              name="password"
+              placeholder="password"
+              value={password}
               onChange={e => onChange(e)}
             />
           </div>
-          <div className="equal width fields">
-            <div className="field">
-              <label>password:</label>
-              <Form.Input
-                icon="lock"
-                iconPosition="left"
-                type="password"
-                name="password"
-                placeholder="password"
-                value={password}
-                onChange={e => onChange(e)}
-              />
-            </div>
-            <div className="field">
-              <label>confirm password:</label>
-              <Form.Input
-                icon="lock"
-                iconPosition="left"
-                type="password"
-                name="password2"
-                placeholder="confirm password"
-                value={password2}
-                onChange={e => onChange(e)}
-              />
-            </div>
+          <div className="field">
+            <label>confirm password:</label>
+            <Form.Input
+              icon="lock"
+              iconPosition="left"
+              type="password"
+              name="password2"
+              placeholder="confirm password"
+              value={password2}
+              onChange={e => onChange(e)}
+            />
           </div>
-
-          <div className="inline field">
-            <div className="ui checkbox">
-              <Form.Checkbox
-                id="terms"
-                name="terms"
-                label="I agree to the Terms & Conditions"
-                onClick={onCheck}
-                value={terms}
-                required
-              />
-            </div>
-          </div>
-
-          <Grid columns={2} centered>
-            <Grid.Column>
-              <button className="ui blue submit button">Register</button>
-            </Grid.Column>
-            <Grid.Column></Grid.Column>
-          </Grid>
-        </Form>
-
-        <div className="ui bottom attached warning message">
-          <i className="icon help"></i>
-          Already have an account?{" "}
-          <Link to="/" className="item">
-            Login here
-          </Link>
         </div>
-      </Grid.Column>
-    </Grid>
+
+        <div className="inline field">
+          <div className="ui checkbox">
+            <Form.Checkbox
+              id="terms"
+              name="terms"
+              label="I agree to the Terms & Conditions"
+              onClick={onCheck}
+              value={terms}
+              required
+            />
+          </div>
+        </div>
+
+        <Grid columns={2} centered>
+          <Grid.Column>
+            <button className="ui blue submit button">Register</button>
+          </Grid.Column>
+          <Grid.Column></Grid.Column>
+        </Grid>
+      </Form>
+
+      <div className="ui bottom attached warning message">
+        <i className="icon help"></i>
+        Already have an account?{" "}
+        <Link to="/" className="item">
+          Login here
+        </Link>
+      </div>
+    </Container>
   );
 };
 
