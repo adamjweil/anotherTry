@@ -6,27 +6,10 @@ import {
   AUTH_ERROR,
   USER_LOADED,
   NOTIFCATION_INCREMENT,
-  NOTIFCATION_DECREMENT
+  NOTIFCATION_DECREMENT,
+  FETCH_USER,
+  FETCH_USERS
 } from "./types";
-
-// Load all Users
-export const loadAllUsers = () => async dispatch => {
-  try {
-    const res = await axios.get("/");
-    dispatch({
-      type: GET_USERS,
-      payload: res.data
-    });
-  } catch (err) {
-    const errors = err.response.res.errors;
-    if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
-    }
-    dispatch({
-      type: AUTH_ERROR
-    });
-  }
-};
 
 // LOAD USER
 export const loadUser = setAlert => async dispatch => {
@@ -74,4 +57,22 @@ export const decrementNotificationCount = () => async dispatch => {
       type: AUTH_ERROR
     });
   }
+};
+
+// Fetch all Users
+export const fetchUsers = () => async dispatch => {
+  const res = await axios.get("/api/users");
+  dispatch({
+    type: FETCH_USERS,
+    payload: res.data
+  });
+};
+
+// Fetch specific User
+export const fetchUser = id => async dispatch => {
+  const res = await axios.get(`/users/${id}`);
+  dispatch({
+    type: FETCH_USER,
+    payload: res.data
+  });
 };
