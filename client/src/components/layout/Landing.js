@@ -9,7 +9,7 @@ import Login from "./../auth/Login";
 
 const Landing = ({ isAuthenticated }) => {
   if (isAuthenticated !== (null || false)) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect push to="/dashboard" />;
   }
 
   return (
@@ -38,7 +38,6 @@ const Landing = ({ isAuthenticated }) => {
 
               <Header
                 style={{
-                  // marginLeft: "100px",
                   marginBottom: "100px",
                   fontSize: "38px",
                   textAlign: "center"

@@ -22,9 +22,8 @@ const Profile = ({
   incrementNotificationCount,
   decrementNotificationCount
 }) => {
-
   if (isAuthenticated === false) {
-    return <Redirect to="/" />;
+    return <Redirect push to="/" />;
   }
   const onIncrementSubmit = () => {
     incrementNotificationCount();
@@ -44,18 +43,23 @@ const Profile = ({
             />
           </div>
           <div className="content">
-            <div className="extra content" style={{ display: 'flex', justifyContent: 'space-between' }}>
-
-            <h4>Name PlaceHolder </h4>
-            <Link className="ui button sm yellow" to="/api/profile/edit">
-              {" "}
-              Edit User
-            </Link>
+            <div
+              className="extra content"
+              style={{ display: "flex", justifyContent: "space-between" }}
+            >
+              <h4>Name PlaceHolder </h4>
+              <Link className="ui button sm yellow" to="/api/profile/edit">
+                {" "}
+                Edit User
+              </Link>
             </div>
             <div className="description"> {profile && profile.title} </div>
           </div>
 
-          <div className="extra content" style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div
+            className="extra content"
+            style={{ display: "flex", justifyContent: "space-between" }}
+          >
             <span>eMail:</span>
 
             <span>
@@ -63,7 +67,14 @@ const Profile = ({
               {auth.user && auth.user.email}
             </span>
           </div>
+          <div
+            className="extra content"
+            style={{ display: "flex", justifyContent: "space-between" }}
+          >
+            <span>Team:</span>
 
+            <span>{profile && profile.team}</span>
+          </div>
         </div>
       </Grid.Column>
       <Grid.Column>
@@ -91,7 +102,7 @@ Profile.propTypes = {
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired
-}
+};
 
 const mapStateToProps = state => ({
   auth: state.auth,

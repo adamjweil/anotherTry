@@ -6,11 +6,13 @@ import { fetchUsers } from "../../actions/user";
 
 const Directory = ({ fetchUsers }) => {
   fetchUsers();
-  return <Header as="h1">Directory</Header>;
+
+  return <div>Directory</div>;
 };
 
-const mapStateToProps = (state, payload) => ({
-  fetchUsers: state.fetchUsers
+const mapStateToProps = state => ({
+  fetchUsers: state.fetchUsers,
+  users: state.users
 });
 
 export default connect(
