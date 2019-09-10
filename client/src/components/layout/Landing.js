@@ -16,7 +16,7 @@ const Landing = ({ isAuthenticated }) => {
     <Fragment>
       <Container
         style={{
-          marginTop: "40px",
+          // marginTop: "40px",
           display: "flex",
           flex: "1",
           flexDirection: "column"
@@ -52,7 +52,17 @@ const Landing = ({ isAuthenticated }) => {
           </Grid.Row>
         </Grid>
       </Container>
-      <Footer />
+      <div
+        style={{
+          display: "block",
+          position: "absolute",
+          bottom: "100px",
+          left: "20px",
+          right: "20px"
+        }}
+      >
+        <Footer />
+      </div>
     </Fragment>
   );
 };

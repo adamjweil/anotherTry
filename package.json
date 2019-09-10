@@ -20,6 +20,7 @@
     "gapi": "0.0.3",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
     "mem": ">=4.0.0",
     "mongoose": "^5.6.11",
     "react-router-redux": "^4.0.8",
