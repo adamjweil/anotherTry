@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile } from "../../actions/profile";
-import { withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import SelectSkills from "./SelectSkills";
 
-const CreateProfile = ({ createProfile, history }) => {
+const CreateProfile = ({ createProfile, history, profile }) => {
   const [formData, setFormData] = useState({
     team: "",
     title: "",
@@ -19,17 +19,32 @@ const CreateProfile = ({ createProfile, history }) => {
     facebook: ""
   });
 
+  const {
+    team,
+    title,
+    bio,
+    hireDate,
+    skills,
+    githubusername,
+    twitter,
+    linkedin,
+    youtube,
+    facebook
+  } = formData;
+
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const onProfileSaveClick = e => {
+  const onProfileSaveClick = async e => {
     e.preventDefault();
     createProfile(formData);
-
-    // await createProfile(title, team, bio, hireDate, skills);
   };
+
+  if (profile.profile !== null) {
+    return <Redirect to="/profile" />;
+  }
 
   return (
     <div className="ui internally celled grid">
@@ -102,7 +117,11 @@ const CreateProfile = ({ createProfile, history }) => {
               <SelectSkills />
             </div>
             <div className="field">
-              <button className="ui positive animated button" size="small">
+              <button
+                type="submit"
+                className="ui positive animated button"
+                size="small"
+              >
                 <div className="visible content">Next</div>
                 <div className="hidden content">
                   <i aria-hidden="true" className="arrow right icon"></i>
@@ -135,7 +154,11 @@ CreateProfile.propTypes = {
   createProfile: PropTypes.func.isRequired
 };
 
+const mapStateToProps = state => ({
+  profile: state.profile
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { createProfile }
 )(withRouter(CreateProfile));

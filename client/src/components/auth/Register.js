@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Grid, Form } from "semantic-ui-react";
+import { Grid, Form, Header } from "semantic-ui-react";
 // Redux
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
@@ -44,12 +44,15 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
   }
 
   return (
-    <Grid centered columns={2}>
+    <Grid centered columns={1}>
       <Grid.Column>
         <div className="ui attached message">
-          <div className="header">Welcome to the meZocliQ Online Portal</div>
+          <div className="header">
+            <Header as="h2">NEW ACCOUNT REGISTRATION!!</Header>
+          </div>
           <p>
-            <i className="hand point left icon"></i>Create New Account!
+            <i className="hand point right icon"></i>
+            Welcome to the meZocliQ Online Portal
           </p>
         </div>
         <Form className="ui form attached fluid segment" onSubmit={onRegister}>
