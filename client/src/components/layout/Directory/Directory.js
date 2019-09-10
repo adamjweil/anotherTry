@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid, Header, Image, Container, Body } from "semantic-ui-react";
 
-import { fetchUsers } from "../../actions/user";
+import { fetchUsers } from "../../../actions/user";
+import DirectoryTopMenu from './DirectoryTopMenu';
 
 class Directory extends React.Component {
   componentDidMount() {
@@ -49,23 +50,10 @@ class Directory extends React.Component {
   render() {
     return (
       <div>
-        <h2>meZocliQ Directory</h2>
-        <div class="ui category search">
-          <div
-            class="ui icon input search-bar"
-            style={{
-              width: "90%",
-              marginLeft: "5%",
-              marginRight: "5%",
-              marginBottom: "10px"
-            }}
-          >
-            <input class="prompt" type="text" placeholder="looking for..." />
-            <i class="search icon"></i>
-          </div>
-          <div class="results"></div>
+        <div className='header'>
+          <center><Header as="h2">meZocliQ Directory</Header></center>
         </div>
-
+        <DirectoryTopMenu />
         <Grid columns={1} inline>
           <Grid.Column>
             <div className="ui celled list">{this.renderList()}</div>
