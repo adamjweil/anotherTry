@@ -9,19 +9,18 @@ import {
   LOGOUT,
   GET_USERS,
   GET_USER,
+  SIGN_IN,
+  SIGN_OUT,
   NOTIFCATION_INCREMENT,
   NOTIFCATION_DECREMENT,
-  GET_NOTIFICATION_COUNT,
-  SIGN_IN,
-  SIGN_OUT
+  GET_NOTIFICATION_COUNT
 } from "../actions/types";
 
 const INITIAL_STATE = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
   loading: true,
-  user: null,
-  notification_count: 0
+  user: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -101,12 +100,10 @@ export default (state = INITIAL_STATE, action) => {
         loading: false
       };
     case NOTIFCATION_INCREMENT:
-      state.notification_count = state.notification_count + 1;
-      return {
-        ...state
-      };
+      this.props.notification_count = state.notification_count + 1;
+      return { ...state };
     case NOTIFCATION_DECREMENT:
-      state.notification_count = state.notification_count - 1;
+      this.props.notification_count = state.notification_count - 1;
       return {
         ...state
       };

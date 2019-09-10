@@ -21,3 +21,5 @@ export const GET_NOTIFICATION_COUNT = "GET_NOTIFICATION_COUNT";
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_OUT = "SIGN_OUT";
 export const GET_CURRENT_PROFILE = "GET_CURRENT_PROFILE";
+export const FETCH_USERS = "FETCH_USERS";
+export const FETCH_USER = "FETCH_USER";

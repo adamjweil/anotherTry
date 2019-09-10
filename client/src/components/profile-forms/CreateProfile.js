@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile } from "../../actions/profile";
-import { Redirect, withRouter } from "react-router-dom";
+import { Redirect, withRouter, Link } from "react-router-dom";
 import SelectSkills from "./SelectSkills";
 
 const CreateProfile = ({ createProfile, history, profile }) => {
@@ -19,6 +19,8 @@ const CreateProfile = ({ createProfile, history, profile }) => {
     facebook: ""
   });
 
+  const [displaySocialInputs, toggleSocialInputs] = useState(false);
+
   const {
     team,
     title,
@@ -32,17 +34,15 @@ const CreateProfile = ({ createProfile, history, profile }) => {
     facebook
   } = formData;
 
-  const [displaySocialInputs, toggleSocialInputs] = useState(false);
-
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const onProfileSaveClick = async e => {
     e.preventDefault();
-    createProfile(formData);
+    createProfile(formData, history);
   };
 
-  if (profile.profile !== null) {
+  if (profile) {
     return <Redirect to="/profile" />;
   }
 
@@ -67,7 +67,7 @@ const CreateProfile = ({ createProfile, history, profile }) => {
 
           <form
             className="ui form attached fluid segment"
-            onSubmit={onProfileSaveClick}
+            onSubmit={e => onProfileSaveClick(e)}
           >
             <div className="field">
               <label>Select your team:</label>
@@ -154,11 +154,12 @@ CreateProfile.propTypes = {
   createProfile: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
-  profile: state.profile
-});
+// const mapStateToProps = state => ({
+//   isAuthenticated:
+//   profile: state.profile
+// });
 
 export default connect(
-  mapStateToProps,
+  null,
   { createProfile }
 )(withRouter(CreateProfile));
