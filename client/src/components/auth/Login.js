@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
-import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
+import {
+  Button,
+  Form,
+  Grid,
+  Message,
+  Segment,
+  Header
+} from "semantic-ui-react";
 // Redux
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
@@ -31,6 +38,7 @@ const Login = ({ login, isAuthenticated, setAlert, signIn }) => {
     <Grid centered columns={1} style={{ paddingRight: "30px" }}>
       <Grid.Column>
         <Segment>
+          <Header as="h3">Have an Account? Sign in Here!</Header>
           <Form size="small" onSubmit={e => onSubmit(e)}>
             <Form.Input
               fluid
@@ -52,20 +60,38 @@ const Login = ({ login, isAuthenticated, setAlert, signIn }) => {
               value={password}
               onChange={e => onChange(e)}
             />
-            <Button
-              color="blue"
-              fluid
-              size="small"
-              style={{ marginBottom: "5px" }}
-            >
-              Login
-            </Button>
+            <Grid columns={2}>
+              <Grid.Column>
+                <Button
+                  color="blue"
+                  fluid
+                  size="small"
+                  style={{ marginBottom: "5px" }}
+                >
+                  Login
+                </Button>
+              </Grid.Column>
+              <Grid.Column>
+                <GoogleAuth />
+              </Grid.Column>
+            </Grid>
           </Form>
-          <GoogleAuth />
         </Segment>
         <Message>
           Not registered yet?
-          <Link to="/register"> Sign up here . . ., or</Link>
+          <Button
+            color="grey"
+            size="small"
+            style={{
+              marginLeft: "30px",
+              borderRadius: "20px",
+              display: "in-line"
+            }}
+          >
+            <Link to="/register" style={{ color: "white" }}>
+              Sign up here . . .
+            </Link>
+          </Button>
         </Message>
       </Grid.Column>
     </Grid>
