@@ -20,13 +20,20 @@ const INITIAL_STATE = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
   loading: true,
-  user: null
+  user: null,
+  notification_count: 0,
+  isAdmin: true
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SIGN_IN:
-      return { ...state, isAuthenticated: true, user: action.payload };
+      localStorage.setItem("token", action.payload.token);
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload
+      };
     case SIGN_OUT:
       return { ...state, isAuthenticated: false, user: null };
     case USER_LOADED:
@@ -55,7 +62,7 @@ export default (state = INITIAL_STATE, action) => {
       localStorage.setItem("token", action.payload.token);
       return {
         ...state,
-        ...action.payload,
+        // ...action.payload,
         isAuthenticated: true,
         loading: false
       };
@@ -100,12 +107,14 @@ export default (state = INITIAL_STATE, action) => {
         loading: false
       };
     case NOTIFCATION_INCREMENT:
-      this.props.notification_count = state.notification_count + 1;
-      return { ...state };
-    case NOTIFCATION_DECREMENT:
-      this.props.notification_count = state.notification_count - 1;
       return {
-        ...state
+        ...state,
+        notification_count: state.notification_count + 1
+      };
+    case NOTIFCATION_DECREMENT:
+      return {
+        ...state,
+        notification_count: state.notification_count - 1
       };
     case GET_NOTIFICATION_COUNT:
       return {

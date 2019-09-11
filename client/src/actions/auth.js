@@ -63,14 +63,10 @@ export const login = (email, password) => async dispatch => {
       payload: res.data
     });
     dispatch(loadUser());
-    dispatch(setAuthToken());
   } catch (err) {
-    const errors = err.data;
-    if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
-    }
+    dispatch(setAlert(err.message, "danger"));
     dispatch({
-      type: LOGIN_FAIL
+      type: AUTH_ERROR
     });
   }
 };

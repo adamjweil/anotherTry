@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { logout } from "../../actions/auth";
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({ auth: { isAuthenticated, loading, isAdmin }, logout }) => {
   if (isAuthenticated) {
     return (
       <div className="ui secondary pointing menu">
@@ -15,6 +15,13 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <Link to="/directory" className="item">
           <i className="info icon"></i>Directory
         </Link>
+        {isAdmin ? (
+          <Link to="/adminDashboard" className="item">
+            <i className="admin icon"></i>Admin
+          </Link>
+        ) : (
+          ""
+        )}
         <div className="right menu">
           <Link to="/tickethub" className="item">
             <i className="ticket icon"></i>TktHub
@@ -63,7 +70,8 @@ Navbar.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  isAdmin: state.isAdmin
 });
 
 export default connect(

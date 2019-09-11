@@ -18,7 +18,7 @@ const Profile = ({
   isAuthenticated,
   auth,
   user,
-  profile: { profile, loading },
+  profile: { profile, loading, team },
   incrementNotificationCount,
   decrementNotificationCount
 }) => {
@@ -73,7 +73,7 @@ const Profile = ({
           >
             <span>Team:</span>
 
-            <span>{profile && profile.team}</span>
+            <span>{profile && team}</span>
           </div>
         </div>
       </Grid.Column>
