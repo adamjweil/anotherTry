@@ -49,7 +49,7 @@ router.post("/", auth, async (req, res) => {
 
   // Build Profile object
   const profileFields = {};
-  profileFields.user = req.user.id;
+  profileFields.user = req.user;
   if (team) profileFields.team = team;
   if (title) profileFields.title = title;
   if (hireDate) profileFields.hireDate = hireDate;
@@ -75,7 +75,7 @@ router.post("/", auth, async (req, res) => {
         { $set: profileFields },
         { new: true }
       );
-      await profile.save();
+      profile.save();
 
       return res.json(profile);
     } else {

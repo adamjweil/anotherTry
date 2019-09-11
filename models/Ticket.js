@@ -4,33 +4,49 @@ const Project = require("./Project");
 
 const TicketSchema = new mongoose.Schema({
   date: {
+    Type: Date,
     default: Date.now
   },
   ticketer: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "user"
-  },
-  project: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'project'
-  },
-  type: {
-    Type: String
-  },
-  description: {
-    Type: String
-  },
-  fixer: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "user"
-  },
-  projectManager: {
-    type: mongoose.Schema.Types.ObjectId,
+    Type: mongoose.Schema.Types.ObjectId,
     ref: "user"
   },
   tester: {
-    type: mongoose.Schema.Types.ObjectId,
+    Type: mongoose.Schema.Types.ObjectId,
     ref: "user"
+  },
+  fixer: {
+    Type: mongoose.Schema.Types.ObjectId,
+    ref: "user"
+  },
+  project: {
+    Type: mongoose.Schema.Types.ObjectId,
+    ref: "project"
+  },
+  release: {
+    Type: mongoose.Schema.Types.ObjectId,
+    ref: "release"
+  },
+  ticketType: {
+    Type: String
+  },
+  fullDescription: {
+    Type: String
+  },
+  summary: {
+    Type: String
+  },
+  environment: {
+    Type: String
+  },
+  process: {
+    Type: String
+  },
+  status: {
+    Type: String
+  },
+  notes: {
+    Type: String
   }
 });
 
