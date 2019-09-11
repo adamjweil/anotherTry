@@ -65,6 +65,7 @@ export const login = (email, password) => async dispatch => {
     });
     dispatch(loadUser());
   } catch (err) {
+
     dispatch(setAlert(err.message, "danger"));
     dispatch({
       type: AUTH_ERROR
