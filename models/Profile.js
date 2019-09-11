@@ -7,7 +7,8 @@ const ProfileSchema = new mongoose.Schema({
     ref: "user"
   },
   team: {
-    type: String
+    Type: mongoose.Schema.Types.ObjectId,
+    ref: "team"
   },
   title: {
     type: String
