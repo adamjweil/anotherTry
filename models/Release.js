@@ -4,27 +4,17 @@ const Project = require("./Project");
 
 const ReleaseSchema = new mongoose.Schema({
   releaseCode: {
-    type: String,
+    Type: String,
     unique: true
   },
   releaseDate: {
-    type: Date
+    Type: Date
   },
-  name: {
-    type: String
-  },
-  keyDeliverables: {
-    type: [String]
-  },
-  allDeliverables: {
-    type: [String]
-  },
-  includedProjects: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'project'
+  releaseName: {
+    Type: String
   },
   releaseManager: {
-    type: mongoose.Schema.Types.ObjectId,
+    Type: mongoose.Schema.Types.ObjectId,
     ref: "user"
   }
 });

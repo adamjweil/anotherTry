@@ -6,10 +6,6 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "user"
   },
-  team: {
-    Type: mongoose.Schema.Types.ObjectId,
-    ref: "team"
-  },
   title: {
     type: String
   },

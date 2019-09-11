@@ -1,12 +1,9 @@
 const mongoose = require("mongoose");
 const User = require("./User");
 const Project = require("./Project");
+const Release = require("./Release");
 
 const TicketSchema = new mongoose.Schema({
-  date: {
-    Type: Date,
-    default: Date.now
-  },
   ticketer: {
     Type: mongoose.Schema.Types.ObjectId,
     ref: "user"
@@ -47,6 +44,13 @@ const TicketSchema = new mongoose.Schema({
   },
   notes: {
     Type: String
+  },
+  ticketNumber: {
+    Type: Number
+  },
+  date: {
+    Type: Date,
+    default: Date.now
   }
 });
 
