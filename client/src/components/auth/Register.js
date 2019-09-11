@@ -100,7 +100,6 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
               name="terms"
               label="I agree to the Terms & Conditions"
               onClick={onCheck}
-              value={terms}
               required
             />
           </div>

@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect, withRouter } from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Grid, Header, Image, Container, Body } from "semantic-ui-react";
+import { Grid, Header } from "semantic-ui-react";
 
 import { fetchUsers } from "../../../actions/user";
-import DirectoryTopMenu from './DirectoryTopMenu';
+import DirectoryTopMenu from "./DirectoryTopMenu";
+import SecondaryMenu from "./SecondaryMenu";
 
 class Directory extends React.Component {
   componentDidMount() {
@@ -41,7 +42,7 @@ class Directory extends React.Component {
               </div>
             </Grid.Column>
           </Grid>
-          <Header as='h3' dividing ></Header>
+          <Header as="h3" dividing></Header>
         </Fragment>
       );
     });
@@ -50,10 +51,12 @@ class Directory extends React.Component {
   render() {
     return (
       <div>
-        <div className='header'>
-          <center><Header as="h2">meZocliQ Directory</Header></center>
+        <div className="header">
+          <center>
+            <Header as="h2">meZocliQ Directory</Header>
+          </center>
         </div>
-        <DirectoryTopMenu />
+        <SecondaryMenu />
         <Grid columns={1} inline>
           <Grid.Column>
             <div className="ui celled list">{this.renderList()}</div>

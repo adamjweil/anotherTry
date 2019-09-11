@@ -16,7 +16,6 @@ const Landing = ({ isAuthenticated }) => {
     <Fragment>
       <Container
         style={{
-          // marginTop: "40px",
           display: "flex",
           flex: "1",
           flexDirection: "column"
@@ -29,7 +28,6 @@ const Landing = ({ isAuthenticated }) => {
                 style={{
                   marginTop: "20px",
                   marginLeft: "20px",
-                  // width: "80%",
                   justifyContent: "center"
                 }}
                 src={process.env.PUBLIC_URL + "/img/mezologo1.png"}
@@ -54,11 +52,11 @@ const Landing = ({ isAuthenticated }) => {
       </Container>
       <div
         style={{
-          display: "block",
+          display: "in-line",
           position: "absolute",
-          bottom: "100px",
-          left: "20px",
-          right: "20px"
+          bottom: "15px",
+          left: "15px",
+          right: "15px"
         }}
       >
         <Footer />

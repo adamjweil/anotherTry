@@ -1,9 +1,9 @@
-import React from 'react';
-import { Step } from 'semantic-ui-react';
+import React from "react";
+import { Step } from "semantic-ui-react";
 
 const Footer = () => {
   return (
-      <footer>
+    <footer>
       <div>
         <Step.Group fluid>
           <Step
@@ -30,6 +30,7 @@ const Footer = () => {
         </Step.Group>
       </div>
     </footer>
-  )};
+  );
+};
 
 export default Footer;

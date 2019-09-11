@@ -40,6 +40,7 @@ export const register = ({ email, terms, password }) => async dispatch => {
     console.log({ err });
     const errors = err.response.data.errors;
     if (errors) {
+      console.log(errors);
       errors.forEach(error => dispatch(setAlert(err.msg, "danger")));
     }
     dispatch({

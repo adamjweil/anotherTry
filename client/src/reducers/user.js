@@ -8,18 +8,17 @@ import {
 import _ from "lodash";
 
 const INITIAL_STATE = {
-  user: null,
+  user: {},
   users: [],
   notification_count: 0
 };
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = {}, action) => {
   switch (action.type) {
     case FETCH_USERS:
       return { ...state, ..._.mapKeys(action.payload, "_id") };
     case FETCH_USER:
       return { ...state, [action.payload.id]: action.payload };
-
     default:
       return {
         ...state
