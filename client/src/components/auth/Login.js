@@ -1,14 +1,8 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
-import {
-  Button,
-  Form,
-  Grid,
-  Message,
-  Segment,
-  Header
-} from "semantic-ui-react";
+import { Form, Message, Segment, Header } from "semantic-ui-react";
+import { Grid, Button } from "@material-ui/core";
 // Redux
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
@@ -35,8 +29,8 @@ const Login = ({ login, isAuthenticated, setAlert, signIn }) => {
   }
 
   return (
-    <Grid centered columns={1} style={{ paddingRight: "30px" }}>
-      <Grid.Column>
+    <Grid container spacing={1} style={{ paddingRight: "30px" }}>
+      <Grid item xs={12} sm={10}>
         <Segment>
           <center>
             <Header as="h3">
@@ -46,7 +40,7 @@ const Login = ({ login, isAuthenticated, setAlert, signIn }) => {
               </Header>
             </Header>
           </center>
-          <Form size="small" onSubmit={e => onSubmit(e)}>
+          <Form onSubmit={e => onSubmit(e)}>
             <Form.Input
               fluid
               icon="user"
@@ -67,8 +61,8 @@ const Login = ({ login, isAuthenticated, setAlert, signIn }) => {
               value={password}
               onChange={e => onChange(e)}
             />
-            <Grid columns={2}>
-              <Grid.Column>
+            <Grid spacing={2}>
+              <Grid item xs={6}>
                 <Button
                   color="blue"
                   fluid
@@ -77,15 +71,15 @@ const Login = ({ login, isAuthenticated, setAlert, signIn }) => {
                 >
                   Login
                 </Button>
-              </Grid.Column>
-              <Grid.Column>
+              </Grid>
+              <Grid item xs={6}>
                 <GoogleAuth />
-              </Grid.Column>
+              </Grid>
             </Grid>
           </Form>
         </Segment>
         <Message className="ui yellow message" style={{ textAlign: "center" }}>
-          <Grid>
+          <Grid item xs={10}>
             <div className="header">
               Not registered yet? Create your accunt now!
             </div>
@@ -110,7 +104,7 @@ const Login = ({ login, isAuthenticated, setAlert, signIn }) => {
             </p>
           </Grid>
         </Message>
-      </Grid.Column>
+      </Grid>
     </Grid>
   );
 };

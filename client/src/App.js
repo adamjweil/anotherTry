@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
-import Navbar from "./components/layout/Navbar";
+import Navbar from "./components/layout/Navbar/Navbar";
 import Register from "./components/auth/Register";
 import Landing from "./components/layout/Landing";
 import Alert from "./components/layout/Alert";
@@ -13,7 +13,7 @@ import CreateProfile from "./components/profile-forms/CreateProfile";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import ThemeingLayout from "./components/layout/ThemeingLayout";
 import ResponsiveLayout from "./components/layout/ResponsiveLayout";
-
+import 'typeface-roboto';
 // Redux
 import store from "./store";
 import { loadUser } from "./actions/user";
