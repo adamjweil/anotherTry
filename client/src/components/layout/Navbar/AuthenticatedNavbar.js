@@ -12,6 +12,8 @@ import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout } from "../../../actions/auth";
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -75,7 +77,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function AuthenticatedNavbar() {
+const AuthenticatedNavbar = ({ logout }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -115,7 +117,7 @@ export default function AuthenticatedNavbar() {
         <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       </Link>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem>Logout</MenuItem>
+      <MenuItem onClick={logout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -190,7 +192,6 @@ export default function AuthenticatedNavbar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-  
             <Link to="/dashboard">
               <MenuItem>
                 <p style={{ color: "white" }}>Dashboardd</p>
@@ -241,4 +242,12 @@ export default function AuthenticatedNavbar() {
       {renderMenu}
     </div>
   );
-}
+};
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+export default connect(
+  mapStateToProps,
+  { logout }
+)(AuthenticatedNavbar);
