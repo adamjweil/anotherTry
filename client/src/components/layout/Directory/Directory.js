@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Header } from "semantic-ui-react";
 import { Grid, Container } from "@material-ui/core";
-
 import { fetchUsers } from "../../../actions/user";
 // import DirectoryTopMenu from "./DirectoryTopMenu";
 import SecondaryMenu from "./SecondaryMenu";
@@ -63,7 +62,7 @@ const Directory = ({ fetchUsers }) => {
 
 Directory.propTypes = {
   fetchUsers: PropTypes.func.isRequired,
-  users: PropTypes.object.isRequired
+  users: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({

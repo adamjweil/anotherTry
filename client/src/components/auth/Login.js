@@ -7,18 +7,19 @@ import {
   TextField,
   FormControlLabel,
   Checkbox,
-  Link,
   Grid,
   Typography,
-  Box
+  Box,
+  FormControl,
+  InputLabel
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { login, signIn } from "../../actions/auth";
 import { setAlert } from "../../actions/alert";
-import GoogleAuth from "../../GoogleAuth";
 
+import GoogleAuth from "../../GoogleAuth";
 const useStyles = makeStyles(theme => ({
   "@global": {
     body: {
@@ -110,12 +111,12 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
           <Typography
             component="h6"
             variant="h6"
-            style={{ fontWeight: "100", marginTop: "-10px" }}
+            style={{ fontSize: "14px", fontWeight: "800", marginTop: "-10px" }}
           >
             Log In Below:
           </Typography>
           <TextField
-            variant="outlined"
+            // variant="outlined"
             margin="normal"
             id="email"
             label="Email Address"
@@ -127,8 +128,9 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
             fullWidth
             autoFocus
           />
+
           <TextField
-            variant="outlined"
+            // variant="outlined"
             margin="normal"
             name="password"
             label="Password"
@@ -140,15 +142,18 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
             required
             fullWidth
           />
+
           <Grid container>
             <Grid item xs={12} sm={6}>
               <FormControlLabel
+                style={{ fontSize: "80px" }}
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
                 className={classes.remember}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={6}></Grid>
+            <Grid item xs={12} sm={5}>
               <Button
                 type="submit"
                 fullWidth
@@ -161,22 +166,36 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
                 Login
               </Button>
             </Grid>
-            <Grid container>
-              <Grid item xs={5}>
-                <Link href="#" variant="body2">
-                  <center>
-                    <p>Forgot password?</p>
-                  </center>
-                </Link>
-              </Grid>
-              <Grid item xs={7}>
-                <Link href="/register" variant="body2">
-                  <center>
-                    <p>{"No account? Sign Up Here!"}</p>
-                  </center>
-                </Link>
-              </Grid>
+            <Grid item sm={2}></Grid>
+            <Grid item xs={12} sm={12}>
+              <Button
+                fullWidth
+                size="large"
+                variant="contained"
+                color="info"
+                onClick={e => onSubmit(e)}
+                className={classes.submit}
+              >
+                REGISTER
+              </Button>
             </Grid>
+
+            <Grid item xs={5}>
+              <Link href="#" variant="body2">
+                <center>
+                  <p>Forgot password?</p>
+                </center>
+              </Link>
+            </Grid>
+
+            <Grid item xs={7}>
+              <Link href="/register" variant="body2">
+                <center>
+                  <p>{"No Account? Sign Up Here!"}</p>
+                </center>
+              </Link>
+            </Grid>
+
             <Grid container>
               <Grid item xs={12} style={{ paddingBottom: "0px" }}>
                 <GoogleAuth />

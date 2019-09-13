@@ -21,7 +21,7 @@ export default function InfoSnackbar() {
     <Snackbar
       anchorOrigin={{
         vertical: "top",
-        horizontal: "right"
+        horizontal: "left"
       }}
       open={infoSnackbarOpen}
       autoHideDuration={6000}

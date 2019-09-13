@@ -26,31 +26,26 @@ import {
 } from "./alert";
 
 // REGISTER USER
-export const register = ({ email, terms, password }) => async dispatch => {
+export const register = (email, terms, password) => async dispatch => {
   const config = {
     headers: {
       "Content-Type": "application/json"
     }
   };
-  const body = JSON.stringify({ email, terms, password });
-
+  const body = JSON.stringify(email, terms, password);
+  console.log(body);
   try {
     const res = await axios.post("/api/users", body, config);
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data
     });
+    dispatch(setAuthToken());
     dispatch(loadUser());
   } catch (err) {
-    console.log({ err });
-    const errors = err.response.data.errors;
-    if (errors) {
-      console.log(errors);
-      errors.forEach(error => dispatch(setAlert(err.msg, "danger")));
+    if (err) {
+      dispatch(showInfoSnackbar(err.msg));
     }
-    dispatch({
-      type: REGISTER_FAIL
-    });
   }
 };
 
@@ -71,7 +66,8 @@ export const login = (email, password) => async dispatch => {
     dispatch(loadUser());
     dispatch(showSuccessSnackbar("Successfully logged in"));
   } catch (err) {
-    const errors = await err.response.data.errors;
+    console.log(err.response.data);
+    const errors = err.response.data.errors;
     errors.forEach(error => dispatch(showInfoSnackbar(error.msg)));
   }
 };
