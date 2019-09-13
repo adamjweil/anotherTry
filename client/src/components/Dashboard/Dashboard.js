@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid, Header } from "semantic-ui-react";
 import Spinner from "../layout/Spinner";
-import Footer from "../layout/Footer";
 import DashboardDetails from "./DashboardDetails";
 import NoProfile from "./NoProfile";
 import YesProfile from "./YesProfile";
@@ -59,9 +58,7 @@ const Dashboard = ({
             left: "20px",
             right: "20px"
           }}
-        >
-          <Footer />
-        </div>
+        ></div>
       </Grid.Row>
     </Grid>
   );
@@ -69,7 +66,9 @@ const Dashboard = ({
 
 Dashboard.propTypes = {
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
+  createProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

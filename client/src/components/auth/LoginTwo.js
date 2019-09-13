@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import {
   Button,
   Container,
@@ -9,13 +10,11 @@ import {
   Link,
   Grid,
   Typography,
-  Paper,
   Box
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { shadows } from "@material-ui/system";
 import { login, signIn } from "../../actions/auth";
 import { setAlert } from "../../actions/alert";
 import GoogleAuth from "../../GoogleAuth";
@@ -44,6 +43,9 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(1, 0, 2)
+  },
+  remember: {
+    margin: theme.spacing(1, 0, 1)
   }
 }));
 
@@ -86,8 +88,28 @@ const LoginTwo = ({ login, isAuthenticated, setAlert }) => {
           onSubmit={e => onSubmit(e)}
           noValidate
         >
-          <Typography component="h1" variant="h4" style={{ fontWeight: "100" }}>
-            Log In Below
+          <Grid container>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={10}>
+              <img
+                style={{
+                  maxWidth: "80%",
+                  marginBottom: "-30px",
+                  justifyContent: "center",
+                  align: "center",
+                  alignItems: "center"
+                }}
+                src={process.env.PUBLIC_URL + "/img/mezologo1.png"}
+                alt=""
+              />
+              <center>
+                <h3>Online Portal</h3>
+              </center>
+            </Grid>
+            <Grid item xs={2}></Grid>
+          </Grid>
+          <Typography component="h5" variant="h5" style={{ fontWeight: "100" }}>
+            Log In Below:
           </Typography>
           <TextField
             variant="outlined"
@@ -120,7 +142,7 @@ const LoginTwo = ({ login, isAuthenticated, setAlert }) => {
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
-                className={classes.submit}
+                className={classes.remember}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -161,6 +183,12 @@ const LoginTwo = ({ login, isAuthenticated, setAlert }) => {
       </Box>
     </Container>
   );
+};
+
+LoginTwo.propTypes = {
+  login: PropTypes.func.isRequired,
+  alerts: PropTypes.array.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({
