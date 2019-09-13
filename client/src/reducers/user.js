@@ -1,19 +1,12 @@
-import {
-  FETCH_USERS,
-  FETCH_USER,
-  NOTIFCATION_INCREMENT,
-  NOTIFCATION_DECREMENT,
-  GET_NOTIFICATION_COUNT
-} from "../actions/types";
+import { FETCH_USERS, FETCH_USER } from "../actions/types";
 import _ from "lodash";
 
 const INITIAL_STATE = {
   user: {},
-  users: [],
-  notification_count: 0
+  users: []
 };
 
-export default (state = {}, action) => {
+export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCH_USERS:
       return { ...state, ..._.mapKeys(action.payload, "_id") };

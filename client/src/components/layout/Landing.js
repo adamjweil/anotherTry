@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Grid } from "@material-ui/core";
-import LoginTwo from "./../auth/LoginTwo";
+import Login from "./../auth/Login";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,8 +27,8 @@ const Landing = ({ isAuthenticated }) => {
       <Container>
         <Grid container>
           <Grid item xs={3}></Grid>
-          <Grid item xs={12} sm={6}>
-            <LoginTwo />
+          <Grid item sm={12} md={6}>
+            <Login />
           </Grid>
           <Grid item xs={3}></Grid>
         </Grid>

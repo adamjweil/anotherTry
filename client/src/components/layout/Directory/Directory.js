@@ -5,12 +5,11 @@ import { Header } from "semantic-ui-react";
 import { Grid, Container } from "@material-ui/core";
 
 import { fetchUsers } from "../../../actions/user";
-import DirectoryTopMenu from "./DirectoryTopMenu";
+// import DirectoryTopMenu from "./DirectoryTopMenu";
 import SecondaryMenu from "./SecondaryMenu";
 
-const Directory = ({ fetchUsers }) => async dispatch => {
-  dispatch(fetchUsers());
-
+const Directory = ({ fetchUsers }) => {
+  fetchUsers();
   const renderList = users => {
     users.map(user => (
       <Fragment>
@@ -19,7 +18,7 @@ const Directory = ({ fetchUsers }) => async dispatch => {
             <div className="item" key={user.id} style={{ width: "45%" }}>
               <img
                 src={user.avatar}
-                alt="large middle aligned icon camera"
+                alt=""
                 style={{ maxWidth: "100%", borderRadius: "10px" }}
               />
             </div>
@@ -55,11 +54,16 @@ const Directory = ({ fetchUsers }) => async dispatch => {
       <SecondaryMenu />
       <Grid container>
         <Grid item xs={12}>
-          <div className="ui celled list">{this.renderList()}</div>
+          <div className="ui celled list">{renderList()}</div>
         </Grid>
       </Grid>
     </Container>
   );
+};
+
+Directory.propTypes = {
+  fetchUsers: PropTypes.func.isRequired,
+  users: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
