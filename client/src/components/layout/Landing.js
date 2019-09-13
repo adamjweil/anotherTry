@@ -27,16 +27,20 @@ const Landing = ({ isAuthenticated }) => {
   }
 
   return (
-    <Fragment className="" style={{ flexGrow: "1" }}>
-      <Container style={{ padding: "20px" }}>
+    <Fragment>
+      <Container>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={7}>
+          <Grid item xs={12} sm={4}>
             <img
               style={{
-                marginTop: "20px",
-                // marginLeft: "20px",
+                // background: "#bbdefb",
+                marginTop: "50px",
+                // marginLeft: "5%",
+                // marginRight: "5%",
+                // paddingRight: "50px",
                 justifyContent: "center",
                 align: "center",
+                alignItems: "center",
                 maxWidth: "400px"
               }}
               src={process.env.PUBLIC_URL + "/img/mezologo1.png"}
@@ -53,7 +57,8 @@ const Landing = ({ isAuthenticated }) => {
               ONLINE PORTAL
             </Header>
           </Grid>
-          <Grid item xs={12} sm={5} style={{ justifyContent: "right" }}>
+          <Grid item xs={2}></Grid>
+          <Grid item xs={12} sm={6}>
             <LoginTwo />
           </Grid>
         </Grid>

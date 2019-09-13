@@ -21,6 +21,11 @@ Front End: Had originally used material-ui to style everything, but as I continu
     - Got the Landing Page, and Login component working
       - You can Login with new form
     - Logout action is working
+    - Snackbar Component Created
+      - Positive / Negative and Neutral (depending on message)
+      - Reducers / actions set up so that these are triggered correctly
+    - Cleaned up the Login Component (borders, bgcolor), the Navbar (Online Portal image links to homepage, there is now a link to directory from main page)
 
       -> LOOK INTO
       - SnackBars
+      - Attaching something to a ticket request

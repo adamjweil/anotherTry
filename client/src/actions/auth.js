@@ -19,6 +19,11 @@ import { push } from "react-router-redux";
 import setAuthToken from "../utils/setAuthToken";
 import store from "./../store";
 import { loadUser } from "./user";
+import {
+  showSuccessSnackbar,
+  showErrorSnackbar,
+  showInfoSnackbar
+} from "./alert";
 
 // REGISTER USER
 export const register = ({ email, terms, password }) => async dispatch => {
@@ -64,11 +69,10 @@ export const login = (email, password) => async dispatch => {
       payload: res.data
     });
     dispatch(loadUser());
+    dispatch(showSuccessSnackbar("Successfully logged in"));
   } catch (err) {
-    dispatch(setAlert(err.message, "danger"));
-    dispatch({
-      type: AUTH_ERROR
-    });
+    const errors = await err.response.data.errors;
+    errors.forEach(error => dispatch(showInfoSnackbar(error.msg)));
   }
 };
 
@@ -88,6 +92,8 @@ export const logout = () => async dispatch => {
     type: LOGOUT
   });
   store.dispatch(push("/"));
+  dispatch(showSuccessSnackbar("Successfully logged out"));
+  dispatch(showInfoSnackbar("Come back soon!"));
 };
 
 // Sign in w GoogleAuth

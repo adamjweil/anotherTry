@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { signIn, signOut } from "./actions/auth";
 import PropTypes from "prop-types";
+import { Grid, Button } from "@material-ui/core";
 
 class GoogleAuth extends React.Component {
   componentDidMount() {
@@ -43,28 +44,38 @@ class GoogleAuth extends React.Component {
       return null;
     } else if (this.props.isAuthenticated) {
       return (
-        <button onClick={this.onSignOutClick} className="ui red google button">
+        <Button onClick={this.onSignOutClick} className="ui red google button">
           <i className="google icon" />
           Sign Out
-        </button>
+        </Button>
       );
     } else {
       return (
-        <button
-          size="small"
-          onClick={this.onSignInClick}
-          className="ui small centered red google button"
-        >
-          <i className="google icon" />
-          Sign In with Google
-        </button>
+        <Grid container>
+          <Grid item xs={12}>
+            <Button
+              fullWidth
+              variant="contained"
+              onClick={this.onSignInClick}
+              color="secondary"
+            >
+              <i className="google icon"></i>
+              Sign In with Google
+            </Button>
+          </Grid>
+        </Grid>
       );
     }
   };
 
   render() {
-    console.log(this.state);
-    return <div>{this.renderAuthButton()}</div>;
+    return (
+      <Grid container>
+        <Grid item xs={12}>
+          {this.renderAuthButton()}
+        </Grid>
+      </Grid>
+    );
   }
 }
 

@@ -36,21 +36,34 @@ export default function UnauthenticatedNavbar() {
             <MenuIcon />
           </IconButton>
 
-          <Typography variant="h6" className={classes.title}>
-            Online Portal
+          <Typography variant="h4" className={classes.title}>
+            <Link to="/">
+              <p
+                style={{ color: "white", fontWeight: "1000", fontSize: "24px" }}
+              >
+                ONLINE PORTAL
+              </p>
+            </Link>
           </Typography>
+
           <MenuItem>
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="primary-search-account-menu"
-              aria-haspopup="true"
-              color="inherit"
-            ></IconButton>
-            <p>Home</p>
+            <Link to="/directory" className="">
+              <p
+                style={{ color: "white", fontWeight: "600", fontSize: "18px" }}
+              >
+                Directory
+              </p>
+            </Link>
           </MenuItem>
-          <Link to="/register">
-            <Button>Register</Button>
-          </Link>
+          <MenuItem>
+            <Link to="/register">
+              <p
+                style={{ color: "white", fontWeight: "600", fontSize: "18px" }}
+              >
+                Register
+              </p>
+            </Link>
+          </MenuItem>
         </Toolbar>
       </AppBar>
     </div>
