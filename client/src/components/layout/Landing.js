@@ -3,11 +3,7 @@ import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { Header } from "semantic-ui-react";
 import { Container, Grid } from "@material-ui/core";
-
-import Footer from "./Footer";
-import Login from "./../auth/Login";
 import LoginTwo from "./../auth/LoginTwo";
 
 const useStyles = makeStyles(theme => ({
@@ -29,38 +25,12 @@ const Landing = ({ isAuthenticated }) => {
   return (
     <Fragment>
       <Container>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={4}>
-            <img
-              style={{
-                // background: "#bbdefb",
-                marginTop: "50px",
-                // marginLeft: "5%",
-                // marginRight: "5%",
-                // paddingRight: "50px",
-                justifyContent: "center",
-                align: "center",
-                alignItems: "center",
-                maxWidth: "400px"
-              }}
-              src={process.env.PUBLIC_URL + "/img/mezologo1.png"}
-              alt=""
-            />
-
-            <Header
-              style={{
-                marginBottom: "100px",
-                fontSize: "38px",
-                textAlign: "center"
-              }}
-            >
-              ONLINE PORTAL
-            </Header>
-          </Grid>
-          <Grid item xs={2}></Grid>
+        <Grid container>
+          <Grid item xs={3}></Grid>
           <Grid item xs={12} sm={6}>
             <LoginTwo />
           </Grid>
+          <Grid item xs={3}></Grid>
         </Grid>
 
         <Grid item xs={12}>
@@ -75,7 +45,6 @@ const Landing = ({ isAuthenticated }) => {
           ></div>
         </Grid>
       </Container>
-      <Footer />
     </Fragment>
   );
 };
