@@ -1,75 +1,70 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Grid, Header } from "semantic-ui-react";
+import { Header } from "semantic-ui-react";
+import { Grid, Container } from "@material-ui/core";
 
 import { fetchUsers } from "../../../actions/user";
 import DirectoryTopMenu from "./DirectoryTopMenu";
 import SecondaryMenu from "./SecondaryMenu";
 
-class Directory extends React.Component {
-  componentDidMount() {
-    this.props.fetchUsers();
-  }
+const Directory = ({ fetchUsers }) => async dispatch => {
+  dispatch(fetchUsers());
 
-  renderList() {
-    return this.props.users.map(user => {
-      return (
-        <Fragment>
-          <Grid columns={16} inline>
-            <Grid.Column width={4}>
-              <div className="item" key={user.id} style={{ width: "45%" }}>
-                <img
-                  src={user.avatar}
-                  alt="large middle aligned icon camera"
-                  style={{ maxWidth: "100%", borderRadius: "10px" }}
-                />
-              </div>
-            </Grid.Column>
-            <Grid.Column width={12}>
-              <div className="content" style={{ marginTop: "10px" }}>
-                <Header as="h5">
-                  <i className="mail icon" />
-                  Email: {user.email}
-                </Header>
-
-                <div
-                  className="description"
-                  style={{ fontWeight: "50", fontDecorations: "italics" }}
-                >
-                  registered on... {user.date}
-                </div>
-              </div>
-            </Grid.Column>
+  const renderList = users => {
+    users.map(user => (
+      <Fragment>
+        <Grid container>
+          <Grid item xs={12} sm={4}>
+            <div className="item" key={user.id} style={{ width: "45%" }}>
+              <img
+                src={user.avatar}
+                alt="large middle aligned icon camera"
+                style={{ maxWidth: "100%", borderRadius: "10px" }}
+              />
+            </div>
           </Grid>
-          <Header as="h3" dividing></Header>
-        </Fragment>
-      );
-    });
-  }
+          <Grid item xs={12}>
+            <div className="content" style={{ marginTop: "10px" }}>
+              <Header as="h5">
+                <i className="mail icon" />
+                Email: {user.email}
+              </Header>
 
-  render() {
-    return (
-      <div>
-        <div className="header">
-          <center>
-            <Header as="h2">meZocliQ Directory</Header>
-          </center>
-        </div>
-        <SecondaryMenu />
-        <Grid columns={1} inline>
-          <Grid.Column>
-            <div className="ui celled list">{this.renderList()}</div>
-          </Grid.Column>
+              <div
+                className="description"
+                style={{ fontWeight: "50", fontDecorations: "italics" }}
+              >
+                registered on... {user.date}
+              </div>
+            </div>
+          </Grid>
         </Grid>
-      </div>
-    );
-  }
-}
+        <Header as="h3" dividing></Header>
+      </Fragment>
+    ));
+  };
 
-const mapStateToProps = state => {
-  return { users: Object.values(state.user) };
+  return (
+    <Container>
+      <div className="header">
+        <center>
+          <Header as="h2">meZocliQ Directory</Header>
+        </center>
+      </div>
+      <SecondaryMenu />
+      <Grid container>
+        <Grid item xs={12}>
+          <div className="ui celled list">{this.renderList()}</div>
+        </Grid>
+      </Grid>
+    </Container>
+  );
 };
+
+const mapStateToProps = state => ({
+  users: Object.values(state.user)
+});
 
 export default connect(
   mapStateToProps,
