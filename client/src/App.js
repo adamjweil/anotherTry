@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import Navbar from "./components/layout/Navbar/Navbar";
 import Register from "./components/auth/Register";
+import RegisterForm from "./components/auth/RegisterForm";
 import Landing from "./components/layout/Landing";
 import Alert from "./components/layout/Alert";
 import SuccessSnackbar from "./components/layout/Alerts/SuccessSnackbar";
@@ -49,7 +50,7 @@ const App = () => {
           <Route exact path="/tickethub" component={Tickets} />
           <section className="container" style={{ flex: "1" }}>
             <Route exact path="/profile" component={Profile} />
-            <Route exact path="/register" component={Register} />
+            <Route exact path="/register" component={RegisterForm} />
             <Route exact path="/directory" component={Directory} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute

@@ -18,8 +18,8 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { login, signIn } from "../../actions/auth";
 import { setAlert } from "../../actions/alert";
-
 import GoogleAuth from "../../GoogleAuth";
+
 const useStyles = makeStyles(theme => ({
   "@global": {
     body: {
@@ -37,8 +37,9 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%",
     marginTop: theme.spacing(1),
+    marginRight: theme.spacing(1),
     padding: "10px",
     border: "1px shadow gray"
   },
@@ -70,8 +71,12 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
     return <Redirect push to="/dashboard" />;
   }
 
+  const onRegisterRedirect = () => {
+    // return <Redirect push to="/register" />;
+  };
+
   return (
-    <Container component="main" mixWidth="md">
+    <Container component="main" maxWidth="md">
       <CssBaseline />
       <Box
         marginTop="50px"
@@ -80,7 +85,7 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
         borderRight={3}
         borderTop={1}
         borderColor="grey.400"
-        style={{ background: "#F8F8F8" }}
+        style={{ background: "#F8F8F8", minWidth: "540px" }}
       >
         <form
           style={{ padding: "30px" }}
@@ -166,17 +171,17 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
                 Login
               </Button>
             </Grid>
-            <Grid item sm={2}></Grid>
-            <Grid item xs={12} sm={12}>
+            <Grid item sm={1}></Grid>
+            <Grid item xs={12} sm={6}>
               <Button
+                href="/register"
                 fullWidth
                 size="large"
                 variant="contained"
                 color="info"
-                onClick={e => onSubmit(e)}
                 className={classes.submit}
               >
-                REGISTER
+                <Link to="/register"> REGISTER </Link>
               </Button>
             </Grid>
 
