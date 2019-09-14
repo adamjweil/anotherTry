@@ -90,7 +90,7 @@ export default (state = INITIAL_STATE, action) => {
     case LOGOUT:
       localStorage.removeItem("token");
       return {
-        ...state,
+        // ...state,
         token: null,
         isAuthenticated: false,
         loading: false

@@ -24,6 +24,7 @@ export default function SuccessSnackbar() {
         horizontal: "left"
       }}
       variant="success"
+      stackable="true"
       open={successSnackbarOpen}
       autoHideDuration={6000}
       onClose={handleClose}

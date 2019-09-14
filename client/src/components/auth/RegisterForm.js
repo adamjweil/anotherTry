@@ -76,14 +76,15 @@ const RegisterForm = ({ register, isAuthenticated, setAlert, toggleCheck }) => {
 
   const onRegister = formData => {
     console.log({ formData });
+    const { password, password2, email, terms } = formData;
     if (password !== password2) {
       showInfoSnackbar("Passwords do not match");
     }
-    if (terms !== true) {
+    if (terms) {
       showErrorSnackbar("Please read and agree to our Terms and Conditions");
     } else {
       register({ email, terms, password });
-      // showSuccessSnackbar("Successfully Registered!");
+      showSuccessSnackbar("Successfully Registered!");
     }
   };
 
@@ -111,8 +112,7 @@ const RegisterForm = ({ register, isAuthenticated, setAlert, toggleCheck }) => {
         <Form
           style={{ padding: "30px" }}
           className={classes.form}
-          onSubmit={e => onRegister(e)}
-          noValidate
+          onSubmit={onRegister}
         >
           <Grid container>
             <Grid item xs={2}></Grid>
@@ -152,7 +152,6 @@ const RegisterForm = ({ register, isAuthenticated, setAlert, toggleCheck }) => {
                 name="email"
                 value={email}
                 onChange={e => onChange(e)}
-                autoComplete="email"
                 required
                 fullWidth
                 autoFocus
@@ -172,7 +171,6 @@ const RegisterForm = ({ register, isAuthenticated, setAlert, toggleCheck }) => {
                 id="password"
                 value={password}
                 onChange={e => onChange(e)}
-                autoComplete="current-password"
                 required
                 fullWidth
               />
@@ -191,7 +189,6 @@ const RegisterForm = ({ register, isAuthenticated, setAlert, toggleCheck }) => {
                 id="password2"
                 value={password2}
                 onChange={e => onChange(e)}
-                autoComplete="current-password"
                 required
                 fullWidth
               />
@@ -204,6 +201,7 @@ const RegisterForm = ({ register, isAuthenticated, setAlert, toggleCheck }) => {
                 <FormControlLabel
                   control={
                     <Checkbox
+                      name="terms"
                       onClick={toggleCheck}
                       value={terms}
                       color="primary"
@@ -232,10 +230,17 @@ const RegisterForm = ({ register, isAuthenticated, setAlert, toggleCheck }) => {
         </Form>
 
         <Grid container>
-          <Grid item xs={0} sm={1}></Grid>
+          <Grid item sm={1}></Grid>
 
-          <Grid item xs={12} sm={5}>
-            <GoogleAuth />
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            style={{ marginBottom: "20px", padding: "0% 0% 0%" }}
+          >
+            <center>
+              <GoogleAuth />
+            </center>
           </Grid>
         </Grid>
       </Box>
@@ -249,7 +254,8 @@ RegisterForm.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  alerts: state.alert
+  alerts: state.alert,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(

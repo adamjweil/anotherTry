@@ -18,6 +18,7 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 import ThemeingLayout from "./components/layout/ThemeingLayout";
 import ResponsiveLayout from "./components/layout/ResponsiveLayout";
 import "typeface-roboto";
+import { SnackbarProvider, useSnackbar } from "notistack";
 // Redux
 import store from "./store";
 import { loadUser } from "./actions/user";
@@ -37,9 +38,11 @@ const App = () => {
       store={store}
       style={{ display: "flex", minHeight: "100vh", flexDirection: "column" }}
     >
-      <SuccessSnackbar />
-      <ErrorSnackbar />
-      <InfoSnackbar />
+      <SnackbarProvider maxSnack={3}>
+        <SuccessSnackbar />
+        <ErrorSnackbar />
+        <InfoSnackbar />
+      </SnackbarProvider>
       <Router>
         <div className="ui container">
           <Navbar />
