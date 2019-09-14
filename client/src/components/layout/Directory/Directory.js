@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Header } from "semantic-ui-react";
@@ -7,10 +7,13 @@ import { fetchUsers } from "../../../actions/user";
 // import DirectoryTopMenu from "./DirectoryTopMenu";
 import SecondaryMenu from "./SecondaryMenu";
 
-const Directory = ({ fetchUsers }) => {
-  fetchUsers();
-  const renderList = users => {
-    users.map(user => (
+class Directory extends React.Component {
+  componentDidMount = () => async dispatch => {
+    await fetchUsers();
+  };
+
+  renderList() {
+    this.props.users.map(user => (
       <Fragment>
         <Grid container>
           <Grid item xs={12} sm={4}>
@@ -41,32 +44,33 @@ const Directory = ({ fetchUsers }) => {
         <Header as="h3" dividing></Header>
       </Fragment>
     ));
-  };
+  }
 
-  return (
-    <Container>
-      <div className="header">
-        <center>
-          <Header as="h2">meZocliQ Directory</Header>
-        </center>
-      </div>
-      <SecondaryMenu />
-      <Grid container>
-        <Grid item xs={12}>
-          <div className="ui celled list">{renderList()}</div>
+  render() {
+    return (
+      <Container>
+        <div className="header">
+          <center>
+            <Header as="h2">meZocliQ Directory</Header>
+          </center>
+        </div>
+        <SecondaryMenu />
+        <Grid container>
+          <Grid item xs={12}>
+            <div className="ui celled list">{this.renderList()}</div>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
-  );
-};
+      </Container>
+    );
+  }
+}
 
 Directory.propTypes = {
-  fetchUsers: PropTypes.func.isRequired,
-  users: PropTypes.array.isRequired
+  fetchUsers: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  users: Object.values(state.user)
+  users: Object.values(state.users)
 });
 
 export default connect(

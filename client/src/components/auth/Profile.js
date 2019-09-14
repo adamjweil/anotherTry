@@ -7,7 +7,8 @@ import {
   decrementNotificationCount
 } from "../../actions/user";
 import { getCurrentProfile } from "../../actions/profile";
-import { Grid, Button } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
+import { Grid, Container, Avatar } from "@material-ui/core";
 import PropTypes from "prop-types";
 import ProfileMenu from "./Profile/ProfileMenu";
 
@@ -33,15 +34,16 @@ const Profile = ({
   };
 
   return (
-    <Grid columns={2}>
-      <Grid.Column columns={1}>
+    <Container>
+      <Grid item xs={12} md={4}>
         <div className="ui card">
-          <div className="image">
-            <img
+          <Grid container justify="center" alignItems="center">
+            <Avatar
               src={auth.user && auth.user.avatar}
+              style={{ margin: "10", width: "60%", height: "60%" }}
               alt="https://as1.ftcdn.net/jpg/02/59/94/92/500_F_259949239_KKDiZphlWffdaE5zsugujCQtaZ8nyWW9.jpg"
             />
-          </div>
+          </Grid>
           <div className="content">
             <div
               className="extra content"
@@ -76,17 +78,17 @@ const Profile = ({
             <span>{profile && team}</span>
           </div>
         </div>
-      </Grid.Column>
-      <Grid.Column>
-        <Grid.Row>
+      </Grid>
+      <Grid>
+        <Grid item xs={12}>
           <ProfileMenu />
-        </Grid.Row>
+        </Grid>
         <div>
           <p>Bio: {profile && profile.bio}</p>
           <p>Skills: {profile && profile.skills}</p>
           <p>Notifications: {auth && auth.notification_count}</p>
         </div>
-      </Grid.Column>
+      </Grid>
 
       <Button onClick={e => onIncrementSubmit(e)}>
         Increment Notifications
@@ -94,7 +96,7 @@ const Profile = ({
       <Button onClick={e => onDecrementSubmit(e)}>
         Decrement Notifications
       </Button>
-    </Grid>
+    </Container>
   );
 };
 

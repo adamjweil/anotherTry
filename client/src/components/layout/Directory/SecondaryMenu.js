@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const SecondaryMenu = () => {
   return (
     <Fragment>
-      <div class="ui secondary pointing menu">
+      <div className="ui secondary pointing menu">
         <Link to="/" className="active item">
           Employees
         </Link>
@@ -17,11 +17,7 @@ const SecondaryMenu = () => {
 
         <Menu.Menu position="right">
           <Menu.Item>
-            <Input
-              style={{ width: "350px" }}
-              icon="search icon"
-              placeholder="Search..."
-            />
+            <Input style={{ width: "350px" }} placeholder="Search..." />
           </Menu.Item>
         </Menu.Menu>
       </div>

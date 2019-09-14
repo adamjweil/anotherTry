@@ -87,9 +87,9 @@ export const logout = () => async dispatch => {
   dispatch({
     type: LOGOUT
   });
-  store.dispatch(push("/"));
   dispatch(showSuccessSnackbar("Successfully logged out"));
   dispatch(showInfoSnackbar("Come back soon!"));
+  // store.dispatch(push("/"));
 };
 
 // Sign in w GoogleAuth
@@ -97,7 +97,10 @@ export const signIn = userId => async dispatch => {
   try {
     dispatch({
       type: SIGN_IN,
-      payload: userId
+      payload: {
+        userId,
+        isAuthenticated: true
+      }
     });
   } catch (err) {
     dispatch({

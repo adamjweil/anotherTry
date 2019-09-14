@@ -23,6 +23,7 @@ export default function InfoSnackbar() {
         vertical: "top",
         horizontal: "left"
       }}
+      stackable="true"
       open={infoSnackbarOpen}
       autoHideDuration={6000}
       onClose={handleClose}
@@ -45,7 +46,7 @@ export default function InfoSnackbar() {
       ]}
     >
       <MySnackbarContentWrapper
-        className=""
+        className="info message"
         onClose={handleClose}
         variant="warning"
         message={infoSnackbarMessage}

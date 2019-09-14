@@ -6,7 +6,7 @@ const INITIAL_STATE = {
   users: []
 };
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = [], action) => {
   switch (action.type) {
     case FETCH_USERS:
       return { ...state, ..._.mapKeys(action.payload, "_id") };
