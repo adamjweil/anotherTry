@@ -29,3 +29,8 @@ Front End: Had originally used material-ui to style everything, but as I continu
       -> LOOK INTO
       - SnackBars
       - Attaching something to a ticket request
+
+    9/14
+    - Added the SnackBars for Success, Info, and Error Messages
+      - Very cool addition
+    - Registration with the new form is finally working. I still need to have it redirect to the User Profile page correctly
