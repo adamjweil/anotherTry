@@ -23,7 +23,7 @@ const Profile = ({
   incrementNotificationCount,
   decrementNotificationCount
 }) => {
-  if (isAuthenticated === false) {
+  if (isAuthenticated !== true) {
     return <Redirect push to="/" />;
   }
   const onIncrementSubmit = () => {

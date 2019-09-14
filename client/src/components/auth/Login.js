@@ -104,7 +104,7 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
                   align: "center",
                   alignItems: "center"
                 }}
-                src={process.env.PUBLIC_URL + "/img/mezologo1.png"}
+                src={process.env.PUBLIC_URL + "../../img/logo.png"}
                 alt=""
               />
               <center>

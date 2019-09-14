@@ -38,7 +38,7 @@ export default function UnauthenticatedNavbar() {
           <Typography variant="h4" className={classes.title}>
             <Link to="/">
               <p
-                style={{ color: "white", fontWeight: "1000", fontSize: "24px" }}
+                style={{ color: "white", fontWeight: "800", fontSize: "24px" }}
               >
                 ONLINE PORTAL
               </p>
@@ -50,7 +50,7 @@ export default function UnauthenticatedNavbar() {
               <p
                 style={{ color: "white", fontWeight: "600", fontSize: "18px" }}
               >
-                Directory
+                DIRECTORY
               </p>
             </Link>
           </MenuItem>
@@ -59,7 +59,7 @@ export default function UnauthenticatedNavbar() {
               <p
                 style={{ color: "white", fontWeight: "600", fontSize: "18px" }}
               >
-                Register
+                REGISTER
               </p>
             </Link>
           </MenuItem>

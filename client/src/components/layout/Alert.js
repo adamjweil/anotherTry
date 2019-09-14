@@ -7,7 +7,7 @@ const onSubmit = id => async dispatch => {
   removeAlert(id);
 };
 
-const Alert = ({ alerts }) => {
+const Alert = alerts => {
   return (
     alerts.length > 0 &&
     alerts.map(alert =>
