@@ -17,8 +17,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Form } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import { setAlert } from "../../actions/alert";
 import { register, toggleCheck } from "../../actions/auth";
+import { loadUser } from "../../actions/user";
 import {
   showInfoSnackbar,
   showErrorSnackbar,
@@ -58,13 +58,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const RegisterForm = ({ register, isAuthenticated, setAlert, toggleCheck }) => {
+const RegisterForm = ({
+  register,
+  isAuthenticated,
+  toggleCheck,
+  showInfoSnackbar,
+  showErrorSnackbar,
+  showSuccessSnackbar
+}) => {
   const [formData, setFormData] = useState(
     {
       email: "",
       password: "",
       password2: "",
-      terms: false
+      terms: true
     },
     []
   );
@@ -74,28 +81,31 @@ const RegisterForm = ({ register, isAuthenticated, setAlert, toggleCheck }) => {
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onRegister = formData => {
-    console.log({ formData });
-    const { password, password2, email, terms } = formData;
-    if (password !== password2) {
-      showInfoSnackbar("Passwords do not match");
-    }
-    if (terms) {
-      showErrorSnackbar("Please read and agree to our Terms and Conditions");
-    } else {
+  const onRegister = async formData => {
+    try {
+      if (password !== password2) {
+        showInfoSnackbar("Passwords do not match");
+      }
+      if (terms) {
+        showErrorSnackbar("Please read and agree to our Terms and Conditions");
+      }
       register({ email, terms, password });
-      showSuccessSnackbar("Successfully Registered!");
+      loadUser();
+    } catch (err) {
+      showErrorSnackbar(err.msg);
     }
+    if (isAuthenticated) {
+      return <Redirect push to="/profile" />;
+    }
+    showSuccessSnackbar("Successfully Registered!");
   };
 
   const onCheck = e => {
-    e.preventDeault();
+    // e.preventDeault();
     toggleCheck(e);
   };
 
-  if (isAuthenticated) {
-    return <Redirect push to="/profile" />;
-  }
+  // Redirect if logged in
 
   return (
     <Container>
@@ -202,8 +212,9 @@ const RegisterForm = ({ register, isAuthenticated, setAlert, toggleCheck }) => {
                   control={
                     <Checkbox
                       name="terms"
-                      onClick={toggleCheck}
+                      onChange={e => onChange(e)}
                       value={terms}
+                      onCl
                       color="primary"
                     />
                   }
@@ -260,5 +271,11 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { setAlert, register, toggleCheck }
+  {
+    register,
+    toggleCheck,
+    showSuccessSnackbar,
+    showErrorSnackbar,
+    showInfoSnackbar
+  }
 )(RegisterForm);
