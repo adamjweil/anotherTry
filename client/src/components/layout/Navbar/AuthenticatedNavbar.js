@@ -55,11 +55,11 @@ const useStyles = makeStyles(theme => ({
     color: "inherit"
   },
   inputInput: {
-    padding: theme.spacing(1, 1, 1, 7),
+    padding: theme.spacing(1, 1, 1, 15),
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: 200
+      width: 250
     }
   },
   sectionDesktop: {
@@ -164,7 +164,12 @@ const AuthenticatedNavbar = ({ logout }) => {
   return (
     <div className={classes.grow}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar
+          style={{
+            height: "3rem",
+            color: "linear-gradient(to right, var(--top1), var(--top2))"
+          }}
+        >
           <IconButton
             edge="start"
             className={classes.menuButton}

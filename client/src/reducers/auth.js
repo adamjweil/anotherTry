@@ -39,6 +39,7 @@ export default (state = INITIAL_STATE, action) => {
     case USER_LOADED:
       return {
         ...state,
+        token: localStorage.getItem("token"),
         isAuthenticated: true,
         loading: false,
         user: action.payload
