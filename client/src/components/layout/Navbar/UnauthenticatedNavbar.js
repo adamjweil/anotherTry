@@ -6,7 +6,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
+import { Button } from "@material-ui/core";
 
+import history from "../../../history";
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1

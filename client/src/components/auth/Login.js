@@ -220,7 +220,7 @@ Login.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
+  isAuthenticated: state.isAuthenticated,
   alerts: state.alert
 });
 

@@ -17,7 +17,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Form } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import { register, toggleCheck } from "../../actions/auth";
+import { login, register, toggleCheck } from "../../actions/auth";
 import { loadUser } from "../../actions/user";
 import {
   showInfoSnackbar,
@@ -26,6 +26,8 @@ import {
 } from "../../actions/alert";
 // import { register, toggleCheck } from "../../actions/auth";
 import GoogleAuth from "../../GoogleAuth";
+import history from "../../history";
+import store from "../../store";
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -59,6 +61,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const RegisterForm = ({
+  login,
   register,
   isAuthenticated,
   toggleCheck,
@@ -86,22 +89,20 @@ const RegisterForm = ({
       if (password !== password2) {
         showInfoSnackbar("Passwords do not match");
       }
-      if (terms) {
+      if (terms !== true) {
         showErrorSnackbar("Please read and agree to our Terms and Conditions");
       }
       register({ email, terms, password });
-      loadUser();
+      login(email, password);
+      history.push("/profile");
     } catch (err) {
       showErrorSnackbar(err.msg);
-    }
-    if (isAuthenticated) {
-      return <Redirect push to="/profile" />;
     }
     showSuccessSnackbar("Successfully Registered!");
   };
 
   const onCheck = e => {
-    // e.preventDeault();
+    e.preventDefault();
     toggleCheck(e);
   };
 
@@ -212,7 +213,7 @@ const RegisterForm = ({
                   control={
                     <Checkbox
                       name="terms"
-                      onChange={e => onChange(e)}
+                      onClick={e => onCheck(e)}
                       value={terms}
                       onCl
                       color="primary"
@@ -272,6 +273,7 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
+    login,
     register,
     toggleCheck,
     showSuccessSnackbar,

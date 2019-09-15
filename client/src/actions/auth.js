@@ -19,6 +19,7 @@ import { push } from "react-router-redux";
 import setAuthToken from "../utils/setAuthToken";
 import store from "./../store";
 import { loadUser } from "./user";
+
 import {
   showSuccessSnackbar,
   showErrorSnackbar,
@@ -40,7 +41,7 @@ export const register = (email, terms, password) => async dispatch => {
       type: REGISTER_SUCCESS,
       payload: res.data
     });
-    dispatch(setAuthToken());
+    // dispatch(setAuthToken());
     dispatch(loadUser());
   } catch (err) {
     if (err) {
@@ -90,6 +91,7 @@ export const logout = () => async dispatch => {
   dispatch(showSuccessSnackbar("Successfully logged out"));
   dispatch(showInfoSnackbar("Come back soon!"));
   // store.dispatch(push("/"));
+  // hashHistory.push("/cart");
 };
 
 // Sign in w GoogleAuth
