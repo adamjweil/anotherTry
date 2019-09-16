@@ -10,7 +10,7 @@ import { getCurrentProfile } from "../../actions/profile";
 import { Button } from "semantic-ui-react";
 import { Grid, Container, Avatar } from "@material-ui/core";
 import PropTypes from "prop-types";
-import ProfileMenu from "./Profile/ProfileMenu";
+import ProfileMenu from "./ProfileMenu";
 
 const Profile = ({
   getCurrentProfile,
@@ -23,7 +23,7 @@ const Profile = ({
   incrementNotificationCount,
   decrementNotificationCount
 }) => {
-  if (isAuthenticated !== true) {
+  if (isAuthenticated === false) {
     return <Redirect push to="/" />;
   }
   const onIncrementSubmit = () => {

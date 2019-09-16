@@ -1,40 +1,54 @@
 import React, { useState } from "react";
-import { withStyles } from "@material-ui/core/styles";
-import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
-
-import { makeStyles } from "@material-ui/core/styles";
-import { Form, Header } from "semantic-ui-react";
 import {
-  Grid,
+  Button,
   Container,
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  Input,
+  CssBaseline,
+  TextField,
   FormControlLabel,
-  Checkbox
+  Checkbox,
+  Grid,
+  Typography,
+  Box
 } from "@material-ui/core";
-import { CheckBoxIcon } from "@material-ui/icons";
-import { Button } from "@material-ui/core";
-import { green } from "@material-ui/core/colors";
-// Redux
+import { makeStyles } from "@material-ui/core/styles";
+import { Form } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { setAlert } from "../../actions/alert";
-import { register, toggleCheck } from "../../actions/auth";
+import { Link, Redirect } from "react-router-dom";
+import { login, register, toggleCheck } from "../../actions/auth";
+import { loadUser } from "../../actions/user";
 import {
   showInfoSnackbar,
   showErrorSnackbar,
-  showUspsSnackbar
+  showSuccessSnackbar
 } from "../../actions/alert";
-// Local Imports
+// import { register, toggleCheck } from "../../actions/auth";
+import GoogleAuth from "../../GoogleAuth";
+import history from "../../history";
+import store from "../../store";
 
 const useStyles = makeStyles(theme => ({
-  button: {
-    margin: theme.spacing(1)
+  "@global": {
+    body: {
+      backgroundColor: theme.palette.common.white
+    }
   },
-  input: {
-    display: "none"
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main
+  },
+  form: {
+    width: "100%",
+    marginTop: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    padding: "10px",
+    border: "1px shadow gray"
   },
   submit: {
     margin: theme.spacing(1, 0, 2)
@@ -44,186 +58,228 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const GreenCheckbox = withStyles({
-  root: {
-    color: green[400],
-    "&$checked": {
-      color: green[600]
-    }
-  },
-  checked: {}
-})(props => <Checkbox color="default" {...props} />);
-
-const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
-  const classes = useStyles();
+const Register = ({
+  login,
+  register,
+  isAuthenticated,
+  toggleCheck,
+  showInfoSnackbar,
+  showErrorSnackbar,
+  showSuccessSnackbar
+}) => {
   const [formData, setFormData] = useState(
     {
-      terms: false,
       email: "",
       password: "",
-      password2: ""
+      password2: "",
+      terms: true
     },
     []
   );
-
-  const { email, terms, password, password2 } = formData;
+  const classes = useStyles();
+  const { email, password, password2, terms } = formData;
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onCheck = e => {
-    e.preventDeault();
-    toggleCheck(e);
+  const onRegister = async formData => {
+    try {
+      if (password !== password2) {
+        showInfoSnackbar("Passwords do not match");
+      } else if (terms !== true) {
+        showErrorSnackbar("Please read and agree to our Terms and Conditions");
+      } else {
+        register({ email, terms, password });
+        showSuccessSnackbar("Successfully Registered!");
+      }
+    } catch (err) {
+      showErrorSnackbar(err.msg);
+    }
   };
 
-  const onRegister = formData => {
-    if (password !== password2) {
-      showInfoSnackbar("Passwords do not match");
-    }
-    if (terms) {
-      showErrorSnackbar("Please read and agree to our Terms and Conditions");
-    } else {
-      register({ email, terms, password });
-    }
+  const onCheck = e => {
+    e.preventDefault();
+    toggleCheck(e);
   };
 
   // Redirect if logged in
   if (isAuthenticated) {
-    return <Redirect push to="/dashboard" />;
+    return <Redirect push to="/profile" />;
   }
 
   return (
-    <Grid container>
-      <Grid item sm={2}></Grid>
-      <Grid item xs={8} sm={6}>
-        <div className="ui attached message">
-          <div className="header">
-            <Header as="h2">NEW ACCOUNT REGISTRATION!!</Header>
-          </div>
-          <p>
-            <i className="hand point right icon"></i>
-            Welcome to the meZocliQ Online Portal
-          </p>
-        </div>
-      </Grid>
-      <Grid item sm={3}></Grid>
-      <Grid container>
-        <Grid item xs={10}></Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <Grid item xs={12}>
-          <Form
-            className="ui form attached fluid segment"
-            onSubmit={onRegister}
+    <Container>
+      <CssBaseline />
+      <Box
+        marginTop="50px"
+        borderLeft={1}
+        borderBottom={3}
+        borderRight={3}
+        borderTop={1}
+        borderColor="grey.400"
+        style={{ background: "#F8F8F8", minWidth: "600px" }}
+      >
+        <Form
+          style={{ padding: "30px" }}
+          className={classes.form}
+          onSubmit={onRegister}
+        >
+          <Grid container>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={10}>
+              <img
+                style={{
+                  maxWidth: "80%",
+                  marginBottom: "-30px",
+                  justifyContent: "center",
+                  align: "center",
+                  alignItems: "center"
+                }}
+                src={process.env.PUBLIC_URL + "/img/mezologo1.png"}
+                alt=""
+              />
+              <center>
+                <h3>Online Portal</h3>
+              </center>
+            </Grid>
+            <Grid item xs={2}></Grid>
+          </Grid>
+          <Typography
+            component="h6"
+            variant="h6"
+            style={{ fontSize: "24px", fontWeight: "800", marginTop: "-10px" }}
           >
-            <Grid item xs={12}>
-              <FormControl>
-                <InputLabel htmlFor="my-input">Email Address:</InputLabel>
-                <Input
-                  onChange={e => onChange(e)}
-                  name="email"
-                  value={email}
-                  id="my-input"
-                  aria-describedby="my-helper-text"
+            Registration Form:
+          </Typography>
+          <Grid container>
+            <Grid item xs={1}></Grid>
+            <Grid item xs={10} sm={10}>
+              <TextField
+                // variant="outlined"
+                margin="normal"
+                id="email"
+                label="Email Address"
+                name="email"
+                value={email}
+                onChange={e => onChange(e)}
+                required
+                fullWidth
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={1}></Grid>
+          </Grid>
+          <Grid container>
+            <Grid item xs={1}></Grid>
+            <Grid item xs={10} md={4}>
+              <TextField
+                // variant="outlined"
+                margin="normal"
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                value={password}
+                onChange={e => onChange(e)}
+                required
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={1}></Grid>
+
+            <Grid item xs={1}></Grid>
+
+            <Grid item xs={10} md={4}>
+              <TextField
+                // variant="outlined"
+                margin="normal"
+                name="password2"
+                label="Confirm Password"
+                type="password"
+                id="password2"
+                value={password2}
+                onChange={e => onChange(e)}
+                required
+                fullWidth
+              />
+
+              <Grid item xs={1}></Grid>
+            </Grid>
+            <Grid container>
+              <Grid item xs={1}></Grid>
+              <Grid item xs={10}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      name="terms"
+                      onClick={e => onCheck(e)}
+                      value={terms}
+                      onCl
+                      color="primary"
+                    />
+                  }
+                  label="I agree to the Terms & Conditions"
+                  className={classes.remember}
                 />
-                <FormHelperText id="my-helper-text">
-                  (Pls use your @mezocliq.com email address)
-                </FormHelperText>
-              </FormControl>
-            </Grid>
-
-            <Grid container>
-              <Grid item xs={6}>
-                <FormControl>
-                  <InputLabel htmlFor="password">Password:</InputLabel>
-                  <Input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={password}
-                    onChange={e => onChange(e)}
-                    aria-describedby="my-helper-text"
-                  />
-                </FormControl>
               </Grid>
-
-              <Grid item xs={6}>
-                <FormControl>
-                  <InputLabel htmlFor="password2">
-                    Pls Confirm Password:
-                  </InputLabel>
-                  <Input
-                    type="password"
-                    id="password2"
-                    name="password2"
-                    value={password2}
-                    onChange={e => onChange(e)}
-                    aria-describedby="my-helper-text"
-                  />
-                </FormControl>
-              </Grid>
+              <Grid item xs={1}></Grid>
             </Grid>
-
-            <Grid item xs={12}>
-              <Grid item xs={12} sm={6}></Grid>
-              <Grid item xs={12} sm={6}></Grid>
+            <Grid item sm={1}></Grid>
+            <Grid item xs={12} sm={5}>
+              <Button
+                type="submit"
+                fullWidth
+                size="large"
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                REGISTER
+              </Button>
             </Grid>
+          </Grid>
+        </Form>
 
-            <Grid container>
-              <Grid item xs={12} sm={6}>
-                <div className="ui checkbox">
-                  <Form.Checkbox
-                    id="terms"
-                    name="terms"
-                    value={terms}
-                    label="I agree to the Terms & Conditions"
-                    onClick={toggleCheck}
-                    required
-                  />
-                </div>
-              </Grid>
+        <Grid container>
+          <Grid item sm={1}></Grid>
 
-              <Grid item xs={12} sm={6} md={6}>
-                <Button
-                  size="small"
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                  onClick={e => onRegister(e)}
-                >
-                  CREATE ACCOUNT HERE!!
-                </Button>
-              </Grid>
-            </Grid>
-          </Form>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            style={{ marginBottom: "20px", padding: "0% 0% 0%" }}
+          >
+            <center>
+              <GoogleAuth />
+            </center>
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <div className="ui bottom attached warning message">
-          <i className="icon help"></i>
-          Already have an account?{" "}
-          <Link to="/" className="item">
-            Login here
-          </Link>
-        </div>
-      </Grid>
-    </Grid>
+      </Box>
+    </Container>
   );
 };
 
 Register.propTypes = {
   register: PropTypes.func.isRequired,
-  setAlert: PropTypes.func.isRequired,
-  alerts: PropTypes.array.isRequired
+  alerts: PropTypes.array.isRequired,
+  showSuccessSnackbar: PropTypes.func.isRequired,
+  showErrorSnackbar: PropTypes.func.isRequired,
+  showInfoSnackbar: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  register: state.auth,
-  alerts: state.alerts
+  alerts: state.alert,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(
   mapStateToProps,
-  { setAlert, register, toggleCheck }
+  {
+    login,
+    register,
+    toggleCheck,
+    showSuccessSnackbar,
+    showErrorSnackbar,
+    showInfoSnackbar
+  }
 )(Register);
