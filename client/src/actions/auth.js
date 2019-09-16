@@ -19,6 +19,7 @@ import { push } from "react-router-redux";
 import setAuthToken from "../utils/setAuthToken";
 import store from "./../store";
 import { loadUser } from "./user";
+import history from "../history";
 
 import {
   showSuccessSnackbar,
@@ -41,11 +42,11 @@ export const register = (email, terms, password) => async dispatch => {
       type: REGISTER_SUCCESS,
       payload: res.data
     });
-    // dispatch(setAuthToken());
     dispatch(loadUser());
   } catch (err) {
-    if (err) {
-      dispatch(showInfoSnackbar(err.msg));
+    const errors = err.response;
+    if (errors) {
+      errors.forEach(error => dispatch(showErrorSnackbar(error.msg)));
     }
   }
 };
@@ -67,9 +68,8 @@ export const login = (email, password) => async dispatch => {
     dispatch(loadUser());
     dispatch(showSuccessSnackbar("Successfully logged in"));
   } catch (err) {
-    console.log(err.response.data);
     const errors = err.response.data.errors;
-    errors.forEach(error => dispatch(showInfoSnackbar(error.msg)));
+    errors.forEach(error => dispatch(showErrorSnackbar(error.msg)));
   }
 };
 
@@ -89,9 +89,7 @@ export const logout = () => async dispatch => {
     type: LOGOUT
   });
   dispatch(showSuccessSnackbar("Successfully logged out"));
-  dispatch(showInfoSnackbar("Come back soon!"));
-  // store.dispatch(push("/"));
-  // hashHistory.push("/cart");
+  history.push("/");
 };
 
 // Sign in w GoogleAuth

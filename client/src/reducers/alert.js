@@ -31,7 +31,10 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         successSnackbarOpen: false,
         errorSnackbarOpen: false,
-        infoSnackbarOpen: false
+        infoSnackbarOpen: false,
+        infoSnackbarMessage: "",
+        errorSnackbarMessage: "",
+        successSnackbarMessage: ""
       };
     default:
       return state;

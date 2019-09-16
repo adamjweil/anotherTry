@@ -1,6 +1,7 @@
 import axios from "axios";
 import { setAlert } from "./alert";
 import setAuthToken from "../utils/setAuthToken";
+import { showErrorSnackbar } from "./alert";
 import {
   GET_USERS,
   AUTH_ERROR,
@@ -25,7 +26,7 @@ export const loadUser = setAlert => async dispatch => {
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+      errors.forEach(error => dispatch(showErrorSnackbar(error.msg)));
     }
     dispatch({
       type: AUTH_ERROR

@@ -24,24 +24,24 @@ export const removeAlert = id => dispatch => {
 
 export const showSuccessSnackbar = message => {
   return dispatch => {
-    dispatch({ type: "SNACKBAR_SUCCESS", message });
+    dispatch({ type: SNACKBAR_SUCCESS, message });
   };
 };
 
 export const showErrorSnackbar = message => {
   return dispatch => {
-    dispatch({ type: "SNACKBAR_ERROR", message });
+    dispatch({ type: SNACKBAR_ERROR, message });
   };
 };
 
 export const showInfoSnackbar = message => {
   return dispatch => {
-    dispatch({ type: "SNACKBAR_INFO", message });
+    dispatch({ type: SNACKBAR_INFO, message });
   };
 };
 
 export const clearSnackbar = () => {
   return dispatch => {
-    dispatch({ type: "SNACKBAR_CLEAR" });
+    dispatch({ type: SNACKBAR_CLEAR });
   };
 };
