@@ -8,9 +8,8 @@ import {
 } from "../../actions/user";
 import { getCurrentProfile } from "../../actions/profile";
 import { Button } from "semantic-ui-react";
-import { Grid, Container, Avatar } from "@material-ui/core";
+import { Grid, Container, Avatar, Divider } from "@material-ui/core";
 import PropTypes from "prop-types";
-import ProfileMenu from "./ProfileMenu";
 
 const Profile = ({
   getCurrentProfile,
@@ -44,6 +43,8 @@ const Profile = ({
               alt="https://as1.ftcdn.net/jpg/02/59/94/92/500_F_259949239_KKDiZphlWffdaE5zsugujCQtaZ8nyWW9.jpg"
             />
           </Grid>
+          <Divider variant="middle" />
+
           <div className="content">
             <div
               className="extra content"
@@ -77,16 +78,6 @@ const Profile = ({
 
             <span>{profile && team}</span>
           </div>
-        </div>
-      </Grid>
-      <Grid>
-        <Grid item xs={12}>
-          <ProfileMenu />
-        </Grid>
-        <div>
-          <p>Bio: {profile && profile.bio}</p>
-          <p>Skills: {profile && profile.skills}</p>
-          <p>Notifications: {auth && auth.notification_count}</p>
         </div>
       </Grid>
 

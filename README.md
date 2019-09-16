@@ -52,3 +52,6 @@ Front End: Had originally used material-ui to style everything, but as I continu
       - Build the View
       - Server end Profile creation
       - Redux Integration
+
+      - Form for Creating Profile
+      https://material-ui.com/getting-started/templates/checkout/

@@ -8,6 +8,7 @@ import SuccessSnackbar from "./components/layout/Alerts/SuccessSnackbar";
 import InfoSnackbar from "./components/layout/Alerts/InfoSnackbar";
 import ErrorSnackbar from "./components/layout/Alerts/ErrorSnackbar";
 import Profile from "./components/Profile/Profile";
+import ProfileTwo from "./components/Profile/ProfileTwo";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Tickets from "./components/Tickets/Tickets";
 import Directory from "./components/layout/Directory/Directory";
@@ -42,24 +43,22 @@ const App = () => {
         <InfoSnackbar />
       </SnackbarProvider>
       <Router>
-        <div className="ui container">
-          <Navbar />
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/themeing" component={ThemeingLayout} />
-          <Route exact path="/responsive" component={ResponsiveLayout} />
+        <Navbar />
+        <Route exact path="/" component={Landing} />
+        <Route exact path="/themeing" component={ThemeingLayout} />
+        <Route exact path="/responsive" component={ResponsiveLayout} />
+        <section className="container" style={{ flex: "1" }}>
+          <Route exact path="/register" component={Register} />
           <Route exact path="/tickethub" component={Tickets} />
-          <section className="container" style={{ flex: "1" }}>
-            <Route exact path="/profile" component={Profile} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/directory" component={Directory} />
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            <PrivateRoute
-              exact
-              path="/create-profile"
-              component={CreateProfile}
-            />
-          </section>
-        </div>
+          <Route exact path="/profile" component={ProfileTwo} />
+          <Route exact path="/directory" component={Directory} />
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute
+            exact
+            path="/create-profile"
+            component={CreateProfile}
+          />
+        </section>
       </Router>
     </Provider>
   );
