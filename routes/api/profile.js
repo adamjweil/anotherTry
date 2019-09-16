@@ -35,6 +35,9 @@ router.post("/", auth, async (req, res) => {
   }
 
   const {
+    firstName,
+    lastName,
+    handle,
     team,
     title,
     hireDate,
@@ -50,6 +53,9 @@ router.post("/", auth, async (req, res) => {
   // Build Profile object
   const profileFields = {};
   profileFields.user = req.user;
+  if (firstName) profileFields.user = firstName;
+  if (lastName) profileFields.user = lastName;
+  if (handle) profileFields.user = handle;
   if (team) profileFields.team = team;
   if (title) profileFields.title = title;
   if (hireDate) profileFields.hireDate = hireDate;
