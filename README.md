@@ -37,6 +37,10 @@ Front End: Had originally used material-ui to style everything, but as I continu
 
     9/16
     - After registration, the page redirects to the User Profile page, as expected
+    - Profile components have been split up to better organize the page
+      - The Avatar and Profile details are now in seperate components, along w/ this new form
+    - On the righ 8/12th of the screen I have started to implement the View portion of the Profile Creation form
+
 
     TO DO
     - Create Profile Component
