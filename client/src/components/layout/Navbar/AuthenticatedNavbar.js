@@ -163,10 +163,17 @@ const AuthenticatedNavbar = ({ logout }) => {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar
+        position="relative"
+        style={
+          {
+            // margin: "-10px"
+          }
+        }
+      >
         <Toolbar
           style={{
-            height: "3rem",
+            // height: "3rem",
             color: "linear-gradient(to right, var(--top1), var(--top2))"
           }}
         >
@@ -200,7 +207,7 @@ const AuthenticatedNavbar = ({ logout }) => {
           <div className={classes.sectionDesktop}>
             <Link to="/dashboard">
               <MenuItem>
-                <p style={{ color: "white" }}>Dashboardd</p>
+                <p style={{ color: "white" }}>Dashboard</p>
               </MenuItem>
             </Link>
 
@@ -210,26 +217,20 @@ const AuthenticatedNavbar = ({ logout }) => {
               </MenuItem>
             </Link>
 
-            <MenuItem>
-              Notifications
+            <MenuItem onClick={handleProfileMenuOpen}>
+              My Profile
               <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
+                <AccountCircle />
               </Badge>
               <IconButton
-                aria-label="show 17 new notifications"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
                 color="inherit"
               ></IconButton>
             </MenuItem>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
