@@ -34,3 +34,21 @@ Front End: Had originally used material-ui to style everything, but as I continu
     - Added the SnackBars for Success, Info, and Error Messages
       - Very cool addition
     - Registration with the new form is finally working. I still need to have it redirect to the User Profile page correctly
+
+    9/16
+    - After registration, the page redirects to the User Profile page, as expected
+
+    TO DO
+    - Create Profile Component
+      - Build the View
+        - Totally clean up the Avatar card,
+        - + any additional Profile Card components
+        -
+      - Multi Step form
+      - Be able to select from a list of existing Users (this will be challenging)
+      - Server end Profile creation
+      - Redux Integration
+    - Create Ticket Component
+      - Build the View
+      - Server end Profile creation
+      - Redux Integration
