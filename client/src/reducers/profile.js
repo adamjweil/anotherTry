@@ -8,6 +8,9 @@ import {
 } from "../actions/types";
 
 const INITIAL_STATE = {
+  firstName: "",
+  lastName: "",
+  handle: "",
   team: "",
   title: "",
   reportingTo: "",
@@ -16,14 +19,13 @@ const INITIAL_STATE = {
   bio: "",
   skills: [],
   githubusername: "",
-  profile: null,
   profiles: [],
   repos: [],
   loading: false,
   user: null
 };
 
-export default function(state = INITIAL_STATE, action) {
+export default function(state = {}, action) {
   const { type, payload } = action;
   switch (type) {
     case GET_PROFILE:
@@ -41,7 +43,7 @@ export default function(state = INITIAL_STATE, action) {
     case CREATE_PROFILE:
       return {
         ...state,
-        profile: payload,
+        ...payload,
         loading: false
       };
     case CREATE_PROFILE_FAIL:

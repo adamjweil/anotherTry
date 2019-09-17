@@ -28,9 +28,6 @@ export const loadUser = setAlert => async dispatch => {
     if (errors) {
       errors.forEach(error => dispatch(showErrorSnackbar(error.msg)));
     }
-    dispatch({
-      type: AUTH_ERROR
-    });
   }
 };
 

@@ -42,6 +42,7 @@ Front End: Had originally used material-ui to style everything, but as I continu
     - On the righ 8/12th of the screen I have started to implement the View portion of the Profile Creation form
       - The Basic Information portion of the Form is complete, and there are placeholders for the rest
     - Brought in fetchUsers function into the Profile Page so that we can display names in the dropdown for when you select direct reports and reporting to
+    - On the Profile Creation form I brought in a DatePicker for the HireDate state
 
 
     TO DO

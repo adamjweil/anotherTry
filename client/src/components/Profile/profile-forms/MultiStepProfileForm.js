@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -15,6 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import BasicInfoForm from "../BasicInfoForm";
 import TeamAndTitleForm from "../TeamAndTitleForm";
 import Review from "../Review";
+import { createProfile } from "../../../actions/profile";
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -87,7 +89,7 @@ const MultiStepProfileForm = ({ createProfile }) => {
       <Grid xs={0} md={2}></Grid>
 
       <Grid item xs={12} md={8}>
-        <React.Fragment>
+        <Fragment>
           <CssBaseline />
           <AppBar
             position="absolute"
@@ -106,9 +108,9 @@ const MultiStepProfileForm = ({ createProfile }) => {
                   </Step>
                 ))}
               </Stepper>
-              <React.Fragment>
+              <Fragment>
                 {activeStep === steps.length ? (
-                  <React.Fragment>
+                  <Fragment>
                     <Typography variant="h5" gutterBottom>
                       Thank you for your order.
                     </Typography>
@@ -117,9 +119,9 @@ const MultiStepProfileForm = ({ createProfile }) => {
                       confirmation, and will send you an update when your order
                       has shipped.
                     </Typography>
-                  </React.Fragment>
+                  </Fragment>
                 ) : (
-                  <React.Fragment>
+                  <Fragment>
                     {getStepContent(activeStep)}
                     <div className={classes.buttons}>
                       {activeStep !== 0 && (
@@ -137,13 +139,20 @@ const MultiStepProfileForm = ({ createProfile }) => {
                           ? "Place order"
                           : "Next"}
                       </Button>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={createProfile}
+                      >
+                        Save
+                      </Button>
                     </div>
-                  </React.Fragment>
+                  </Fragment>
                 )}
-              </React.Fragment>
+              </Fragment>
             </Paper>
           </main>
-        </React.Fragment>
+        </Fragment>
       </Grid>
 
       <Grid xs={0} md={2}></Grid>
@@ -151,4 +160,20 @@ const MultiStepProfileForm = ({ createProfile }) => {
   );
 };
 
-export default connect()(MultiStepProfileForm);
+MultiStepProfileForm.propTypes = {
+  createProfile: PropTypes.func.isRequired,
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  profile: state.profile,
+  auth: state.auth,
+  user: state.auth.user
+});
+
+export default connect(
+  mapStateToProps,
+  { createProfile }
+)(MultiStepProfileForm);
