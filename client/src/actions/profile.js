@@ -1,6 +1,7 @@
 import axios from "axios";
-import { setAlert } from "./alert";
-import { GET_PROFILE, PROFILE_ERROR } from "./types";
+import { setAlert, showSuccessSnackbar, showErrorSnackbar } from "./alert";
+
+import { GET_PROFILE, PROFILE_ERROR, CREATE_PROFILE } from "./types";
 
 // Get current users Profile
 export const getCurrentProfile = () => async dispatch => {
@@ -25,35 +26,36 @@ export const createProfile = (
   history,
   edit = false
 ) => async dispatch => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
   try {
-    const config = {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    };
-
     const res = await axios.post("/api/profile", formData, config);
-
     dispatch({
-      type: GET_PROFILE,
+      type: CREATE_PROFILE,
       payload: res.data
     });
+    dispatch(getCurrentProfile());
 
-    dispatch(setAlert(edit ? "Profile Update" : "Profile Created", "success"));
+    dispatch(
+      showSuccessSnackbar(
+        edit ? "Profile Update" : "Profile Created",
+        "success"
+      )
+    );
 
-    if (!edit) {
-      history.push("/dashboard");
-    }
+    // if (!edit) {
+    //   history.push("/dashboard");
+    // }
   } catch (err) {
-    const errors = err.response.data.errors;
+    console.log(err);
+    const errors = err.data;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+      errors.forEach(error => dispatch(showErrorSnackbar(error.msg)));
     }
-
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
   }
 };
