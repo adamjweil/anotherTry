@@ -43,6 +43,9 @@ Front End: Had originally used material-ui to style everything, but as I continu
       - The Basic Information portion of the Form is complete, and there are placeholders for the rest
     - Brought in fetchUsers function into the Profile Page so that we can display names in the dropdown for when you select direct reports and reporting to
     - On the Profile Creation form I brought in a DatePicker for the HireDate state
+    - Set up the Bio and Skills section of the CreateProfile form
+      - Bio is 'Outlined' multiline textarea
+      - Skills needs to be a multi-select
 
 
     TO DO
@@ -59,6 +62,8 @@ Front End: Had originally used material-ui to style everything, but as I continu
       - Build the View
       - Server end Profile creation
       - Redux Integration
+
+    - CreateProfile ACTION & REDUCER
 
       - Form for Creating Profile
       https://material-ui.com/getting-started/templates/checkout/

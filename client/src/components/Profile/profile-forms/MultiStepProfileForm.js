@@ -15,6 +15,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import BasicInfoForm from "../BasicInfoForm";
 import TeamAndTitleForm from "../TeamAndTitleForm";
+import BioAndSkillsForm from "../BioAndSkillsForm";
 import Review from "../Review";
 import { createProfile } from "../../../actions/profile";
 
@@ -64,7 +65,7 @@ const getStepContent = step => {
     case 1:
       return <TeamAndTitleForm />;
     case 2:
-      return <Review />;
+      return <BioAndSkillsForm />;
     case 3:
       return <Review />;
     default:
@@ -138,13 +139,6 @@ const MultiStepProfileForm = ({ createProfile }) => {
                         {activeStep === steps.length - 1
                           ? "Place order"
                           : "Next"}
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={createProfile}
-                      >
-                        Save
                       </Button>
                     </div>
                   </Fragment>

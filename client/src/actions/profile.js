@@ -21,41 +21,31 @@ export const getCurrentProfile = () => async dispatch => {
 };
 
 // Create profile
-export const createProfile = (
-  formData,
-  history,
-  edit = false
-) => async dispatch => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-
+export const createProfile = formData => async dispatch => {
   try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+
     const res = await axios.post("/api/profile", formData, config);
     dispatch({
-      type: CREATE_PROFILE,
+      type: GET_PROFILE,
       payload: res.data
     });
-    dispatch(getCurrentProfile());
 
-    dispatch(
-      showSuccessSnackbar(
-        edit ? "Profile Update" : "Profile Created",
-        "success"
-      )
-    );
-
-    // if (!edit) {
-    //   history.push("/dashboard");
-    // }
+    dispatch(showSuccessSnackbar("success"));
   } catch (err) {
-    console.log(err);
-    const errors = err.data;
+    const errors = err.response.data.errors;
 
     if (errors) {
       errors.forEach(error => dispatch(showErrorSnackbar(error.msg)));
     }
+
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
   }
 };
