@@ -44,7 +44,7 @@ export const register = (email, terms, password) => async dispatch => {
     });
     dispatch(loadUser());
   } catch (err) {
-    const errors = err.response;
+    const errors = err.response.data.errors;
     if (errors) {
       errors.forEach(error => dispatch(showErrorSnackbar(error.msg)));
     }

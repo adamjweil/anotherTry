@@ -21,6 +21,7 @@ import { SnackbarProvider, useSnackbar } from "notistack";
 import store from "./store";
 import { loadUser } from "./actions/user";
 import setAuthToken from "./utils/setAuthToken";
+import { Link, withRouter } from "react-router-dom";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -63,4 +64,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withRouter(App);

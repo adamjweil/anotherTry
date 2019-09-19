@@ -13,6 +13,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../../actions/auth";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -251,8 +252,12 @@ const AuthenticatedNavbar = ({ logout }) => {
   );
 };
 
+AuthenticatedNavbar.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  logout: PropTypes.func.isRequired
+};
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  auth: state.auth
 });
 export default connect(
   mapStateToProps,

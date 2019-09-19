@@ -39,6 +39,7 @@ const BasicInfoForm = ({ createProfile }) => {
       showErrorSnackbar(err.msg);
     }
   };
+
   return (
     <Fragment>
       <Typography variant="h6" gutterBottom>

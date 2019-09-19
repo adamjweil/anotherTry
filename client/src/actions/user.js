@@ -1,9 +1,7 @@
 import axios from "axios";
-import { setAlert } from "./alert";
 import setAuthToken from "../utils/setAuthToken";
 import { showErrorSnackbar } from "./alert";
 import {
-  GET_USERS,
   AUTH_ERROR,
   USER_LOADED,
   FETCH_USER,
@@ -11,9 +9,10 @@ import {
   NOTIFCATION_INCREMENT,
   NOTIFCATION_DECREMENT
 } from "./types";
+import history from "../history";
 
 // LOAD USER
-export const loadUser = setAlert => async dispatch => {
+export const loadUser = showErrorSnackbar => async dispatch => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
@@ -29,6 +28,7 @@ export const loadUser = setAlert => async dispatch => {
       errors.forEach(error => dispatch(showErrorSnackbar(error.msg)));
     }
   }
+  history.push("/dashboard");
 };
 
 // Increment the notification counter
