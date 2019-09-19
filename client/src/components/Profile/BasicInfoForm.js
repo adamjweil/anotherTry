@@ -8,20 +8,22 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { connect } from "react-redux";
 import { DatePicker, KeyboardDatePicker } from "@material-ui/pickers";
 import { createProfile } from "../../actions/profile";
-
+import {
+  showInfoSnackbar,
+  showErrorSnackbar,
+  showSuccessSnackbar
+} from "../../actions/alert";
 const BasicInfoForm = ({ createProfile }) => {
   const [formData, setFormData] = useState(
     {
       firstName: "",
       lastName: "",
       handle: "",
-
-      team: "",
-      title: ""
+      hireDate: ""
     },
     []
   );
-  const { firstName, lastName, handle, team, title } = formData;
+  const { firstName, lastName, handle } = formData;
 
   const [hireDate, handleDateChange] = useState(new Date(), []);
 
@@ -30,70 +32,83 @@ const BasicInfoForm = ({ createProfile }) => {
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  const onProfileCreation = async formData => {
+    try {
+      createProfile({ firstName, lastName, handle });
+    } catch (err) {
+      showErrorSnackbar(err.msg);
+    }
+  };
   return (
     <Fragment>
       <Typography variant="h6" gutterBottom>
         Basic Information
       </Typography>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            name="firstName"
-            label="First Name"
-            value={firstName}
-            onChange={e => onChange(e)}
-            fullWidth
-            autoComplete="fname"
-          />
+      <form>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              name="firstName"
+              label="First Name"
+              value={firstName}
+              onChange={e => onChange(e)}
+              fullWidth
+              autoComplete="fname"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              name="lastName"
+              label="Last Name"
+              value={lastName}
+              onChange={e => onChange(e)}
+              fullWidth
+              autoComplete="lname"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="handle"
+              name="handle"
+              label="Handle"
+              value={handle}
+              onChange={e => onChange(e)}
+              fullWidth
+              autoComplete="handle"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <KeyboardDatePicker
+              variant="outlined"
+              label="Hire Date"
+              format="MM/dd/yyyy"
+              value={hireDate}
+              InputAdornmentProps={{ position: "start" }}
+              onChange={e => handleDateChange(e)}
+            />
+          </Grid>
+          <Grid item xs={1}></Grid>
+          <Grid item xs={10}>
+            <DatePicker
+              autoOk
+              orientation="landscape"
+              name="hireDate"
+              variant="static"
+              openTo="date"
+              value={hireDate}
+              onChange={e => handleDateChange(e)}
+            />
+          </Grid>
+          <Button
+            type="submit"
+            variant="contained"
+            color="secondary"
+            onClick={onProfileCreation}
+          >
+            Save
+          </Button>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            name="lastName"
-            label="Last Name"
-            value={lastName}
-            onChange={e => onChange(e)}
-            fullWidth
-            autoComplete="lname"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            id="handle"
-            name="handle"
-            label="Handle"
-            value={handle}
-            onChange={e => onChange(e)}
-            fullWidth
-            autoComplete="handle"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <KeyboardDatePicker
-            variant="outlined"
-            label="Hire Date"
-            format="MM/dd/yyyy"
-            value={hireDate}
-            InputAdornmentProps={{ position: "start" }}
-            onChange={e => handleDateChange(e)}
-          />
-        </Grid>
-        <Grid item xs={1}></Grid>
-        <Grid item xs={10}>
-          <DatePicker
-            autoOk
-            orientation="landscape"
-            name="hireDate"
-            id="hireDate"
-            variant="static"
-            openTo="date"
-            value={hireDate}
-            onChange={e => handleDateChange(e)}
-          />
-        </Grid>
-        <Button variant="contained" color="secondary" onClick={createProfile}>
-          Save
-        </Button>
-      </Grid>
+      </form>
     </Fragment>
   );
 };

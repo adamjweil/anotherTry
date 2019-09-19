@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Header } from "semantic-ui-react";
@@ -7,10 +7,10 @@ import { fetchUsers } from "../../../actions/user";
 // import DirectoryTopMenu from "./DirectoryTopMenu";
 import SecondaryMenu from "./SecondaryMenu";
 
-class Directory extends React.Component {
-  componentDidMount = () => async dispatch => {
-    await fetchUsers();
-  };
+class Directory extends Component {
+  componentDidMount() {
+    fetchUsers();
+  }
 
   renderList() {
     this.props.users.map(user => (
