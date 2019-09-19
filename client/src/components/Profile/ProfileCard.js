@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
@@ -10,11 +10,16 @@ import {
 import { Grid, Avatar, Divider, Paper } from "@material-ui/core";
 
 const ProfileCard = ({
+  formData,
+  onProfileCreation,
   auth,
   profile,
   incrementNotificationCount,
   decrementNotificationCount
 }) => {
+  // const { firstName, lastName, handle, hireDate } = formData;
+  // const [firstName, setFirst] = useState(firstName);
+
   return (
     <Paper style={{ padding: "10px", marginTop: "50px" }}>
       <Grid container justify="center">

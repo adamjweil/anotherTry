@@ -13,6 +13,8 @@ import TourGuide from "./TourGuide";
 const Dashboard = ({
   isAuthenticated,
   createProfile,
+  users,
+  auth,
   auth: { user },
   profile: { profile, loading }
 }) => {

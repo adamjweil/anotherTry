@@ -5,7 +5,11 @@ import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Grid } from "@material-ui/core";
 import Login from "./../auth/Login";
+import Dashboard from "../Dashboard/Dashboard";
 import { login } from "../../actions/auth";
+import { loadUser } from "../../actions/user";
+// import { Redirect } from "react-router-dom";
+import history from "../../history";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,12 +22,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Landing = ({ isAuthenticated, login }) => {
-  const classes = useStyles();
-
+const Landing = ({ history, isAuthenticated, login, loadUser }) => {
   return (
     <Fragment>
-      <Container className={classes.root}>
+      <Container className="">
         <Grid container>
           <Grid item xs={3}></Grid>
           <Grid item sm={12} md={6}>
@@ -49,7 +51,10 @@ const Landing = ({ isAuthenticated, login }) => {
 };
 
 Landing.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool,
+  loadUser: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -58,5 +63,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { login }
+  { login, loadUser }
 )(Landing);

@@ -20,6 +20,7 @@ import { login, signIn } from "../../actions/auth";
 import { setAlert } from "../../actions/alert";
 import GoogleAuth from "../../GoogleAuth";
 import history from "../../history";
+
 const useStyles = makeStyles(theme => ({
   "@global": {
     body: {
@@ -51,7 +52,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login = ({ login, setAlert }) => {
+const Login = ({ isAuthenticated, login, setAlert }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -64,7 +65,12 @@ const Login = ({ login, setAlert }) => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    login(email, password);
+    try {
+      login(email, password);
+      history.push("/dashboard");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -165,16 +171,18 @@ const Login = ({ login, setAlert }) => {
             </Grid>
             <Grid item sm={1}></Grid>
             <Grid item xs={12} sm={6}>
-              <Button
-                href="/register"
-                fullWidth
-                size="large"
-                variant="contained"
-                color="info"
-                className={classes.submit}
-              >
-                <Link to="/register"> REGISTER </Link>
-              </Button>
+              <Link to="/register">
+                <Button
+                  href="/register"
+                  fullWidth
+                  size="large"
+                  variant="contained"
+                  color="info"
+                  className={classes.submit}
+                >
+                  REGISTER
+                </Button>
+              </Link>
             </Grid>
 
             <Grid item xs={5}>
@@ -207,7 +215,8 @@ const Login = ({ login, setAlert }) => {
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
-  alerts: PropTypes.array.isRequired
+  alerts: PropTypes.array.isRequired,
+  isAuthenticated: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
