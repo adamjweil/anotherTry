@@ -86,7 +86,7 @@ router.post("/", auth, async (req, res) => {
       return res.json(profile);
     } else {
       // Create
-      profile = await new Profile(profileFields);
+      profile = new Profile({ profileFields });
       res.json(profile);
     }
   } catch (err) {

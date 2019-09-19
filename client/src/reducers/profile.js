@@ -18,20 +18,19 @@ const INITIAL_STATE = {
   hireDate: "",
   bio: "",
   skills: [],
-  githubusername: "",
   profiles: [],
   repos: [],
   loading: false,
   user: null
 };
 
-export default function(state = {}, action) {
+export default function(state = INITIAL_STATE, action) {
   const { type, payload } = action;
   switch (type) {
     case GET_PROFILE:
       return {
         ...state,
-        ...payload,
+        profile: payload,
         loading: false
       };
     case PROFILE_ERROR:
@@ -42,8 +41,7 @@ export default function(state = {}, action) {
       };
     case CREATE_PROFILE:
       return {
-        ...state,
-        ...payload,
+        profile: payload,
         loading: false
       };
     case CREATE_PROFILE_FAIL:

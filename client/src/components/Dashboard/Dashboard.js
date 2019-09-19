@@ -29,7 +29,7 @@ const Dashboard = ({
       relaxed
       stackable
     >
-      <Grid.Column>
+      <Grid item xs={6}>
         <Fragment>
           <img
             src={process.env.PUBLIC_URL + "/img/mezLogo120px.png"}
@@ -43,24 +43,25 @@ const Dashboard = ({
 
           {profile === null ? <NoProfile /> : <YesProfile />}
         </Fragment>
-      </Grid.Column>
-      <Grid.Column>
+      </Grid>
+
+      <Grid>
         <DashboardDetails />
         <TourGuide />
-      </Grid.Column>
-      <Grid.Row>
-        <div
-          style={{
-            display: "in-line",
-            position: "relative",
-            top: "75%",
-            bottom: "0px",
-            left: "20px",
-            right: "20px"
-          }}
-        ></div>
-      </Grid.Row>
+      </Grid>
+      <Grid></Grid>
+      <div
+        style={{
+          display: "in-line",
+          position: "relative",
+          top: "75%",
+          bottom: "0px",
+          left: "20px",
+          right: "20px"
+        }}
+      ></div>
     </Grid>
+    // </Grid>
   );
 };
 
