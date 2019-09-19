@@ -18,7 +18,7 @@ const TeamAndTitleForm = ({ createProfile, fetchUsers, users }) => {
   );
   useEffect(() => {
     fetchUsers();
-  }, []);
+  });
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });

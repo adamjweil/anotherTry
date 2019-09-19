@@ -71,6 +71,7 @@ export const login = (email, password) => async dispatch => {
     const errors = err.response.data.errors;
     errors.forEach(error => dispatch(showErrorSnackbar(error.msg)));
   }
+  history.push("/dashboard");
 };
 
 export const toggleCheck = terms => async dispatch => {

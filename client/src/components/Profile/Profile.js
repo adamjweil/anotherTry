@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   loadUser,
@@ -17,16 +17,17 @@ const Profile = ({
   getCurrentProfile,
   loadUser,
   setAlert,
+
   isAuthenticated,
-  auth,
-  user,
+  auth: { user },
+  users,
   profile: { profile, loading, team },
   incrementNotificationCount,
   decrementNotificationCount
 }) => {
-  if (isAuthenticated === false) {
-    return <Redirect push to="/" />;
-  }
+  // if (isAuthenticated !== true) {
+  //   return <Redirect push to="/" />;
+  // }
   const onIncrementSubmit = () => {
     incrementNotificationCount();
   };
@@ -62,13 +63,16 @@ const Profile = ({
 Profile.propTypes = {
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired
+  users: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool,
+  getCurrentProfile: PropTypes.func.isRequired,
+  loadUser: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
   profile: state.profile,
-  user: state.user
+  users: state.users
 });
 
 export default connect(

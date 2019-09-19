@@ -19,7 +19,7 @@ import { Link, Redirect } from "react-router-dom";
 import { login, signIn } from "../../actions/auth";
 import { setAlert } from "../../actions/alert";
 import GoogleAuth from "../../GoogleAuth";
-
+import history from "../../history";
 const useStyles = makeStyles(theme => ({
   "@global": {
     body: {
@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login = ({ login, isAuthenticated, setAlert }) => {
+const Login = ({ login, setAlert }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -65,14 +65,6 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
   const onSubmit = async e => {
     e.preventDefault();
     login(email, password);
-  };
-
-  if (isAuthenticated) {
-    return <Redirect push to="/dashboard" />;
-  }
-
-  const onRegisterRedirect = () => {
-    // return <Redirect push to="/register" />;
   };
 
   return (
@@ -215,12 +207,10 @@ const Login = ({ login, isAuthenticated, setAlert }) => {
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
-  alerts: PropTypes.array.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
+  alerts: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.isAuthenticated,
   alerts: state.alert
 });
 

@@ -8,8 +8,10 @@ import DashboardDetails from "./DashboardDetails";
 import NoProfile from "./NoProfile";
 import YesProfile from "./YesProfile";
 import TourGuide from "./TourGuide";
+// import { Redirect } from "react-router-dom";
 
 const Dashboard = ({
+  isAuthenticated,
   createProfile,
   auth: { user },
   profile: { profile, loading }
@@ -17,6 +19,10 @@ const Dashboard = ({
   useEffect(() => {
     getCurrentProfile();
   }, []);
+
+  // if (isAuthenticated !== true) {
+  //   return <Redirect push to="/" />;
+  // }
 
   return loading && profile === null ? (
     <Spinner />
