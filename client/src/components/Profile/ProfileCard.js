@@ -17,8 +17,8 @@ const ProfileCard = ({
 }) => {
   return (
     <Paper style={{ padding: "10px", marginTop: "50px" }}>
-      <Grid container>
-        <Grid item xs={12} justify="center" alignItems="center">
+      <Grid container justify="center">
+        <Grid item xs={12}>
           <center>
             <Avatar
               src="https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_960_720.png"
@@ -90,14 +90,14 @@ const ProfileCard = ({
 
 ProfileCard.propTypes = {
   profile: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+  // user: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.profile,
-  user: state.user
+  profile: state.profile
+  // user: state.user
 });
 
 export default connect(

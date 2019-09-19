@@ -1,12 +1,12 @@
 import React, { useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Grid } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
+// import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -87,7 +87,7 @@ const MultiStepProfileForm = ({ createProfile }) => {
 
   return (
     <Grid container>
-      <Grid xs={0} md={2}></Grid>
+      <Grid item md={2}></Grid>
 
       <Grid item xs={12} md={8}>
         <Fragment>
@@ -149,7 +149,7 @@ const MultiStepProfileForm = ({ createProfile }) => {
         </Fragment>
       </Grid>
 
-      <Grid xs={0} md={2}></Grid>
+      <Grid item md={2}></Grid>
     </Grid>
   );
 };
@@ -157,14 +157,12 @@ const MultiStepProfileForm = ({ createProfile }) => {
 MultiStepProfileForm.propTypes = {
   createProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  auth: state.auth,
-  user: state.auth.user
+  auth: state.auth
 });
 
 export default connect(

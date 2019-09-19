@@ -7,7 +7,7 @@ import UnauthenticatedNavbar from "./UnauthenticatedNavbar";
 import { logout } from "../../../actions/auth";
 
 const Navbar = ({ isAuthenticated, auth: { loading, isAdmin }, logout }) => {
-  if (isAuthenticated === true) {
+  if ((isAuthenticated = true)) {
     return <AuthenticatedNavbar />;
   } else {
     return <UnauthenticatedNavbar />;
@@ -17,11 +17,11 @@ const Navbar = ({ isAuthenticated, auth: { loading, isAdmin }, logout }) => {
 Navbar.propTypes = {
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  isAdmin: PropTypes.bool
+  isAdmin: PropTypes.bool,
+  isAuthenticated: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: true,
   auth: state.auth,
   isAdmin: state.isAdmin
 });
