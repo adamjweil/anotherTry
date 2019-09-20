@@ -16,12 +16,12 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 import ThemeingLayout from "./components/layout/TestLayout/ThemeingLayout";
 import ResponsiveLayout from "./components/layout/TestLayout/ResponsiveLayout";
 import "typeface-roboto";
-import { SnackbarProvider, useSnackbar } from "notistack";
+import { SnackbarProvider } from "notistack";
 // Redux
 import store from "./store";
 import { loadUser } from "./actions/user";
 import setAuthToken from "./utils/setAuthToken";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);

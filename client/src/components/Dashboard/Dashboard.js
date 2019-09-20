@@ -8,7 +8,7 @@ import DashboardDetails from "./DashboardDetails";
 import NoProfile from "./NoProfile";
 import YesProfile from "./YesProfile";
 import TourGuide from "./TourGuide";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const Dashboard = ({
   isAuthenticated,
@@ -22,9 +22,9 @@ const Dashboard = ({
     getCurrentProfile();
   }, []);
 
-  // if (isAuthenticated !== true) {
-  //   return <Redirect push to="/" />;
-  // }
+  if (isAuthenticated !== true) {
+    return <Redirect push to="/" />;
+  }
 
   return loading && profile === null ? (
     <Spinner />
@@ -69,7 +69,6 @@ const Dashboard = ({
         }}
       ></div>
     </Grid>
-    // </Grid>
   );
 };
 
