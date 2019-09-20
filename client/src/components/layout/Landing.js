@@ -1,15 +1,11 @@
 import React, { Fragment } from "react";
-import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Grid } from "@material-ui/core";
 import Login from "./../auth/Login";
-import Dashboard from "../Dashboard/Dashboard";
 import { login } from "../../actions/auth";
 import { loadUser } from "../../actions/user";
-// import { Redirect } from "react-router-dom";
-import history from "../../history";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,9 +19,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Landing = ({ history, isAuthenticated, login, loadUser }) => {
+  const classes = useStyles();
   return (
     <Fragment>
-      <Container className="">
+      <Container className={classes.root}>
         <Grid container>
           <Grid item xs={3}></Grid>
           <Grid item sm={12} md={6}>
