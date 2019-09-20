@@ -8,46 +8,38 @@ import {
 } from "../actions/types";
 
 const INITIAL_STATE = {
-  firstName: "",
-  lastName: "",
-  handle: "",
-  team: "",
-  title: "",
-  reportingTo: "",
-  directReports: "",
-  hireDate: "",
-  bio: "",
-  skills: [],
+  profile: null,
   profiles: [],
   repos: [],
-  loading: false,
-  user: null
+  loading: true,
+  error: {}
 };
 
 export default function(state = INITIAL_STATE, action) {
-  const { type, payload } = action;
-  switch (type) {
+  // const { type, payload } = action;
+  switch (action.type) {
     case GET_PROFILE:
       return {
         ...state,
-        profile: payload,
+        profile: action.payload,
         loading: false
       };
     case PROFILE_ERROR:
       return {
         ...state,
-        error: payload,
+        error: action.payload,
         loading: false
       };
     case CREATE_PROFILE:
       return {
-        profile: payload,
+        ...state,
+        profile: action.payload,
         loading: false
       };
     case CREATE_PROFILE_FAIL:
       return {
         ...state,
-        errors: payload,
+        errors: action.payload,
         loading: false
       };
     case CLEAR_PROFILE:

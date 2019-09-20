@@ -18,23 +18,25 @@ const BasicInfoForm = ({ createProfile }) => {
     {
       firstName: "",
       lastName: "",
-      handle: "",
-      hireDate: ""
+      handle: ""
     },
     []
   );
   const { firstName, lastName, handle } = formData;
 
-  const [hireDate, handleDateChange] = useState(new Date(), []);
+  const [hireDate, handleDateChange] = useState({
+    hireDate: ""
+  });
 
   // fetchUsers();
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onProfileCreation = async formData => {
+  const onProfileCreation = async e => {
+    e.preventDefault();
     try {
-      createProfile({ firstName, lastName, handle });
+      createProfile({ firstName, lastName, handle, hireDate });
     } catch (err) {
       showErrorSnackbar(err.msg);
     }

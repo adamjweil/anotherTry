@@ -5,6 +5,7 @@ import { Header } from "semantic-ui-react";
 import { Grid } from "@material-ui/core";
 import { fetchUsers } from "../../../actions/user";
 import VerticalMenu from "./VerticalMenu";
+import SearchDirectory from "./SearchDirectory";
 
 class Directory extends React.Component {
   componentDidMount() {
@@ -63,7 +64,12 @@ class Directory extends React.Component {
               click on a specific Employee or Team to get additional details!
             </Header>
           </center>
-          <div className="ui celled list">{this.renderList()}</div>
+          <Grid item xs={12}>
+            <SearchDirectory />
+          </Grid>
+          <div className="ui celled list" style={{ marginTop: "-150px" }}>
+            {this.renderList()}
+          </div>
         </Grid>
       </Grid>
     );

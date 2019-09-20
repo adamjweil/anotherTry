@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { getCurrentProfile, createProfile } from "../../actions/profile";
+import { getCurrentProfile } from "../../actions/profile";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid, Header } from "semantic-ui-react";
@@ -11,10 +11,7 @@ import TourGuide from "./TourGuide";
 import { Redirect } from "react-router-dom";
 
 const Dashboard = ({
-  isAuthenticated,
-  createProfile,
-  users,
-  auth,
+  getCurrentProfile,
   auth: { user },
   profile: { profile, loading }
 }) => {
@@ -22,9 +19,9 @@ const Dashboard = ({
     getCurrentProfile();
   }, []);
 
-  if (isAuthenticated !== true) {
-    return <Redirect push to="/" />;
-  }
+  // if (isAuthenticated !== true) {
+  //   return <Redirect push to="/" />;
+  // }
 
   return loading && profile === null ? (
     <Spinner />
@@ -73,10 +70,9 @@ const Dashboard = ({
 };
 
 Dashboard.propTypes = {
-  auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
-  createProfile: PropTypes.func.isRequired
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -86,5 +82,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, createProfile }
+  { getCurrentProfile }
 )(Dashboard);

@@ -18,36 +18,24 @@ import { showErrorSnackbar } from "../../actions/alert";
 const Profile = ({
   getCurrentProfile,
   loadUser,
-  setAlert,
-
   isAuthenticated,
   auth: { user },
-  users,
   profile: { profile, loading },
   incrementNotificationCount,
   decrementNotificationCount
 }) => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    handle: "",
-    hireDate: "",
-    team: "",
-    title: ""
-  });
-
   // const { firstName, lastName, handle, hireDate, team, title } = formData;
 
-  const onProfileCreation = async formData => {
-    try {
-      createProfile(formData);
-    } catch (err) {
-      showErrorSnackbar(err.msg);
-    }
-  };
+  // const onProfileCreation = async formData => {
+  //   try {
+  //     createProfile(formData);
+  //   } catch (err) {
+  //     showErrorSnackbar(err.msg);
+  //   }
+  // };
 
-  const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  // const onChange = e =>
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
 
   // if (isAuthenticated !== true) {
   //   return <Redirect push to="/" />;
@@ -64,10 +52,7 @@ const Profile = ({
       <Grid container>
         <Grid item md={1}></Grid>
         <Grid item xs={12} md={3}>
-          <ProfileCard
-            formDate={formData}
-            onProfileCreation={onProfileCreation}
-          />
+          <ProfileCard />
         </Grid>
         <Grid item xs={12} md={5}>
           <MultiStepProfileForm />
