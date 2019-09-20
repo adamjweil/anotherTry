@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, BrowserRouter as Router } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import Navbar from "./components/layout/Navbar/Navbar";
 import Register from "./components/auth/Register";
@@ -48,16 +48,18 @@ const App = () => {
         <Route exact path="/themeing" component={ThemeingLayout} />
         <Route exact path="/responsive" component={ResponsiveLayout} />
         <section className="container" style={{ flex: "1" }}>
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/tickethub" component={Tickets} />
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/directory" component={Directory} />
-          <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          <PrivateRoute
-            exact
-            path="/create-profile"
-            component={CreateProfile}
-          />
+          <Switch>
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/tickethub" component={Tickets} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/directory" component={Directory} />
+            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute
+              exact
+              path="/create-profile"
+              component={CreateProfile}
+            />
+          </Switch>
         </section>
       </Router>
     </Provider>

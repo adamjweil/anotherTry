@@ -1,13 +1,17 @@
 import axios from "axios";
-import { setAlert, showSuccessSnackbar, showErrorSnackbar } from "./alert";
+import { showSuccessSnackbar, showErrorSnackbar } from "./alert";
 
-import { GET_PROFILE, PROFILE_ERROR, CREATE_PROFILE } from "./types";
+import {
+  GET_PROFILE,
+  PROFILE_ERROR,
+  CREATE_PROFILE,
+  UPDATE_PROFILE
+} from "./types";
 
 // Get current users Profile
 export const getCurrentProfile = () => async dispatch => {
   try {
     const res = await axios.get("/api/profile/me");
-
     dispatch({
       type: GET_PROFILE,
       payload: res.data
@@ -21,7 +25,7 @@ export const getCurrentProfile = () => async dispatch => {
 };
 
 // Create profile
-export const createProfile = ({ formData }) => async dispatch => {
+export const createProfile = formData => async dispatch => {
   try {
     const config = {
       headers: {
@@ -50,5 +54,28 @@ export const createProfile = ({ formData }) => async dispatch => {
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
     });
+  }
+};
+
+export const updateProfile = (formData, history) => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+
+    const res = await axios.put("/api/profile", formData, config);
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data
+    });
+    dispatch(showSuccessSnackbar("Profile Updated"));
+  } catch (err) {
+    const errors = err.repsponse.data.errors;
+
+    if (errors) {
+      errors.forEach(dispatch(showErrorSnackbar(err.msg)));
+    }
   }
 };
