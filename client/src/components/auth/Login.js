@@ -173,11 +173,10 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
             <Grid item xs={12} sm={6}>
               <Link to="/register">
                 <Button
-                  href="/register"
                   fullWidth
                   size="large"
                   variant="contained"
-                  color="info"
+                  color="secondary"
                   className={classes.submit}
                 >
                   REGISTER
@@ -186,7 +185,7 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
             </Grid>
 
             <Grid item xs={5}>
-              <Link href="#" variant="body2">
+              <Link to="#" variant="body2">
                 <center>
                   <p>Forgot password?</p>
                 </center>
@@ -194,7 +193,7 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
             </Grid>
 
             <Grid item xs={7}>
-              <Link href="/register" variant="body2">
+              <Link to="/register" variant="body2">
                 <center>
                   <p>{"No Account? Sign Up Here!"}</p>
                 </center>
@@ -215,7 +214,7 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
-  alerts: PropTypes.array.isRequired,
+  alerts: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool
 };
 
