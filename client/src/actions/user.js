@@ -12,7 +12,7 @@ import {
 import history from "../history";
 
 // LOAD USER
-export const loadUser = showErrorSnackbar => async dispatch => {
+export const loadUser = (history, showErrorSnackbar) => async dispatch => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
   }
@@ -23,12 +23,13 @@ export const loadUser = showErrorSnackbar => async dispatch => {
       payload: res.data
     });
   } catch (err) {
-    const errors = err.response.data.errors;
-    if (errors) {
-      errors.forEach(error => dispatch(showErrorSnackbar(error.msg)));
-    }
+    dispatch({
+      type: AUTH_ERROR
+    });
+    console.log(err);
+    // showErrorSnackbar(err.msg);
   }
-  history.push("/dashboard");
+  // history.push("/dashboard");
 };
 
 // Increment the notification counter

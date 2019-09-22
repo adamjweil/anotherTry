@@ -35,7 +35,6 @@ export const register = (email, terms, password) => async dispatch => {
     }
   };
   const body = JSON.stringify(email, terms, password);
-  console.log(body);
   try {
     const res = await axios.post("/api/users", body, config);
     dispatch({
@@ -53,13 +52,13 @@ export const register = (email, terms, password) => async dispatch => {
 
 // LOGIN USER
 export const login = (email, password) => async dispatch => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  const body = JSON.stringify(email, password);
   try {
-    const config = {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    };
-    const body = JSON.stringify({ email, password });
     const res = await axios.post("/api/auth", body, config);
     dispatch({
       type: LOGIN_SUCCESS,
@@ -69,9 +68,10 @@ export const login = (email, password) => async dispatch => {
     dispatch(showSuccessSnackbar("Successfully logged in"));
   } catch (err) {
     const errors = err.response.data.errors;
-    errors.forEach(error => dispatch(showErrorSnackbar(error.msg)));
+    if (errors) {
+      errors.forEach(error => dispatch(showErrorSnackbar(error.msg)));
+    }
   }
-  history.push("/dashboard");
 };
 
 export const toggleCheck = terms => async dispatch => {

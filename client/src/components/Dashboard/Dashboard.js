@@ -12,6 +12,7 @@ import { Redirect } from "react-router-dom";
 
 const Dashboard = ({
   getCurrentProfile,
+  isAuthenticated,
   auth: { user },
   profile: { profile, loading }
 }) => {
@@ -19,9 +20,9 @@ const Dashboard = ({
     getCurrentProfile();
   }, []);
 
-  // if (isAuthenticated !== true) {
-  //   return <Redirect push to="/" />;
-  // }
+  if (isAuthenticated !== true) {
+    return <Redirect push to="/" />;
+  }
 
   return loading && profile === null ? (
     <Spinner />
