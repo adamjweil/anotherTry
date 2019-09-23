@@ -1,40 +1,51 @@
 import axios from "axios";
-// import { browserHistory } from "react-router";
 import {
   LOGIN_SUCCESS,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   LOGIN_FAIL,
+  USER_LOADED,
   LOGOUT,
-  NOTIFCATION_INCREMENT,
-  NOTIFCATION_DECREMENT,
   CLEAR_PROFILE,
   TOGGLE_TERMS,
   SIGN_IN,
   SIGN_OUT,
   AUTH_ERROR
 } from "./types";
-import { setAlert } from "./alert";
-import { push } from "react-router-redux";
 import setAuthToken from "../utils/setAuthToken";
-import store from "./../store";
-import { loadUser } from "./user";
-import history from "../history";
-
 import {
   showSuccessSnackbar,
   showErrorSnackbar,
   showInfoSnackbar
 } from "./alert";
 
+//Load User
+export const loadUser = (history, showErrorSnackbar) => async dispatch => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+  try {
+    const res = await axios.get("/api/auth");
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR
+    });
+  }
+};
+
 // REGISTER USER
-export const register = (email, terms, password) => async dispatch => {
+export const register = ({ email, terms, password }) => async dispatch => {
   const config = {
     headers: {
       "Content-Type": "application/json"
     }
   };
-  const body = JSON.stringify(email, terms, password);
+  const body = JSON.stringify({ email, terms, password });
+
   try {
     const res = await axios.post("/api/users", body, config);
     dispatch({
@@ -42,11 +53,17 @@ export const register = (email, terms, password) => async dispatch => {
       payload: res.data
     });
     dispatch(loadUser());
+    dispatch(showSuccessSnackbar("Successfully Registered!"));
   } catch (err) {
     const errors = err.response.data.errors;
+
     if (errors) {
       errors.forEach(error => dispatch(showErrorSnackbar(error.msg)));
     }
+
+    dispatch({
+      type: REGISTER_FAIL
+    });
   }
 };
 
@@ -57,9 +74,11 @@ export const login = (email, password) => async dispatch => {
       "Content-Type": "application/json"
     }
   };
-  const body = JSON.stringify(email, password);
+  const body = JSON.stringify({ email, password });
+
   try {
     const res = await axios.post("/api/auth", body, config);
+
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data
@@ -67,13 +86,14 @@ export const login = (email, password) => async dispatch => {
     dispatch(loadUser());
     dispatch(showSuccessSnackbar("Successfully logged in"));
   } catch (err) {
-    const errors = err.response.data.errors;
-    if (errors) {
-      errors.forEach(error => dispatch(showErrorSnackbar(error.msg)));
-    }
+    dispatch(showErrorSnackbar(err.msg));
+    dispatch({
+      type: LOGIN_FAIL
+    });
   }
 };
 
+// Toggle the T&C checkbox
 export const toggleCheck = terms => async dispatch => {
   dispatch({
     type: TOGGLE_TERMS,
@@ -89,8 +109,7 @@ export const logout = () => async dispatch => {
   dispatch({
     type: LOGOUT
   });
-  dispatch(showSuccessSnackbar("Successfully logged out"));
-  history.push("/");
+  dispatch(showInfoSnackbar("Successfully logged out"));
 };
 
 // Sign in w GoogleAuth
@@ -110,6 +129,7 @@ export const signIn = userId => async dispatch => {
   }
 };
 
+//Sign Out with GoogleAuth
 export const signOut = () => {
   return {
     type: SIGN_OUT

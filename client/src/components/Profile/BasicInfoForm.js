@@ -27,16 +27,14 @@ export class BasicInfoForm extends Component {
 
     return (
       <MuiThemeProvider>
-        <Typography variant="h6" gutterBottom>
-          Basic Information
-        </Typography>
         <Fragment>
+          <Typography variant="h6" gutterBottom>
+            Basic Information
+          </Typography>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <TextField
                 label="First Name"
-                hintText="Enter your First Name"
-                floatingLabelText="first Name"
                 onChange={handleChange("firstName")}
                 fullWidth
                 defaultValue={values.firstName}
@@ -45,8 +43,6 @@ export class BasicInfoForm extends Component {
             <Grid item xs={12} sm={6}>
               <TextField
                 label="Last Name"
-                hintText="Enter your Last Name"
-                floatingLabelText="last Name"
                 onChange={handleChange("lastName")}
                 defaultValue={values.lastName}
                 fullWidth
@@ -55,8 +51,6 @@ export class BasicInfoForm extends Component {
             <Grid item xs={12} sm={6}>
               <TextField
                 label="Handle"
-                hintText="Choose a Handle"
-                floatingLabelText="handle"
                 onChange={handleChange("handle")}
                 defaultValue={values.handle}
                 fullWidth

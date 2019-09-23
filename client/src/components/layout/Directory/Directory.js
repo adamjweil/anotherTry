@@ -7,7 +7,7 @@ import { fetchUsers } from "../../../actions/user";
 import VerticalMenu from "./VerticalMenu";
 import SearchDirectory from "./SearchDirectory";
 
-class Directory extends React.Component {
+export class Directory extends React.Component {
   componentDidMount() {
     this.props.fetchUsers();
   }
