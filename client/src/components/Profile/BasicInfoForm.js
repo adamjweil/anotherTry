@@ -1,20 +1,20 @@
-import React, { Fragment, useState, useEffect, Component } from "react";
-import AppBar from "material-ui/AppBar";
+import React, { Fragment, Component } from "react";
+// import AppBar from "material-ui/AppBar";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
-import { Typography, TextField, Button } from "@material-ui/core/";
+import { Typography, TextField } from "@material-ui/core/";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import RaisedButton from "material-ui/RaisedButton";
 // import  from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { connect } from "react-redux";
 import { DatePicker, KeyboardDatePicker } from "@material-ui/pickers";
-import { createProfile } from "../../actions/profile";
-import {
-  showInfoSnackbar,
-  showErrorSnackbar,
-  showSuccessSnackbar
-} from "../../actions/alert";
+// import { createProfile } from "../../actions/profile";
+// import {
+//   showInfoSnackbar,
+//   showErrorSnackbar,
+//   showSuccessSnackbar
+// } from "../../actions/alert";
 
 export class BasicInfoForm extends Component {
   continue = e => {
@@ -34,6 +34,7 @@ export class BasicInfoForm extends Component {
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <TextField
+                name="firstName"
                 label="First Name"
                 onChange={handleChange("firstName")}
                 fullWidth
@@ -77,12 +78,22 @@ export class BasicInfoForm extends Component {
                 defaultValue={values.handle}
               />
             </Grid>
-            <RaisedButton
-              label="Continue"
-              primary={true}
-              style={styles.button}
-              onClick={this.continue}
-            />
+            <Grid item xs={6}>
+              <RaisedButton
+                label="Back"
+                primary={true}
+                style={styles.button}
+                onClick={this.continue}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <RaisedButton
+                label="Continue"
+                primary={true}
+                style={styles.button}
+                onClick={e => this.continue(e)}
+              />
+            </Grid>
           </Grid>
         </Fragment>
       </MuiThemeProvider>
@@ -91,14 +102,13 @@ export class BasicInfoForm extends Component {
 }
 
 BasicInfoForm.propTypes = {
-  // profile: PropTypes.object.isRequired,
-  // createProfile: PropTypes.func.isRequired
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
-
 const mapStateToProps = state => ({
   profile: state.profile,
-  auth: state.auth,
-  user: state.auth.user
+  auth: state.auth
+  // user: state.auth.user
 });
 
 const styles = {
@@ -106,4 +116,4 @@ const styles = {
     margin: 15
   }
 };
-export default BasicInfoForm;
+export default connect(mapStateToProps)(BasicInfoForm);

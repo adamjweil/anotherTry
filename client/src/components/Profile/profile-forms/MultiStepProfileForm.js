@@ -1,18 +1,7 @@
-import React, { useState, Fragment, Component } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-// import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { Grid } from "@material-ui/core";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-// import Toolbar from "@material-ui/core/Toolbar";
-import Paper from "@material-ui/core/Paper";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import BasicInfoForm from "../BasicInfoForm";
 import TeamAndTitleForm from "../TeamAndTitleForm";
 import BioAndSkillsForm from "../BioAndSkillsForm";
@@ -57,9 +46,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export class MultiStepProfileForm extends Component {
-  constructor() {
-    super();
-  }
+  classes = useStyles();
   state = {
     step: 1,
     firstName: "",
@@ -114,7 +101,14 @@ export class MultiStepProfileForm extends Component {
           />
         );
       case 2:
-        return <TeamAndTitleForm />;
+        return (
+          <TeamAndTitleForm
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            handleChange={this.handleChange}
+            values={values}
+          />
+        );
       case 3:
         return <BioAndSkillsForm />;
       case 4:

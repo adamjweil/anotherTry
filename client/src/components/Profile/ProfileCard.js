@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile } from "../../actions/profile";
@@ -17,11 +17,8 @@ const ProfileCard = ({
   incrementNotificationCount,
   decrementNotificationCount
 }) => {
-  // const { firstName, lastName, handle, hireDate } = formData;
-  // const [firstName, setFirst] = useState(firstName);
-
   return (
-    <Paper style={{ padding: "10px", marginTop: "50px" }}>
+    <Paper style={{ padding: "10px", marginTop: "30px" }}>
       <Grid container justify="center">
         <Grid item xs={12}>
           <center>
@@ -95,14 +92,12 @@ const ProfileCard = ({
 
 ProfileCard.propTypes = {
   profile: PropTypes.object.isRequired,
-  // user: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
   profile: state.profile
-  // user: state.user
 });
 
 export default connect(
