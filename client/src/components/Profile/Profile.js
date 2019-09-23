@@ -1,5 +1,4 @@
-import React, { Fragment, useState } from "react";
-// import { Redirect } from "react-router-dom";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import {
   loadUser,
@@ -12,8 +11,6 @@ import { Grid } from "@material-ui/core";
 import PropTypes from "prop-types";
 import ProfileCard from "./ProfileCard";
 import MultiStepProfileForm from "./profile-forms/MultiStepProfileForm";
-import { createProfile } from "../../actions/profile";
-import { showErrorSnackbar } from "../../actions/alert";
 
 const Profile = ({
   getCurrentProfile,
@@ -24,22 +21,6 @@ const Profile = ({
   incrementNotificationCount,
   decrementNotificationCount
 }) => {
-  // const { firstName, lastName, handle, hireDate, team, title } = formData;
-
-  // const onProfileCreation = async formData => {
-  //   try {
-  //     createProfile(formData);
-  //   } catch (err) {
-  //     showErrorSnackbar(err.msg);
-  //   }
-  // };
-
-  // const onChange = e =>
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  // if (isAuthenticated !== true) {
-  //   return <Redirect push to="/" />;
-  // }
   const onIncrementSubmit = () => {
     incrementNotificationCount();
   };
@@ -50,10 +31,11 @@ const Profile = ({
   return (
     <Fragment>
       <Grid container>
-        <Grid item md={1}></Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={0} md={1}></Grid>
+        <Grid item xs={12} md={3} style={{ minWidth: "300px" }}>
           <ProfileCard />
         </Grid>
+        <Grid item xs={0} md={1}></Grid>
         <Grid item xs={12} md={5}>
           <MultiStepProfileForm />
         </Grid>

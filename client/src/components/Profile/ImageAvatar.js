@@ -27,6 +27,13 @@ const ImageAvatars = ({ loadUser, profile, auth: { user }, auth }) => {
   );
 };
 
+ImageAvatars.propTypes = {
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  loadUser: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired
+};
+
 const mapStateToProps = state => ({
   auth: state.auth,
   profile: state.profile
