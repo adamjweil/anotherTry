@@ -14,18 +14,14 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { Form } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { login, register, toggleCheck } from "../../actions/auth";
-import { loadUser } from "../../actions/user";
 import {
   showInfoSnackbar,
   showErrorSnackbar,
   showSuccessSnackbar
 } from "../../actions/alert";
-// import { register, toggleCheck } from "../../actions/auth";
 import GoogleAuth from "../../GoogleAuth";
-import history from "../../history";
-import store from "../../store";
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -82,18 +78,19 @@ const Register = ({
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onRegister = async formData => {
-    try {
-      if (password !== password2) {
-        showInfoSnackbar("Passwords do not match");
-      } else if (terms !== true) {
-        showErrorSnackbar("Please read and agree to our Terms and Conditions");
-      } else {
+  const onRegister = async e => {
+    e.preventDefault();
+    if (password !== password2) {
+      showInfoSnackbar("Passwords do not match");
+    } else if (terms !== true) {
+      showErrorSnackbar("Please read and agree to our Terms and Conditions");
+    } else {
+      try {
         register({ email, terms, password });
         showSuccessSnackbar("Successfully Registered!");
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      showErrorSnackbar(err.msg);
     }
   };
 
@@ -214,7 +211,6 @@ const Register = ({
                       name="terms"
                       onClick={e => onCheck(e)}
                       value={terms}
-                      onCl
                       color="primary"
                     />
                   }

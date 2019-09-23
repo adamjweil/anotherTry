@@ -1,7 +1,7 @@
 import {
   REGISTER_SUCCESS,
-  LOGIN_SUCCESS,
   REGISTER_FAIL,
+  LOGIN_SUCCESS,
   LOGIN_FAIL,
   AUTH_ERROR,
   USER_LOADED,
@@ -26,55 +26,37 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
     case SIGN_IN:
-      localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("token", payload.token);
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload
+        user: payload
       };
     case SIGN_OUT:
       return { ...state, isAuthenticated: false, user: null };
     case USER_LOADED:
       return {
         ...state,
-        token: localStorage.getItem("token"),
         isAuthenticated: true,
         loading: false,
-        user: action.payload
-      };
-    case LOGIN_SUCCESS:
-      localStorage.setItem("token", action.payload.token);
-      return {
-        ...state,
-        isAuthenticated: true,
-        loading: false
-      };
-    case LOGIN_FAIL:
-      localStorage.removeItem("token");
-      return {
-        ...state,
-        token: null,
-        isAuthenticated: false,
-        loading: false
+        user: payload
       };
     case REGISTER_SUCCESS:
-      localStorage.setItem("token", action.payload.token);
+    case LOGIN_SUCCESS:
+      localStorage.setItem("token", payload.token);
       return {
         ...state,
+        ...payload,
         isAuthenticated: true,
         loading: false
       };
     case REGISTER_FAIL:
-      localStorage.removeItem("token");
-      return {
-        ...state,
-        token: null,
-        isAuthenticated: false,
-        loading: false
-      };
     case AUTH_ERROR:
+    case LOGOUT:
+    case LOGIN_FAIL:
       localStorage.removeItem("token");
       return {
         ...state,
@@ -87,14 +69,6 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state
       };
-    case LOGOUT:
-      localStorage.removeItem("token");
-      return {
-        // ...state,
-        token: null,
-        isAuthenticated: false,
-        loading: false
-      };
     case GET_USERS:
       return {
         ...state
@@ -102,7 +76,7 @@ export default (state = INITIAL_STATE, action) => {
     case GET_USER:
       return {
         ...state,
-        user: action.payload,
+        user: payload,
         isAuthenticated: true,
         loading: false
       };

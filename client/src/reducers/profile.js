@@ -11,35 +11,36 @@ const INITIAL_STATE = {
   profile: null,
   profiles: [],
   repos: [],
+  user: null,
   loading: true,
   error: {}
 };
 
 export default function(state = INITIAL_STATE, action) {
-  // const { type, payload } = action;
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
     case GET_PROFILE:
       return {
         ...state,
-        profile: action.payload,
+        profile: payload,
         loading: false
       };
     case PROFILE_ERROR:
       return {
         ...state,
-        error: action.payload,
+        error: payload,
         loading: false
       };
     case CREATE_PROFILE:
       return {
         ...state,
-        profile: action.payload,
+        profile: payload,
         loading: false
       };
     case CREATE_PROFILE_FAIL:
       return {
         ...state,
-        errors: action.payload,
+        errors: payload,
         loading: false
       };
     case CLEAR_PROFILE:

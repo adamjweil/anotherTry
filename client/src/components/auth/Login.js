@@ -9,17 +9,14 @@ import {
   Checkbox,
   Grid,
   Typography,
-  Box,
-  FormControl,
-  InputLabel
+  Box
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { login, signIn } from "../../actions/auth";
 import { setAlert } from "../../actions/alert";
 import GoogleAuth from "../../GoogleAuth";
-import history from "../../history";
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -65,12 +62,7 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    try {
-      login(email, password);
-      history.push("/dashboard");
-    } catch (err) {
-      console.log(err);
-    }
+    login(email, password);
   };
 
   return (
@@ -103,7 +95,7 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
                   alignItems: "center"
                 }}
                 src={process.env.PUBLIC_URL + "../../img/logo.png"}
-                alt=""
+                alt={process.env.PUBLIC_URL + "../../img/mezoLogo120px.png"}
               />
               <center>
                 <h3>Online Portal</h3>
@@ -119,29 +111,24 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
             Log In Below:
           </Typography>
           <TextField
-            // variant="outlined"
             margin="normal"
             id="email"
             label="Email Address"
             name="email"
             value={email}
             onChange={e => onChange(e)}
-            autoComplete="email"
             required
             fullWidth
             autoFocus
           />
 
           <TextField
-            // variant="outlined"
             margin="normal"
             name="password"
             label="Password"
             type="password"
-            id="password"
             value={password}
             onChange={e => onChange(e)}
-            autoComplete="current-password"
             required
             fullWidth
           />
@@ -164,7 +151,7 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                onClick={e => onSubmit(e)}
+                onClick={onSubmit}
               >
                 Login
               </Button>
@@ -178,6 +165,9 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
                   variant="contained"
                   color="secondary"
                   className={classes.submit}
+                  style={{
+                    textDecoration: "none"
+                  }}
                 >
                   REGISTER
                 </Button>
@@ -214,12 +204,12 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
-  alerts: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-  alerts: state.alert
+  alerts: state.alert,
+  auth: state.auth
 });
 
 export default connect(

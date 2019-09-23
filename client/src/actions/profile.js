@@ -1,17 +1,16 @@
 import axios from "axios";
 import { showSuccessSnackbar, showErrorSnackbar } from "./alert";
-
 import {
   GET_PROFILE,
   PROFILE_ERROR,
-  CREATE_PROFILE,
-  UPDATE_PROFILE
+  CREATE_PROFILE
+  // UPDATE_PROFILE
 } from "./types";
 
 // Get current users Profile
 export const getCurrentProfile = () => async dispatch => {
   try {
-    const res = await axios.get("/api/profile/me");
+    const res = await axios.get("/api/profile");
     dispatch({
       type: GET_PROFILE,
       payload: res.data
