@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, Component } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 // import { Link } from "react-router-dom";
@@ -56,103 +56,74 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const steps = ["Basic Info", "Team & Title", "Add Skills", "Review"];
-
-const getStepContent = step => {
-  switch (step) {
-    case 0:
-      return <BasicInfoForm />;
-    case 1:
-      return <TeamAndTitleForm />;
-    case 2:
-      return <BioAndSkillsForm />;
-    case 3:
-      return <Review />;
-    default:
-      throw new Error("Unknown step");
+export class MultiStepProfileForm extends Component {
+  constructor() {
+    super();
   }
-};
-
-const MultiStepProfileForm = ({ createProfile }) => {
-  const [activeStep, setActiveStep] = useState(0);
-  const classes = useStyles();
-
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
+  state = {
+    step: 1,
+    firstName: "",
+    lastName: "",
+    handle: "",
+    hireDate: "",
+    team: "",
+    title: "",
+    bio: "",
+    skills: []
   };
 
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
+  // Preceed to next step
+  nextStep = () => {
+    const { step } = this.state;
+    this.setState({
+      step: step + 1
+    });
+  };
+  // Preceed to previous step
+  prevStep = () => {
+    const { step } = this.state;
+    this.setState({
+      step: step - 1
+    });
+  };
+  // Handle fields change
+  handleChange = input => e => {
+    this.setState({ [input]: e.target.value });
   };
 
-  return (
-    <Grid container>
-      <Grid item md={2}></Grid>
+  render() {
+    const { step } = this.state;
+    const {
+      firstName,
+      lastName,
+      hireDate,
+      team,
+      title,
+      bio,
+      skills
+    } = this.state;
+    const values = { firstName, lastName, hireDate, team, title, bio, skills };
 
-      <Grid item xs={12} md={8}>
-        <Fragment>
-          <CssBaseline />
-          <AppBar
-            position="absolute"
-            color="default"
-            className={classes.appBar}
-          ></AppBar>
-          <main className={classes.layout}>
-            <Paper className={classes.paper}>
-              <Typography component="h1" variant="h4" align="center">
-                Profile Set Up
-              </Typography>
-              <Stepper activeStep={activeStep} className={classes.stepper}>
-                {steps.map(label => (
-                  <Step key={label}>
-                    <StepLabel>{label}</StepLabel>
-                  </Step>
-                ))}
-              </Stepper>
-              <Fragment>
-                {activeStep === steps.length ? (
-                  <Fragment>
-                    <Typography variant="h5" gutterBottom>
-                      Thank you for your order.
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      Your order number is #2001539. We have emailed your order
-                      confirmation, and will send you an update when your order
-                      has shipped.
-                    </Typography>
-                  </Fragment>
-                ) : (
-                  <Fragment>
-                    {getStepContent(activeStep)}
-                    <div className={classes.buttons}>
-                      {activeStep !== 0 && (
-                        <Button onClick={handleBack} className={classes.button}>
-                          Back
-                        </Button>
-                      )}
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleNext}
-                        className={classes.button}
-                      >
-                        {activeStep === steps.length - 1
-                          ? "Place order"
-                          : "Next"}
-                      </Button>
-                    </div>
-                  </Fragment>
-                )}
-              </Fragment>
-            </Paper>
-          </main>
-        </Fragment>
-      </Grid>
-
-      <Grid item md={2}></Grid>
-    </Grid>
-  );
-};
+    switch (step) {
+      case 1:
+        return (
+          <BasicInfoForm
+            nextStep={this.nextStep}
+            handleChange={this.handleChange}
+            values={values}
+          />
+        );
+      case 2:
+        return <TeamAndTitleForm />;
+      case 3:
+        return <BioAndSkillsForm />;
+      case 4:
+        return <Review />;
+      default:
+        throw new Error("Unknown step");
+    }
+  }
+}
 
 MultiStepProfileForm.propTypes = {
   createProfile: PropTypes.func.isRequired,
