@@ -14,9 +14,10 @@ Front End: Had originally used material-ui to style everything, but as I continu
 3. Users can submit a Ticket
 4. Users can join a team
 5. Users can view tickets
+6. Users can create tickets
 
 
-    9/12
+    #9/12
     - Switched from using Semantic-UI to Material-UI
     - Got the Landing Page, and Login component working
       - You can Login with new form
@@ -30,12 +31,12 @@ Front End: Had originally used material-ui to style everything, but as I continu
       - SnackBars
       - Attaching something to a ticket request
 
-    9/14
+    #9/14
     - Added the SnackBars for Success, Info, and Error Messages
       - Very cool addition
     - Registration with the new form is finally working. I still need to have it redirect to the User Profile page correctly
 
-    9/16
+    #9/16
     - After registration, the page redirects to the User Profile page, as expected
     - Profile components have been split up to better organize the page
       - The Avatar and Profile details are now in seperate components, along w/ this new form
@@ -47,23 +48,18 @@ Front End: Had originally used material-ui to style everything, but as I continu
       - Bio is 'Outlined' multiline textarea
       - Skills needs to be a multi-select
 
+    #9/23
+    - Finally starting to understand the difference between functional and pure components, and why that actually plays a super important role in how you structure your application.
+      - I've since needed to go back and re-factor the 'Directory' and 'Profile' pages, and currently working on ticket page.
+    - Scrapping multi-step form for the moment so I can just get the profile form working and move on to tickets.
 
-    TO DO
-    - Create Profile Component
-      - Build the View
-        - Totally clean up the Avatar card,
-        - + any additional Profile Card components
-        -
-      - Multi Step form
-      - Be able to select from a list of existing Users (this will be challenging)
-      - Server end Profile creation
-      - Redux Integration
-    - Create Ticket Component
-      - Build the View
-      - Server end Profile creation
-      - Redux Integration
 
-    - CreateProfile ACTION & REDUCER
+
+
+    ##TO DO
+    - Complete Profile Form
+    - Make sure Profile form submits to server
+    - Ticket Form
 
       - Form for Creating Profile
       https://material-ui.com/getting-started/templates/checkout/
