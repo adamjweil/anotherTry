@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { signIn, signOut } from "./actions/auth";
+import { signIn, signOut, loadUser } from "./actions/auth";
 import PropTypes from "prop-types";
 import { Grid, Button } from "@material-ui/core";
-
+// import { signIn }
 class GoogleAuth extends React.Component {
   componentDidMount() {
     window.gapi.load("client:auth2", () => {
@@ -16,7 +16,7 @@ class GoogleAuth extends React.Component {
         .then(() => {
           this.auth = window.gapi.auth2.getAuthInstance();
           // this.auth = window.gapi2.getAuthInstance();
-          this.onAuthChange(this.isAuthenticated.get());
+          this.onAuthChange(this.auth.isAuthenticated.get());
           this.auth.isAuthenticated.listen(this.onAuthChange);
         });
     });
@@ -90,5 +90,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { signIn, signOut }
+  { signIn, signOut, loadUser }
 )(GoogleAuth);

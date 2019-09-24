@@ -62,15 +62,15 @@ const statusValues = [
 
 const NewTicketForm = props => {
   return (
-    <Grid centered columns={1}>
-      <Grid.Column>
+    <Grid container>
+      <Grid item xs={12}>
         <div className="ui attached message">
           <div className="header">
             <center>
-              <Header as="h2">
+              <h2>
                 <i className="ticket icon"></i>
-                New Ticket Form
-              </Header>
+                NEW TICKET FORM
+              </h2>
             </center>
           </div>
           <center>
@@ -243,7 +243,7 @@ const NewTicketForm = props => {
           <Button className="ui primary button">Submit</Button>
           <Button className="ui button">Cancel</Button>
         </Form>
-      </Grid.Column>
+      </Grid>
     </Grid>
   );
 };
