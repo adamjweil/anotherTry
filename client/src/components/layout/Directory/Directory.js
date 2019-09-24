@@ -10,6 +10,7 @@ import SearchDirectory from "./SearchDirectory";
 export class Directory extends React.Component {
   componentDidMount() {
     this.props.fetchUsers();
+    console.log(this.props.users);
   }
 
   renderList() {

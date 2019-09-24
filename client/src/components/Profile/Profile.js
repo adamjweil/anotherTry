@@ -1,7 +1,8 @@
-import React, { Fragment } from "react";
+import React, { Fragment, Component } from "react";
 import { connect } from "react-redux";
 import {
   loadUser,
+  fetchUsers,
   incrementNotificationCount,
   decrementNotificationCount
 } from "../../actions/user";
@@ -10,49 +11,105 @@ import { Button } from "semantic-ui-react";
 import { Grid } from "@material-ui/core";
 import PropTypes from "prop-types";
 import ProfileCard from "./ProfileCard";
-import MultiStepProfileForm from "./profile-forms/MultiStepProfileForm";
+import CreateProfile from "./profile-forms/CreateProfile";
 
-const Profile = ({
-  getCurrentProfile,
-  loadUser,
-  isAuthenticated,
-  auth: { user },
-  profile: { profile, loading },
-  incrementNotificationCount,
-  decrementNotificationCount
-}) => {
-  const onIncrementSubmit = () => {
+export class Profile extends Component {
+  componentDidMount() {
+    loadUser();
+    fetchUsers();
+    // getCurrentProfile();
+    fetchUsers();
+  }
+  state = {
+    firstName: "",
+    lastName: "",
+    handle: "",
+    hireDate: Date.now,
+    team: "",
+    title: "",
+    bio: "",
+    skills: []
+  };
+
+  handleChange = input => e => {
+    console.log(e);
+    this.setState({ [input]: e.target.value });
+  };
+
+  handleDateChange = hireDate => e => {
+    let yr = e.getFullYear();
+    let mo = e.getMonth();
+    let dt = e.getDate();
+
+    if (dt < 10) {
+      dt = "0" + dt;
+    }
+    if (mo < 10) {
+      mo = "0" + mo;
+    }
+    let full = mo + "/" + dt + "/" + yr;
+    this.setState({ hireDate: full });
+  };
+
+  onIncrementSubmit() {
     incrementNotificationCount();
-  };
-  const onDecrementSubmit = () => {
+  }
+  onDecrementSubmit() {
     decrementNotificationCount();
-  };
+  }
+  render() {
+    const {
+      firstName,
+      lastName,
+      handle,
+      hireDate,
+      team,
+      title,
+      bio,
+      skills
+    } = this.state;
+    const values = {
+      firstName,
+      lastName,
+      handle,
+      hireDate,
+      team,
+      title,
+      bio,
+      skills
+    };
 
-  return (
-    <Fragment>
-      <Grid container>
-        <Grid item xs={0} md={1}></Grid>
-        <Grid item xs={12} md={3} style={{ minWidth: "300px" }}>
-          <ProfileCard />
+    return (
+      <Fragment>
+        <Grid container>
+          <Grid item xs={0} md={1}></Grid>
+          <Grid item xs={12} md={3} style={{ minWidth: "300px" }}>
+            <ProfileCard values={values} user={this.props.user} />
+          </Grid>
+          <Grid item xs={0} md={1}></Grid>
+          <Grid item xs={12} md={5}>
+            <CreateProfile
+              values={values}
+              users={this.props.users}
+              handleChange={this.handleChange}
+              handleDateChange={this.handleDateChange}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={0} md={1}></Grid>
-        <Grid item xs={12} md={5}>
-          <MultiStepProfileForm />
+        <Grid container>
+          <Grid item xs={12} md={8}>
+            <Button onClick={this.onIncrementSubmit}>
+              Increment Notifications
+            </Button>
+            <Button onClick={this.onDecrementSubmit}>
+              Decrement Notifications
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid container>
-        <Grid item xs={12} md={8}>
-          <Button onClick={e => onIncrementSubmit(e)}>
-            Increment Notifications
-          </Button>
-          <Button onClick={e => onDecrementSubmit(e)}>
-            Decrement Notifications
-          </Button>
-        </Grid>
-      </Grid>
-    </Fragment>
-  );
-};
+      </Fragment>
+    );
+  }
+}
 
 Profile.propTypes = {
   auth: PropTypes.object.isRequired,
@@ -66,7 +123,8 @@ Profile.propTypes = {
 const mapStateToProps = state => ({
   auth: state.auth,
   profile: state.profile,
-  users: state.users
+  users: state.users,
+  user: state.auth.user
 });
 
 export default connect(
