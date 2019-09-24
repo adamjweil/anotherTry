@@ -7,6 +7,7 @@ import TeamAndTitleForm from "../TeamAndTitleForm";
 import BioAndSkillsForm from "../BioAndSkillsForm";
 import Review from "../Review";
 import { createProfile } from "../../../actions/profile";
+import { fetchUsers } from "../../../actions/user";
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -46,7 +47,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export class MultiStepProfileForm extends Component {
-  classes = useStyles();
+  componentDidMount() {
+    fetchUsers();
+  }
+  // classes = useStyles();
   state = {
     step: 1,
     firstName: "",
@@ -107,6 +111,7 @@ export class MultiStepProfileForm extends Component {
             prevStep={this.prevStep}
             handleChange={this.handleChange}
             values={values}
+            users={this.users}
           />
         );
       case 3:

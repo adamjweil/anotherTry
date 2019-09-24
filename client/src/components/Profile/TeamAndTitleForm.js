@@ -1,17 +1,17 @@
 import React, { Fragment, Component } from "react";
 import Typography from "@material-ui/core/Typography";
-import { Grid } from "@material-ui/core";
+import { Grid, Input } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 // import FormControlLabel from "@material-ui/core/FormControlLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
 import { connect } from "react-redux";
+import Select from "@material-ui/core/Select";
 import { fetchUsers } from "../../actions/user";
 import RaisedButton from "material-ui/RaisedButton";
 
 export class TeamAndTitleForm extends Component {
-  componentDidMount() {
-    fetchUsers();
-  }
-
   continue = e => {
     e.preventDefault();
     this.props.nextStep();
@@ -34,7 +34,7 @@ export class TeamAndTitleForm extends Component {
   TITLES = ["Intern", "Analyst", "Associate", "Senior Accociate", "Director"];
 
   render() {
-    const { values, handleChange } = this.props;
+    const { users, values, handleChange } = this.props;
 
     return (
       <Fragment>
@@ -43,6 +43,15 @@ export class TeamAndTitleForm extends Component {
         </Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="outlined-age-native-simple">Age</InputLabel>
+              <Select native value={values} onChange={handleChange("team")}>
+                <option value="" />
+                <option value={10}>Ten</option>
+                <option value={20}>Twenty</option>
+                <option value={30}>Thirty</option>
+              </Select>
+            </FormControl>
             <TextField
               required
               label="team"

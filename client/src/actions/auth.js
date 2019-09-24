@@ -10,7 +10,8 @@ import {
   TOGGLE_TERMS,
   SIGN_IN,
   SIGN_OUT,
-  AUTH_ERROR
+  AUTH_ERROR,
+  GOOGLE_SIGNIN_SUCCESS
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
 import {
@@ -113,15 +114,15 @@ export const logout = () => async dispatch => {
 };
 
 // Sign in w GoogleAuth
-export const signIn = userId => async dispatch => {
+export const signIn = () => async dispatch => {
   try {
     dispatch({
-      type: SIGN_IN,
-      payload: {
-        userId,
-        isAuthenticated: true
-      }
+      type: GOOGLE_SIGNIN_SUCCESS
     });
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    dispatch(loadUser());
   } catch (err) {
     dispatch({
       type: AUTH_ERROR

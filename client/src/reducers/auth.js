@@ -13,7 +13,8 @@ import {
   SIGN_OUT,
   NOTIFCATION_INCREMENT,
   NOTIFCATION_DECREMENT,
-  GET_NOTIFICATION_COUNT
+  GET_NOTIFICATION_COUNT,
+  GOOGLE_SIGNIN_SUCCESS
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -32,8 +33,9 @@ export default (state = INITIAL_STATE, action) => {
       localStorage.setItem("token", payload.token);
       return {
         ...state,
+        ...payload,
         isAuthenticated: true,
-        user: payload
+        loading: false
       };
     case SIGN_OUT:
       return { ...state, isAuthenticated: false, user: null };
@@ -43,6 +45,11 @@ export default (state = INITIAL_STATE, action) => {
         isAuthenticated: true,
         loading: false,
         user: payload
+      };
+    case GOOGLE_SIGNIN_SUCCESS:
+      return {
+        ...state,
+        token: payload
       };
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
