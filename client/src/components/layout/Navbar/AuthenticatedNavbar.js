@@ -1,6 +1,6 @@
 import React from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
-import { AppBar, Badge, MenuItem, Menu } from "@material-ui/core";
+import { AppBar, Badge, MenuItem, Menu, Button } from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
@@ -9,6 +9,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import MenuBookIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -133,12 +134,15 @@ const AuthenticatedNavbar = ({ logout }) => {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
+        <Link to="/directory">
+          <IconButton color="inherit">
+            <Badge>
+              <MenuBookIcon />
+            </Badge>
+          </IconButton>
+
+          <p>Directory</p>
+        </Link>
       </MenuItem>
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
@@ -164,17 +168,9 @@ const AuthenticatedNavbar = ({ logout }) => {
 
   return (
     <div className={classes.grow}>
-      <AppBar
-        position="relative"
-        style={
-          {
-            // margin: "-10px"
-          }
-        }
-      >
+      <AppBar position="relative">
         <Toolbar
           style={{
-            // height: "3rem",
             color: "linear-gradient(to right, var(--top1), var(--top2))"
           }}
         >

@@ -24,9 +24,6 @@ const ProfileSchema = new mongoose.Schema({
   bio: {
     type: String
   },
-  skills: {
-    type: [String]
-  },
   githubusername: {
     type: String
   },

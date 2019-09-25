@@ -12,27 +12,32 @@ import { Grid } from "@material-ui/core";
 import PropTypes from "prop-types";
 import ProfileCard from "./ProfileCard";
 import CreateProfile from "./profile-forms/CreateProfile";
+import ProfileForm from "./ProfileForm";
 
 export class Profile extends Component {
+  constructor() {
+    super();
+    this.state = {
+      firstName: "",
+      lastName: "",
+      handle: "",
+      hireDate: Date.now,
+      team: "",
+      title: "",
+      bio: "",
+      skills: []
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
   componentDidMount() {
     loadUser();
     fetchUsers();
     // getCurrentProfile();
     fetchUsers();
   }
-  state = {
-    firstName: "",
-    lastName: "",
-    handle: "",
-    hireDate: Date.now,
-    team: "",
-    title: "",
-    bio: "",
-    skills: []
-  };
+  state = {};
 
   handleChange = input => e => {
-    console.log(e);
     this.setState({ [input]: e.target.value });
   };
 
@@ -88,11 +93,13 @@ export class Profile extends Component {
           </Grid>
           <Grid item xs={0} md={1}></Grid>
           <Grid item xs={12} md={5}>
-            <CreateProfile
+            <ProfileForm
               values={values}
               users={this.props.users}
+              createProfile={this.props.createProfile}
               handleChange={this.handleChange}
               handleDateChange={this.handleDateChange}
+              onProfileSub={this.onProfileSub}
             />
           </Grid>
         </Grid>
@@ -123,7 +130,6 @@ Profile.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.profile,
   users: state.users,
   user: state.auth.user
 });

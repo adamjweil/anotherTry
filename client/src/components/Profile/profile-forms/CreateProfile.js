@@ -43,7 +43,7 @@ export class CreateProfile extends Component {
   };
 
   render() {
-    const { users, values, handleChange, handleDateChange } = this.props;
+    const { users, values, handleChange } = this.props;
 
     console.log(users);
     return (

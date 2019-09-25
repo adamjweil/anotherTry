@@ -24,7 +24,7 @@ export const getCurrentProfile = () => async dispatch => {
 };
 
 // Create profile
-export const createProfile = formData => async dispatch => {
+export const createProfile = values => async dispatch => {
   try {
     const config = {
       headers: {
@@ -32,12 +32,13 @@ export const createProfile = formData => async dispatch => {
       }
     };
 
-    const body = JSON.stringify({ formData });
+    // const body = JSON.stringify(values);
 
-    const res = await axios.post("/api/profile", body, config);
+    const res = await axios.post("/api/profile", values, config);
     console.log(res);
+
     dispatch({
-      type: CREATE_PROFILE,
+      type: GET_PROFILE,
       payload: res.data
     });
 
