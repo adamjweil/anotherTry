@@ -6,7 +6,7 @@ import {
   incrementNotificationCount,
   decrementNotificationCount
 } from "../../actions/user";
-import { getCurrentProfile } from "../../actions/profile";
+import { getCurrentProfile, createProfile } from "../../actions/profile";
 import { Button } from "semantic-ui-react";
 import { Grid } from "@material-ui/core";
 import PropTypes from "prop-types";
@@ -117,7 +117,8 @@ Profile.propTypes = {
   users: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool,
   getCurrentProfile: PropTypes.func.isRequired,
-  loadUser: PropTypes.func.isRequired
+  loadUser: PropTypes.func.isRequired,
+  createProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -130,6 +131,7 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
+    createProfile,
     loadUser,
     getCurrentProfile,
     incrementNotificationCount,

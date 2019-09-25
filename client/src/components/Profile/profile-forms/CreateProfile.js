@@ -1,15 +1,47 @@
 import React, { Fragment, Component } from "react";
 import PropTypes from "prop-types";
-import { Grid, FormControl, TextField, Select } from "@material-ui/core";
+import {
+  Grid,
+  FormControl,
+  TextField,
+  Select,
+  MenuItem,
+  InputLabel,
+  Button
+} from "@material-ui/core";
 import { connect } from "react-redux";
 import { createProfile } from "../../../actions/profile";
 import { Redirect, withRouter, Link } from "react-router-dom";
 import { KeyboardDatePicker } from "@material-ui/pickers";
 
+const TEAMS = [
+  "LogiQ",
+  "Dev - Backend",
+  "Dev - Frontend",
+  "Integration",
+  "Project Management",
+  "Tech Experts",
+  "Ops"
+];
+
+const TITLES = [
+  "Intern",
+  "Analyst",
+  "Associate",
+  "Senior Accociate",
+  "Director"
+];
+
 export class CreateProfile extends Component {
-  if(profile) {
-    return <Redirect to="/profile" />;
-  }
+  // if(profile) {
+  //   return <Redirect to="/profile" />;
+  // }
+
+  onSubmit = e => {
+    e.preventDefault();
+    createProfile(this.props.values);
+  };
+
   render() {
     const { users, values, handleChange, handleDateChange } = this.props;
 
@@ -58,26 +90,54 @@ export class CreateProfile extends Component {
             </FormControl>
           </Grid>
 
+          <Grid item xs={6}></Grid>
+
           <Grid item xs={12} sm={6}>
-            <KeyboardDatePicker
-              // fullWidth
-              name="hireDate"
-              variant="outlined"
-              label="Hire Date"
-              format="MM/dd/yyyy"
-              InputAdornmentProps={{ position: "start" }}
-              onChange={handleDateChange("hireDate")}
-              defaultValue={values.hireDate}
-            />
+            <FormControl fullWidth>
+              <InputLabel>Team</InputLabel>
+              <Select
+                name="team"
+                value={values.team}
+                onChange={handleChange("team")}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+
+                {TEAMS.map(team => (
+                  <MenuItem value={team}>{team}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
 
-          <FormControl>
-            <Grid item xs={12}>
-              <Select>
-                <option>x</option>
+          <Grid item xs={6}></Grid>
+
+          <Grid item xs={12} sm={6}>
+            <FormControl fullWidth>
+              <InputLabel>Title</InputLabel>
+              <Select
+                name="title"
+                value={values.title}
+                onChange={handleChange("title")}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+
+                {TITLES.map(title => (
+                  <MenuItem value={title}>{title}</MenuItem>
+                ))}
               </Select>
-            </Grid>
-          </FormControl>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={6}></Grid>
+          <Grid item xs={12}>
+            <Button color="primary" onSubmit={createProfile()}>
+              Submit
+            </Button>
+          </Grid>
         </Grid>
       </Fragment>
     );
@@ -85,7 +145,8 @@ export class CreateProfile extends Component {
 }
 
 const mapStateToProps = state => ({
-  users: Object.values(state.users)
+  users: Object.values(state.users),
+  profile: state.profile
 });
 
 export default connect(
