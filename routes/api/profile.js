@@ -53,9 +53,9 @@ router.post("/", auth, async (req, res) => {
   // Build Profile object
   const profileFields = {};
   profileFields.user = req.user;
-  if (firstName) profileFields.user = firstName;
-  if (lastName) profileFields.user = lastName;
-  if (handle) profileFields.user = handle;
+  if (firstName) profileFields.firstName = firstName;
+  if (lastName) profileFields.lastName = lastName;
+  if (handle) profileFields.handle = handle;
   if (team) profileFields.team = team;
   if (title) profileFields.title = title;
   if (hireDate) profileFields.hireDate = hireDate;
@@ -86,7 +86,7 @@ router.post("/", auth, async (req, res) => {
       return res.json(profile);
     } else {
       // Create
-      profile = new Profile({ profileFields });
+      profile = new Profile(profileFields);
       res.json(profile);
     }
   } catch (err) {
