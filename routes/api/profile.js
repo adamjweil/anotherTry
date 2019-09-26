@@ -52,13 +52,13 @@ router.post("/", auth, async (req, res) => {
       // Update
       profile = await Profile.findOneAndUpdate(
         { user: req.user.id },
-        { $set: { profile: profileFields } },
+        { $set: { profile: { profileFields } } },
         { new: true },
         { returnOriginal: false }
       );
-      profile.save();
 
-      return res.json(profile);
+      return profile.save();
+      // return res.json(profile);
     } else {
       // Create
       profile = new Profile(profileFields);
@@ -89,7 +89,7 @@ router.get("/", async (req, res) => {
 router.get("/user/:user_id", async (req, res) => {
   try {
     const profile = await Profile.findOne({
-      user: req.params.user_id
+      user: req.user.id
     }).populate("user", ["avatar"]);
 
     if (!profile) {

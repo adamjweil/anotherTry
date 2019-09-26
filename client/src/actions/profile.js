@@ -24,42 +24,10 @@ export const getCurrentProfile = () => async dispatch => {
 };
 
 // Create profile
-export const createProfile = (
-  firstName,
-  lastName,
-  handle,
-  team,
-  title
-) => async dispatch => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-  try {
-    const body = JSON.stringify(firstName, lastName, handle, team, title);
-
-    const res = await axios.post("/api/profile", body, config);
-    console.log(res);
-    dispatch({
-      type: GET_PROFILE,
-      payload: res.data
-    });
-
-    dispatch(showSuccessSnackbar("success"));
-  } catch (err) {
-    const errors = err.response.data.errors;
-
-    if (errors) {
-      errors.forEach(error => dispatch(showErrorSnackbar(error.msg)));
-    }
-
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
-  }
-};
+export const createProfile = ({ input }) => ({
+  type: CREATE_PROFILE,
+  payload: { input }
+});
 
 export const updateProfile = (formData, history) => async dispatch => {
   try {

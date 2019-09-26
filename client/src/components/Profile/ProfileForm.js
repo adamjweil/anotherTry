@@ -68,7 +68,13 @@ const TITLES = [
   "Director"
 ];
 
-const ProfileForm = ({ values, createProfile, handleSubmit, handleChange }) => {
+const ProfileForm = ({
+  handleSubmitProfile,
+  values,
+  createProfile,
+  handleSubmit,
+  handleChange
+}) => {
   // const [formData, setFormData] = useState({
   //   firstName: "",
   //   lastName: "",
@@ -77,16 +83,16 @@ const ProfileForm = ({ values, createProfile, handleSubmit, handleChange }) => {
   //   title: ""
   // });
   const classes = useStyles();
-  const { firstName, lastName, handle, team, title } = values;
 
   const onSubmit = async e => {
+    const { firstName, lastName, handle, team, title } = values;
     e.preventDefault();
-    createProfile({ values });
+    createProfile(firstName, lastName, handle, team, title);
   };
 
   return (
     <Grid container>
-      <Form className={classes.form} onSubmit={e => onSubmit(e)}>
+      <Form className={classes.form} onSubmit={e => handleSubmitProfile(e)}>
         <Paper className={classes.paper}>
           <Grid item xs={12} className={classes.message}>
             <center>
@@ -155,7 +161,9 @@ const ProfileForm = ({ values, createProfile, handleSubmit, handleChange }) => {
                 onChange={handleChange("team")}
               >
                 {TEAMS.map(team => (
-                  <MenuItem value={team}>{team}</MenuItem>
+                  <MenuItem key={team} value={team}>
+                    {team}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -181,7 +189,9 @@ const ProfileForm = ({ values, createProfile, handleSubmit, handleChange }) => {
                 </MenuItem>
 
                 {TITLES.map(title => (
-                  <MenuItem value={title}>{title}</MenuItem>
+                  <MenuItem key={title} value={title}>
+                    {title}
+                  </MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -195,7 +205,7 @@ const ProfileForm = ({ values, createProfile, handleSubmit, handleChange }) => {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={onSubmit}
+              onClick={handleSubmitProfile}
             >
               SUBMIT
             </Button>
@@ -208,7 +218,7 @@ const ProfileForm = ({ values, createProfile, handleSubmit, handleChange }) => {
 
 ProfileForm.propTypes = {
   createProfile: PropTypes.func.isRequired,
-  users: PropTypes.object.isRequired,
+  users: PropTypes.array.isRequired,
   profile: PropTypes.object.isRequired
 };
 
