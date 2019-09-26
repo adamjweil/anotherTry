@@ -38,7 +38,8 @@ const useStyles = makeStyles(theme => ({
   form: {
     width: "100%",
     marginTop: theme.spacing(1),
-    marginRight: theme.spacing(1),
+    // marginRight: theme.spacing(1),
+    // marginLeft: theme.spacing(1),
     padding: "10px 10px 10px",
     border: "1px shadow gray"
   },
@@ -105,19 +106,19 @@ const ProfileForm = ({ values, createProfile, handleSubmit, handleChange }) => {
   };
   return (
     <Grid container>
-      <Grid item xs={12}>
-        <h2> Set Up Your Profile Below!</h2>
-      </Grid>
       <Form className={classes.form}>
         <Paper className={classes.paper}>
+          <Grid item xs={12}>
+            <h2> Set Up Your Profile Here!</h2>
+          </Grid>
           <Grid container>
             <Grid item xs={12} sm={5}>
-              <FormControl>
+              <FormControl style={{ marginLeft: "20px" }}>
                 <TextField
                   name="firstName"
                   label="First Name"
                   onChange={handleChange("firstName")}
-                  defaultValue={values.firstName}
+                  // defaultValue={values.firstName}
                 />
               </FormControl>
             </Grid>
@@ -140,6 +141,7 @@ const ProfileForm = ({ values, createProfile, handleSubmit, handleChange }) => {
                 label="Handle"
                 onChange={handleChange("handle")}
                 defaultValue={values.handle}
+                helperText="What do you go by?"
               />
             </FormControl>
           </Grid>
@@ -153,16 +155,12 @@ const ProfileForm = ({ values, createProfile, handleSubmit, handleChange }) => {
             >
               <InputLabel>Team</InputLabel>
               <Select
-                variant="outlined"
+                // variant="outlined"
                 style={{ width: "350px" }}
                 name="team"
                 value={values.team}
                 onChange={handleChange("team")}
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-
                 {TEAMS.map(team => (
                   <MenuItem value={team}>{team}</MenuItem>
                 ))}
@@ -179,7 +177,7 @@ const ProfileForm = ({ values, createProfile, handleSubmit, handleChange }) => {
             >
               <InputLabel>Title</InputLabel>
               <Select
-                variant="outlined"
+                // variant="outlined"
                 style={{ width: "350px" }}
                 name="title"
                 value={values.title}
