@@ -52,12 +52,14 @@ Front End: Had originally used material-ui to style everything, but as I continu
     - Finally starting to understand the difference between functional and pure components, and why that actually plays a super important role in how you structure your application.
       - I've since needed to go back and re-factor the 'Directory' and 'Profile' pages, and currently working on ticket page.
     - Scrapping multi-step form for the moment so I can just get the profile form working and move on to tickets.
+    - Completed Profile Form
 
+    #9/26
+    - Need to have the createProfile action actually create a profile in server
 
 
 
     ##TO DO
-    - Complete Profile Form
     - Make sure Profile form submits to server
     - Ticket Form
 
