@@ -24,20 +24,23 @@ export const getCurrentProfile = () => async dispatch => {
 };
 
 // Create profile
-export const createProfile = ({ values }) => async dispatch => {
+export const createProfile = (
+  firstName,
+  lastName,
+  handle,
+  team,
+  title
+) => async dispatch => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
   try {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": localStorage.token
-      }
-    };
+    const body = JSON.stringify(firstName, lastName, handle, team, title);
 
-    // const body = JSON.stringify(values);
-
-    const res = await axios.post("/api/profile", values, config);
+    const res = await axios.post("/api/profile", body, config);
     console.log(res);
-
     dispatch({
       type: GET_PROFILE,
       payload: res.data
