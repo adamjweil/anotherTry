@@ -24,11 +24,12 @@ export const getCurrentProfile = () => async dispatch => {
 };
 
 // Create profile
-export const createProfile = values => async dispatch => {
+export const createProfile = ({ values }) => async dispatch => {
   try {
     const config = {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.token
       }
     };
 
