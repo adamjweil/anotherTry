@@ -34,21 +34,7 @@ router.post("/", auth, async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const {
-    firstName,
-    lastName,
-    handle,
-    team,
-    title
-    // hireDate,
-    // bio,
-    // skills,
-    // githubusername,
-    // twitter,
-    // linkedin,
-    // facebook,
-    // youtube
-  } = req.body;
+  const { firstName, lastName, handle, team, title } = req.body;
 
   // Build Profile object
   const profileFields = {};
@@ -58,37 +44,24 @@ router.post("/", auth, async (req, res) => {
   if (handle) profileFields.handle = handle;
   if (team) profileFields.team = team;
   if (title) profileFields.title = title;
-  // if (hireDate) profileFields.hireDate = hireDate;
-  // if (bio) profileFields.bio = bio;
-  // if (githubusername) profileFields.githubusername = githubusername;
-  // if (skills) {
-  //   profileFields.skills = skills.split(",").map(skill => skill.trim());
-  // }
 
-  // profileFields.social = {};
-  // if (twitter) profileFields.social.twitter = twitter;
-  // if (linkedin) profileFields.social.linkedin = linkedin;
-  // if (facebook) profileFields.social.facebook = facebook;
-  // if (youtube) profileFields.social.youtube = youtube;
-
-  // console.log(await Profile.findOne({ user: req.user.id }));
   try {
-    let profile = await Profile.findOne({ user: req._id });
+    profile = await Profile.findOne({ user: req.user.id });
 
-    console.log("req");
     if (profile) {
       // Update
       profile = await Profile.findOneAndUpdate(
-        { user: req.user },
-        { $set: profileFields },
-        { new: true }
+        { user: req.user.id },
+        { $set: { profile: profileFields } },
+        { new: true },
+        { returnOriginal: false }
       );
       profile.save();
 
       return res.json(profile);
     } else {
       // Create
-      profile = new Profile({ profileFields });
+      profile = new Profile(profileFields);
       res.json(profile);
     }
   } catch (err) {

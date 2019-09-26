@@ -15,27 +15,19 @@ import CreateProfile from "./profile-forms/CreateProfile";
 import ProfileForm from "./ProfileForm";
 
 export class Profile extends Component {
-  constructor() {
-    super();
-    this.state = {
-      firstName: "",
-      lastName: "",
-      handle: "",
-      hireDate: Date.now,
-      team: "",
-      title: "",
-      bio: "",
-      skills: []
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
+  state = {
+    firstName: "",
+    lastName: "",
+    handle: "",
+    team: "",
+    title: ""
+  };
   componentDidMount() {
     loadUser();
     fetchUsers();
-    // getCurrentProfile();
+    getCurrentProfile();
     fetchUsers();
   }
-  state = {};
 
   handleChange = input => e => {
     this.setState({ [input]: e.target.value });
@@ -63,25 +55,13 @@ export class Profile extends Component {
     decrementNotificationCount();
   }
   render() {
-    const {
-      firstName,
-      lastName,
-      handle,
-      hireDate,
-      team,
-      title,
-      bio,
-      skills
-    } = this.state;
+    const { firstName, lastName, handle, team, title } = this.state;
     const values = {
       firstName,
       lastName,
       handle,
-      hireDate,
       team,
-      title,
-      bio,
-      skills
+      title
     };
 
     return (
@@ -120,7 +100,6 @@ export class Profile extends Component {
 
 Profile.propTypes = {
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
   users: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool,
   getCurrentProfile: PropTypes.func.isRequired,
@@ -131,7 +110,8 @@ Profile.propTypes = {
 const mapStateToProps = state => ({
   auth: state.auth,
   users: state.users,
-  user: state.auth.user
+  user: state.auth.user,
+  profile: state.profile
 });
 
 export default connect(

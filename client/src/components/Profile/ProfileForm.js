@@ -10,12 +10,13 @@ import {
   InputLabel,
   Button,
   Container,
+  Typography,
   Paper
 } from "@material-ui/core";
 import { Form } from "semantic-ui-react";
 import PropTypes from "prop-types";
 
-import { createProfile } from "../../actions/profile";
+import { updateProfile, createProfile } from "../../actions/profile";
 import { getCurrentProfile } from "../../actions/profile";
 import { loadUser } from "../../actions/user";
 import {
@@ -38,10 +39,11 @@ const useStyles = makeStyles(theme => ({
   form: {
     width: "100%",
     marginTop: theme.spacing(1),
-    // marginRight: theme.spacing(1),
-    // marginLeft: theme.spacing(1),
-    padding: "10px 10px 10px",
-    border: "1px shadow gray"
+    border: "1px shadow",
+    borderColor: "#3f51b5"
+  },
+  message: {
+    borderBottom: "3px solid #3f51b5"
   },
   submit: {
     margin: theme.spacing(1, 0, 2)
@@ -67,49 +69,40 @@ const TITLES = [
 ];
 
 const ProfileForm = ({ values, createProfile, handleSubmit, handleChange }) => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    handle: "",
-    team: "",
-    title: ""
-  });
+  // const [formData, setFormData] = useState({
+  //   firstName: "",
+  //   lastName: "",
+  //   handle: "",
+  //   team: "",
+  //   title: ""
+  // });
   const classes = useStyles();
-  const { firstName, lastName, handle, team, title } = formData;
-
-  const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const { firstName, lastName, handle, team, title } = values;
 
   const onSubmit = async e => {
     e.preventDefault();
-    createProfile(firstName, lastName, handle, team, title);
+    createProfile({ values });
   };
 
-  const onProfileSubmit = async e => {
-    e.preventDefault();
-    try {
-      createProfile({ firstName, lastName, handle, team, title });
-      console.log({ firstName, lastName, handle, team, title });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const onProfileSub = async e => {
-    e.preventDefault();
-    try {
-      createProfile(values);
-      console.log(values);
-    } catch (err) {
-      console.log(err);
-    }
-  };
   return (
     <Grid container>
-      <Form className={classes.form}>
+      <Form className={classes.form} onSubmit={e => onSubmit(e)}>
         <Paper className={classes.paper}>
-          <Grid item xs={12}>
-            <h2> Set Up Your Profile Here!</h2>
+          <Grid item xs={12} className={classes.message}>
+            <center>
+              <h2>Welcome to Online Portal!</h2>
+            </center>
+            <center>
+              <h4
+                style={{
+                  fontSize: "12px",
+                  marginTop: "-20px",
+                  marginBottom: "0px"
+                }}
+              >
+                Set Up Profile Below
+              </h4>
+            </center>
           </Grid>
           <Grid container>
             <Grid item xs={12} sm={5}>
@@ -196,13 +189,13 @@ const ProfileForm = ({ values, createProfile, handleSubmit, handleChange }) => {
           <Grid item xs={6}></Grid>
           <Grid item xs={12}>
             <Button
-              onClick={onSubmit}
-              type="submit"
               // fullWidth
+              type="submit"
               size="small"
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={onSubmit}
             >
               SUBMIT
             </Button>
