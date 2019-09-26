@@ -1,5 +1,7 @@
 import React, { Fragment, Component } from "react";
 import { connect } from "react-redux";
+import uuid from "uuid";
+import axios from "axios";
 import {
   loadUser,
   fetchUsers,
@@ -48,6 +50,25 @@ export class Profile extends Component {
     this.setState({ hireDate: full });
   };
 
+  handleSubmitProfile = ({ firstName, lastName, handle, team, title }) => {
+    const newProfile = {
+      firstName,
+      lastName,
+      handle,
+      team,
+      title
+    };
+
+    const res = axios
+      .post("/api/profile", { ...newProfile })
+      .then(({ data: { firstName } }) => {
+        console.log(`Item - ${firstName} added successfully`);
+      })
+      .catch(e => console.log("Addition failed , Error ", e));
+
+    this.props.createProfile(res);
+  };
+
   onIncrementSubmit() {
     incrementNotificationCount();
   }
@@ -67,19 +88,24 @@ export class Profile extends Component {
     return (
       <Fragment>
         <Grid container>
-          <Grid item xs={0} md={1}></Grid>
+          <Grid item md={1}></Grid>
           <Grid item xs={12} md={3} style={{ minWidth: "300px" }}>
             <ProfileCard values={values} user={this.props.user} />
           </Grid>
-          <Grid item xs={0} md={1}></Grid>
+          <Grid item md={1}></Grid>
           <Grid item xs={12} md={5}>
             <ProfileForm
+              firstName={this.state.firstName}
+              lastName={this.state.lastName}
+              handle={this.state.handle}
+              team={this.state.team}
+              title={this.state.title}
               values={values}
               users={this.props.users}
               createProfile={this.props.createProfile}
               handleChange={this.handleChange}
               handleDateChange={this.handleDateChange}
-              onProfileSub={this.onProfileSub}
+              handleSubmitProfile={this.handleSubmitProfile}
             />
           </Grid>
         </Grid>
@@ -110,8 +136,7 @@ Profile.propTypes = {
 const mapStateToProps = state => ({
   auth: state.auth,
   users: state.users,
-  user: state.auth.user,
-  profile: state.profile
+  user: state.auth.user
 });
 
 export default connect(
