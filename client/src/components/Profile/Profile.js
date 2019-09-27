@@ -50,6 +50,10 @@ export class Profile extends Component {
     this.setState({ hireDate: full });
   };
 
+  onSubmit(formValues) {
+    this.props.createProfile(formValues);
+  }
+
   handleSubmitProfile = ({ firstName, lastName, handle, team, title }) => {
     const newProfile = {
       firstName,
@@ -105,7 +109,7 @@ export class Profile extends Component {
               createProfile={this.props.createProfile}
               handleChange={this.handleChange}
               handleDateChange={this.handleDateChange}
-              handleSubmitProfile={this.handleSubmitProfile}
+              onSubmit={this.onSubmit}
             />
           </Grid>
         </Grid>
