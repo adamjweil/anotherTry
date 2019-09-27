@@ -24,10 +24,9 @@ export const getCurrentProfile = () => async dispatch => {
 };
 
 // Create profile
-export const createProfile = ({ input }) => ({
-  type: CREATE_PROFILE,
-  payload: { input }
-});
+export const createProfile = input => async dispatch => {
+  axios.post("/api/profile", input);
+};
 
 export const updateProfile = (formData, history) => async dispatch => {
   try {

@@ -75,24 +75,26 @@ const ProfileForm = ({
   handleSubmit,
   handleChange
 }) => {
-  // const [formData, setFormData] = useState({
-  //   firstName: "",
-  //   lastName: "",
-  //   handle: "",
-  //   team: "",
-  //   title: ""
-  // });
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    handle: "",
+    team: "",
+    title: ""
+  });
   const classes = useStyles();
+  const { firstName, lastName, handle, team, title } = formData;
 
-  const onSubmit = async e => {
-    const { firstName, lastName, handle, team, title } = values;
-    e.preventDefault();
-    createProfile(firstName, lastName, handle, team, title);
+  const onChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = formData => dispatch => {
+    dispatch(createProfile(formData));
   };
 
   return (
     <Grid container>
-      <Form className={classes.form} onSubmit={e => handleSubmitProfile(e)}>
+      <Form className={classes.form} onSubmit={this.onSubmit}>
         <Paper className={classes.paper}>
           <Grid item xs={12} className={classes.message}>
             <center>
@@ -116,7 +118,7 @@ const ProfileForm = ({
                 <TextField
                   name="firstName"
                   label="First Name"
-                  onChange={handleChange("firstName")}
+                  onChange={e => onChange(e)}
                   // defaultValue={values.firstName}
                 />
               </FormControl>
@@ -127,7 +129,7 @@ const ProfileForm = ({
                 <TextField
                   name="lastName"
                   label="Last Name"
-                  onChange={handleChange("lastName")}
+                  onChange={e => onChange(e)}
                   defaultValue={values.lastName}
                 />
               </FormControl>
@@ -138,7 +140,7 @@ const ProfileForm = ({
               <TextField
                 name="handle"
                 label="Handle"
-                onChange={handleChange("handle")}
+                onChange={e => onChange(e)}
                 defaultValue={values.handle}
                 helperText="What do you go by?"
               />
@@ -158,7 +160,7 @@ const ProfileForm = ({
                 style={{ width: "350px" }}
                 name="team"
                 value={values.team}
-                onChange={handleChange("team")}
+                onChange={e => onChange(e)}
               >
                 {TEAMS.map(team => (
                   <MenuItem key={team} value={team}>
@@ -205,7 +207,7 @@ const ProfileForm = ({
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={handleSubmitProfile}
+              onClick={e => onSubmit(e)}
             >
               SUBMIT
             </Button>
