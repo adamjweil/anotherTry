@@ -45,7 +45,6 @@ class GoogleAuth extends React.Component {
     } else if (this.props.isAuthenticated) {
       return (
         <Button onClick={this.onSignOutClick} className="ui red google button">
-          <i className="google icon" />
           Sign Out
         </Button>
       );
@@ -55,11 +54,11 @@ class GoogleAuth extends React.Component {
           <Grid item xs={12}>
             <Button
               fullWidth
+              size="small"
               variant="contained"
               onClick={this.onSignInClick}
-              color="secondary"
+              color="info"
             >
-              <i className="google icon"></i>
               Sign In with Google
             </Button>
           </Grid>

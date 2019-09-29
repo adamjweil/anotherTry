@@ -94,7 +94,7 @@ const ProfileForm = ({
 
   return (
     <Grid container>
-      <Form className={classes.form} onSubmit={this.onSubmit}>
+      <Form className={classes.form} onSubmit={onSubmit}>
         <Paper className={classes.paper}>
           <Grid item xs={12} className={classes.message}>
             <center>

@@ -9,8 +9,15 @@ import {
   Checkbox,
   Grid,
   Typography,
-  Box
+  Box,
+  InputAdornment,
+  IconButton,
+  Icon
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import EmailTwoToneIcon from "@material-ui/icons/EmailTwoTone";
+import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { makeStyles } from "@material-ui/core/styles";
 import { Form } from "semantic-ui-react";
 import { connect } from "react-redux";
@@ -72,8 +79,20 @@ const Register = ({
     },
     []
   );
+  const [values, setValues] = React.useState({
+    showPassword: false
+  });
   const classes = useStyles();
   const { email, password, password2, terms } = formData;
+  const { showPassword } = values;
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -105,8 +124,10 @@ const Register = ({
   }
 
   return (
-    <Container>
+    <Container component="main" maxWidth="md">
       <CssBaseline />
+
+      <Grid item sm={12} md={6}></Grid>
       <Box
         marginTop="50px"
         borderLeft={1}
@@ -121,13 +142,10 @@ const Register = ({
           className={classes.form}
           onSubmit={onRegister}
         >
-          <Grid container>
-            <Grid item xs={2}></Grid>
-            <Grid item xs={10}>
+          <Grid item xs={12}>
+            <center>
               <img
                 style={{
-                  maxWidth: "80%",
-                  marginBottom: "-30px",
                   justifyContent: "center",
                   align: "center",
                   alignItems: "center"
@@ -135,6 +153,11 @@ const Register = ({
                 src={process.env.PUBLIC_URL + "/img/mezologo1.png"}
                 alt=""
               />
+            </center>
+          </Grid>
+          <Grid container>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={10}>
               <center>
                 <h3>Online Portal</h3>
               </center>
@@ -144,7 +167,11 @@ const Register = ({
           <Typography
             component="h6"
             variant="h6"
-            style={{ fontSize: "24px", fontWeight: "800", marginTop: "-10px" }}
+            style={{
+              fontSize: "14px",
+              fontWeight: "800",
+              marginTop: "-10px"
+            }}
           >
             Registration Form:
           </Typography>
@@ -152,7 +179,7 @@ const Register = ({
             <Grid item xs={1}></Grid>
             <Grid item xs={10} sm={10}>
               <TextField
-                // variant="outlined"
+                variant="filled"
                 margin="normal"
                 id="email"
                 label="Email Address"
@@ -162,6 +189,15 @@ const Register = ({
                 required
                 fullWidth
                 autoFocus
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Icon edge="end">
+                        <EmailTwoToneIcon />
+                      </Icon>
+                    </InputAdornment>
+                  )
+                }}
               />
             </Grid>
             <Grid item xs={1}></Grid>
@@ -170,16 +206,34 @@ const Register = ({
             <Grid item xs={1}></Grid>
             <Grid item xs={10} md={4}>
               <TextField
-                // variant="outlined"
+                variant="filled"
                 margin="normal"
                 name="password"
                 label="Password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 value={password}
                 onChange={e => onChange(e)}
                 required
                 fullWidth
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        edge="end"
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {values.showPassword ? (
+                          <VisibilityOutlinedIcon />
+                        ) : (
+                          <VisibilityOffIcon />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
               />
             </Grid>
             <Grid item xs={1}></Grid>
@@ -188,11 +242,11 @@ const Register = ({
 
             <Grid item xs={10} md={4}>
               <TextField
-                // variant="outlined"
+                variant="filled"
                 margin="normal"
                 name="password2"
                 label="Confirm Password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password2"
                 value={password2}
                 onChange={e => onChange(e)}
@@ -204,7 +258,7 @@ const Register = ({
             </Grid>
             <Grid container>
               <Grid item xs={1}></Grid>
-              <Grid item xs={10}>
+              <Grid item xs={5}>
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -218,20 +272,20 @@ const Register = ({
                   className={classes.remember}
                 />
               </Grid>
-              <Grid item xs={1}></Grid>
-            </Grid>
-            <Grid item sm={1}></Grid>
-            <Grid item xs={12} sm={5}>
-              <Button
-                type="submit"
-                fullWidth
-                size="large"
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                REGISTER
-              </Button>
+              <Grid item xs={6}></Grid>
+              <Grid itsm sm={1}></Grid>
+              <Grid item xs={12} sm={4}>
+                <Button
+                  type="submit"
+                  fullWidth
+                  size="large"
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                >
+                  REGISTER
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
         </Form>
@@ -245,9 +299,21 @@ const Register = ({
             sm={6}
             style={{ marginBottom: "20px", padding: "0% 0% 0%" }}
           >
-            <center>
-              <GoogleAuth />
-            </center>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <Button
+                renderAs="button"
+                size="small"
+                variant="contained"
+                color="secondary"
+                className={classes.submit}
+                style={{
+                  textDecoration: "none",
+                  borderRadius: "20px"
+                }}
+              >
+                Go Back To Login
+              </Button>
+            </Link>
           </Grid>
         </Grid>
       </Box>

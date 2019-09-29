@@ -56,11 +56,9 @@ export const register = ({ email, terms, password }) => async dispatch => {
     dispatch(loadUser());
     dispatch(showSuccessSnackbar("Successfully Registered!"));
   } catch (err) {
-    const errors = err.response.data.errors;
+    // const errors = err.response.data.errors;
 
-    if (errors) {
-      errors.forEach(error => dispatch(showErrorSnackbar(error.msg)));
-    }
+    dispatch(showErrorSnackbar(err.msg));
 
     dispatch({
       type: REGISTER_FAIL

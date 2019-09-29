@@ -9,9 +9,15 @@ import {
   Checkbox,
   Grid,
   Typography,
-  Box
+  Box,
+  IconButton,
+  Icon,
+  InputAdornment,
+  makeStyles
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
+import EmailTwoToneIcon from "@material-ui/icons/EmailTwoTone";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { login, signIn } from "../../actions/auth";
@@ -49,13 +55,29 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Login = ({ isAuthenticated, login, setAlert }) => {
+const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   });
+  const [values, setValues] = React.useState({
+    amount: "",
+    password: "",
+    weight: "",
+    weightRange: "",
+    showPassword: false
+  });
+
   const classes = useStyles();
   const { email, password } = formData;
+  const { showPassword } = values;
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+  const handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -119,22 +141,51 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
             onChange={e => onChange(e)}
             required
             fullWidth
+            variant="filled"
             autoFocus
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Icon edge="end">
+                    <EmailTwoToneIcon />
+                  </Icon>
+                </InputAdornment>
+              )
+            }}
           />
 
           <TextField
             margin="normal"
             name="password"
             label="Password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             value={password}
             onChange={e => onChange(e)}
             required
             fullWidth
+            variant="filled"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    edge="end"
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {values.showPassword ? (
+                      <VisibilityOutlinedIcon />
+                    ) : (
+                      <VisibilityOffIcon />
+                    )}
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
           />
 
           <Grid container>
-            <Grid item xs={12} sm={6}>
+            <Grid item sm={6}>
               <FormControlLabel
                 style={{ fontSize: "80px" }}
                 control={<Checkbox value="remember" color="primary" />}
@@ -156,10 +207,11 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
                 Login
               </Button>
             </Grid>
-            <Grid item sm={1}></Grid>
-            <Grid item xs={12} sm={6}>
-              <Link to="/register">
+            <Grid item sm={2}></Grid>
+            <Grid item xs={12} sm={5}>
+              <Link to="/register" style={{ textDecoration: "none" }}>
                 <Button
+                  renderAs="button"
                   fullWidth
                   size="large"
                   variant="contained"
@@ -174,26 +226,22 @@ const Login = ({ isAuthenticated, login, setAlert }) => {
               </Link>
             </Grid>
 
-            <Grid item xs={5}>
-              <Link to="#" variant="body2">
-                <center>
-                  <p>Forgot password?</p>
-                </center>
-              </Link>
-            </Grid>
-
             <Grid item xs={7}>
-              <Link to="/register" variant="body2">
-                <center>
-                  <p>{"No Account? Sign Up Here!"}</p>
-                </center>
+              <Link
+                to="#"
+                style={{
+                  textDecoration: "none",
+                  fontWeight: 400,
+                  fontSize: "12px",
+                  color: "grey",
+                  marginLeft: "10px"
+                }}
+              >
+                Forgot password? Click Here!!
               </Link>
             </Grid>
-
-            <Grid container>
-              <Grid item xs={12} style={{ paddingBottom: "0px" }}>
-                <GoogleAuth />
-              </Grid>
+            <Grid item sm={5}>
+              <GoogleAuth />
             </Grid>
           </Grid>
         </form>
