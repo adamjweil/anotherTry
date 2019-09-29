@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Grid } from "@material-ui/core";
 import Login from "./../auth/Login";
+import Register from "./../auth/Register";
 import { login } from "../../actions/auth";
 import { loadUser } from "../../actions/user";
 import { Redirect } from "react-router-dom";
@@ -31,6 +32,14 @@ const Landing = ({ auth: { isAuthenticated }, history, login }) => {
   // useEffect(() => {
   //   loadUser();
   // }, []);
+  const [values, setValues] = React.useState({
+    loginOrRegister: true
+  });
+  const showLoginOrRegister = () => {
+    setValues({ ...values, showLoginOrRegister: !values.showLoginOrRegister });
+  };
+  const { LoginOrRegister } = values;
+
   const classes = useStyles();
   if (isAuthenticated === true) {
     return <Redirect to="/dashboard" />;
@@ -41,7 +50,11 @@ const Landing = ({ auth: { isAuthenticated }, history, login }) => {
           <Grid container>
             <Grid item xs={3}></Grid>
             <Grid item sm={12} md={6}>
-              <Login />
+              {showLoginOrRegister ? (
+                <Login showLoginOrRegister={showLoginOrRegister} />
+              ) : (
+                <Register />
+              )}
             </Grid>
             <Grid item xs={3}></Grid>
           </Grid>
