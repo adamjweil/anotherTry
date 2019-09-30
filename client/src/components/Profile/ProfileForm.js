@@ -13,15 +13,12 @@ import {
 } from "@material-ui/core";
 import { Form } from "semantic-ui-react";
 import PropTypes from "prop-types";
+import SaveIcon from "@material-ui/icons/Save";
+import clsx from "clsx";
 
 import { updateProfile, createProfile } from "../../actions/profile";
 import { getCurrentProfile } from "../../actions/profile";
 import { loadUser } from "../../actions/user";
-import {
-  showInfoSnackbar,
-  showErrorSnackbar,
-  showSuccessSnackbar
-} from "../../actions/alert";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -33,6 +30,15 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center",
     width: "100%"
+  },
+  leftIcon: {
+    marginRight: theme.spacing(1)
+  },
+  rightIcon: {
+    marginLeft: theme.spacing(1)
+  },
+  iconSmall: {
+    fontSize: 20
   },
   form: {
     width: "100%",
@@ -118,6 +124,7 @@ const ProfileForm = ({
             <Grid item xs={12} sm={5}>
               <FormControl>
                 <TextField
+                  style={{ marginRight: "10px" }}
                   margin="normal"
                   variant="outlined"
                   name="lastName"
@@ -149,7 +156,6 @@ const ProfileForm = ({
             >
               <InputLabel> Team</InputLabel>
               <Select
-                margin="normal"
                 style={{ width: "350px" }}
                 name="team"
                 value={values.team}
@@ -173,7 +179,6 @@ const ProfileForm = ({
             >
               <InputLabel>Title</InputLabel>
               <Select
-                margin="normal"
                 style={{ width: "350px" }}
                 name="title"
                 value={values.title}
@@ -194,14 +199,13 @@ const ProfileForm = ({
           <Grid item xs={6}></Grid>
           <Grid item xs={12}>
             <Button
-              // fullWidth
               type="submit"
-              size="small"
               variant="contained"
-              color="primary"
+              size="small"
               className={classes.submit}
             >
-              SUBMIT
+              <SaveIcon className={clsx(classes.leftIcon, classes.iconSmall)} />
+              Save
             </Button>
           </Grid>
         </Paper>
@@ -223,5 +227,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createProfile, updateProfile }
+  { createProfile, updateProfile, loadUser, getCurrentProfile }
 )(ProfileForm);

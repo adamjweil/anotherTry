@@ -1,6 +1,5 @@
 import React, { Fragment, Component } from "react";
 import { connect } from "react-redux";
-import uuid from "uuid";
 import axios from "axios";
 import {
   loadUser,
@@ -17,7 +16,6 @@ import { Button } from "semantic-ui-react";
 import { Grid } from "@material-ui/core";
 import PropTypes from "prop-types";
 import ProfileCard from "./ProfileCard";
-import CreateProfile from "./profile-forms/CreateProfile";
 import ProfileForm from "./ProfileForm";
 
 export class Profile extends Component {
@@ -53,10 +51,6 @@ export class Profile extends Component {
     let full = mo + "/" + dt + "/" + yr;
     this.setState({ hireDate: full });
   };
-
-  onSubmit(formValues) {
-    this.props.createProfile(formValues);
-  }
 
   handleSubmitProfile = ({ firstName, lastName, handle, team, title }) => {
     const newProfile = {

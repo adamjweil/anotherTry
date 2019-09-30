@@ -1,6 +1,5 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
-import { showErrorSnackbar } from "./alert";
 import {
   AUTH_ERROR,
   USER_LOADED,
@@ -9,7 +8,6 @@ import {
   NOTIFCATION_INCREMENT,
   NOTIFCATION_DECREMENT
 } from "./types";
-import history from "../history";
 
 // LOAD USER
 export const loadUser = (history, showErrorSnackbar) => async dispatch => {

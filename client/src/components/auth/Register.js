@@ -28,7 +28,6 @@ import {
   showErrorSnackbar,
   showSuccessSnackbar
 } from "../../actions/alert";
-import GoogleAuth from "../../GoogleAuth";
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -304,13 +303,26 @@ const Register = ({
                 renderAs="button"
                 size="small"
                 variant="contained"
-                color="secondary"
+                color="info"
                 className={classes.submit}
                 style={{
                   textDecoration: "none",
                   borderRadius: "20px"
                 }}
               >
+                <img
+                  style={{
+                    justifyContent: "center",
+                    align: "center",
+                    alignItems: "center",
+                    height: "20px",
+                    width: "20px"
+                  }}
+                  src={
+                    process.env.PUBLIC_URL + "/img/arrow_back_grey_192x192.png"
+                  }
+                  alt=""
+                />
                 Go Back To Login
               </Button>
             </Link>
