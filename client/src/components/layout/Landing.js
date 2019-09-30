@@ -1,12 +1,11 @@
-import React, { Fragment, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container, Grid } from "@material-ui/core";
+import { Grid, Container } from "@material-ui/core";
 import Login from "./../auth/Login";
 import Register from "./../auth/Register";
 import { login } from "../../actions/auth";
-import { loadUser } from "../../actions/user";
 import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
@@ -20,18 +19,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-// class Landing extends React.Component {
-//   componentDidMount() {
-//     loadUser();
-//   }
-//   useEffect(() => {
-//     loadUser(),
-//   })
-// }
 const Landing = ({ auth: { isAuthenticated }, history, login }) => {
-  // useEffect(() => {
-  //   loadUser();
-  // }, []);
   const [values, setValues] = React.useState({
     loginOrRegister: true
   });
@@ -44,33 +32,31 @@ const Landing = ({ auth: { isAuthenticated }, history, login }) => {
     return <Redirect to="/dashboard" />;
   } else {
     return (
-      <Fragment>
-        <Container className={classes.root}>
-          <Grid container>
-            <Grid item xs={3}></Grid>
-            <Grid item sm={12} md={6}>
-              {showLoginOrRegister ? (
-                <Login showLoginOrRegister={showLoginOrRegister} />
-              ) : (
-                <Register />
-              )}
-            </Grid>
-            <Grid item xs={3}></Grid>
+      <Container className={classes.root} maxWidth="md">
+        <Grid>
+          <Grid item xs={3}></Grid>
+          <Grid item sm={12} md={6}>
+            {showLoginOrRegister ? (
+              <Login showLoginOrRegister={showLoginOrRegister} />
+            ) : (
+              <Register />
+            )}
           </Grid>
+          <Grid item xs={3}></Grid>
+        </Grid>
 
-          <Grid item xs={12}>
-            <div
-              style={{
-                display: "in-line",
-                position: "absolute",
-                bottom: "15px",
-                left: "15px",
-                right: "15px"
-              }}
-            ></div>
-          </Grid>
-        </Container>
-      </Fragment>
+        <Grid item xs={12}>
+          <div
+            style={{
+              display: "in-line",
+              position: "absolute",
+              bottom: "15px",
+              left: "15px",
+              right: "15px"
+            }}
+          ></div>
+        </Grid>
+      </Container>
     );
   }
 };

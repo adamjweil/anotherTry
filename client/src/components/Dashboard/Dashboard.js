@@ -20,14 +20,7 @@ export class Dashboard extends Component {
     return loading && profile === null ? (
       <Spinner />
     ) : (
-      <Grid
-        style={{ marginTop: "10px" }}
-        container
-        columns={2}
-        divided
-        relaxed
-        stackable
-      >
+      <Grid container columns={2} divided relaxed stackable>
         <Grid item xs={6}>
           <Fragment>
             <img

@@ -1,13 +1,12 @@
 import React from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
-import { AppBar, Badge, MenuItem, Menu, Button } from "@material-ui/core";
+import { AppBar, Badge, MenuItem, Menu } from "@material-ui/core";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
+import { IconButton, Button } from "@material-ui/core";
 import InputBase from "@material-ui/core/InputBase";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MenuBookIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
@@ -114,11 +113,31 @@ const AuthenticatedNavbar = ({ logout }) => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <Link to="/profile">
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <Link to="/profile" style={{ textDecoration: "none" }}>
+        <MenuItem onClick={handleMenuClose}>
+          <Button>Profile</Button>
+        </MenuItem>
       </Link>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={logout}>Logout</MenuItem>
+      <Link to="/tickethub" style={{ textDecoration: "none" }}>
+        <MenuItem onClick={handleMenuClose}>
+          <Button>Tickets</Button>
+        </MenuItem>
+      </Link>
+      <Link to="/dashboard" style={{ textDecoration: "none" }}>
+        <MenuItem onClick={handleMenuClose}>
+          <Button>Dashboard</Button>
+        </MenuItem>
+      </Link>
+      <Link to="/directory" style={{ textDecoration: "none" }}>
+        <MenuItem onClick={handleMenuClose}>
+          <Button>Directory</Button>
+        </MenuItem>
+      </Link>
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <MenuItem onClick={logout}>
+          <Button>Logout</Button>
+        </MenuItem>
+      </Link>
     </Menu>
   );
 
@@ -180,9 +199,9 @@ const AuthenticatedNavbar = ({ logout }) => {
             color="inherit"
             aria-label="open drawer"
           >
-            <MenuIcon />
+            <MenuIcon onClick={handleProfileMenuOpen} />
           </IconButton>
-          <Link to="/directory">
+          <Link to="/directory" style={{ textDecoration: "none" }}>
             <MenuItem>
               <p style={{ color: "white" }}>Directory</p>
             </MenuItem>
@@ -214,19 +233,18 @@ const AuthenticatedNavbar = ({ logout }) => {
               </MenuItem>
             </Link>
 
-            <MenuItem onClick={handleProfileMenuOpen}>
-              My Profile
+            <MenuItem>
+              <p style={{ color: "white" }}>
+                <Link
+                  to="/profile"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
+                  Profile
+                </Link>
+              </p>
               <Badge badgeContent={17} color="secondary">
                 <AccountCircle />
               </Badge>
-              <IconButton
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              ></IconButton>
             </MenuItem>
           </div>
           <div className={classes.sectionMobile}>

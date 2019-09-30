@@ -211,7 +211,7 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
             <Grid item xs={12} sm={5}>
               <Link to="/register" style={{ textDecoration: "none" }}>
                 <Button
-                  renderAs="button"
+                  renderas="button"
                   fullWidth
                   size="large"
                   variant="contained"

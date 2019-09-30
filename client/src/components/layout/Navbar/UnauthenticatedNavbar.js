@@ -2,13 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, MenuItem } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
+import { Toolbar } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import MenuIcon from "@material-ui/icons/Menu";
-// import { Button } from "@material-ui/core";
-
-// import history from "../../../history";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,38 +24,43 @@ export default function UnauthenticatedNavbar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-
-          <Typography variant="h4" className={classes.title}>
-            <Link to="/">
-              <p
-                style={{ color: "white", fontWeight: "800", fontSize: "24px" }}
-              >
-                ONLINE PORTAL
-              </p>
-            </Link>
-          </Typography>
-
           <MenuItem>
-            <Link to="/directory" className="">
+            <Link
+              to="/directory"
+              className=""
+              style={{ textDecoration: "none" }}
+            >
               <p
-                style={{ color: "white", fontWeight: "600", fontSize: "18px" }}
+                style={{
+                  color: "white",
+                  fontWeight: "500",
+                  fontSize: "16px"
+                }}
               >
                 DIRECTORY
               </p>
             </Link>
           </MenuItem>
+          <Typography variant="h6" className={classes.title}></Typography>
+
           <MenuItem>
-            <Link to="/register">
+            <Link to="/" className="" style={{ textDecoration: "none" }}>
               <p
-                style={{ color: "white", fontWeight: "600", fontSize: "18px" }}
+                style={{ color: "white", fontWeight: "500", fontSize: "16px" }}
+              >
+                HOME
+              </p>
+            </Link>
+          </MenuItem>
+
+          <MenuItem>
+            <Link to="/register" style={{ textDecoration: "none" }}>
+              <p
+                style={{
+                  color: "white",
+                  fontWeight: "500",
+                  fontSize: "16px"
+                }}
               >
                 REGISTER
               </p>
