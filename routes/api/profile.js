@@ -38,7 +38,8 @@ router.post("/", auth, async (req, res) => {
 
   // Build Profile object
   const profileFields = {};
-  profileFields.user = req.user;
+  profileFields.user = req.user.id;
+
   if (firstName) profileFields.firstName = firstName;
   if (lastName) profileFields.lastName = lastName;
   if (handle) profileFields.handle = handle;
@@ -51,10 +52,9 @@ router.post("/", auth, async (req, res) => {
     if (profile) {
       // Update
       profile = await Profile.findOneAndUpdate(
-        { user: req.user.id },
+        { user: req.user },
         { $set: { profile: { profileFields } } },
-        { new: true },
-        { returnOriginal: false }
+        { new: true }
       );
 
       return profile.save();
