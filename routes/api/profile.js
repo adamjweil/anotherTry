@@ -40,9 +40,9 @@ router.post("/", auth, async (req, res) => {
   const profileFields = {};
   profileFields.user = req.user.id;
 
-  if (firstName) profileFields.firstName = firstName;
-  if (lastName) profileFields.lastName = lastName;
-  if (handle) profileFields.handle = handle;
+  if (firstName) profileFields.firstName = req.firstName;
+  if (lastName) profileFields.lastName = req.lastName;
+  if (handle) profileFields.handle = req.handle;
   if (team) profileFields.team = team;
   if (title) profileFields.title = title;
 
@@ -57,8 +57,8 @@ router.post("/", auth, async (req, res) => {
         { new: true }
       );
 
-      return profile.save();
-      // return res.json(profile);
+      profile.save();
+      return res.json(profile);
     } else {
       // Create
       profile = new Profile(profileFields);

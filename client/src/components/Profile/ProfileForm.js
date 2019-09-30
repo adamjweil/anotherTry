@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -9,8 +9,6 @@ import {
   MenuItem,
   InputLabel,
   Button,
-  Container,
-  Typography,
   Paper
 } from "@material-ui/core";
 import { Form } from "semantic-ui-react";
@@ -75,21 +73,10 @@ const ProfileForm = ({
   handleSubmit,
   handleChange
 }) => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    handle: "",
-    team: "",
-    title: ""
-  });
   const classes = useStyles();
-  const { firstName, lastName, handle, team, title } = formData;
-
-  const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = e => {
-    console.log(values);
+    // console.log(values);
     e.preventDefault();
     createProfile(values);
   };
@@ -236,5 +223,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createProfile }
+  { createProfile, updateProfile }
 )(ProfileForm);

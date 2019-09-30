@@ -38,7 +38,6 @@ const Landing = ({ auth: { isAuthenticated }, history, login }) => {
   const showLoginOrRegister = () => {
     setValues({ ...values, showLoginOrRegister: !values.showLoginOrRegister });
   };
-  const { LoginOrRegister } = values;
 
   const classes = useStyles();
   if (isAuthenticated === true) {
