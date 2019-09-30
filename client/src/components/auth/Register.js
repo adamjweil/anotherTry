@@ -179,7 +179,7 @@ const Register = ({
             <Grid item xs={1}></Grid>
             <Grid item xs={10} sm={10}>
               <TextField
-                variant="filled"
+                variant="outlined"
                 margin="normal"
                 id="email"
                 label="Email Address"
@@ -206,7 +206,7 @@ const Register = ({
             <Grid item xs={1}></Grid>
             <Grid item xs={10} md={4}>
               <TextField
-                variant="filled"
+                variant="outlined"
                 margin="normal"
                 name="password"
                 label="Password"
@@ -242,7 +242,7 @@ const Register = ({
 
             <Grid item xs={10} md={4}>
               <TextField
-                variant="filled"
+                variant="outlined"
                 margin="normal"
                 name="password2"
                 label="Confirm Password"

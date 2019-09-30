@@ -88,13 +88,15 @@ const ProfileForm = ({
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = formData => dispatch => {
-    dispatch(createProfile(formData));
+  const onSubmit = e => {
+    console.log(values);
+    e.preventDefault();
+    createProfile(values);
   };
 
   return (
     <Grid container>
-      <Form className={classes.form} onSubmit={onSubmit}>
+      <Form className={classes.form} onSubmit={e => onSubmit(e)}>
         <Paper className={classes.paper}>
           <Grid item xs={12} className={classes.message}>
             <center>
@@ -116,10 +118,12 @@ const ProfileForm = ({
             <Grid item xs={12} sm={5}>
               <FormControl style={{ marginLeft: "20px" }}>
                 <TextField
+                  margin="normal"
+                  variant="outlined"
                   name="firstName"
                   label="First Name"
-                  onChange={e => onChange(e)}
-                  // defaultValue={values.firstName}
+                  onChange={handleChange("firstName")}
+                  defaultValue={values.firstName}
                 />
               </FormControl>
             </Grid>
@@ -127,9 +131,11 @@ const ProfileForm = ({
             <Grid item xs={12} sm={5}>
               <FormControl>
                 <TextField
+                  margin="normal"
+                  variant="outlined"
                   name="lastName"
                   label="Last Name"
-                  onChange={e => onChange(e)}
+                  onChange={handleChange("lastName")}
                   defaultValue={values.lastName}
                 />
               </FormControl>
@@ -140,7 +146,7 @@ const ProfileForm = ({
               <TextField
                 name="handle"
                 label="Handle"
-                onChange={e => onChange(e)}
+                onChange={handleChange("handle")}
                 defaultValue={values.handle}
                 helperText="What do you go by?"
               />
@@ -154,13 +160,13 @@ const ProfileForm = ({
                 margin: "10px 10px 10px"
               }}
             >
-              <InputLabel>Team</InputLabel>
+              <InputLabel> Team</InputLabel>
               <Select
-                // variant="outlined"
+                margin="normal"
                 style={{ width: "350px" }}
                 name="team"
                 value={values.team}
-                onChange={e => onChange(e)}
+                onChange={handleChange("team")}
               >
                 {TEAMS.map(team => (
                   <MenuItem key={team} value={team}>
@@ -180,7 +186,7 @@ const ProfileForm = ({
             >
               <InputLabel>Title</InputLabel>
               <Select
-                // variant="outlined"
+                margin="normal"
                 style={{ width: "350px" }}
                 name="title"
                 value={values.title}
@@ -207,7 +213,6 @@ const ProfileForm = ({
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={e => onSubmit(e)}
             >
               SUBMIT
             </Button>

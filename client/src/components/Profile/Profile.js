@@ -109,7 +109,7 @@ export class Profile extends Component {
               createProfile={this.props.createProfile}
               handleChange={this.handleChange}
               handleDateChange={this.handleDateChange}
-              onSubmit={this.onSubmit}
+              onSubmit={this.handleSubmitProfile}
             />
           </Grid>
         </Grid>

@@ -133,6 +133,7 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
             Log In Below:
           </Typography>
           <TextField
+            variant="outlined"
             margin="normal"
             id="email"
             label="Email Address"
@@ -141,7 +142,6 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
             onChange={e => onChange(e)}
             required
             fullWidth
-            variant="filled"
             autoFocus
             InputProps={{
               endAdornment: (
@@ -163,7 +163,7 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
             onChange={e => onChange(e)}
             required
             fullWidth
-            variant="filled"
+            variant="outlined"
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
