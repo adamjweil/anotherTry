@@ -34,7 +34,7 @@ export default function(state = INITIAL_STATE, action) {
     case CREATE_PROFILE:
       return {
         ...state,
-        profile: { ...payload },
+        profile: payload,
         loading: false
       };
     case CREATE_PROFILE_FAIL:
