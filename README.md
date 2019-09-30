@@ -57,6 +57,11 @@ Front End: Had originally used material-ui to style everything, but as I continu
     #9/26
     - Need to have the createProfile action actually create a profile in server
 
+    #9/30
+    - createProfile action is now actually creating a Profile Object. The object is sitting in State, however. I neeed to make sure it gets picked up by the database so that it can be fetched properly
+    - Fixed the MenuItem Icon on the left side of navbar so that when clicked, the correct dropdown list shows up
+      - Also removed from previous location
+      - Clicking buttons in the dropdown is behaving as expected
 
 
     ##TO DO
