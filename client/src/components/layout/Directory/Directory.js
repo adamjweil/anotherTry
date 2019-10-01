@@ -52,7 +52,7 @@ export class Directory extends React.Component {
 
   render() {
     return (
-      <Grid container>
+      <Grid>
         <Grid item xs={2}>
           <VerticalMenu />
         </Grid>

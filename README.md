@@ -63,9 +63,11 @@ Front End: Had originally used material-ui to style everything, but as I continu
       - Also removed from previous location
       - Clicking buttons in the dropdown is behaving as expected
 
+    #10/01
+    - Okay so FINALLY I have my MongoDB interacting with redux on the front end for the creation of profiles. For whatever reason, it was much easier to connect the login and register functionality (which included creating DB models for uses...), so maybe I was just missing somethign with this. Seems to be working now
 
     ##TO DO
-    - Make sure Profile form submits to server
+    - After profile has been submitted for the first time, You need to be able to go in and edit it
     - Ticket Form
 
       - Form for Creating Profile

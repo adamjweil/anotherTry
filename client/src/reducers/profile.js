@@ -4,7 +4,8 @@ import {
   CREATE_PROFILE,
   CREATE_PROFILE_FAIL,
   CLEAR_PROFILE,
-  GET_CURRENT_PROFILE
+  GET_CURRENT_PROFILE,
+  PROFILE_LOADED
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -53,6 +54,12 @@ export default function(state = INITIAL_STATE, action) {
     case GET_CURRENT_PROFILE:
       return {
         ...state
+      };
+    case PROFILE_LOADED:
+      return {
+        ...state,
+        profile: payload,
+        loading: false
       };
     default:
       return state;

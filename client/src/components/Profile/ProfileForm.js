@@ -73,23 +73,27 @@ const TITLES = [
 ];
 
 const ProfileForm = ({
-  handleSubmitProfile,
   values,
+  firstName,
+  lastName,
+  handle,
+  team,
+  title,
   createProfile,
   handleSubmit,
   handleChange
 }) => {
   const classes = useStyles();
 
-  const onSubmit = e => {
+  const onSubmit = async dispatch => {
     // console.log(values);
-    e.preventDefault();
-    createProfile(values);
+    // e.preventDefault();
+    createProfile({ firstName, lastName, handle, team, title });
   };
 
   return (
     <Grid container>
-      <Form className={classes.form} onSubmit={e => onSubmit(e)}>
+      <Form className={classes.form} onSubmit={onSubmit}>
         <Paper className={classes.paper}>
           <Grid item xs={12} className={classes.message}>
             <center>
@@ -115,8 +119,8 @@ const ProfileForm = ({
                   variant="outlined"
                   name="firstName"
                   label="First Name"
+                  value={firstName}
                   onChange={handleChange("firstName")}
-                  defaultValue={values.firstName}
                 />
               </FormControl>
             </Grid>
@@ -130,7 +134,6 @@ const ProfileForm = ({
                   name="lastName"
                   label="Last Name"
                   onChange={handleChange("lastName")}
-                  defaultValue={values.lastName}
                 />
               </FormControl>
             </Grid>
@@ -141,7 +144,6 @@ const ProfileForm = ({
                 name="handle"
                 label="Handle"
                 onChange={handleChange("handle")}
-                defaultValue={values.handle}
                 helperText="What do you go by?"
               />
             </FormControl>
@@ -158,7 +160,6 @@ const ProfileForm = ({
               <Select
                 style={{ width: "350px" }}
                 name="team"
-                value={values.team}
                 onChange={handleChange("team")}
               >
                 {TEAMS.map(team => (
@@ -181,7 +182,6 @@ const ProfileForm = ({
               <Select
                 style={{ width: "350px" }}
                 name="title"
-                value={values.title}
                 onChange={handleChange("title")}
               >
                 <MenuItem value="">
@@ -216,8 +216,8 @@ const ProfileForm = ({
 
 ProfileForm.propTypes = {
   createProfile: PropTypes.func.isRequired,
-  users: PropTypes.array.isRequired,
-  profile: PropTypes.object.isRequired
+  users: PropTypes.array.isRequired
+  // profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

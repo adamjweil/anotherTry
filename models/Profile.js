@@ -18,29 +18,6 @@ const ProfileSchema = new mongoose.Schema({
   title: {
     type: String
   },
-  hireDate: {
-    type: Date
-  },
-  bio: {
-    type: String
-  },
-  githubusername: {
-    type: String
-  },
-  social: {
-    twitter: {
-      type: String
-    },
-    linkedin: {
-      type: String
-    },
-    facebook: {
-      type: String
-    },
-    youtube: {
-      type: String
-    }
-  },
   date: {
     type: Date,
     default: Date.now
