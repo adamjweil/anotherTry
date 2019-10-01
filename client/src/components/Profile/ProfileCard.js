@@ -2,11 +2,12 @@ import React from "react";
 // import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid, Avatar, Divider, Paper } from "@material-ui/core";
+import { getCurrentProfile, loadProfile } from "../../actions/profile";
 
 export class ProfileCard extends React.Component {
   render() {
-    const { values } = this.props;
-    const { firstName, lastName, handle, team, title } = values;
+    // const { values } = this.props;
+    const { firstName, lastName, handle, team, title } = this.props;
 
     return (
       <Paper style={{ padding: "10px", marginTop: "30px" }}>
@@ -86,4 +87,12 @@ export class ProfileCard extends React.Component {
   }
 }
 
-export default connect()(ProfileCard);
+const mapStateToProps = state => ({
+  profile: state.profile,
+  user: state.user
+});
+
+export default connect(
+  mapStateToProps,
+  { getCurrentProfile, loadProfile }
+)(ProfileCard);

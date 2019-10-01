@@ -10,7 +10,8 @@ import {
 import {
   getCurrentProfile,
   createProfile,
-  updateProfile
+  updateProfile,
+  loadProfile
 } from "../../actions/profile";
 import { Button } from "semantic-ui-react";
 import { Grid } from "@material-ui/core";
@@ -28,9 +29,7 @@ export class Profile extends Component {
   };
   componentDidMount() {
     loadUser();
-    fetchUsers();
-    getCurrentProfile();
-    fetchUsers();
+    loadProfile();
   }
 
   handleChange = input => e => {
@@ -78,21 +77,12 @@ export class Profile extends Component {
     decrementNotificationCount();
   }
   render() {
-    const { firstName, lastName, handle, team, title } = this.state;
-    const values = {
-      firstName,
-      lastName,
-      handle,
-      team,
-      title
-    };
-
     return (
       <Fragment>
         <Grid container>
           <Grid item md={1}></Grid>
           <Grid item xs={12} md={3} style={{ minWidth: "300px" }}>
-            <ProfileCard values={values} user={this.props.user} />
+            <ProfileCard />
           </Grid>
           <Grid item md={1}></Grid>
           <Grid item xs={12} md={5}>
@@ -102,7 +92,6 @@ export class Profile extends Component {
               handle={this.state.handle}
               team={this.state.team}
               title={this.state.title}
-              values={values}
               users={this.props.users}
               createProfile={this.props.createProfile}
               handleChange={this.handleChange}
@@ -128,7 +117,8 @@ export class Profile extends Component {
 
 Profile.propTypes = {
   auth: PropTypes.object.isRequired,
-  users: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool,
   getCurrentProfile: PropTypes.func.isRequired,
   loadUser: PropTypes.func.isRequired,
@@ -138,12 +128,14 @@ Profile.propTypes = {
 const mapStateToProps = state => ({
   auth: state.auth,
   users: state.users,
-  user: state.auth.user
+  user: state.auth.user,
+  profile: state.profile
 });
 
 export default connect(
   mapStateToProps,
   {
+    loadProfile,
     updateProfile,
     createProfile,
     loadUser,

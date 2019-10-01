@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const gravatar = require("gravatar");
 const auth = require("../../middleware/auth");
 const { check, validationResult } = require("express-validator");
-
+const config = require("config");
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
 
@@ -40,9 +41,11 @@ router.post("/", auth, async (req, res) => {
   const profileFields = {};
   profileFields.user = req.user.id;
 
-  if (firstName) profileFields.firstName = req.firstName;
-  if (lastName) profileFields.lastName = req.lastName;
-  if (handle) profileFields.handle = req.handle;
+  if (firstName) profileFields.firstName = firstName;
+
+  if (lastName) profileFields.lastName = lastName;
+
+  if (handle) profileFields.handle = handle;
   if (team) profileFields.team = team;
   if (title) profileFields.title = title;
 
@@ -52,16 +55,19 @@ router.post("/", auth, async (req, res) => {
     if (profile) {
       // Update
       profile = await Profile.findOneAndUpdate(
-        { user: req.user },
-        { $set: { profile: { profileFields } } },
+        { user: req.user.id },
+        { $set: { profile: profileFields } },
         { new: true }
       );
 
-      profile.save();
-      return res.json(profile);
+      await profile.save();
+      res.json(profile);
     } else {
       // Create
       profile = new Profile(profileFields);
+      profile.user = req.user;
+
+      await profile.save();
       return res.json(profile);
     }
   } catch (err) {

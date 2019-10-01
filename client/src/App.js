@@ -44,10 +44,10 @@ const App = () => {
       </SnackbarProvider>
       <Router>
         <Navbar />
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/themeing" component={ThemeingLayout} />
-        <Route exact path="/responsive" component={ResponsiveLayout} />
         <section className="container" style={{ flex: "1" }}>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/themeing" component={ThemeingLayout} />
+          <Route exact path="/responsive" component={ResponsiveLayout} />
           <Switch>
             <Route exact path="/register" component={Register} />
             <Route exact path="/tickethub" component={Tickets} />
