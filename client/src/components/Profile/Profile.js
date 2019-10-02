@@ -18,6 +18,7 @@ import { Grid } from "@material-ui/core";
 import PropTypes from "prop-types";
 import ProfileCard from "./ProfileCard";
 import ProfileForm from "./ProfileForm";
+import store from "../../store";
 
 export class Profile extends Component {
   state = {
@@ -28,8 +29,7 @@ export class Profile extends Component {
     title: ""
   };
   componentDidMount() {
-    loadUser();
-    loadProfile();
+    store.dispatch(loadProfile());
   }
 
   handleChange = input => e => {
@@ -118,7 +118,6 @@ export class Profile extends Component {
 Profile.propTypes = {
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool,
   getCurrentProfile: PropTypes.func.isRequired,
   loadUser: PropTypes.func.isRequired,

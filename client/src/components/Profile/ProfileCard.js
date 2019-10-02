@@ -89,7 +89,7 @@ export class ProfileCard extends React.Component {
 
 const mapStateToProps = state => ({
   profile: state.profile,
-  user: state.user
+  user: state.auth.user
 });
 
 export default connect(

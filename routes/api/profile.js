@@ -50,6 +50,7 @@ router.post("/", auth, async (req, res) => {
   if (title) profileFields.title = title;
 
   try {
+    user = await User.find;
     profile = await Profile.findOne({ user: req.user.id });
 
     if (profile) {
@@ -79,15 +80,16 @@ router.post("/", auth, async (req, res) => {
 // @ route GET api/profile
 // @desc   Get all Profile
 // @access Public
-router.get("/", async (req, res) => {
-  try {
-    const profiles = await Profile.find().populate("user", ["email", "avatar"]);
-    res.json(profiles);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
+
+// router.get("/", async (req, res) => {
+//   try {
+//     const profiles = await Profile.find().populate("user", ["email", "avatar"]);
+//     res.json(profiles);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// });
 
 // @ route GET api/profile/user/:user_id
 // @desc   Get a specific Profile
