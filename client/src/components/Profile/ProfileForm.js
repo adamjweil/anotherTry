@@ -161,7 +161,12 @@ const ProfileForm = ({
                 style={{ width: "350px" }}
                 name="team"
                 onChange={handleChange("team")}
+                value={team}
               >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+
                 {TEAMS.map(team => (
                   <MenuItem key={team} value={team}>
                     {team}
@@ -183,6 +188,7 @@ const ProfileForm = ({
                 style={{ width: "350px" }}
                 name="title"
                 onChange={handleChange("title")}
+                value={title}
               >
                 <MenuItem value="">
                   <em>None</em>

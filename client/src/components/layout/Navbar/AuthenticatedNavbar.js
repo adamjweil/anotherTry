@@ -134,8 +134,8 @@ const AuthenticatedNavbar = ({ logout }) => {
         </MenuItem>
       </Link>
       <Link to="/" style={{ textDecoration: "none" }}>
-        <MenuItem onClick={logout}>
-          <Button>Logout</Button>
+        <MenuItem>
+          <Button onClick={logout}>Logout</Button>
         </MenuItem>
       </Link>
     </Menu>
@@ -267,7 +267,6 @@ const AuthenticatedNavbar = ({ logout }) => {
 };
 
 AuthenticatedNavbar.propTypes = {
-  isAuthenticated: PropTypes.bool,
   logout: PropTypes.func.isRequired
 };
 const mapStateToProps = state => ({

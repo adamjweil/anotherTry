@@ -10,22 +10,21 @@ import {
 //LOAD profile
 export const loadProfile = showErrorSnackbar => async dispatch => {
   try {
-    const res = await axios.get("/api/profile");
+    const res = await axios.get("/api/profile/me");
     dispatch({
       type: PROFILE_LOADED,
       payload: res.data
     });
   } catch (err) {
-    dispatch({
-      type: AUTH_ERROR
-    });
     console.log(err);
+    dispatch(showSuccessSnackbar(err.msg));
   }
 };
+
 // Get current users Profile
 export const getCurrentProfile = () => async dispatch => {
   try {
-    const res = await axios.get("/api/profile");
+    const res = await axios.get("/api/profile/me");
     dispatch({
       type: GET_PROFILE,
       payload: res.data
@@ -63,11 +62,8 @@ export const createProfile = ({
     // dispatch(getCurrentProfile());
     dispatch(showSuccessSnackbar("Profile Updated"));
   } catch (err) {
-    const errors = err.repsponse.data.errors;
-
-    if (errors) {
-      errors.forEach(dispatch(showErrorSnackbar(err.msg)));
-    }
+    console.log(err);
+    dispatch(showSuccessSnackbar(err.msg));
   }
 };
 
