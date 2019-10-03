@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import axios from "axios";
 import {
   loadUser,
-  fetchUsers,
   incrementNotificationCount,
   decrementNotificationCount
 } from "../../actions/user";
@@ -30,6 +29,7 @@ export class Profile extends Component {
   };
   componentDidMount() {
     store.dispatch(loadProfile());
+    store.dispatch(loadUser());
   }
 
   handleChange = input => e => {
@@ -82,7 +82,14 @@ export class Profile extends Component {
         <Grid container>
           <Grid item md={1}></Grid>
           <Grid item xs={12} md={3} style={{ minWidth: "300px" }}>
-            <ProfileCard />
+            <ProfileCard
+              firstName={this.state.firstName}
+              lastName={this.state.lastName}
+              handle={this.state.handle}
+              team={this.state.team}
+              title={this.state.title}
+              user={this.props.user}
+            />
           </Grid>
           <Grid item md={1}></Grid>
           <Grid item xs={12} md={5}>
@@ -92,7 +99,7 @@ export class Profile extends Component {
               handle={this.state.handle}
               team={this.state.team}
               title={this.state.title}
-              users={this.props.users}
+              user={this.props.user}
               createProfile={this.props.createProfile}
               handleChange={this.handleChange}
               handleDateChange={this.handleDateChange}

@@ -10,7 +10,7 @@ import {
 //LOAD profile
 export const loadProfile = showErrorSnackbar => async dispatch => {
   try {
-    const res = await axios.get("/api/profile/me");
+    const res = await axios.get("/api/profile");
     dispatch({
       type: PROFILE_LOADED,
       payload: res.data

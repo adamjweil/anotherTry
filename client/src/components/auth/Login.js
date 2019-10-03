@@ -97,7 +97,7 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
         borderRight={3}
         borderTop={1}
         borderColor="grey.400"
-        style={{ background: "#F8F8F8", minWidth: "540px" }}
+        style={{ background: "#F8F8F8", width: "575px" }}
       >
         <form
           style={{ padding: "30px" }}
@@ -185,7 +185,7 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
           />
 
           <Grid container>
-            <Grid item sm={6}>
+            <Grid item xs={6}>
               <FormControlLabel
                 style={{ fontSize: "80px" }}
                 control={<Checkbox value="remember" color="primary" />}
@@ -233,7 +233,7 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
                   textDecoration: "none",
                   fontWeight: 400,
                   fontSize: "12px",
-                  color: "grey",
+                  color: "default",
                   marginLeft: "10px"
                 }}
               >

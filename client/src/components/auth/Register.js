@@ -303,7 +303,7 @@ const Register = ({
                 renderAs="button"
                 size="small"
                 variant="contained"
-                color="info"
+                color="inherit"
                 className={classes.submit}
                 style={{
                   textDecoration: "none",

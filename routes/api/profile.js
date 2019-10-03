@@ -6,7 +6,7 @@ const { check, validationResult } = require("express-validator");
 const config = require("config");
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
-
+const ObjectId = require("ObjectId");
 // @ route GET api/profile/me
 // @desc   Get current users profile
 // @access Public
@@ -39,7 +39,7 @@ router.post("/", auth, async (req, res) => {
 
   // Build Profile object
   const profileFields = {};
-  profileFields.user = req.user.id;
+  profileFields.user = req.user;
 
   if (firstName) profileFields.firstName = firstName;
 
@@ -49,26 +49,36 @@ router.post("/", auth, async (req, res) => {
   if (team) profileFields.team = team;
   if (title) profileFields.title = title;
 
-  try {
-    user = await User.find;
-    profile = await Profile.findOne({ user: req.user.id });
+  user = await User.findOne({ user: req.user._id });
+  if (user) profileFields.user = req.user;
+  const id = ObjectId(user._id);
 
+  console.log("id");
+  console.log(id);
+
+  try {
+    // console.error(profileFields);
+    profile = await Profile.findOne({ user });
+    console.error("profile");
+    console.error(profile);
     if (profile) {
       // Update
       profile = await Profile.findOneAndUpdate(
-        { user: req.user.id },
+        { user: profileFields.user.id },
         { $set: { profile: profileFields } },
         { new: true }
       );
 
-      await profile.save();
+      profile.save();
       res.json(profile);
     } else {
       // Create
-      profile = new Profile(profileFields);
-      profile.user = req.user;
+      if (user) profileFields.user = req.user;
+      let profile = new Profile(profileFields);
+      console.log("hello");
+      // profile.user = req.user;
 
-      await profile.save();
+      profile.save();
       return res.json(profile);
     }
   } catch (err) {
@@ -77,19 +87,21 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
-// @ route GET api/profile
+// @route GET api/profile
 // @desc   Get all Profile
 // @access Public
-
-// router.get("/", async (req, res) => {
-//   try {
-//     const profiles = await Profile.find().populate("user", ["email", "avatar"]);
-//     res.json(profiles);
-//   } catch (err) {
-//     console.error(err.message);
-//     res.status(500).send("Server Error");
-//   }
-// });
+router.get("/", async (req, res) => {
+  try {
+    const profiles = await Profile.findBy({ user: req.user }).populate("user", [
+      "email",
+      "avatar"
+    ]);
+    res.json(profiles);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 // @ route GET api/profile/user/:user_id
 // @desc   Get a specific Profile
@@ -104,7 +116,7 @@ router.get("/user/:user_id", async (req, res) => {
       return res.status(400).json({ msg: "There is no profile for this user" });
     }
 
-    res.json(profiles);
+    res.json(profile);
   } catch (err) {
     console.error(err.message);
     if (err.kind == "ObjectId") {

@@ -15,6 +15,7 @@ import { Form } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import SaveIcon from "@material-ui/icons/Save";
 import clsx from "clsx";
+import { ObjectId } from "mongodb";
 
 import { updateProfile, createProfile } from "../../actions/profile";
 import { getCurrentProfile } from "../../actions/profile";
@@ -222,12 +223,12 @@ const ProfileForm = ({
 
 ProfileForm.propTypes = {
   createProfile: PropTypes.func.isRequired,
-  users: PropTypes.array.isRequired
+  user: PropTypes.object.isRequired
   // profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  users: Object.values(state.users),
+  user: ObjectId(state.auth.user),
   profile: state.profile
 });
 

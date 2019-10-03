@@ -198,8 +198,9 @@ const AuthenticatedNavbar = ({ logout }) => {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={handleProfileMenuOpen}
           >
-            <MenuIcon onClick={handleProfileMenuOpen} />
+            <MenuIcon />
           </IconButton>
           <Link to="/directory" style={{ textDecoration: "none" }}>
             <MenuItem>
@@ -234,14 +235,12 @@ const AuthenticatedNavbar = ({ logout }) => {
             </Link>
 
             <MenuItem>
-              <p style={{ color: "white" }}>
-                <Link
-                  to="/profile"
-                  style={{ textDecoration: "none", color: "white" }}
-                >
-                  Profile
-                </Link>
-              </p>
+              <Link
+                to="/profile"
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <p style={{ color: "white" }}>Profile</p>
+              </Link>
               <Badge badgeContent={17} color="secondary">
                 <AccountCircle />
               </Badge>

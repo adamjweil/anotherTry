@@ -11,7 +11,7 @@ import Profile from "./components/Profile/Profile";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Tickets from "./components/Tickets/Tickets";
 import Directory from "./components/layout/Directory/Directory";
-import CreateProfile from "./components/Profile/profile-forms/CreateProfile";
+// import CreateProfile from "./components/Profile/profile-forms/CreateProfile";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import ThemeingLayout from "./components/layout/TestLayout/ThemeingLayout";
 import ResponsiveLayout from "./components/layout/TestLayout/ResponsiveLayout";
@@ -31,7 +31,7 @@ if (localStorage.token) {
 const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
-    // store.dispatch(loadProfile());
+    store.dispatch(loadProfile());
   }, []);
 
   return (
@@ -56,11 +56,6 @@ const App = () => {
             <PrivateRoute exact path="/profile" component={Profile} />
             <Route exact path="/directory" component={Directory} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            <PrivateRoute
-              exact
-              path="/create-profile"
-              component={CreateProfile}
-            />
           </Switch>
         </section>
       </Router>

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Container } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import Login from "./../auth/Login";
 import Register from "./../auth/Register";
 import { login } from "../../actions/auth";
@@ -32,18 +32,16 @@ const Landing = ({ auth: { isAuthenticated }, history, login }) => {
     return <Redirect to="/dashboard" />;
   } else {
     return (
-      <Container className={classes.root} maxWidth="md">
-        <Grid>
-          <Grid item xs={3}></Grid>
-          <Grid item sm={12} md={6}>
-            {showLoginOrRegister ? (
-              <Login showLoginOrRegister={showLoginOrRegister} />
-            ) : (
-              <Register />
-            )}
-          </Grid>
-          <Grid item xs={3}></Grid>
+      <Grid container className={classes.root}>
+        <Grid item sm={3}></Grid>
+        <Grid item xs={12} sm={6}>
+          {showLoginOrRegister ? (
+            <Login showLoginOrRegister={showLoginOrRegister} />
+          ) : (
+            <Register />
+          )}
         </Grid>
+        <Grid item sm={3}></Grid>
 
         <Grid item xs={12}>
           <div
@@ -56,7 +54,7 @@ const Landing = ({ auth: { isAuthenticated }, history, login }) => {
             }}
           ></div>
         </Grid>
-      </Container>
+      </Grid>
     );
   }
 };
