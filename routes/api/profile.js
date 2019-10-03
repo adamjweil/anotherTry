@@ -50,27 +50,13 @@ router.post("/", auth, async (req, res) => {
   if (title) profileFields.title = title;
 
   try {
-    // user = await User.find;
-    profile = await Profile.findOne({ user: req.user.id });
-
-    if (profile) {
-      // Update
-      profile = await Profile.findOneAndUpdate(
-        { user: req.user.id },
-        { $set: { profile: profileFields } },
-        { new: true }
-      );
-
-      profile.save();
-      res.json(profile);
-    } else {
-      // Create
-      profile = new Profile(profileFields);
-      profile.user = req.user;
-
-      profile.save();
-      res.json(profile);
-    }
+    // Update
+    let profile = await Profile.findOneAndUpdate(
+      { user: req.user.id },
+      { $set: profileFields },
+      { new: true, upsert: true }
+    );
+    res.json(profile);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -81,15 +67,15 @@ router.post("/", auth, async (req, res) => {
 // @desc   Get all Profile
 // @access Public
 
-// router.get("/", async (req, res) => {
-//   try {
-//     const profiles = await Profile.find().populate("user", ["email", "avatar"]);
-//     res.json(profiles);
-//   } catch (err) {
-//     console.error(err.message);
-//     res.status(500).send("Server Error");
-//   }
-// });
+router.get("/", async (req, res) => {
+  try {
+    const profiles = await Profile.find().populate("user", ["email", "avatar"]);
+    res.json(profiles);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 // @ route GET api/profile/user/:user_id
 // @desc   Get a specific Profile
@@ -97,14 +83,14 @@ router.post("/", auth, async (req, res) => {
 router.get("/user/:user_id", async (req, res) => {
   try {
     const profile = await Profile.findOne({
-      user: req.user.id
-    }).populate("user", ["avatar"]);
+      user: req.params.user_id
+    }).populate("user", ["name", "avatar"]);
 
     if (!profile) {
       return res.status(400).json({ msg: "There is no profile for this user" });
     }
 
-    res.json(profiles);
+    res.json(profile);
   } catch (err) {
     console.error(err.message);
     if (err.kind == "ObjectId") {

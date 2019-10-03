@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -16,8 +16,8 @@ import PropTypes from "prop-types";
 import SaveIcon from "@material-ui/icons/Save";
 import clsx from "clsx";
 
-import { updateProfile, createProfile } from "../../actions/profile";
-import { getCurrentProfile } from "../../actions/profile";
+import { createProfile } from "../../actions/profile";
+import { loadCurrentProfile } from "../../actions/profile";
 import { loadUser } from "../../actions/user";
 
 const useStyles = makeStyles(theme => ({
@@ -73,27 +73,35 @@ const TITLES = [
 ];
 
 const ProfileForm = ({
-  values,
-  firstName,
-  lastName,
-  handle,
-  team,
-  title,
   createProfile,
-  handleSubmit,
-  handleChange
+  loadCurrentProfile,
+  profile: { profile, loading },
+  history
 }) => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    handle: "",
+    team: "",
+    title: ""
+  });
+  const { firstName, lastName, handle, team, title } = formData;
   const classes = useStyles();
 
-  const onSubmit = async dispatch => {
-    // console.log(values);
-    // e.preventDefault();
-    createProfile({ firstName, lastName, handle, team, title });
+  const onChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onSubmit = e => {
+    e.preventDefault();
+    createProfile(formData, history);
   };
+  useEffect(() => {
+    loadCurrentProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadCurrentProfile]);
 
   return (
     <Grid container>
-      <Form className={classes.form} onSubmit={onSubmit}>
+      <Form className={classes.form} onSubmit={e => onSubmit(e)}>
         <Paper className={classes.paper}>
           <Grid item xs={12} className={classes.message}>
             <center>
@@ -120,7 +128,7 @@ const ProfileForm = ({
                   name="firstName"
                   label="First Name"
                   value={firstName}
-                  onChange={handleChange("firstName")}
+                  onChange={e => onChange(e)}
                 />
               </FormControl>
             </Grid>
@@ -133,7 +141,8 @@ const ProfileForm = ({
                   variant="outlined"
                   name="lastName"
                   label="Last Name"
-                  onChange={handleChange("lastName")}
+                  value={lastName}
+                  onChange={e => onChange(e)}
                 />
               </FormControl>
             </Grid>
@@ -143,7 +152,8 @@ const ProfileForm = ({
               <TextField
                 name="handle"
                 label="Handle"
-                onChange={handleChange("handle")}
+                value={handle}
+                onChange={e => onChange(e)}
                 helperText="What do you go by?"
               />
             </FormControl>
@@ -160,7 +170,7 @@ const ProfileForm = ({
               <Select
                 style={{ width: "350px" }}
                 name="team"
-                onChange={handleChange("team")}
+                onChange={e => onChange(e)}
                 value={team}
               >
                 <MenuItem value="">
@@ -187,7 +197,7 @@ const ProfileForm = ({
               <Select
                 style={{ width: "350px" }}
                 name="title"
-                onChange={handleChange("title")}
+                onChange={e => onChange(e)}
                 value={title}
               >
                 <MenuItem value="">
@@ -233,5 +243,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createProfile, updateProfile, loadUser, getCurrentProfile }
+  { createProfile, loadUser, loadCurrentProfile }
 )(ProfileForm);
