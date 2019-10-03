@@ -4,6 +4,7 @@ import axios from "axios";
 import {
   loadUser,
   fetchUsers,
+  // getCurrentProfile,
   incrementNotificationCount,
   decrementNotificationCount
 } from "../../actions/user";
@@ -28,8 +29,8 @@ export class Profile extends Component {
     team: "",
     title: ""
   };
-  componentDidMount() {
-    store.dispatch(loadProfile());
+  componentDidUMount() {
+    store.dispatch(getCurrentProfile());
   }
 
   handleChange = input => e => {

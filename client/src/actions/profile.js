@@ -24,7 +24,7 @@ export const loadProfile = showErrorSnackbar => async dispatch => {
 // Get current users Profile
 export const getCurrentProfile = () => async dispatch => {
   try {
-    const res = await axios.get("/api/profile/me");
+    const res = await axios.get(`/api/profile/`);
     dispatch({
       type: GET_PROFILE,
       payload: res.data
