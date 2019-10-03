@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from "react";
-import { getCurrentProfile } from "../../actions/profile";
+import { loadCurrentProfile } from "../../actions/profile";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid, Header } from "semantic-ui-react";
@@ -11,7 +11,7 @@ import TourGuide from "./TourGuide";
 
 export class Dashboard extends Component {
   componentDidMount() {
-    getCurrentProfile();
+    loadCurrentProfile();
   }
 
   render() {
@@ -58,7 +58,7 @@ export class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
+  loadCurrentProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 };
@@ -70,5 +70,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile }
+  { loadCurrentProfile }
 )(Dashboard);

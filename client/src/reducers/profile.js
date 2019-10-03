@@ -1,26 +1,27 @@
 import {
   GET_PROFILE,
-  PROFILE_ERROR,
   CREATE_PROFILE,
-  CREATE_PROFILE_FAIL,
-  CLEAR_PROFILE,
-  GET_CURRENT_PROFILE,
-  PROFILE_LOADED
+  UPDATE_PROFILE,
+  PROFILE_ERROR,
+  GET_ALL_PROFILES,
+  CLEAR_PROFILE
 } from "../actions/types";
 
 const INITIAL_STATE = {
   profile: null,
   profiles: [],
   repos: [],
-  user: null,
   loading: true,
-  error: {}
+  error: {},
+  notification_count: 0
 };
 
 export default function(state = INITIAL_STATE, action) {
   const { type, payload } = action;
   switch (type) {
     case GET_PROFILE:
+    case CREATE_PROFILE:
+    case UPDATE_PROFILE:
       return {
         ...state,
         profile: payload,
@@ -32,16 +33,10 @@ export default function(state = INITIAL_STATE, action) {
         error: payload,
         loading: false
       };
-    case CREATE_PROFILE:
+    case GET_ALL_PROFILES:
       return {
         ...state,
-        profile: payload,
-        loading: false
-      };
-    case CREATE_PROFILE_FAIL:
-      return {
-        ...state,
-        errors: payload,
+        profiles: payload,
         loading: false
       };
     case CLEAR_PROFILE:
@@ -49,16 +44,6 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         profile: null,
         repos: [],
-        loading: false
-      };
-    case GET_CURRENT_PROFILE:
-      return {
-        ...state
-      };
-    case PROFILE_LOADED:
-      return {
-        ...state,
-        profile: payload,
         loading: false
       };
     default:

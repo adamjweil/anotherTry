@@ -2,7 +2,7 @@ import React from "react";
 // import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Grid, Avatar, Divider, Paper } from "@material-ui/core";
-import { getCurrentProfile, loadProfile } from "../../actions/profile";
+import { loadCurrentProfile } from "../../actions/profile";
 
 export class ProfileCard extends React.Component {
   render() {
@@ -94,5 +94,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, loadProfile }
+  { loadCurrentProfile }
 )(ProfileCard);

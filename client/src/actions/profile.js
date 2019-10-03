@@ -2,29 +2,34 @@ import axios from "axios";
 import { showSuccessSnackbar, showErrorSnackbar } from "./alert";
 import {
   GET_PROFILE,
-  PROFILE_ERROR,
-  AUTH_ERROR,
-  PROFILE_LOADED
+  GET_ALL_PROFILES,
+  CREATE_PROFILE,
+  // UPDATE_PROFILE,
+  CLEAR_PROFILE,
+  PROFILE_ERROR
 } from "./types";
 
 //LOAD profile
-export const loadProfile = showErrorSnackbar => async dispatch => {
+export const loadCurrentProfile = () => async dispatch => {
   try {
     const res = await axios.get("/api/profile/me");
     dispatch({
-      type: PROFILE_LOADED,
+      type: GET_PROFILE,
       payload: res.data
     });
   } catch (err) {
     console.log(err);
-    dispatch(showSuccessSnackbar(err.msg));
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
   }
 };
 
-// Get current users Profile
-export const getCurrentProfile = () => async dispatch => {
+export const loadProfileById = id => async dispatch => {
   try {
-    const res = await axios.get("/api/profile/me");
+    const res = await axios.get(`/api/profile/user/${id}`);
+
     dispatch({
       type: GET_PROFILE,
       payload: res.data
@@ -37,55 +42,56 @@ export const getCurrentProfile = () => async dispatch => {
   }
 };
 
-// Create profile
-export const createProfile = ({
-  firstName,
-  lastName,
-  handle,
-  team,
-  title
-}) => async dispatch => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-  const body = { firstName, lastName, handle, team, title };
-  console.log(body);
+export const getAllProfiles = () => async dispatch => {
+  dispatch({ type: CLEAR_PROFILE });
+
   try {
-    const res = await axios.post("/api/profile", body, config);
-    console.log(res);
+    const res = await axios.get("/api/profile");
+
     dispatch({
-      type: GET_PROFILE,
+      type: GET_ALL_PROFILES,
       payload: res.data
     });
-    // dispatch(getCurrentProfile());
-    dispatch(showSuccessSnackbar("Profile Updated"));
   } catch (err) {
-    console.log(err);
-    dispatch(showSuccessSnackbar(err.msg));
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
   }
 };
-
-export const updateProfile = (values, history) => async dispatch => {
+// Create profile
+export const createProfile = ({
+  formData,
+  history,
+  edit = false
+}) => async dispatch => {
   try {
     const config = {
       headers: {
         "Content-Type": "application/json"
       }
     };
+    // const body = { firstName, lastName, handle, team, title };
 
-    const res = await axios.put("/api/profile", values, config);
+    const res = await axios.post("/api/profile", formData, config);
+
     dispatch({
-      type: GET_PROFILE,
+      type: CREATE_PROFILE,
       payload: res.data
     });
-    dispatch(showSuccessSnackbar("Profile Updated"));
+    // dispatch(getCurrentProfile());
+    dispatch(showSuccessSnackbar(edit ? "Profile Updated" : "Profile Created"));
   } catch (err) {
-    const errors = err.repsponse.data.errors;
+    console.log(err);
+    debugger;
+    const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(dispatch(showErrorSnackbar(err.msg)));
+      errors.forEach(error => dispatch(showSuccessSnackbar(error.msg)));
     }
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
   }
 };
