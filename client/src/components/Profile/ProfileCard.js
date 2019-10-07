@@ -4,16 +4,8 @@ import { Grid, Avatar, Divider, Paper } from "@material-ui/core";
 import { loadCurrentProfile } from "../../actions/profile";
 import PropTypes from "prop-types";
 
-const ProfileCard = ({
-  profile: { profile: loading },
-  firstName,
-  lastName,
-  handle,
-  team,
-  title,
-  loadCurrentProfile
-}) => {
-  // const { firstName, lastName, handle, team, title } = this.props;
+const ProfileCard = ({ profile, loadCurrentProfile }) => {
+  const { firstName, lastName, handle, team, title } = profile;
   return (
     <Paper style={{ padding: "10px", marginTop: "30px" }}>
       <Grid container justify="center">
