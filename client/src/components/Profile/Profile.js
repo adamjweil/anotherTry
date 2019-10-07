@@ -14,7 +14,7 @@ const Profile = ({
 }) => {
   useEffect(() => {
     loadCurrentProfile();
-  }, [loadCurrentProfile]);
+  }, []);
 
   return (
     <Fragment>
