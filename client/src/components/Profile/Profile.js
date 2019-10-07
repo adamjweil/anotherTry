@@ -1,21 +1,20 @@
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
-
-import { loadProfileById } from "../../actions/profile";
+import { loadCurrentProfile } from "../../actions/profile";
 import { Grid } from "@material-ui/core";
 import PropTypes from "prop-types";
 import ProfileCard from "./ProfileCard";
 import ProfileForm from "./ProfileForm";
 
 const Profile = ({
-  loadProfileById,
+  loadCurrentProfile,
   profile: { profile, loading },
   auth,
   match
 }) => {
   useEffect(() => {
-    loadProfileById(match.params.id);
-  }, [loadProfileById, match.params.id]);
+    loadCurrentProfile();
+  }, [loadCurrentProfile]);
 
   return (
     <Fragment>
@@ -37,7 +36,7 @@ const Profile = ({
 Profile.propTypes = {
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
-  loadProfileById: PropTypes.func.isRequired
+  loadCurrentProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -47,5 +46,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loadProfileById }
+  { loadCurrentProfile }
 )(Profile);

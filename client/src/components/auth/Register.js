@@ -89,8 +89,8 @@ const Register = ({
     setValues({ ...values, showPassword: !values.showPassword });
   };
 
-  const handleMouseDownPassword = event => {
-    event.preventDefault();
+  const handleMouseDownPassword = e => {
+    e.preventDefault();
   };
 
   const onChange = e =>
@@ -104,16 +104,16 @@ const Register = ({
       showErrorSnackbar("Please read and agree to our Terms and Conditions");
     } else {
       try {
-        register({ email, terms, password });
-        showSuccessSnackbar("Successfully Registered!");
+        await register({ email, terms, password });
       } catch (err) {
+        showErrorSnackbar(err.msg);
         console.log(err);
       }
     }
   };
 
   const onCheck = e => {
-    e.preventDefault();
+    // e.preventDefault();
     toggleCheck(e);
   };
 
@@ -272,7 +272,7 @@ const Register = ({
                 />
               </Grid>
               <Grid item xs={6}></Grid>
-              <Grid itsm sm={1}></Grid>
+              <Grid item sm={1}></Grid>
               <Grid item xs={12} sm={4}>
                 <Button
                   type="submit"
@@ -300,10 +300,10 @@ const Register = ({
           >
             <Link to="/" style={{ textDecoration: "none" }}>
               <Button
-                renderAs="button"
+                renderas="button"
                 size="small"
                 variant="contained"
-                color="info"
+                color="default"
                 className={classes.submit}
                 style={{
                   textDecoration: "none",
@@ -335,14 +335,13 @@ const Register = ({
 
 Register.propTypes = {
   register: PropTypes.func.isRequired,
-  alerts: PropTypes.array.isRequired,
+  toggleCheck: PropTypes.func.isRequired,
   showSuccessSnackbar: PropTypes.func.isRequired,
   showErrorSnackbar: PropTypes.func.isRequired,
   showInfoSnackbar: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  alerts: state.alert,
   isAuthenticated: state.auth.isAuthenticated
 });
 

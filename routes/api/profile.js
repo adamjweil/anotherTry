@@ -39,12 +39,10 @@ router.post("/", auth, async (req, res) => {
 
   // Build Profile object
   const profileFields = {};
-  profileFields.user = req.user._id;
+  profileFields.user = req.user.id;
 
   if (firstName) profileFields.firstName = firstName;
-
   if (lastName) profileFields.lastName = lastName;
-
   if (handle) profileFields.handle = handle;
   if (team) profileFields.team = team;
   if (title) profileFields.title = title;
@@ -66,7 +64,6 @@ router.post("/", auth, async (req, res) => {
 // @ route GET api/profile
 // @desc   Get all Profile
 // @access Public
-
 router.get("/", async (req, res) => {
   try {
     const profiles = await Profile.find().populate("user", ["email", "avatar"]);
@@ -89,7 +86,6 @@ router.get("/user/:user_id", async (req, res) => {
     if (!profile) {
       return res.status(400).json({ msg: "There is no profile for this user" });
     }
-
     res.json(profile);
   } catch (err) {
     console.error(err.message);
