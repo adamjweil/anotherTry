@@ -1,10 +1,12 @@
-Project Management Tool for small to medium sized companies
+--> ###Project Management Tool for small to medium sized companies
 
-- Description
+Description
 
-Tech Stack: ReactJS, Redux, Node, MongoDB, Custom Middleware
+# Tech Stack: ReactJS, Redux, Node, MongoDB, Custom Middleware
 
-Front End: Had originally used material-ui to style everything, but as I continued to style components, I found increasing limitations. So I'm in the midst of using Material-UI instead
+## Front End: Had originally used material-ui to style everything, but as I continued to style components, I found increasing limitations. So I'm in the midst of using Material-UI instead
+
+User Stories
 
 1. Users can register an account
    1a. Users are redirected to appropriate page after
@@ -22,7 +24,7 @@ Front End: Had originally used material-ui to style everything, but as I continu
     - Got the Landing Page, and Login component working
       - You can Login with new form
     - Logout action is working
-    - Snackbar Component Created
+    - SnackBar Component Created
       - Positive / Negative and Neutral (depending on message)
       - Reducers / actions set up so that these are triggered correctly
     - Cleaned up the Login Component (borders, bgcolor), the Navbar (Online Portal image links to homepage, there is now a link to directory from main page)
@@ -39,13 +41,13 @@ Front End: Had originally used material-ui to style everything, but as I continu
     #9/16
     - After registration, the page redirects to the User Profile page, as expected
     - Profile components have been split up to better organize the page
-      - The Avatar and Profile details are now in seperate components, along w/ this new form
-    - On the righ 8/12th of the screen I have started to implement the View portion of the Profile Creation form
+      - The Avatar and Profile details are now in Separate components, along w/ this new form
+    - On the right 8/12th of the screen I have started to implement the View portion of the Profile Creation form
       - The Basic Information portion of the Form is complete, and there are placeholders for the rest
     - Brought in fetchUsers function into the Profile Page so that we can display names in the dropdown for when you select direct reports and reporting to
     - On the Profile Creation form I brought in a DatePicker for the HireDate state
     - Set up the Bio and Skills section of the CreateProfile form
-      - Bio is 'Outlined' multiline textarea
+      - Bio is 'Outlined' multiline TextArea
       - Skills needs to be a multi-select
 
     #9/23
@@ -58,17 +60,26 @@ Front End: Had originally used material-ui to style everything, but as I continu
     - Need to have the createProfile action actually create a profile in server
 
     #9/30
-    - createProfile action is now actually creating a Profile Object. The object is sitting in State, however. I neeed to make sure it gets picked up by the database so that it can be fetched properly
-    - Fixed the MenuItem Icon on the left side of navbar so that when clicked, the correct dropdown list shows up
+    - createProfile action is now actually creating a Profile Object. The object is sitting in State, however. I need to make sure it gets picked up by the database so that it can be fetched properly
+    - Fixed the MenuItem Icon on the left side of NavBar so that when clicked, the correct dropdown list shows up
       - Also removed from previous location
       - Clicking buttons in the dropdown is behaving as expected
 
     #10/01
-    - Okay so FINALLY I have my MongoDB interacting with redux on the front end for the creation of profiles. For whatever reason, it was much easier to connect the login and register functionality (which included creating DB models for uses...), so maybe I was just missing somethign with this. Seems to be working now
+    - Okay so FINALLY I have my MongoDB interacting with redux on the front end for the creation of profiles. For whatever reason, it was much easier to connect the login and register functionality (which included creating DB models for uses...), so maybe I was just missing something with this. Seems to be working now
+
+    #10/07
+    - Profiles are now being saved in the MongoDB. The most difficult part of this was to have the profiles not only save to the DB correctly while updating state alongside each other, but also making sure that I'm storing ObjectIDs on models correctly so that I can get comfortable with the non-relational aspect of mongoDB
 
     ##TO DO
-    - After profile has been submitted for the first time, You need to be able to go in and edit it
+    - When Profile is saved, the ProfileCard component needs to update accordingly
     - Ticket Form
+      - Get the layout and wireframe all set up on the Ticket page
+      - Set up the form so that it interacts with State
+      ... ^ DB
+    - DashBoard
+      - Get the layout wire-framed out
+    - oAuth integration on top of in app authentication
 
       - Form for Creating Profile
       https://material-ui.com/getting-started/templates/checkout/

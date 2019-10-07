@@ -1,10 +1,9 @@
 import axios from "axios";
-import { showSuccessSnackbar, showErrorSnackbar } from "./alert";
+import { showSuccessSnackbar } from "./alert";
 import {
   GET_PROFILE,
   GET_ALL_PROFILES,
   CREATE_PROFILE,
-  // UPDATE_PROFILE,
   CLEAR_PROFILE,
   PROFILE_ERROR
 } from "./types";
@@ -13,6 +12,7 @@ import {
 export const loadCurrentProfile = () => async dispatch => {
   try {
     const res = await axios.get("/api/profile/me");
+    console.log(res);
     dispatch({
       type: GET_PROFILE,
       payload: res.data
@@ -29,7 +29,6 @@ export const loadCurrentProfile = () => async dispatch => {
 export const loadProfileById = id => async dispatch => {
   try {
     const res = await axios.get(`/api/profile/user/${id}`);
-
     dispatch({
       type: GET_PROFILE,
       payload: res.data
@@ -44,10 +43,8 @@ export const loadProfileById = id => async dispatch => {
 
 export const getAllProfiles = () => async dispatch => {
   dispatch({ type: CLEAR_PROFILE });
-
   try {
     const res = await axios.get("/api/profile");
-
     dispatch({
       type: GET_ALL_PROFILES,
       payload: res.data
@@ -71,10 +68,7 @@ export const createProfile = ({
         "Content-Type": "application/json"
       }
     };
-    // const body = { firstName, lastName, handle, team, title };
-
     const res = await axios.post("/api/profile", formData, config);
-
     dispatch({
       type: CREATE_PROFILE,
       payload: res.data
@@ -83,9 +77,7 @@ export const createProfile = ({
     dispatch(showSuccessSnackbar(edit ? "Profile Updated" : "Profile Created"));
   } catch (err) {
     console.log(err);
-    debugger;
     const errors = err.response.data.errors;
-
     if (errors) {
       errors.forEach(error => dispatch(showSuccessSnackbar(error.msg)));
     }

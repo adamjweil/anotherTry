@@ -22,26 +22,21 @@ export const removeAlert = id => dispatch => {
   });
 };
 
-export const showSuccessSnackbar = message => {
-  return dispatch => {
-    dispatch({ type: SNACKBAR_SUCCESS, message });
-  };
+export const showSuccessSnackbar = message => dispatch => {
+  const id = uuid.v4();
+  dispatch({ type: SNACKBAR_SUCCESS, payload: { message, id } });
 };
 
-export const showErrorSnackbar = message => {
-  return dispatch => {
-    dispatch({ type: SNACKBAR_ERROR, message });
-  };
+export const showErrorSnackbar = message => dispatch => {
+  const id = uuid.v4();
+  dispatch({ type: SNACKBAR_ERROR, payload: { message, id } });
 };
 
-export const showInfoSnackbar = message => {
-  return dispatch => {
-    dispatch({ type: SNACKBAR_INFO, message });
-  };
+export const showInfoSnackbar = message => dispatch => {
+  const id = uuid.v4();
+  dispatch({ type: SNACKBAR_INFO, payload: { message, id } });
 };
 
-export const clearSnackbar = () => {
-  return dispatch => {
-    dispatch({ type: SNACKBAR_CLEAR });
-  };
+export const clearSnackbar = id => dispatch => {
+  dispatch({ type: SNACKBAR_CLEAR, id });
 };

@@ -1,9 +1,15 @@
 import React from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
-import { AppBar, Badge, MenuItem, Menu } from "@material-ui/core";
-import Toolbar from "@material-ui/core/Toolbar";
-import { IconButton, Button } from "@material-ui/core";
-import InputBase from "@material-ui/core/InputBase";
+import {
+  IconButton,
+  Button,
+  AppBar,
+  Badge,
+  MenuItem,
+  Menu,
+  Toolbar,
+  InputBase
+} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
@@ -198,8 +204,9 @@ const AuthenticatedNavbar = ({ logout }) => {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={handleProfileMenuOpen}
           >
-            <MenuIcon onClick={handleProfileMenuOpen} />
+            <MenuIcon />
           </IconButton>
           <Link to="/directory" style={{ textDecoration: "none" }}>
             <MenuItem>

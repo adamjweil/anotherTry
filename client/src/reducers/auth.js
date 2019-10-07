@@ -11,9 +11,6 @@ import {
   GET_USER,
   SIGN_IN,
   SIGN_OUT,
-  NOTIFCATION_INCREMENT,
-  NOTIFCATION_DECREMENT,
-  GET_NOTIFICATION_COUNT,
   GOOGLE_SIGNIN_SUCCESS
 } from "../actions/types";
 
@@ -77,20 +74,6 @@ export default (state = INITIAL_STATE, action) => {
         user: payload,
         isAuthenticated: true,
         loading: false
-      };
-    case NOTIFCATION_INCREMENT:
-      return {
-        ...state,
-        notification_count: state.notification_count + 1
-      };
-    case NOTIFCATION_DECREMENT:
-      return {
-        ...state,
-        notification_count: state.notification_count - 1
-      };
-    case GET_NOTIFICATION_COUNT:
-      return {
-        ...state
       };
     default:
       return state;

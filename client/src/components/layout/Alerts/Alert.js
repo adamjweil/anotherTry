@@ -7,7 +7,7 @@ const onSubmit = id => async dispatch => {
   removeAlert(id);
 };
 
-const Alert = alerts => {
+const Alert = ({ alerts, removeAlert }) => {
   return (
     alerts.length > 0 &&
     alerts.map(alert =>
@@ -27,7 +27,8 @@ const Alert = alerts => {
 };
 
 Alert.propTypes = {
-  alerts: PropTypes.array.isRequired
+  alerts: PropTypes.array.isRequired,
+  removeAlert: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

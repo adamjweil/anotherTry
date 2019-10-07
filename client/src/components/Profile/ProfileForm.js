@@ -91,8 +91,8 @@ const ProfileForm = ({
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const onSubmit = e => {
-    e.preventDefault();
-    createProfile(formData, history);
+    // e.preventDefault();
+    createProfile({ formData });
   };
   useEffect(() => {
     loadCurrentProfile();
@@ -101,7 +101,7 @@ const ProfileForm = ({
 
   return (
     <Grid container>
-      <Form className={classes.form} onSubmit={e => onSubmit(e)}>
+      <Form className={classes.form} onSubmit={onSubmit}>
         <Paper className={classes.paper}>
           <Grid item xs={12} className={classes.message}>
             <center>
