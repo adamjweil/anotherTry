@@ -119,9 +119,9 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
                 src={process.env.PUBLIC_URL + "../../img/logo.png"}
                 alt={process.env.PUBLIC_URL + "../../img/mezoLogo120px.png"}
               />
-              <center>
-                <h3>Online Portal</h3>
-              </center>
+              <br />
+              <br />
+              <br />
             </Grid>
             <Grid item xs={2}></Grid>
           </Grid>

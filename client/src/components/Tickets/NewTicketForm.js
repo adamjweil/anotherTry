@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  TextArea,
-  Header,
-  Input,
-  Button,
-  Form,
-  Grid,
-  Select
-} from "semantic-ui-react";
+import { TextArea, Input, Button, Form, Grid, Select } from "semantic-ui-react";
 // Redux
 import { connect } from "react-redux";
 

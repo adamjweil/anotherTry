@@ -113,7 +113,6 @@ const Register = ({
   };
 
   const onCheck = e => {
-    // e.preventDefault();
     toggleCheck(e);
   };
 
@@ -147,7 +146,8 @@ const Register = ({
                 style={{
                   justifyContent: "center",
                   align: "center",
-                  alignItems: "center"
+                  alignItems: "center",
+                  width: "50%"
                 }}
                 src={process.env.PUBLIC_URL + "/img/mezologo1.png"}
                 alt=""
@@ -156,11 +156,7 @@ const Register = ({
           </Grid>
           <Grid container>
             <Grid item xs={2}></Grid>
-            <Grid item xs={10}>
-              <center>
-                <h3>Online Portal</h3>
-              </center>
-            </Grid>
+            <Grid item xs={10}></Grid>
             <Grid item xs={2}></Grid>
           </Grid>
           <Typography
@@ -257,7 +253,7 @@ const Register = ({
             </Grid>
             <Grid container>
               <Grid item xs={1}></Grid>
-              <Grid item xs={5}>
+              <Grid item xs={11}>
                 <FormControlLabel
                   control={
                     <Checkbox
@@ -271,7 +267,7 @@ const Register = ({
                   className={classes.remember}
                 />
               </Grid>
-              <Grid item xs={6}></Grid>
+
               <Grid item sm={1}></Grid>
               <Grid item xs={12} sm={4}>
                 <Button
@@ -296,14 +292,17 @@ const Register = ({
             item
             xs={12}
             sm={6}
-            style={{ marginBottom: "20px", padding: "0% 0% 0%" }}
+            style={{
+              marginBottom: "20px",
+              padding: "0% 0% 0%",
+              marginTop: "-30px"
+            }}
           >
             <Link to="/" style={{ textDecoration: "none" }}>
               <Button
                 renderas="button"
                 size="small"
-                variant="contained"
-                color="default"
+                color="secondary"
                 className={classes.submit}
                 style={{
                   textDecoration: "none",
@@ -318,6 +317,7 @@ const Register = ({
                     height: "20px",
                     width: "20px"
                   }}
+                  color="secondary"
                   src={
                     process.env.PUBLIC_URL + "/img/arrow_back_grey_192x192.png"
                   }

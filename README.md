@@ -71,6 +71,15 @@ User Stories
     #10/07
     - Profiles are now being saved in the MongoDB. The most difficult part of this was to have the profiles not only save to the DB correctly while updating state alongside each other, but also making sure that I'm storing ObjectIDs on models correctly so that I can get comfortable with the non-relational aspect of mongoDB
 
+    #10/08
+    - Login and Registration pages now cleaned up.
+      - The Login/Reg components on the landing page are centered
+      - Got rid of the ugly "Online Portal" text below the company logo
+      - Updated the 'back to login' button on the registration form
+    - Directory page was previously just pulling all of the users from the database. I have now styled it, so you can actually tell who the users are.
+      - Down the line, these will link to their individual profile pages.
+
+
     ##TO DO
     - When Profile is saved, the ProfileCard component needs to update accordingly
     - Ticket Form
