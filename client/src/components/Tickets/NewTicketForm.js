@@ -1,39 +1,50 @@
-import React from "react";
-import { TextArea, Input, Button, Form, Grid, Select } from "semantic-ui-react";
+import React, { Fragment } from "react";
+import {
+  Grid,
+  TextField,
+  RadioGroup,
+  Radio,
+  FormLabel,
+  FormControl,
+  FormControlLabel,
+  InputLabel,
+  MenuItem,
+  Select
+} from "@material-ui/core";
 // Redux
 import { connect } from "react-redux";
 
-const projectOptions = [
+const PROJECTS = [
   { key: 0, text: "OPP-IG", value: "OPP-IG" },
   { key: 1, text: "Security Master", value: "SECURITY MASTER" },
   { key: 2, text: "INSURANCE", value: "INSURANCE" }
 ];
 
-const people = [
+const PEOPLE = [
   { key: 0, text: "Adam Weil", value: "Adam Weil" },
   { key: 1, text: "Lindsay Weil", value: "Lindsay Weil" },
   { key: 2, text: "Matt Weil", value: "Matt Weil" }
 ];
 
-const releaseOptions = [
+const RELEASES = [
   { key: 0, text: "19A-12", value: "19A-12" },
   { key: 1, text: "20B-1", value: "20B-1" },
   { key: 2, text: "20C-2", value: "20C-2" }
 ];
 
-const ticketTypes = [
+const TICKETTYPES = [
   { key: 0, text: "BUGFIX", value: "BUGFIX" },
   { key: 1, text: "ENHANCEMENT", value: "ENHANCEMENT" }
 ];
 
-const environmentValues = [
+const ENVIRONMENTS = [
   { key: 0, text: "QABIN", value: "QABIN" },
   { key: 1, text: "QANON", value: "QANON" },
   { key: 2, text: "QAMP", value: "QAMP" },
   { key: 2, text: "BiVuk", value: "BiVuk" }
 ];
 
-const processValues = [
+const PROCESSES = [
   { key: 0, text: "SECURITIES", value: "SECURITIES" },
   { key: 1, text: "PRODUCTS", value: "PRODUCTS" },
   { key: 2, text: "ACCOUNTS", value: "ACCOUNTS" },
@@ -45,7 +56,7 @@ const processValues = [
   { key: 8, text: "TERMS", value: "TERMS" }
 ];
 
-const statusValues = [
+const STATUSVALUES = [
   { key: 0, text: "GO", value: "GO" },
   { key: 1, text: "TALK", value: "TALK" },
   { key: 2, text: "TBD", value: "TBD" },
@@ -54,189 +65,145 @@ const statusValues = [
 
 const NewTicketForm = props => {
   return (
-    <Grid container>
+    <Fragment>
       <Grid item xs={12}>
-        <div className="ui attached message">
-          <div className="header">
-            <center>
-              <h2>
-                <i className="ticket icon"></i>
-                NEW TICKET FORM
-              </h2>
-            </center>
-          </div>
-          <center>
-            <p>Submit a New Ticket Below!</p>
-          </center>
-        </div>
-        <Form size="small" className="ui form attached fluid segment">
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <Form.Group inline>
-              <label style={{ fontWeight: "800", fontSize: "16px" }}>
-                Importance:
-              </label>
-              <label style={{ color: "red", fontWeight: "500" }}>HIGH</label>
-              <Form.Radio value="high" />
-              <label style={{ color: "orange", fontWeight: "500" }}>
-                MEDIUM
-              </label>
-              <Form.Radio value="medium" />
-              <label style={{ color: "gray", fontWeight: "500" }}>LOW</label>
-              <Form.Radio value="low" />
-            </Form.Group>
-            <Form.Group inline>
-              <Form.Field
-                id="form-text-control-hrs"
-                control={Input}
-                label="Est. Hrs:"
-                placeholder="Est. hrs"
-              />
-            </Form.Group>
-          </div>
-          <Form.Group widths="equal">
-            <Form.Field
-              inline
-              control={Select}
-              options={ticketTypes}
-              label="Type:"
-              placeholder="Txt Type"
-            />
-            <Form.Field
-              inline
-              control={Select}
-              options={releaseOptions}
-              label={{
-                children: "Release:",
-                htmlFor: "form-select-control-release"
-              }}
-              search
-              searchInput={{ id: "form-select-control-release" }}
-              placeholder="Release"
-            />
-            <Form.Field
-              inline
-              control={Select}
-              options={projectOptions}
-              label={{
-                children: "Project:",
-                htmlFor: "form-select-control-project"
-              }}
-              search
-              searchInput={{ id: "form-select-control-project" }}
-              placeholder="Project"
-            />
-          </Form.Group>
-
-          <Form.Group widths="even">
-            <Form.Field
-              inline
-              control={Select}
-              options={people}
-              label={{
-                children: "Ticketer",
-                htmlFor: "form-select-control-requester"
-              }}
-              search
-              searchInput={{ id: "form-select-control-requester" }}
-              placeholder="Requestor"
-              required
-            />
-
-            <Form.Field
-              inline
-              control={Select}
-              options={people}
-              label={{
-                children: "Tester",
-                htmlFor: "form-select-control-tester"
-              }}
-              search
-              searchInput={{ id: "form-select-control-tester" }}
-              placeholder="Tester"
-              required
-            />
-
-            <Form.Field
-              inline
-              control={Select}
-              options={people}
-              label={{
-                children: "Fixer",
-                htmlFor: "form-select-control-fixer"
-              }}
-              search
-              searchInput={{ id: "form-select-control-fixer" }}
-              required
-              placeholder="Fixer"
-            />
-          </Form.Group>
-
-          <Form.Field
-            id="form-text-control-summary"
-            control={Input}
-            label="Summary:"
-            placeholder="Summary"
-            required
-          />
-          <Form.Field
-            id="form-textarea-control-description"
-            control={TextArea}
-            label="Full Description:"
-            placeholder="Description"
-            required
-          />
-
-          <Form.Group widths="equal">
-            <Form.Field
-              inline
-              control={Select}
-              options={environmentValues}
-              label={{
-                children: "Env.:",
-                htmlFor: "form-select-control-env"
-              }}
-              search
-              searchInput={{ id: "form-select-control-env" }}
-              placeholder="Environment"
-            />
-
-            <Form.Field
-              inline
-              control={Select}
-              options={processValues}
-              id="form-text-control-process"
-              label={{
-                children: "Process:",
-                htmlFor: "form-select-control-process"
-              }}
-              placeholder="Process"
-            />
-
-            <Form.Field
-              inline
-              control={Select}
-              options={statusValues}
-              id="form-text-control-status"
-              label="Status:"
-              placeholder="Status"
-              required
-            />
-          </Form.Group>
-
-          <Form.Group widths="equal">
-            <Form.Field
-              id="form-text-control-notes"
-              control={TextArea}
-              label="Notes:"
-              placeholder="Notes"
-            />
-          </Form.Group>
-
-          <Button className="ui primary button">Submit</Button>
-          <Button className="ui button">Cancel</Button>
-        </Form>
+        <center>
+          <h2>NEW TICKET FORM</h2>
+          <p>Submit a New Ticket Below!</p>
+        </center>
       </Grid>
-    </Grid>
+      <Grid container spacing={1}>
+        <Grid item sm={1}></Grid>
+        <Grid item xs={6} sm={2}>
+          <FormControl component="fieldset">
+            <FormLabel commponent="legend">Importance:</FormLabel>
+            <RadioGroup aria-label="importance" name="importance" row>
+              <FormControlLabel value="High" control={<Radio />} label="High" />
+              <FormControlLabel
+                value="Neutral"
+                control={<Radio />}
+                label="Neutral"
+              />
+              <FormControlLabel value="Low" control={<Radio />} label="Low" />
+            </RadioGroup>
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={6} sm={3}>
+          <FormControl style={{ width: "65px", marginRight: "15px" }}>
+            <InputLabel>Type</InputLabel>
+            <Select name="type">
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {TICKETTYPES.map(type => (
+                <MenuItem value={type.text} key={type.id}>
+                  {type.text}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <FormControl style={{ width: "185px" }}>
+            <InputLabel>Project</InputLabel>
+            <Select name="project">
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {PROJECTS.map(type => (
+                <MenuItem value={type.text} key={type.id}>
+                  {type.text}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={6} sm={2}>
+          <FormControl style={{ width: "90px" }}>
+            <InputLabel>ENV</InputLabel>
+            <Select name="environment">
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {ENVIRONMENTS.map(type => (
+                <MenuItem value={type.text} key={type.id}>
+                  {type.text}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <FormControl style={{ width: "100px" }}>
+            <InputLabel>Status:</InputLabel>
+            <Select name="status">
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {STATUSVALUES.map(type => (
+                <MenuItem value={type.text} key={type.id}>
+                  {type.text}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={12} sm={2}>
+          <FormControl style={{ width: "130px" }}>
+            <InputLabel>Fixer:</InputLabel>
+            <Select name="fixer">
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {PEOPLE.map(type => (
+                <MenuItem value={type.text} key={type.id}>
+                  {type.text}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={6} sm={2}>
+          <FormControl fullWidth>
+            <InputLabel>Process</InputLabel>
+            <Select name="process">
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {PROCESSES.map(type => (
+                <MenuItem value={type.text} key={type.id}>
+                  {type.text}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={6} sm={2}>
+          <FormControl style={{ width: "100px" }}>
+            <InputLabel>Release:</InputLabel>
+            <Select name="release">
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {RELEASES.map(type => (
+                <MenuItem value={type.text} key={type.id}>
+                  {type.text}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+
+        <Grid item xs={6} sm={2}>
+          <TextField />
+        </Grid>
+      </Grid>
+
+      <Grid item sm={1}></Grid>
+    </Fragment>
   );
 };
 

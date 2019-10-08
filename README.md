@@ -78,12 +78,13 @@ User Stories
       - Updated the 'back to login' button on the registration form
     - Directory page was previously just pulling all of the users from the database. I have now styled it, so you can actually tell who the users are.
       - Down the line, these will link to their individual profile pages.
+    - Wireframing and setting up the TicketForm component is about half done. I have brought most of everything together, I just need to organize the values and make sure they're communicating with my store and server accordingly...
+
 
 
     ##TO DO
     - When Profile is saved, the ProfileCard component needs to update accordingly
     - Ticket Form
-      - Get the layout and wireframe all set up on the Ticket page
       - Set up the form so that it interacts with State
       ... ^ DB
     - DashBoard

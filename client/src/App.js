@@ -20,7 +20,7 @@ import { SnackbarProvider } from "notistack";
 // Redux
 import store from "./store";
 import { loadUser } from "./actions/user";
-import { loadProfile } from "./actions/profile";
+import { loadCurrentProfile } from "./actions/profile";
 import setAuthToken from "./utils/setAuthToken";
 import { withRouter } from "react-router-dom";
 
@@ -31,7 +31,7 @@ if (localStorage.token) {
 const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
-    // store.dispatch(loadProfile());
+    store.dispatch(loadCurrentProfile());
   }, []);
 
   return (

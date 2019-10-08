@@ -73,7 +73,7 @@ export const createProfile = ({
       type: CREATE_PROFILE,
       payload: res.data
     });
-    // dispatch(getCurrentProfile());
+    dispatch(loadCurrentProfile());
     dispatch(showSuccessSnackbar(edit ? "Profile Updated" : "Profile Created"));
   } catch (err) {
     console.log(err);

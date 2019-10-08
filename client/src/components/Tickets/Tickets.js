@@ -7,17 +7,12 @@ import NewTicketForm from "./NewTicketForm";
 
 const Tickets = () => {
   return (
-    <Container>
-      <Grid columns={15}>
-        <Grid.Column width={3}>
-          <TicketHubLeftMenu />
-        </Grid.Column>
-        <Grid.Column></Grid.Column>
-        <Grid.Column width={11}>
-          <NewTicketForm />
-        </Grid.Column>
+    <Grid container>
+      <Grid item sm={1}></Grid>
+      <Grid item xs={12} sm={12}>
+        <NewTicketForm />
       </Grid>
-    </Container>
+    </Grid>
   );
 };
 

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Grid, Avatar, Divider, Paper } from "@material-ui/core";
 import { loadCurrentProfile } from "../../actions/profile";
 import PropTypes from "prop-types";
 
-const ProfileCard = ({ profile, loadCurrentProfile }) => {
-  const { firstName, lastName, handle, team, title } = profile;
+const ProfileCard = ({ user, profile, loadCurrentProfile }) => {
+  useEffect(() => {
+    loadCurrentProfile();
+  }, [loadCurrentProfile]);
+
   return (
     <Paper style={{ padding: "10px", marginTop: "30px" }}>
       <Grid container justify="center">
@@ -25,8 +28,10 @@ const ProfileCard = ({ profile, loadCurrentProfile }) => {
         <Divider variant="middle" style={{ color: "black" }} />
         <Grid item xs={12}>
           <center>
-            <h2 style={{ marginBottom: "-20px" }}>{firstName}</h2>
-            <h5 style={{ fontWeight: "400" }}>{handle}</h5>
+            <h2 style={{ marginBottom: "-20px" }}>
+              {profile && profile.firstName}
+            </h2>
+            <h5 style={{ fontWeight: "400" }}>{profile && profile.handle}</h5>
           </center>
         </Grid>
         <Grid
@@ -35,7 +40,9 @@ const ProfileCard = ({ profile, loadCurrentProfile }) => {
           style={{ justifyContent: "space-between", display: "flex" }}
         >
           <span style={{ fontSize: "12px", fontWeight: "200" }}>eMail:</span>
-          <span style={{ fontSize: "16px", fontWeight: "500" }}></span>
+          <span style={{ fontSize: "16px", fontWeight: "500" }}>
+            {user && user.email}
+          </span>
         </Grid>
 
         <Grid
@@ -45,7 +52,7 @@ const ProfileCard = ({ profile, loadCurrentProfile }) => {
         >
           <span style={{ fontSize: "12px", fontWeight: "200" }}>Title:</span>
           <span style={{ fontSize: "16px", fontWeight: "500" }}>
-            <span>{title}</span>
+            <span>{profile && profile.title}</span>
           </span>
         </Grid>
 
@@ -56,7 +63,7 @@ const ProfileCard = ({ profile, loadCurrentProfile }) => {
         >
           <span style={{ fontSize: "12px", fontWeight: "200" }}>Team:</span>
           <span style={{ fontSize: "16px", fontWeight: "500" }}>
-            <span>{team}</span>
+            <span>{profile && profile.team}</span>
           </span>
         </Grid>
 
@@ -69,7 +76,7 @@ const ProfileCard = ({ profile, loadCurrentProfile }) => {
             Notifications:
           </span>
           <span style={{ fontSize: "16px", fontWeight: "500" }}>
-            <span>notification_count</span>
+            <span>{user && user.notification_count}</span>
           </span>
         </Grid>
       </Grid>
