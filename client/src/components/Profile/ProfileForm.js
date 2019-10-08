@@ -97,7 +97,7 @@ const ProfileForm = ({
   useEffect(() => {
     loadCurrentProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loadCurrentProfile]);
+  }, []);
 
   return (
     <Grid container>
