@@ -32,17 +32,17 @@ const Landing = ({ auth: { isAuthenticated }, history, login }) => {
     return <Redirect to="/dashboard" />;
   } else {
     return (
-      <Container className={classes.root} maxWidth="md">
-        <Grid>
-          <Grid item xs={3}></Grid>
-          <Grid item sm={12} md={6}>
+      <Container className={classes.root}>
+        <Grid container>
+          <Grid item sm={2} md={3}></Grid>
+          <Grid item xs={12} md={6}>
             {showLoginOrRegister ? (
               <Login showLoginOrRegister={showLoginOrRegister} />
             ) : (
               <Register />
             )}
           </Grid>
-          <Grid item xs={3}></Grid>
+          <Grid item sm={3}></Grid>
         </Grid>
 
         <Grid item xs={12}>
