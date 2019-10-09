@@ -4,7 +4,7 @@ import { Grid, Avatar, Divider, Paper } from "@material-ui/core";
 import { loadCurrentProfile } from "../../actions/profile";
 import PropTypes from "prop-types";
 
-const ProfileCard = ({ user, profile, loadCurrentProfile }) => {
+const ProfileCard = ({ user, profile: { profile }, loadCurrentProfile }) => {
   useEffect(() => {
     loadCurrentProfile();
   }, [loadCurrentProfile]);
@@ -29,9 +29,11 @@ const ProfileCard = ({ user, profile, loadCurrentProfile }) => {
         <Grid item xs={12}>
           <center>
             <h2 style={{ marginBottom: "-20px" }}>
-              {profile && profile.firstName}
+              {profile && profile.firstName + " " + profile.lastName}
             </h2>
-            <h5 style={{ fontWeight: "400" }}>{profile && profile.handle}</h5>
+            <h5 style={{ fontWeight: "400" }}>
+              {profile && "@" + profile.handle}
+            </h5>
           </center>
         </Grid>
         <Grid
