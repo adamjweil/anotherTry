@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(1)
   },
   title: {
     flexGrow: 1
@@ -25,11 +25,18 @@ export default function UnauthenticatedNavbar() {
       <AppBar position="static">
         <Toolbar>
           <MenuItem>
-            <Link
-              to="/directory"
-              className=""
-              style={{ textDecoration: "none" }}
-            >
+            <Link to="/" className="" style={{ textDecoration: "none" }}>
+              <p
+                style={{ color: "white", fontWeight: "500", fontSize: "16px" }}
+              >
+                HOME
+              </p>
+            </Link>
+          </MenuItem>
+          <Typography variant="h6" className={classes.title}></Typography>
+
+          <MenuItem>
+            <Link to="/directory" style={{ textDecoration: "none" }}>
               <p
                 style={{
                   color: "white",
@@ -38,17 +45,6 @@ export default function UnauthenticatedNavbar() {
                 }}
               >
                 DIRECTORY
-              </p>
-            </Link>
-          </MenuItem>
-          <Typography variant="h6" className={classes.title}></Typography>
-
-          <MenuItem>
-            <Link to="/" className="" style={{ textDecoration: "none" }}>
-              <p
-                style={{ color: "white", fontWeight: "500", fontSize: "16px" }}
-              >
-                HOME
               </p>
             </Link>
           </MenuItem>

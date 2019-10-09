@@ -20,6 +20,7 @@ import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { makeStyles } from "@material-ui/core/styles";
 import { Form } from "semantic-ui-react";
+import Footer from "../layout/Navbar/Footer";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { login, register, toggleCheck } from "../../actions/auth";
@@ -329,6 +330,7 @@ const Register = ({
           </Grid>
         </Grid>
       </Box>
+      <Footer />
     </Container>
   );
 };

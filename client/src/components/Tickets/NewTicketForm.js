@@ -164,7 +164,6 @@ const NewTicketForm = props => {
             </Select>
           </FormControl>
         </Grid>
-
         <Grid item xs={6} sm={2}>
           <FormControl fullWidth>
             <InputLabel>Process</InputLabel>
