@@ -82,11 +82,11 @@ User Stories
 
     #10/09
     - Footer set up on the Landing Page, as well as the Registration Page
-
+    - Ticket form has been updated to include even more of the variables needed for tickets to be submitted. The next step is to actually wire up
+    - The Profile Card is now updating as expected when you submit the profile form. I wasn't destructuring PROFILE object from the PROFILE array, and so all the values I was looking for were undefined. Was much harder to debug then I wouldve thought. Took a while to figure this out
 
 
     ##TO DO
-    - When Profile is saved, the ProfileCard component needs to update accordingly
     - Ticket Form
       - Set up the form so that it interacts with State
       ... ^ DB

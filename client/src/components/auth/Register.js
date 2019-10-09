@@ -119,7 +119,7 @@ const Register = ({
 
   // Redirect if logged in
   if (isAuthenticated) {
-    return <Redirect push to="/profile" />;
+    return <Redirect push to="/dashboard" />;
   }
 
   return (
