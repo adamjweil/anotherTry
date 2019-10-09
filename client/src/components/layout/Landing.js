@@ -7,7 +7,7 @@ import Login from "./../auth/Login";
 import Register from "./../auth/Register";
 import { login } from "../../actions/auth";
 import { Redirect } from "react-router-dom";
-
+import Footer from "./Navbar/Footer";
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -56,6 +56,7 @@ const Landing = ({ auth: { isAuthenticated }, history, login }) => {
             }}
           ></div>
         </Grid>
+        <Footer />
       </Container>
     );
   }

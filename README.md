@@ -80,6 +80,9 @@ User Stories
       - Down the line, these will link to their individual profile pages.
     - Wireframing and setting up the TicketForm component is about half done. I have brought most of everything together, I just need to organize the values and make sure they're communicating with my store and server accordingly...
 
+    #10/09
+    - Footer set up on the Landing Page, as well as the Registration Page
+
 
 
     ##TO DO
