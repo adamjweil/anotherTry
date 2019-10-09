@@ -4,7 +4,7 @@ Description
 
 # Tech Stack: ReactJS, Redux, Node, MongoDB, Custom Middleware
 
-## Front End: Had originally used material-ui to style everything, but as I continued to style components, I found increasing limitations. So I'm in the midst of using Material-UI instead
+## Front End: Had originally used Semantic-UI to style everything, but as I continued to style components, I found increasing limitations. So I'm in the midst of using Material-UI instead
 
 User Stories
 
