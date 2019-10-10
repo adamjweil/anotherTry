@@ -56,15 +56,20 @@ router.post("/", auth, async (req, res) => {
   if (status) ticketFields.status = status;
   if (tester) ticketFields.tester = tester;
   if (standing) ticketFields.standing = standing;
+  if (ticketId) ticketFields.ticketId = ticketId;
   if (importance) ticketFields.importance = importance;
 
   try {
-    let ticket = await Ticket.findOneAndUpdate(
-      { _id: req.ticket.id },
-      { $set: ticketFields },
-      { new: true, upsert: true }
-    );
-    res.json(ticket);
+    ticket = await Ticket.findOne({ ticketId });
+
+    if (!ticket) {
+      let ticket = await Ticket.findOneAndUpdate(
+        { _id: req.ticket.id },
+        { $set: ticketFields },
+        { new: true, upsert: true }
+      );
+      res.json(ticket);
+    }
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

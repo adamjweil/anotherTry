@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect } from "react";
-import { connect } from "react-redux";
-import { loadCurrentProfile } from "../../actions/profile";
-import { Grid } from "@material-ui/core";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Grid } from "@material-ui/core";
+import { loadCurrentProfile } from "../../actions/profile";
 import ProfileCard from "./ProfileCard";
-import ProfileForm from "./ProfileForm";
+import ProfileForm from "./profile-forms/ProfileForm";
 
 const Profile = ({
   loadCurrentProfile,

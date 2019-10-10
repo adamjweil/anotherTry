@@ -28,16 +28,17 @@ const UserList = ({ users, fetchUsers }) => {
   const classes = useStyles();
   useEffect(() => {
     fetchUsers();
-  }, [fetchUsers]);
+  }, []);
   return users.map(user => {
     return (
       <Grid
+        key={user._id}
         item
         xs={12}
         sm={3}
         style={{ display: "inLine-block", margin: "15px" }}
       >
-        <Card key={user.id}>
+        <Card>
           <CardActionArea>
             <CardMedia
               className={classes.media}
@@ -46,11 +47,25 @@ const UserList = ({ users, fetchUsers }) => {
               title="User Avatar"
             />
             <CardContent>
-              <Typography variant="h5" component="p">
+              <Typography
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "700",
+                  textAlign: "center",
+                  color: "#696969"
+                }}
+              >
                 First Last
               </Typography>
-              <Typography variant="h8" component="p">
-                eMail: {user.email}
+              eMail:
+              <Typography
+                style={{
+                  fontSize: "14px",
+                  fontWeight: "600",
+                  color: "#696969"
+                }}
+              >
+                {user.email}
               </Typography>
             </CardContent>
           </CardActionArea>

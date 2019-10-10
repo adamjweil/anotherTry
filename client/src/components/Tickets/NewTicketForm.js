@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import {
   Grid,
   Button,
-  // TextField,
+  TextField,
   RadioGroup,
   Radio,
   FormLabel,
@@ -11,14 +11,16 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Box
+  Box,
+  Typography,
+  Divider
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 // Redux
 import { connect } from "react-redux";
 import { fetchUsers } from "../../actions/user";
 import { createTicket } from "../../actions/ticket";
-
+import { showErrorSnackbar } from "../../actions/alert";
 const PROJECTS = [
   {
     key: 0,
@@ -419,7 +421,7 @@ const BUCKETS = [
   }
 ];
 
-const NewTicketForm = ({ users, user, fetchUsers }) => {
+const NewTicketForm = ({ users, user, fetchUsers, createTicket }) => {
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
@@ -453,6 +455,7 @@ const NewTicketForm = ({ users, user, fetchUsers }) => {
     status,
     tester,
     standing,
+    ticketId,
     importance
   } = formData;
 
@@ -461,12 +464,15 @@ const NewTicketForm = ({ users, user, fetchUsers }) => {
       ...formData,
       [e.target.name]: e.target.value
     });
-  const onSubmit = e => {
-    console.lof(formData);
+  const onSubmit = async e => {
+    console.log({ formData });
     e.preventDefault();
-    createTicket({
-      formData
-    });
+    try {
+      await createTicket({ formData });
+    } catch (err) {
+      showErrorSnackbar(err.msg);
+      console.log(err);
+    }
   };
 
   return (
@@ -479,11 +485,37 @@ const NewTicketForm = ({ users, user, fetchUsers }) => {
         }}
       >
         <Grid item xs={12}>
-          <center>
-            <h2> NEW TICKET FORM </h2> <p> Submit a New Ticket Below! </p>{" "}
-          </center>{" "}
+          <Typography
+            style={{
+              fontSize: "24px",
+              fontWeight: "700",
+              color: "#696969",
+              textAlign: "center"
+            }}
+          >
+            NEW TICKET FORM
+          </Typography>
+          <Typography
+            style={{
+              fontSize: "18px",
+              fontWeight: "500",
+              color: "#A9A9A9",
+              textAlign: "center"
+            }}
+          >
+            Submit a New Ticket Below!
+          </Typography>
         </Grid>
-        <form onSubmit={onSubmit}>
+        <Divider
+          variant="middle"
+          style={{
+            marginTop: "5px",
+            height: "1px",
+            color: "#F8F8F8",
+            weight: "700"
+          }}
+        />
+        <form onSubmit={e => onSubmit(e)}>
           <Grid container spacing={2}>
             <Grid item>
               <FormControl
@@ -491,19 +523,17 @@ const NewTicketForm = ({ users, user, fetchUsers }) => {
                   width: "150px"
                 }}
               >
-                <InputLabel> Type </InputLabel>{" "}
+                <InputLabel> Type </InputLabel>
                 <Select
                   name="ticketType"
                   onChange={e => onChange(e)}
                   value={ticketType}
                 >
-                  {" "}
                   {TICKETTYPES.map(type => (
-                    <MenuItem value={type.text} key={type.id}>
-                      {" "}
+                    <MenuItem value={type.text} key={type.key}>
                       {type.text}
                     </MenuItem>
-                  ))}{" "}
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
@@ -513,22 +543,20 @@ const NewTicketForm = ({ users, user, fetchUsers }) => {
                   width: "100px"
                 }}
               >
-                <InputLabel> Source </InputLabel>{" "}
+                <InputLabel> Source </InputLabel>
                 <Select
                   name="source"
                   onChange={e => onChange(e)}
                   value={source}
                 >
-                  {" "}
                   {SOURCES.map(type => (
-                    <MenuItem value={type.text} key={type.id}>
-                      {" "}
-                      {type.text}{" "}
+                    <MenuItem value={type.text} key={type.key}>
+                      {type.text}
                     </MenuItem>
-                  ))}{" "}
-                </Select>{" "}
-              </FormControl>{" "}
-            </Grid>{" "}
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
             <Grid item>
               <FormControl
                 style={{
@@ -536,37 +564,34 @@ const NewTicketForm = ({ users, user, fetchUsers }) => {
                 }}
                 size="small"
               >
-                <InputLabel> ENV </InputLabel>{" "}
+                <InputLabel> ENV </InputLabel>
                 <Select
                   name="environment"
                   onChange={e => onChange(e)}
                   value={environment}
                 >
-                  {" "}
                   {ENVIRONMENTS.map(type => (
-                    <MenuItem value={type.text} key={type.id}>
-                      {" "}
-                      {type.text}{" "}
+                    <MenuItem value={type.text} key={type.key}>
+                      {type.text}
                     </MenuItem>
-                  ))}{" "}
-                </Select>{" "}
-              </FormControl>{" "}
-            </Grid>{" "}
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
             <Grid item>
               <FormControl
                 style={{
                   width: "100px"
                 }}
               >
-                <InputLabel> Bucket: </InputLabel>{" "}
+                <InputLabel> Bucket: </InputLabel>
                 <Select
                   name="bucket"
                   onChange={e => onChange(e)}
                   value={bucket}
                 >
-                  {" "}
                   {BUCKETS.map(type => (
-                    <MenuItem value={type.text} key={type.id}>
+                    <MenuItem value={type.text} key={type.key}>
                       {type.text}
                     </MenuItem>
                   ))}
@@ -581,16 +606,14 @@ const NewTicketForm = ({ users, user, fetchUsers }) => {
                   onChange={e => onChange(e)}
                   value={project}
                 >
-                  {" "}
                   {PROJECTS.map(type => (
-                    <MenuItem value={type.text} key={type.id}>
-                      {" "}
-                      {type.text}{" "}
+                    <MenuItem value={type.text} key={type.key}>
+                      {type.text}
                     </MenuItem>
-                  ))}{" "}
-                </Select>{" "}
-              </FormControl>{" "}
-            </Grid>{" "}
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
             <Grid item>
               <FormControl
                 style={{
@@ -598,43 +621,39 @@ const NewTicketForm = ({ users, user, fetchUsers }) => {
                   margin: "0 5px 5px 0"
                 }}
               >
-                <InputLabel> Release: </InputLabel>{" "}
+                <InputLabel> Release: </InputLabel>
                 <Select
                   name="release"
                   onChange={e => onChange(e)}
                   value={release}
                 >
-                  {" "}
                   {RELEASES.map(type => (
-                    <MenuItem value={type.text} key={type.id}>
-                      {" "}
-                      {type.text}{" "}
+                    <MenuItem value={type.text} key={type.key}>
+                      {type.text}
                     </MenuItem>
-                  ))}{" "}
-                </Select>{" "}
-              </FormControl>{" "}
-            </Grid>{" "}
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
             <Grid item>
               <FormControl
                 style={{
                   width: "150px"
                 }}
               >
-                <InputLabel> Process </InputLabel>{" "}
+                <InputLabel> Process </InputLabel>
                 <Select
                   name="process"
                   onChange={e => onChange(e)}
                   value={process}
                 >
-                  {" "}
                   {PROCESSES.map(type => (
-                    <MenuItem value={type.text} key={type.id}>
-                      {" "}
-                      {type.text}{" "}
+                    <MenuItem value={type.text} key={type.key}>
+                      {type.text}
                     </MenuItem>
-                  ))}{" "}
-                </Select>{" "}
-              </FormControl>{" "}
+                  ))}
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item>
               <FormControl
@@ -642,17 +661,15 @@ const NewTicketForm = ({ users, user, fetchUsers }) => {
                   width: "175px"
                 }}
               >
-                <InputLabel> Owner: </InputLabel>{" "}
+                <InputLabel> Owner: </InputLabel>
                 <Select name="owner" onChange={e => onChange(e)} value={owner}>
-                  {" "}
                   {PEOPLE.map(type => (
-                    <MenuItem value={type.text} key={type.id}>
-                      {" "}
-                      {type.text}{" "}
+                    <MenuItem value={type.text} key={type.key}>
+                      {type.text}
                     </MenuItem>
-                  ))}{" "}
-                </Select>{" "}
-              </FormControl>{" "}
+                  ))}
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item>
               <FormControl
@@ -660,17 +677,16 @@ const NewTicketForm = ({ users, user, fetchUsers }) => {
                   width: "175px"
                 }}
               >
-                <InputLabel> Fixer: </InputLabel>{" "}
+                <InputLabel> Fixer: </InputLabel>
                 <Select name="fixer" onChange={e => onChange(e)} value={fixer}>
                   {" "}
                   {PEOPLE.map(type => (
-                    <MenuItem value={type.text} key={type.id}>
-                      {" "}
-                      {type.text}{" "}
+                    <MenuItem value={type.text} key={type.key}>
+                      {type.text}
                     </MenuItem>
-                  ))}{" "}
-                </Select>{" "}
-              </FormControl>{" "}
+                  ))}
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item>
               <FormControl
@@ -678,21 +694,19 @@ const NewTicketForm = ({ users, user, fetchUsers }) => {
                   width: "100px"
                 }}
               >
-                <InputLabel> Status: </InputLabel>{" "}
+                <InputLabel> Status: </InputLabel>
                 <Select
                   name="status"
                   onChange={e => onChange(e)}
                   value={status}
                 >
-                  {" "}
                   {STATUSVALUES.map(type => (
-                    <MenuItem value={type.text} key={type.id}>
-                      {" "}
-                      {type.text}{" "}
+                    <MenuItem value={type.text} key={type.key}>
+                      {type.text}
                     </MenuItem>
-                  ))}{" "}
-                </Select>{" "}
-              </FormControl>{" "}
+                  ))}
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item>
               <FormControl
@@ -700,21 +714,19 @@ const NewTicketForm = ({ users, user, fetchUsers }) => {
                   width: "175px"
                 }}
               >
-                <InputLabel> Tester: </InputLabel>{" "}
+                <InputLabel> Tester: </InputLabel>
                 <Select
                   name="tester"
                   onChange={e => onChange(e)}
                   value={tester}
                 >
-                  {" "}
                   {PEOPLE.map(type => (
-                    <MenuItem value={type.text} key={type.id}>
-                      {" "}
-                      {type.text}{" "}
+                    <MenuItem value={type.text} key={type.key}>
+                      {type.text}
                     </MenuItem>
-                  ))}{" "}
-                </Select>{" "}
-              </FormControl>{" "}
+                  ))}
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item>
               <FormControl
@@ -722,21 +734,35 @@ const NewTicketForm = ({ users, user, fetchUsers }) => {
                   width: "100px"
                 }}
               >
-                <InputLabel> STD: </InputLabel>{" "}
+                <InputLabel> STD: </InputLabel>
                 <Select
                   name="standing"
                   onChange={e => onChange(e)}
                   value={standing}
                 >
-                  {" "}
                   {STANDINGVALUES.map(type => (
-                    <MenuItem value={type.text} key={type.id}>
-                      {" "}
-                      {type.text}{" "}
+                    <MenuItem value={type.text} key={type.key}>
+                      {type.text}
                     </MenuItem>
-                  ))}{" "}
-                </Select>{" "}
-              </FormControl>{" "}
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item>
+              <FormControl
+                style={{
+                  width: "150px"
+                }}
+              >
+                <InputLabel>Ticket ID:</InputLabel>
+                <TextField
+                  name="ticketId"
+                  value={ticketId}
+                  onChange={e => onChange(e)}
+                  variant="filled"
+                  margin="normal"
+                />
+              </FormControl>
             </Grid>
             <Grid item>
               <FormControl
@@ -778,12 +804,12 @@ const NewTicketForm = ({ users, user, fetchUsers }) => {
                 variant="contained"
                 size="small"
               >
-                Submit{" "}
-              </Button>{" "}
-            </Grid>{" "}
-          </Grid>{" "}
-        </form>{" "}
-      </Box>{" "}
+                Submit
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </Box>
     </Fragment>
   );
 };

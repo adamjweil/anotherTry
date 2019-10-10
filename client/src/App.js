@@ -8,10 +8,10 @@ import SuccessSnackbar from "./components/layout/Alerts/SuccessSnackbar";
 import InfoSnackbar from "./components/layout/Alerts/InfoSnackbar";
 import ErrorSnackbar from "./components/layout/Alerts/ErrorSnackbar";
 import Profile from "./components/Profile/Profile";
+import ProfileForm from "./components/Profile/profile-forms/ProfileForm";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Tickets from "./components/Tickets/Tickets";
 import Directory from "./components/layout/Directory/Directory";
-import CreateProfile from "./components/Profile/profile-forms/CreateProfile";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import ThemeingLayout from "./components/layout/TestLayout/ThemeingLayout";
 import ResponsiveLayout from "./components/layout/TestLayout/ResponsiveLayout";
@@ -56,11 +56,7 @@ const App = () => {
             <PrivateRoute exact path="/profile" component={Profile} />
             <Route exact path="/directory" component={Directory} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            <PrivateRoute
-              exact
-              path="/create-profile"
-              component={CreateProfile}
-            />
+            <PrivateRoute exact path="/profileform" component={ProfileForm} />
           </Switch>
         </section>
       </Router>
