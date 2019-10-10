@@ -85,11 +85,15 @@ User Stories
     - Ticket form has been updated to include even more of the variables needed for tickets to be submitted. The next step is to actually wire up
     - The Profile Card is now updating as expected when you submit the profile form. I wasn't destructuring PROFILE object from the PROFILE array, and so all the values I was looking for were undefined. Was much harder to debug then I wouldve thought. Took a while to figure this out
 
+    #10/10
+    - Set up Ticket Reducers, Actions, and routes. I had already had a model set up for Tickets, but it did need to be changed around slightly. Now that all of these variables are included in the application state, I need to make sure theyre saving correctly to the database.
+    - After reading a bunch of Medium articles on UX and some fundamental tools to become a better designer, and started to implement some of those. One example is throwing a box shadow the Login and Register Components, rather than having a Border width specific to each side (which was a super hacky alternative, that I didnt like at all). These box shadows look much better
+      - I also started to play around with using color and weight as a way to formulate my information heirarchy, rather than relting on font size all the time. This makes the site much much more visually appealing, and I plan on playing around with these ideas a lot more going forward
 
     ##TO DO
-    - Ticket Form
-      - Set up the form so that it interacts with State
-      ... ^ DB
+    - Dropdown of Users from the database. I need to have the Users first + last name dispay, however, and those variables are stored on the Profile Object, which is indirectly atached to the User
+    - Styling Ticket form
+    - Fetching tickets
     - DashBoard
       - Get the layout wire-framed out
     - oAuth integration on top of in app authentication

@@ -129,12 +129,11 @@ const Register = ({
       <Grid item sm={12} md={6}></Grid>
       <Box
         marginTop="50px"
-        borderLeft={1}
-        borderBottom={3}
-        borderRight={3}
-        borderTop={1}
-        borderColor="grey.400"
-        style={{ background: "#F8F8F8", minWidth: "600px" }}
+        style={{
+          background: "#F8F8F8",
+          minWidth: "600px",
+          boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.2)"
+        }}
       >
         <Form
           style={{ padding: "30px" }}

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   Button,
   Container,
@@ -18,8 +20,6 @@ import {
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import EmailTwoToneIcon from "@material-ui/icons/EmailTwoTone";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { login, signIn } from "../../actions/auth";
 import { setAlert } from "../../actions/alert";
 import GoogleAuth from "../../GoogleAuth";
@@ -92,12 +92,11 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
       <CssBaseline />
       <Box
         marginTop="50px"
-        borderLeft={1}
-        borderBottom={3}
-        borderRight={3}
-        borderTop={1}
-        borderColor="grey.400"
-        style={{ background: "#F8F8F8", minWidth: "540px" }}
+        style={{
+          background: "#F8F8F8",
+          minWidth: "540px",
+          boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.2)"
+        }}
       >
         <form
           style={{ padding: "30px" }}
@@ -193,8 +192,23 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
                 className={classes.remember}
               />
             </Grid>
-            <Grid item xs={6}></Grid>
-            <Grid item xs={12} sm={5}>
+            <Grid item xs={6}>
+              <Link
+                to="#"
+                className={classes.remember}
+                style={{
+                  textDecoration: "none",
+                  fontWeight: 600,
+                  fontSize: "14px",
+                  color: "blue",
+                  marginLeft: "30px"
+                }}
+              >
+                Forgot password? Click Here!!
+              </Link>
+            </Grid>
+
+            <Grid item xs={12}>
               <Button
                 type="submit"
                 fullWidth
@@ -207,15 +221,14 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
                 Login
               </Button>
             </Grid>
-            <Grid item sm={2}></Grid>
             <Grid item xs={12} sm={5}>
               <Link to="/register" style={{ textDecoration: "none" }}>
                 <Button
                   renderas="button"
                   fullWidth
-                  size="large"
+                  size="small"
                   variant="contained"
-                  color="secondary"
+                  color="standard"
                   className={classes.submit}
                   style={{
                     textDecoration: "none"
@@ -226,21 +239,9 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
               </Link>
             </Grid>
 
-            <Grid item xs={7}>
-              <Link
-                to="#"
-                style={{
-                  textDecoration: "none",
-                  fontWeight: 400,
-                  fontSize: "12px",
-                  color: "grey",
-                  marginLeft: "10px"
-                }}
-              >
-                Forgot password? Click Here!!
-              </Link>
-            </Grid>
-            <Grid item sm={5}>
+            <Grid item sm={2}></Grid>
+
+            <Grid item xs={12} sm={5} className={classes.submit}>
               <GoogleAuth />
             </Grid>
           </Grid>
@@ -252,6 +253,10 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
 
 Login.propTypes = {
   login: PropTypes.func.isRequired,
+  signIn: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
+  alerts: PropTypes.array.isRequired,
+  auth: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool
 };
 

@@ -9,7 +9,8 @@ import {
   MenuItem,
   InputLabel,
   Button,
-  Paper
+  Paper,
+  InputAdornment
 } from "@material-ui/core";
 import { Form } from "semantic-ui-react";
 import PropTypes from "prop-types";
@@ -44,7 +45,8 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     marginTop: theme.spacing(1),
     border: "1px shadow",
-    borderColor: "#3f51b5"
+    borderColor: "#3f51b5",
+    boxShadow: " 0 4px 6px 0 hsla(0, 0%, 0%, 0.2)"
   },
   message: {
     borderBottom: "3px solid #3f51b5"
@@ -150,11 +152,18 @@ const ProfileForm = ({
           <Grid item xs={12} sm={5}>
             <FormControl>
               <TextField
-                name="handle"
                 label="Handle"
+                name="handle"
+                margin="normal"
+                variant="filled"
                 value={handle}
                 onChange={e => onChange(e)}
                 helperText="What do you go by?"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">@</InputAdornment>
+                  )
+                }}
               />
             </FormControl>
           </Grid>
