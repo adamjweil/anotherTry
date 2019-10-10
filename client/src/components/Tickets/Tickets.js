@@ -8,8 +8,7 @@ import NewTicketForm from "./NewTicketForm";
 const Tickets = () => {
   return (
     <Grid container>
-      <Grid item sm={1}></Grid>
-      <Grid item xs={12} sm={12}>
+      <Grid item xs={12}>
         <NewTicketForm />
       </Grid>
     </Grid>

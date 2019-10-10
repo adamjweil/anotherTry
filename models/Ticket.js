@@ -48,6 +48,9 @@ const TicketSchema = new mongoose.Schema({
     Type: mongoose.Schema.Types.ObjectId,
     ref: "user"
   },
+  ticketId: {
+    Type: String
+  },
   date: {
     Type: Date,
     default: Date.now

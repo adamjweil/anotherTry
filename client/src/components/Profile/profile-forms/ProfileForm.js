@@ -17,9 +17,9 @@ import PropTypes from "prop-types";
 import SaveIcon from "@material-ui/icons/Save";
 import clsx from "clsx";
 
-import { createProfile } from "../../actions/profile";
-import { loadCurrentProfile } from "../../actions/profile";
-import { loadUser } from "../../actions/user";
+import { createProfile } from "../../../actions/profile";
+import { loadCurrentProfile } from "../../../actions/profile";
+import { loadUser } from "../../../actions/user";
 
 const useStyles = makeStyles(theme => ({
   root: {
