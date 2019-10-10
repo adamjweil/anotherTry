@@ -1,6 +1,7 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Grid,
+  Button,
   TextField,
   RadioGroup,
   Radio,
@@ -12,8 +13,11 @@ import {
   Select,
   Box
 } from "@material-ui/core";
+import PropTypes from "prop-types";
 // Redux
 import { connect } from "react-redux";
+import { fetchUsers } from "../../actions/user";
+import { createTicket } from "../../actions/ticket";
 
 const PROJECTS = [
   { key: 0, text: "OPP-IG", value: "OPP-IG" },
@@ -127,10 +131,59 @@ const BUCKETS = [
   { key: 4, text: "MEZOCLIQ", value: "MEZOCLIQ" }
 ];
 
-const NewTicketForm = props => {
+const NewTicketForm = ({ users, user, fetchUsers }) => {
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
+
+  const [formData, setFormData] = useState({
+    ticketType: "",
+    source: "",
+    environment: "",
+    bucket: "",
+    project: "",
+    release: "",
+    process: "",
+    owner: "",
+    fixer: "",
+    status: "",
+    tester: "",
+    standing: "",
+    importance: ""
+  });
+
+  const {
+    ticketType,
+    source,
+    environment,
+    bucket,
+    project,
+    release,
+    process,
+    owner,
+    fixer,
+    status,
+    tester,
+    standing,
+    importance
+  } = formData;
+
+  const onChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onSubmit = e => {
+    e.preventDefault();
+    createTicket({ formData });
+  };
+
   return (
     <Fragment>
-      <Box style={{ border: "1px solid grey", padding: "15px" }}>
+      <Box
+        style={{
+          border: "1px solid grey",
+          padding: "15px",
+          boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.2)"
+        }}
+      >
         <Grid item xs={12}>
           <center>
             <h2>NEW TICKET FORM</h2>
@@ -138,12 +191,16 @@ const NewTicketForm = props => {
           </center>
         </Grid>
 
-        <form>
+        <form onSubmit={onSubmit}>
           <Grid container spacing={2}>
             <Grid item>
               <FormControl style={{ width: "150px" }}>
                 <InputLabel>Type</InputLabel>
-                <Select name="type">
+                <Select
+                  name="ticketType"
+                  onChange={e => onChange(e)}
+                  value={ticketType}
+                >
                   {TICKETTYPES.map(type => (
                     <MenuItem value={type.text} key={type.id}>
                       {type.text}
@@ -155,7 +212,11 @@ const NewTicketForm = props => {
             <Grid item>
               <FormControl style={{ width: "100px" }}>
                 <InputLabel>Source</InputLabel>
-                <Select name="source">
+                <Select
+                  name="source"
+                  onChange={e => onChange(e)}
+                  value={source}
+                >
                   {SOURCES.map(type => (
                     <MenuItem value={type.text} key={type.id}>
                       {type.text}
@@ -167,7 +228,11 @@ const NewTicketForm = props => {
             <Grid item>
               <FormControl style={{ width: "90px" }} size="small">
                 <InputLabel>ENV</InputLabel>
-                <Select name="environment">
+                <Select
+                  name="environment"
+                  onChange={e => onChange(e)}
+                  value={environment}
+                >
                   {ENVIRONMENTS.map(type => (
                     <MenuItem value={type.text} key={type.id}>
                       {type.text}
@@ -179,10 +244,11 @@ const NewTicketForm = props => {
             <Grid item>
               <FormControl style={{ width: "100px" }}>
                 <InputLabel>Bucket:</InputLabel>
-                <Select name="bucket">
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
+                <Select
+                  name="bucket"
+                  onChange={e => onChange(e)}
+                  value={bucket}
+                >
                   {BUCKETS.map(type => (
                     <MenuItem value={type.text} key={type.id}>
                       {type.text}
@@ -194,7 +260,11 @@ const NewTicketForm = props => {
             <Grid item>
               <FormControl style={{ width: "200px" }}>
                 <InputLabel>Project</InputLabel>
-                <Select name="project">
+                <Select
+                  name="project"
+                  onChange={e => onChange(e)}
+                  value={project}
+                >
                   {PROJECTS.map(type => (
                     <MenuItem value={type.text} key={type.id}>
                       {type.text}
@@ -206,10 +276,11 @@ const NewTicketForm = props => {
             <Grid item>
               <FormControl style={{ width: "100px", margin: "0 5px 5px 0" }}>
                 <InputLabel>Release:</InputLabel>
-                <Select name="release">
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
+                <Select
+                  name="release"
+                  onChange={e => onChange(e)}
+                  value={release}
+                >
                   {RELEASES.map(type => (
                     <MenuItem value={type.text} key={type.id}>
                       {type.text}
@@ -221,7 +292,11 @@ const NewTicketForm = props => {
             <Grid item>
               <FormControl style={{ width: "150px" }}>
                 <InputLabel>Process</InputLabel>
-                <Select name="process">
+                <Select
+                  name="process"
+                  onChange={e => onChange(e)}
+                  value={process}
+                >
                   {PROCESSES.map(type => (
                     <MenuItem value={type.text} key={type.id}>
                       {type.text}
@@ -234,7 +309,7 @@ const NewTicketForm = props => {
             <Grid item>
               <FormControl style={{ width: "175px" }}>
                 <InputLabel>Owner:</InputLabel>
-                <Select name="owner">
+                <Select name="owner" onChange={e => onChange(e)} value={owner}>
                   {PEOPLE.map(type => (
                     <MenuItem value={type.text} key={type.id}>
                       {type.text}
@@ -247,7 +322,7 @@ const NewTicketForm = props => {
             <Grid item>
               <FormControl style={{ width: "175px" }}>
                 <InputLabel>Fixer:</InputLabel>
-                <Select name="fixer">
+                <Select name="fixer" onChange={e => onChange(e)} value={fixer}>
                   {PEOPLE.map(type => (
                     <MenuItem value={type.text} key={type.id}>
                       {type.text}
@@ -260,7 +335,11 @@ const NewTicketForm = props => {
             <Grid item>
               <FormControl style={{ width: "100px" }}>
                 <InputLabel>Status:</InputLabel>
-                <Select name="status">
+                <Select
+                  name="status"
+                  onChange={e => onChange(e)}
+                  value={status}
+                >
                   {STATUSVALUES.map(type => (
                     <MenuItem value={type.text} key={type.id}>
                       {type.text}
@@ -273,7 +352,11 @@ const NewTicketForm = props => {
             <Grid item>
               <FormControl style={{ width: "175px" }}>
                 <InputLabel>Tester:</InputLabel>
-                <Select name="tester">
+                <Select
+                  name="tester"
+                  onChange={e => onChange(e)}
+                  value={tester}
+                >
                   {PEOPLE.map(type => (
                     <MenuItem value={type.text} key={type.id}>
                       {type.text}
@@ -286,7 +369,11 @@ const NewTicketForm = props => {
             <Grid item>
               <FormControl style={{ width: "100px" }}>
                 <InputLabel>STD:</InputLabel>
-                <Select name="standing">
+                <Select
+                  name="standing"
+                  onChange={e => onChange(e)}
+                  value={standing}
+                >
                   {STANDINGVALUES.map(type => (
                     <MenuItem value={type.text} key={type.id}>
                       {type.text}
@@ -299,7 +386,13 @@ const NewTicketForm = props => {
             <Grid item>
               <FormControl component="fieldset" style={{ marginTop: "15px" }}>
                 <FormLabel commponent="legend">Importance:</FormLabel>
-                <RadioGroup aria-label="importance" name="importance" row>
+                <RadioGroup
+                  aria-label="importance"
+                  name="importance"
+                  value={importance}
+                  onChange={e => onChange(e)}
+                  row
+                >
                   <FormControlLabel
                     value="High"
                     control={<Radio />}
@@ -318,6 +411,16 @@ const NewTicketForm = props => {
                 </RadioGroup>
               </FormControl>
             </Grid>
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                color="primary"
+                variant="contained"
+                size="small"
+              >
+                Submit
+              </Button>
+            </Grid>
           </Grid>
         </form>
       </Box>
@@ -325,6 +428,19 @@ const NewTicketForm = props => {
   );
 };
 
-NewTicketForm.propTypes = {};
+NewTicketForm.propTypes = {
+  users: PropTypes.array.isRequired,
+  fetchUsers: PropTypes.func.isRequired,
+  createTicket: PropTypes.func.isRequired
+};
 
-export default connect()(NewTicketForm);
+const mapStateToProps = state => ({
+  users: Object.values(state.users),
+  user: state.auth.user,
+  ticket: state.ticket
+});
+
+export default connect(
+  mapStateToProps,
+  { fetchUsers, createTicket }
+)(NewTicketForm);

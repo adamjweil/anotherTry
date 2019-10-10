@@ -233,7 +233,6 @@ const ProfileForm = ({
 ProfileForm.propTypes = {
   createProfile: PropTypes.func.isRequired,
   users: PropTypes.array.isRequired
-  // profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
