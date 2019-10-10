@@ -18,6 +18,9 @@ const ProfileSchema = new mongoose.Schema({
   title: {
     type: String
   },
+  team: {
+    type: String
+  },
   date: {
     type: Date,
     default: Date.now
