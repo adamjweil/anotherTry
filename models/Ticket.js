@@ -1,14 +1,29 @@
 const mongoose = require("mongoose");
 const User = require("./User");
-const Project = require("./Project");
-const Release = require("./Release");
 
 const TicketSchema = new mongoose.Schema({
-  ticketer: {
-    Type: mongoose.Schema.Types.ObjectId,
-    ref: "user"
+  ticketType: {
+    Type: String
   },
-  tester: {
+  source: {
+    Type: String
+  },
+  environment: {
+    Type: String
+  },
+  bucket: {
+    Type: String
+  },
+  project: {
+    Type: String
+  },
+  release: {
+    Type: String
+  },
+  process: {
+    Type: String
+  },
+  owner: {
     Type: mongoose.Schema.Types.ObjectId,
     ref: "user"
   },
@@ -16,37 +31,22 @@ const TicketSchema = new mongoose.Schema({
     Type: mongoose.Schema.Types.ObjectId,
     ref: "user"
   },
-  project: {
-    Type: mongoose.Schema.Types.ObjectId,
-    ref: "project"
-  },
-  release: {
-    Type: mongoose.Schema.Types.ObjectId,
-    ref: "release"
-  },
-  ticketType: {
-    Type: String
-  },
-  fullDescription: {
-    Type: String
-  },
-  summary: {
-    Type: String
-  },
-  environment: {
-    Type: String
-  },
-  process: {
-    Type: String
-  },
   status: {
     Type: String
   },
-  notes: {
+  tester: {
+    Type: mongoose.Schema.Types.ObjectId,
+    ref: "user"
+  },
+  standing: {
     Type: String
   },
-  ticketNumber: {
-    Type: Number
+  importance: {
+    Type: String
+  },
+  ticketer: {
+    Type: mongoose.Schema.Types.ObjectId,
+    ref: "user"
   },
   date: {
     Type: Date,

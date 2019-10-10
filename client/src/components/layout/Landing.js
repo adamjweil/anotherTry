@@ -45,7 +45,6 @@ const Landing = ({ auth: { isAuthenticated }, history, login }) => {
             </Grid>
             <Grid item sm={3}></Grid>
           </Grid>
-
           <Grid item xs={12}>
             <div
               style={{
