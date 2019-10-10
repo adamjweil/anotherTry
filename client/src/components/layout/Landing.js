@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
@@ -32,32 +32,34 @@ const Landing = ({ auth: { isAuthenticated }, history, login }) => {
     return <Redirect to="/dashboard" />;
   } else {
     return (
-      <Container className={classes.root}>
-        <Grid container>
-          <Grid item sm={2} md={3}></Grid>
-          <Grid item xs={12} md={6}>
-            {showLoginOrRegister ? (
-              <Login showLoginOrRegister={showLoginOrRegister} />
-            ) : (
-              <Register />
-            )}
+      <Fragment>
+        <Container className={classes.root}>
+          <Grid container>
+            <Grid item sm={2} md={3}></Grid>
+            <Grid item xs={12} md={6}>
+              {showLoginOrRegister ? (
+                <Login showLoginOrRegister={showLoginOrRegister} />
+              ) : (
+                <Register />
+              )}
+            </Grid>
+            <Grid item sm={3}></Grid>
           </Grid>
-          <Grid item sm={3}></Grid>
-        </Grid>
 
-        <Grid item xs={12}>
-          <div
-            style={{
-              display: "in-line",
-              position: "absolute",
-              bottom: "15px",
-              left: "15px",
-              right: "15px"
-            }}
-          ></div>
-        </Grid>
+          <Grid item xs={12}>
+            <div
+              style={{
+                display: "in-line",
+                position: "absolute",
+                bottom: "15px",
+                left: "15px",
+                right: "15px"
+              }}
+            ></div>
+          </Grid>
+        </Container>
         <Footer />
-      </Container>
+      </Fragment>
     );
   }
 };

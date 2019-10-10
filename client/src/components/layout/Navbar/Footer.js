@@ -7,11 +7,12 @@ const Footer = () => {
   return (
     <div
       style={{
-        position: "relative",
+        position: "absolute",
+        display: "in-line",
         left: 0,
         bottom: 0,
         right: 0,
-        marginTop: "50px",
+        // marginTop: "50px"
         marginBottom: "20px"
       }}
     >
