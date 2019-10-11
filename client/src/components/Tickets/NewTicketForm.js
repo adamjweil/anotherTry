@@ -815,7 +815,7 @@ const NewTicketForm = ({ users, user, fetchUsers, createTicket }) => {
 };
 
 NewTicketForm.propTypes = {
-  users: PropTypes.array.isRequired,
+  // users: PropTypes.array.isRequired,
   fetchUsers: PropTypes.func.isRequired,
   createTicket: PropTypes.func.isRequired
 };

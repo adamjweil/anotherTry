@@ -23,7 +23,7 @@ const TicketSchema = new mongoose.Schema({
   process: {
     Type: String
   },
-  owner: {
+  ticketer: {
     Type: mongoose.Schema.Types.ObjectId,
     ref: "user"
   },
@@ -43,10 +43,6 @@ const TicketSchema = new mongoose.Schema({
   },
   importance: {
     Type: String
-  },
-  ticketer: {
-    Type: mongoose.Schema.Types.ObjectId,
-    ref: "user"
   },
   ticketId: {
     Type: String
