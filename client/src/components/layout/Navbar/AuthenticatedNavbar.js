@@ -200,9 +200,7 @@ const AuthenticatedNavbar = ({ logout }) => {
   return (
     <div className={classes.grow}>
       <AppBar position="static">
-        <Toolbar
-          style={{ backgroundColor: "rgba(0, 0, 0, 0.87);", ocacity: "0.5" }}
-        >
+        <Toolbar>
           <IconButton
             edge="start"
             className={classes.menuButton}
