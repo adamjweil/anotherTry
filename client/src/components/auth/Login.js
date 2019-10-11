@@ -52,6 +52,9 @@ const useStyles = makeStyles(theme => ({
   },
   remember: {
     margin: theme.spacing(1, 0, 1)
+  },
+  main: {
+    width: "540px"
   }
 }));
 
@@ -88,13 +91,13 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
   };
 
   return (
-    <Container component="main" maxWidth="md">
+    <Container component="main" maxWidth="md" className={classes.main}>
       <CssBaseline />
       <Box
         marginTop="50px"
         style={{
           background: "#F8F8F8",
-          minWidth: "540px",
+
           boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.2)"
         }}
       >
@@ -184,24 +187,23 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
           />
 
           <Grid container>
-            <Grid item sm={6}>
+            <Grid item>
               <FormControlLabel
-                style={{ fontSize: "80px" }}
+                style={{ fontSize: "5px" }}
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
                 className={classes.remember}
               />
-            </Grid>
-            <Grid item xs={6}>
+
               <Link
                 to="#"
-                className={classes.remember}
                 style={{
                   textDecoration: "none",
                   fontWeight: 600,
                   fontSize: "14px",
                   color: "blue",
-                  marginLeft: "30px"
+                  align: "middle",
+                  marginLeft: "50px"
                 }}
               >
                 Forgot password? Click Here!!
