@@ -11,9 +11,13 @@ const User = require("../../models/User");
 // @access Ptivate
 router.get("/", auth, async (req, res) => {
   try {
-    const tickets = await Ticket.find();
+    const tickets = await Ticket.find().populate("profile", [
+      "firstName",
+      "lastName"
+    ]);
     res.json(tickets);
   } catch (err) {
+    console.error(err.message);
     res.status(500).send("Server Error");
   }
 });
@@ -60,16 +64,12 @@ router.post("/", auth, async (req, res) => {
   if (importance) ticketFields.importance = importance;
 
   try {
-    ticket = await Ticket.findOne({ ticketId });
-
-    if (!ticket) {
-      let ticket = await Ticket.findOneAndUpdate(
-        { _id: req.ticket.id },
-        { $set: ticketFields },
-        { new: true, upsert: true }
-      );
-      res.json(ticket);
-    }
+    let ticket = await Ticket.findOneAndUpdate(
+      { ticketId: req.ticket.ticketId },
+      { $set: ticketFields },
+      { new: true, upsert: true }
+    );
+    res.json(ticket);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

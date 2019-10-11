@@ -25,7 +25,7 @@ export const createTicket = ({ formData, edit = false }) => async dispatch => {
   try {
     const config = {
       headers: {
-        "Content-Type": "applicsation/json"
+        "Content-Type": "application/json"
       }
     };
     const res = await axios.post("/api/ticket", formData, config);
@@ -33,7 +33,7 @@ export const createTicket = ({ formData, edit = false }) => async dispatch => {
       type: CREATE_TICKET,
       payload: res.data
     });
-    dispatch(loadTickets());
+    // dispatch(loadTickets());
     dispatch(showSuccessSnackbar(edit ? "Ticket Updated" : "Ticket Created"));
   } catch (err) {
     console.log(err);
