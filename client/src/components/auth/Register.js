@@ -14,15 +14,14 @@ import {
   IconButton,
   Icon
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
 import EmailTwoToneIcon from "@material-ui/icons/EmailTwoTone";
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { makeStyles } from "@material-ui/core/styles";
 import { Form } from "semantic-ui-react";
-import Footer from "../layout/Navbar/Footer";
+// import Footer from "../layout/Navbar/Footer";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { login, register, toggleCheck } from "../../actions/auth";
 import {
   showInfoSnackbar,
@@ -125,7 +124,6 @@ const Register = ({
   return (
     <Container component="main" maxWidth="md">
       <CssBaseline />
-
       <Grid item sm={12} md={6}></Grid>
       <Box
         marginTop="50px"
@@ -329,7 +327,6 @@ const Register = ({
           </Grid>
         </Grid>
       </Box>
-      <Footer />
     </Container>
   );
 };
