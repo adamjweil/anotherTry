@@ -8,19 +8,18 @@ import ContactMailIcon from "@material-ui/icons/ContactMail";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.87);",
-    ocacity: "0.5"
+    flexGrow: 1
   },
   menuButton: {
     marginRight: theme.spacing(2)
   },
-
   title: {
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block"
-    }
+    },
+    marginLeft: "50px",
+    fontWeight: "700"
   },
   sectionDesktop: {
     display: "none",
@@ -38,7 +37,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function UnauthenticatedNavbar() {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -48,18 +46,27 @@ export default function UnauthenticatedNavbar() {
               Online Portal
             </Link>
           </Typography>
-          <Link to="/directory" style={{ textDecoration: "none" }}>
-            <MenuItem>
-              <ContactMailIcon
-                fontSize="small"
-                style={{ color: "white", marginRight: "10px" }}
-              />
-              <p style={{ color: "white" }}>Directory</p>
-            </MenuItem>
-          </Link>
+
           <div className={classes.root} />
           <div className={classes.sectionDesktop}>
-            <Link to="/" className="" style={{ textDecoration: "none" }}>
+            <Link to="/directory" style={{ textDecoration: "none" }}>
+              <MenuItem>
+                <ContactMailIcon
+                  fontSize="small"
+                  style={{ color: "white", marginRight: "10px" }}
+                />
+                <p
+                  style={{
+                    color: "white",
+                    fontWeight: "500",
+                    fontSize: "16px"
+                  }}
+                >
+                  Directory
+                </p>
+              </MenuItem>
+            </Link>
+            <Link to="/register" style={{ textDecoration: "none" }}>
               <MenuItem>
                 <p
                   style={{
@@ -68,38 +75,10 @@ export default function UnauthenticatedNavbar() {
                     fontSize: "16px"
                   }}
                 >
-                  HOME
+                  Register
                 </p>
               </MenuItem>
             </Link>
-
-            <MenuItem>
-              <Link to="/directory" style={{ textDecoration: "none" }}>
-                <p
-                  style={{
-                    color: "white",
-                    fontWeight: "500",
-                    fontSize: "16px"
-                  }}
-                >
-                  DIRECTORY
-                </p>
-              </Link>
-            </MenuItem>
-
-            <MenuItem>
-              <Link to="/register" style={{ textDecoration: "none" }}>
-                <p
-                  style={{
-                    color: "white",
-                    fontWeight: "500",
-                    fontSize: "16px"
-                  }}
-                >
-                  REGISTER
-                </p>
-              </Link>
-            </MenuItem>
           </div>
         </Toolbar>
       </AppBar>
