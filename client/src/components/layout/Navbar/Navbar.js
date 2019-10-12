@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-
 import AuthenticatedNavbar from "./AuthenticatedNavbar";
 import UnauthenticatedNavbar from "./UnauthenticatedNavbar";
 import { logout } from "../../../actions/auth";

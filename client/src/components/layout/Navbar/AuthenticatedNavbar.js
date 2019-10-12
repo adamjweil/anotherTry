@@ -127,29 +127,29 @@ const AuthenticatedNavbar = ({ logout }) => {
     >
       <MenuItem onClick={handleMenuClose}>
         <Link to="/profile" style={{ textDecoration: "none" }}>
-          <Button>Profile</Button>
+          Profile
         </Link>
       </MenuItem>
-      <Link to="/ticket" style={{ textDecoration: "none" }}>
-        <MenuItem onClick={handleMenuClose}>
-          <Button>Tickets</Button>
-        </MenuItem>
-      </Link>
-      <Link to="/dashboard" style={{ textDecoration: "none" }}>
-        <MenuItem onClick={handleMenuClose}>
-          <Button>Dashboard</Button>
-        </MenuItem>
-      </Link>
-      <Link to="/directory" style={{ textDecoration: "none" }}>
-        <MenuItem onClick={handleMenuClose}>
-          <Button>Directory</Button>
-        </MenuItem>
-      </Link>
-      <Link to="/" style={{ textDecoration: "none" }}>
-        <MenuItem>
-          <Button onClick={logout}>Logout</Button>
-        </MenuItem>
-      </Link>
+      <MenuItem onClick={handleMenuClose}>
+        <Link to="/ticket" style={{ textDecoration: "none" }}>
+          Tickets
+        </Link>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link to="/dashboard" style={{ textDecoration: "none" }}>
+          Dashboard
+        </Link>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link to="/directory" style={{ textDecoration: "none" }}>
+          Directory
+        </Link>
+      </MenuItem>
+      <MenuItem onClick={logout}>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          Logout
+        </Link>
+      </MenuItem>
     </Menu>
   );
 
@@ -211,7 +211,7 @@ const AuthenticatedNavbar = ({ logout }) => {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            <Link to="/" style={{ textDecoration: "none", color: "#F8F8F8" }}>
               Online Portal
             </Link>
           </Typography>

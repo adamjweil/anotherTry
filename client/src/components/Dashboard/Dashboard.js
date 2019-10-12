@@ -20,7 +20,7 @@ export class Dashboard extends Component {
     return loading && profile === null ? (
       <Spinner />
     ) : (
-      <Grid container columns={2} divided relaxed stackable>
+      <Grid container>
         <Grid item xs={6}>
           <Fragment>
             <img
