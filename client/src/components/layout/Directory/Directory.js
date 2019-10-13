@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Header } from "semantic-ui-react";
-import { Grid } from "@material-ui/core";
+
+import { Grid, Typography } from "@material-ui/core";
 import { fetchUsers } from "../../../actions/user";
 import VerticalMenu from "./VerticalMenu";
 import SearchDirectory from "./SearchDirectory";
@@ -16,12 +16,12 @@ const Directory = ({ users, profiles, fetchUsers }) => {
       </Grid>
       <Grid item xs={10}>
         <center>
-          <Header as="h2">meZocliQ Directory</Header>
-          <Header as="p">
+          <Typography as="h6">meZocliQ Directory</Typography>
+          <Typography as="p">
             Check out our Company Directory, organized by Employee, Team, and in
             the context of the overall organizational chart. Feel free to click
             on a specific Employee or Team to get additional details!
-          </Header>
+          </Typography>
         </center>
         <Grid item xs={12}>
           <SearchDirectory />

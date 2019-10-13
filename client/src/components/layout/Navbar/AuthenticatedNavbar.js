@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import {
   IconButton,
@@ -26,9 +26,7 @@ import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   grow: {
-    flexGrow: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.87);",
-    ocacity: "0.5"
+    flexGrow: 1
   },
   menuButton: {
     marginRight: theme.spacing(2)
@@ -37,7 +35,11 @@ const useStyles = makeStyles(theme => ({
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block"
-    }
+    },
+    marginRight: "20px",
+    fontWeight: "700",
+    fontSize: "24px",
+    opacity: ".75"
   },
   search: {
     position: "relative",
@@ -55,7 +57,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   searchIcon: {
-    width: theme.spacing(7),
+    width: theme.spacing(5),
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
@@ -67,7 +69,7 @@ const useStyles = makeStyles(theme => ({
     color: "inherit"
   },
   inputInput: {
-    padding: theme.spacing(1, 1, 1, 15),
+    padding: theme.spacing(1, 1, 1, 5),
     transition: theme.transitions.create("width"),
     // marginLeft: "100px",
     // width: "100%",
@@ -89,7 +91,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AuthenticatedNavbar = ({ logout }) => {
+const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -199,7 +201,7 @@ const AuthenticatedNavbar = ({ logout }) => {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar style={{ position: "static" }}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -210,9 +212,13 @@ const AuthenticatedNavbar = ({ logout }) => {
           >
             <MenuIcon />
           </IconButton>
+
           <Typography className={classes.title} variant="h6" noWrap>
-            <Link to="/" style={{ textDecoration: "none", color: "#F8F8F8" }}>
-              Online Portal
+            <Link
+              to="/"
+              style={{ textDecoration: "none", color: "rgb(240,240,240)" }}
+            >
+              meZocliQ Online Portal
             </Link>
           </Typography>
 
@@ -263,21 +269,14 @@ const AuthenticatedNavbar = ({ logout }) => {
 
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Link to="/profile" color="white">
-                <Badge badgeContent={17} color="secondary">
+                <Badge
+                  style={{ color: "rgb(232,232,232)" }}
+                  badgeContent={17}
+                  color="secondary"
+                >
                   <AccountCircle fontSize="large" style={{ color: "white" }} />
                 </Badge>
               </Link>
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
             </IconButton>
           </div>
         </Toolbar>
@@ -289,10 +288,13 @@ const AuthenticatedNavbar = ({ logout }) => {
 };
 
 AuthenticatedNavbar.propTypes = {
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  isAuthenticated: state.isAuthenticated,
+  loading: state.loading
 });
 export default connect(
   mapStateToProps,
