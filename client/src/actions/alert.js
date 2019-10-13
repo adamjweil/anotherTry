@@ -8,12 +8,13 @@ import {
   SNACKBAR_CLEAR
 } from "./types";
 
-export const setAlert = (msg, alertType) => dispatch => {
+export const setAlert = (msg, alertType, timeout = 5000) => dispatch => {
   const id = uuid.v4();
   dispatch({
     type: SET_ALERT,
     payload: { msg, alertType, id }
   });
+  setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), timeout);
 };
 
 export const removeAlert = id => dispatch => {
@@ -22,17 +23,17 @@ export const removeAlert = id => dispatch => {
   });
 };
 
-export const showSuccessSnackbar = message => dispatch => {
+export const showSuccessSnackbar = (message, timeout = 5000) => dispatch => {
   const id = uuid.v4();
   dispatch({ type: SNACKBAR_SUCCESS, payload: { message, id } });
 };
 
-export const showErrorSnackbar = message => dispatch => {
+export const showErrorSnackbar = (message, timeout = 5000) => dispatch => {
   const id = uuid.v4();
   dispatch({ type: SNACKBAR_ERROR, payload: { message, id } });
 };
 
-export const showInfoSnackbar = message => dispatch => {
+export const showInfoSnackbar = (message, timeout = 5000) => dispatch => {
   const id = uuid.v4();
   dispatch({ type: SNACKBAR_INFO, payload: { message, id } });
 };

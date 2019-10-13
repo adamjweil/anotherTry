@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, MenuItem } from "@material-ui/core";
+import { AppBar, MenuItem, Menu, IconButton } from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
 import { Toolbar } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
@@ -18,8 +19,10 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       display: "block"
     },
-    marginLeft: "50px",
-    fontWeight: "700"
+    marginLeft: "30px",
+    fontWeight: "700",
+    fontSize: "24px",
+    opacity: ".75"
   },
   sectionDesktop: {
     display: "none",
@@ -35,15 +38,75 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function UnauthenticatedNavbar() {
+const UnauthenticatedNavbar = () => {
   const classes = useStyles();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const menuId = "primary-search-account-menu";
+  function handleProfileMenuOpen(event) {
+    setAnchorEl(event.currentTarget);
+  }
+
+  function handleMobileMenuClose() {
+    setMobileMoreAnchorEl(null);
+  }
+
+  function handleMenuClose() {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  }
+
+  function handleMobileMenuOpen(event) {
+    setMobileMoreAnchorEl(event.currentTarget);
+  }
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={handleMenuClose}>
+        <Link to="/register" style={{ textDecoration: "none" }}>
+          Register
+        </Link>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          Home
+        </Link>
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link to="/directory" style={{ textDecoration: "none" }}>
+          Directory
+        </Link>
+      </MenuItem>
+    </Menu>
+  );
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleProfileMenuOpen}
+          >
+            <MenuIcon />
+          </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-              Online Portal
+              meZocliQ Online Portal
             </Link>
           </Typography>
 
@@ -82,6 +145,9 @@ export default function UnauthenticatedNavbar() {
           </div>
         </Toolbar>
       </AppBar>
+      {renderMenu}
     </div>
   );
-}
+};
+
+export default UnauthenticatedNavbar;

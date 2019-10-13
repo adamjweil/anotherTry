@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
-import Navbar from "./components/layout/Navbar/Navbar";
+import AuthenticatedNavbar from "./components/layout/Navbar/Navbar";
 import Register from "./components/auth/Register";
 import Landing from "./components/layout/Landing";
 import SuccessSnackbar from "./components/layout/Alerts/SuccessSnackbar";
@@ -35,33 +35,30 @@ const App = () => {
   }, []);
 
   return (
-    <Provider
-      store={store}
-      style={{ display: "flex", minHeight: "100vh", flexDirection: "column" }}
-    >
-      <SnackbarProvider maxSnack={3}>
-        <SuccessSnackbar />
-        <ErrorSnackbar />
-        <InfoSnackbar />
-      </SnackbarProvider>
+    <Provider store={store}>
       <Router>
-        <Navbar />
-        <section className="container" style={{ flex: "1" }}>
+        <AuthenticatedNavbar />
+        <SnackbarProvider>
+          <SuccessSnackbar />
+          <InfoSnackbar />
+          <ErrorSnackbar />
+        </SnackbarProvider>
+        <Switch>
           <Route exact path="/" component={Landing} />
-          <Route exact path="/themeing" component={ThemeingLayout} />
-          <Route exact path="/responsive" component={ResponsiveLayout} />
-          <Switch>
+          <section className="container">
             <Route exact path="/register" component={Register} />
-            <Route exact path="/ticket" component={Tickets} />
-            <PrivateRoute exact path="/profile" component={Profile} />
             <Route exact path="/directory" component={Directory} />
+            <Route exact path="/profile/:id" component={Profile} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path="/profileform" component={ProfileForm} />
-          </Switch>
-        </section>
+            <PrivateRoute exact path="/profile" component={Profile} />
+            <PrivateRoute exact path="/profile/:id" component={Profile} />
+            <PrivateRoute exact path="/ticket" component={Tickets} />
+          </section>
+        </Switch>
       </Router>
     </Provider>
   );
 };
 
-export default withRouter(App);
+export default App;
