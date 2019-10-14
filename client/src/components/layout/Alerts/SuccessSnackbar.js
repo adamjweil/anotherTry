@@ -5,12 +5,12 @@ import IconButton from "@material-ui/core/IconButton";
 import { Icon } from "@material-ui/core";
 import { clearSnackbar } from "../../../actions/alert";
 import MySnackbarContentWrapper from "./MySnackbarContentWrapper";
-
-export default function SuccessSnackbar() {
-  const { successSnackbarMessage, successSnackbarOpen } = useSelector(
-    state => state.alert
-  );
-
+import { connect } from "react-redux";
+const SuccessSnackbar = ({
+  successSnackbarMessage,
+  successSnackbarOpen,
+  clearSnackbar
+}) => {
   const handleClose = id => async dispatch => {
     clearSnackbar(id);
   };
@@ -47,4 +47,13 @@ export default function SuccessSnackbar() {
       />
     </Snackbar>
   );
-}
+};
+
+const mapStateToProps = state => {
+  return { alert: state.alerts };
+};
+
+export default connect(
+  mapStateToProps,
+  { clearSnackbar }
+)(SuccessSnackbar);

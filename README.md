@@ -90,6 +90,10 @@ User Stories
     - After reading a bunch of Medium articles on UX and some fundamental tools to become a better designer, and started to implement some of those. One example is throwing a box shadow the Login and Register Components, rather than having a Border width specific to each side (which was a super hacky alternative, that I didnt like at all). These box shadows look much better
       - I also started to play around with using color and weight as a way to formulate my information heirarchy, rather than relting on font size all the time. This makes the site much much more visually appealing, and I plan on playing around with these ideas a lot more going forward
 
+    #10/14
+    - Have had a busy few days, so havent had as much time coding as id like to have. I was able to log in today to focus on cleaning on the navbar buttons, so it it more visually appealing... since all unfctionality isnt there yet...
+
+
     ##TO DO
     - Dropdown of Users from the database. I need to have the Users first + last name dispay, however, and those variables are stored on the Profile Object, which is indirectly atached to the User
     - Styling Ticket form
