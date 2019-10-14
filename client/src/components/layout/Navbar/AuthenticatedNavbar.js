@@ -9,7 +9,8 @@ import {
   Menu,
   Toolbar,
   InputBase,
-  Typography
+  Typography,
+  Grid
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import MailIcon from "@material-ui/icons/Mail";
@@ -23,6 +24,8 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../../actions/auth";
 import PropTypes from "prop-types";
+import NotificationsNoneSharpIcon from "@material-ui/icons/NotificationsNoneSharp";
+import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -200,9 +203,9 @@ const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
   );
 
   return (
-    <div className={classes.grow}>
+    <Fragment>
       <AppBar style={{ position: "static" }}>
-        <Toolbar>
+        <Toolbar style={{ minHeight: "10px", maxHeight: "90px" }}>
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -216,20 +219,41 @@ const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
           <Typography className={classes.title} variant="h6" noWrap>
             <Link
               to="/"
-              style={{ textDecoration: "none", color: "rgb(240,240,240)" }}
+              style={{
+                textDecoration: "none",
+                color: "rgb(240,240,240)",
+                height: "100px"
+              }}
             >
               meZocliQ Online Portal
             </Link>
           </Typography>
 
           <Link to="/directory" style={{ textDecoration: "none" }}>
-            <MenuItem>
-              <ContactMailIcon
-                fontSize="small"
-                style={{ color: "white", marginRight: "10px" }}
-              />
-              <p style={{ color: "white" }}>Directory</p>
-            </MenuItem>
+            <Grid container>
+              <MenuItem>
+                <Grid row>
+                  <ContactMailIcon
+                    fontSize="large"
+                    style={{
+                      color: "white",
+                      marginLeft: "5px",
+                      marginTop: "5px"
+                    }}
+                  />
+                  <p
+                    style={{
+                      marginTop: "-10px",
+                      color: "white",
+                      fontWeight: "500",
+                      fontSize: "12px"
+                    }}
+                  >
+                    Directory
+                  </p>
+                </Grid>
+              </MenuItem>
+            </Grid>
           </Link>
 
           <div className={classes.search}>
@@ -259,31 +283,72 @@ const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
               </MenuItem>
             </Link>
 
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Link to="/profile" color="white">
-                <Badge badgeContent={4} color="secondary">
-                  <MailIcon fontSize="large" style={{ color: "white" }} />
-                </Badge>
-              </Link>
-            </IconButton>
+            <Link to="/profile" color="white">
+              <Grid container>
+                <MenuItem>
+                  <Grid row>
+                    <IconButton aria-label="show 4 new mails" color="inherit">
+                      <Badge badgeContent={4} color="secondary">
+                        <NotificationsNoneSharpIcon
+                          fontSize="large"
+                          style={{
+                            color: "white",
+                            marginLeft: "5px",
+                            marginTop: "20px"
+                          }}
+                        />
+                      </Badge>
+                    </IconButton>
+                    <p
+                      style={{
+                        // marginLeft: "20px",
+                        marginTop: "-15px",
+                        color: "white",
+                        fontWeight: "500",
+                        fontSize: "12px"
+                      }}
+                    >
+                      Notifications
+                    </p>
+                  </Grid>
+                </MenuItem>
+              </Grid>
+            </Link>
 
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Link to="/profile" color="white">
-                <Badge
-                  style={{ color: "rgb(232,232,232)" }}
-                  badgeContent={17}
-                  color="secondary"
-                >
-                  <AccountCircle fontSize="large" style={{ color: "white" }} />
-                </Badge>
-              </Link>
-            </IconButton>
+            <Link to="/profile" style={{ textDecoration: "none" }}>
+              <Grid container>
+                <MenuItem>
+                  <Grid row>
+                    <AccountCircleOutlinedIcon
+                      fontSize="large"
+                      style={{
+                        color: "white",
+                        marginLeft: "5px",
+                        marginTop: "20px"
+                      }}
+                    />
+
+                    <p
+                      style={{
+                        color: "white",
+                        fontWeight: "500",
+                        fontSize: "12px",
+                        marginLeft: "5px",
+                        marginTop: "0px"
+                      }}
+                    >
+                      Profile
+                    </p>
+                  </Grid>
+                </MenuItem>
+              </Grid>
+            </Link>
           </div>
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-    </div>
+    </Fragment>
   );
 };
 

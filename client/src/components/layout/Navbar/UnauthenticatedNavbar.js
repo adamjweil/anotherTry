@@ -1,12 +1,13 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, MenuItem, Menu, IconButton } from "@material-ui/core";
+import { AppBar, MenuItem, Menu, IconButton, Grid } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
 import { Toolbar } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import ContactMailIcon from "@material-ui/icons/ContactMail";
-
+import FingerprintOutlinedIcon from "@material-ui/icons/FingerprintOutlined";
+import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -20,9 +21,9 @@ const useStyles = makeStyles(theme => ({
       display: "block"
     },
     marginLeft: "30px",
-    fontWeight: "700",
+    fontWeight: "800",
     fontSize: "24px",
-    opacity: ".75"
+    opacity: ".85"
   },
   sectionDesktop: {
     display: "none",
@@ -94,7 +95,7 @@ const UnauthenticatedNavbar = () => {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar style={{ minHeight: "10px", maxHeight: "80px" }}>
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -104,43 +105,100 @@ const UnauthenticatedNavbar = () => {
           >
             <MenuIcon />
           </IconButton>
+
           <Typography className={classes.title} variant="h6" noWrap>
-            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            <Link
+              to="/"
+              style={{ textDecoration: "underline", color: "white" }}
+            >
               meZocliQ Online Portal
             </Link>
           </Typography>
 
           <div className={classes.root} />
           <div className={classes.sectionDesktop}>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <Grid container>
+                <MenuItem>
+                  <Grid row>
+                    <HomeOutlinedIcon
+                      label="Home"
+                      fontSize="large"
+                      style={{
+                        color: "white",
+                        marginLeft: "5px",
+                        marginTop: "5px"
+                      }}
+                    />
+                    <p
+                      style={{
+                        marginTop: "-10px",
+                        marginLeft: "5px",
+                        color: "white",
+                        fontWeight: "500",
+                        fontSize: "12px"
+                      }}
+                    >
+                      Home
+                    </p>
+                  </Grid>
+                </MenuItem>
+              </Grid>
+            </Link>
+
             <Link to="/directory" style={{ textDecoration: "none" }}>
-              <MenuItem>
-                <ContactMailIcon
-                  fontSize="small"
-                  style={{ color: "white", marginRight: "10px" }}
-                />
-                <p
-                  style={{
-                    color: "white",
-                    fontWeight: "500",
-                    fontSize: "16px"
-                  }}
-                >
-                  Directory
-                </p>
-              </MenuItem>
+              <Grid container>
+                <MenuItem>
+                  <Grid row>
+                    <ContactMailIcon
+                      label="Directory"
+                      fontSize="large"
+                      style={{
+                        color: "white",
+                        marginLeft: "5px",
+                        marginTop: "5px"
+                      }}
+                    />
+                    <p
+                      style={{
+                        marginTop: "-10px",
+                        color: "white",
+                        fontWeight: "500",
+                        fontSize: "12px"
+                      }}
+                    >
+                      Directory
+                    </p>
+                  </Grid>
+                </MenuItem>
+              </Grid>
             </Link>
             <Link to="/register" style={{ textDecoration: "none" }}>
-              <MenuItem>
-                <p
-                  style={{
-                    color: "white",
-                    fontWeight: "500",
-                    fontSize: "16px"
-                  }}
-                >
-                  Register
-                </p>
-              </MenuItem>
+              <Grid container>
+                <MenuItem>
+                  <Grid row>
+                    <FingerprintOutlinedIcon
+                      label="Register"
+                      fontSize="large"
+                      style={{
+                        color: "white",
+                        marginLeft: "5px",
+                        marginTop: "5px"
+                      }}
+                    />
+                    <p
+                      style={{
+                        marginTop: "-10px",
+                        color: "white",
+                        fontWeight: "500",
+                        fontSize: "12px"
+                      }}
+                    >
+                      Register
+                    </p>
+                  </Grid>
+                </MenuItem>
+              </Grid>
             </Link>
           </div>
         </Toolbar>
