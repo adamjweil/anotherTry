@@ -83,7 +83,7 @@ User Stories
     #10/09
     - Footer set up on the Landing Page, as well as the Registration Page
     - Ticket form has been updated to include even more of the variables needed for tickets to be submitted. The next step is to actually wire up
-    - The Profile Card is now updating as expected when you submit the profile form. I wasn't destructuring PROFILE object from the PROFILE array, and so all the values I was looking for were undefined. Was much harder to debug then I wouldve thought. Took a while to figure this out
+    - The Profile Card is now updating as expected when you submit the profile form. I wasn't de-structuring PROFILE object from the PROFILE array, and so all the values I was looking for were undefined. It was much harder to debug then I would have thought. Took a while to figure this out
 
     #10/10
     - Set up Ticket Reducers, Actions, and routes. I had already had a model set up for Tickets, but it did need to be changed around slightly. Now that all of these variables are included in the application state, I need to make sure theyre saving correctly to the database.
@@ -95,6 +95,12 @@ User Stories
 
     #10/15
     - Finished the design and implementation of the final NavBar for both Authenticated and Unauthenticated users
+    - Forgot Password text is now different format than the click here button, which makes it look nicer
+    - I've made the Registration Form to be in line with what the Login form is setup to look like, to bring some consistancy to the application
+
+---
+
+    - Upon new user Registration, the user should be directed to the dashboard, where they can also fill out the Profile Form
     - Complete Ticket Form
       - Submit to DB
 
