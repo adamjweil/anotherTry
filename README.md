@@ -78,7 +78,7 @@ User Stories
       - Updated the 'back to login' button on the registration form
     - Directory page was previously just pulling all of the users from the database. I have now styled it, so you can actually tell who the users are.
       - Down the line, these will link to their individual profile pages.
-    - Wireframing and setting up the TicketForm component is about half done. I have brought most of everything together, I just need to organize the values and make sure they're communicating with my store and server accordingly...
+    - Wire-Framing and setting up the TicketForm component is about half done. I have brought most of everything together, I just need to organize the values and make sure they're communicating with my store and server accordingly...
 
     #10/09
     - Footer set up on the Landing Page, as well as the Registration Page
@@ -88,10 +88,16 @@ User Stories
     #10/10
     - Set up Ticket Reducers, Actions, and routes. I had already had a model set up for Tickets, but it did need to be changed around slightly. Now that all of these variables are included in the application state, I need to make sure theyre saving correctly to the database.
     - After reading a bunch of Medium articles on UX and some fundamental tools to become a better designer, and started to implement some of those. One example is throwing a box shadow the Login and Register Components, rather than having a Border width specific to each side (which was a super hacky alternative, that I didnt like at all). These box shadows look much better
-      - I also started to play around with using color and weight as a way to formulate my information heirarchy, rather than relting on font size all the time. This makes the site much much more visually appealing, and I plan on playing around with these ideas a lot more going forward
+      - I also started to play around with using color and weight as a way to formulate my information heirarchy, rather than relying on font size all the time. This makes the site much much more visually appealing, and I plan on playing around with these ideas a lot more going forward
 
     #10/14
-    - Have had a busy few days, so havent had as much time coding as id like to have. I was able to log in today to focus on cleaning on the navbar buttons, so it it more visually appealing... since all unfctionality isnt there yet...
+    - Have had a busy few days, so haven't had as much time coding as id like to have. I was able to log in today to focus on cleaning on the Navbar buttons, so it it more visually appealing... since all functionality isnt there yet...
+
+    #10/15
+    - Finished the design and implementation of the final NavBar for both Authenticated and Unauthenticated users
+    - Complete Ticket Form
+      - Submit to DB
+
 
 
     ##TO DO
