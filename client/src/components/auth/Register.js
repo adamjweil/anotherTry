@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
@@ -57,27 +57,19 @@ const useStyles = makeStyles(theme => ({
   },
   remember: {
     margin: theme.spacing(1, 0, 1)
+  },
+  main: {
+    width: "540px"
   }
 }));
 
-const Register = ({
-  login,
-  register,
-  isAuthenticated,
-  toggleCheck,
-  showInfoSnackbar,
-  showErrorSnackbar,
-  showSuccessSnackbar
-}) => {
-  const [formData, setFormData] = useState(
-    {
-      email: "",
-      password: "",
-      password2: "",
-      terms: true
-    },
-    []
-  );
+const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    password2: "",
+    terms: true
+  });
   const [values, setValues] = React.useState({
     showPassword: false
   });
@@ -122,14 +114,13 @@ const Register = ({
   }
 
   return (
-    <Container component="main" maxWidth="md">
+    <Container component="main" maxWidth="md" className={classes.main}>
       <CssBaseline />
-      <Grid item sm={12} md={6}></Grid>
+
       <Box
         marginTop="50px"
         style={{
           background: "#F8F8F8",
-          minWidth: "600px",
           boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.2)"
         }}
       >
@@ -145,7 +136,7 @@ const Register = ({
                   justifyContent: "center",
                   align: "center",
                   alignItems: "center",
-                  width: "50%"
+                  width: "300px"
                 }}
                 src={process.env.PUBLIC_URL + "/img/mezologo1.png"}
                 alt=""
@@ -163,16 +154,17 @@ const Register = ({
             style={{
               fontSize: "14px",
               fontWeight: "800",
-              marginTop: "-10px"
+              marginTop: "-10px",
+              textAlign: "center"
             }}
           >
-            Registration Form:
+            Registration Form
           </Typography>
           <Grid container>
             <Grid item xs={1}></Grid>
             <Grid item xs={10} sm={10}>
               <TextField
-                variant="outlined"
+                variant="standard"
                 margin="normal"
                 id="email"
                 label="Email Address"
@@ -197,9 +189,9 @@ const Register = ({
           </Grid>
           <Grid container>
             <Grid item xs={1}></Grid>
-            <Grid item xs={10} md={4}>
+            <Grid item xs={10}>
               <TextField
-                variant="outlined"
+                variant="standard"
                 margin="normal"
                 name="password"
                 label="Password"
@@ -233,9 +225,9 @@ const Register = ({
 
             <Grid item xs={1}></Grid>
 
-            <Grid item xs={10} md={4}>
+            <Grid item xs={10}>
               <TextField
-                variant="outlined"
+                variant="standard"
                 margin="normal"
                 name="password2"
                 label="Confirm Password"

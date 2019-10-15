@@ -78,8 +78,8 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
-  const handleMouseDownPassword = event => {
-    event.preventDefault();
+  const handleMouseDownPassword = e => {
+    e.preventDefault();
   };
 
   const onChange = e =>
@@ -108,20 +108,20 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
         >
           <Grid container>
             <Grid item xs={2}></Grid>
-            <Grid item xs={10}>
+            <Grid item xs={8}>
               <img
                 style={{
-                  maxWidth: "80%",
+                  maxWidth: "100%",
                   marginBottom: "-30px",
                   justifyContent: "center",
                   align: "center",
-                  alignItems: "center"
+                  alignItems: "center",
+                  textAlign: "center"
                 }}
                 src={process.env.PUBLIC_URL + "../../img/logo.png"}
                 alt={process.env.PUBLIC_URL + "../../img/mezoLogo120px.png"}
               />
-              <br />
-              <br />
+
               <br />
             </Grid>
             <Grid item xs={2}></Grid>
@@ -129,12 +129,19 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
           <Typography
             component="h6"
             variant="h6"
-            style={{ fontSize: "14px", fontWeight: "800", marginTop: "-10px" }}
+            style={{
+              fontSize: "14px",
+              fontWeight: "800",
+              marginTop: "10px",
+
+              marinLeft: "100px"
+            }}
           >
-            Log In Below:
+            Login Form
           </Typography>
+
           <TextField
-            variant="outlined"
+            variant="standard"
             margin="normal"
             id="email"
             label="Email Address"
@@ -164,7 +171,7 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
             onChange={e => onChange(e)}
             required
             fullWidth
-            variant="outlined"
+            variant="standard"
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -205,7 +212,18 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
                   marginLeft: "50px"
                 }}
               >
-                Forgot password? Click Here!!
+                <span
+                  style={{
+                    display: "inLine",
+                    textDecoration: "none",
+                    color: "grey",
+                    fontStyle: "italic",
+                    fontWeight: "400"
+                  }}
+                >
+                  Forgot password?{" "}
+                </span>
+                Click Here!!
               </Link>
             </Grid>
 
@@ -240,9 +258,9 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
               </Link>
             </Grid>
 
-            <Grid item sm={2}></Grid>
+            <Grid item sm={1}></Grid>
 
-            <Grid item xs={12} sm={5} className={classes.submit}>
+            <Grid item xs={12} sm={6} className={classes.submit}>
               <GoogleAuth />
             </Grid>
           </Grid>
