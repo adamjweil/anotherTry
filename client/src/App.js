@@ -17,6 +17,7 @@ import ThemeingLayout from "./components/layout/TestLayout/ThemeingLayout";
 import ResponsiveLayout from "./components/layout/TestLayout/ResponsiveLayout";
 import "typeface-roboto";
 import { SnackbarProvider } from "notistack";
+import "./App.css";
 // Redux
 import store from "./store";
 import { loadUser } from "./actions/user";

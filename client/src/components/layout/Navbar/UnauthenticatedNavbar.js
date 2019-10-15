@@ -5,9 +5,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
 import { Toolbar } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import ContactMailIcon from "@material-ui/icons/ContactMail";
 import FingerprintOutlinedIcon from "@material-ui/icons/FingerprintOutlined";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
+import ImportContactsOutlinedIcon from "@material-ui/icons/ImportContactsOutlined";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
@@ -17,13 +18,14 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     display: "none",
+
     [theme.breakpoints.up("sm")]: {
       display: "block"
     },
     marginLeft: "30px",
-    fontWeight: "800",
-    fontSize: "24px",
-    opacity: ".85"
+    fontWeight: "700",
+    fontSize: "26px",
+    opacity: ".95"
   },
   sectionDesktop: {
     display: "none",
@@ -61,9 +63,9 @@ const UnauthenticatedNavbar = () => {
     handleMobileMenuClose();
   }
 
-  function handleMobileMenuOpen(event) {
-    setMobileMoreAnchorEl(event.currentTarget);
-  }
+  // function handleMobileMenuOpen(event) {
+  //   setMobileMoreAnchorEl(event.currentTarget);
+  // }
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -94,8 +96,8 @@ const UnauthenticatedNavbar = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar style={{ minHeight: "10px", maxHeight: "80px" }}>
+      <AppBar style={{ position: "static", padding: "0px" }}>
+        <Toolbar style={{ minHeight: "10px", maxHeight: "65px" }}>
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -109,34 +111,43 @@ const UnauthenticatedNavbar = () => {
           <Typography className={classes.title} variant="h6" noWrap>
             <Link
               to="/"
-              style={{ textDecoration: "underline", color: "white" }}
+              style={{
+                textDecoration: "none",
+                color: "rgb(240,240,240)"
+              }}
             >
-              meZocliQ Online Portal
+              Online Portal
             </Link>
           </Typography>
 
           <div className={classes.root} />
           <div className={classes.sectionDesktop}>
-            <Link to="/" style={{ textDecoration: "none" }}>
+            <Link to="/" style={{ textDecoration: "none", paddingTop: "0px" }}>
               <Grid container>
-                <MenuItem>
+                <MenuItem
+                  style={{
+                    maxHeight: "70px",
+                    paddingRight: "20px",
+                    paddingLeft: "20px"
+                  }}
+                >
                   <Grid row>
                     <HomeOutlinedIcon
                       label="Home"
-                      fontSize="large"
+                      fontSize="medium"
                       style={{
                         color: "white",
-                        marginLeft: "5px",
-                        marginTop: "5px"
+                        marginTop: "30px",
+                        marginLeft: "5px"
                       }}
                     />
                     <p
                       style={{
-                        marginTop: "-10px",
-                        marginLeft: "5px",
+                        marginTop: "0px",
                         color: "white",
                         fontWeight: "500",
-                        fontSize: "12px"
+                        fontSize: "14px",
+                        paddingBottom: "5px"
                       }}
                     >
                       Home
@@ -146,25 +157,35 @@ const UnauthenticatedNavbar = () => {
               </Grid>
             </Link>
 
-            <Link to="/directory" style={{ textDecoration: "none" }}>
+            <Link
+              to="/directory"
+              style={{ textDecoration: "none", paddingTop: "0px" }}
+            >
               <Grid container>
-                <MenuItem>
+                <MenuItem
+                  style={{
+                    maxHeight: "70px",
+                    paddingRight: "20px",
+                    paddingLeft: "20px"
+                  }}
+                >
                   <Grid row>
-                    <ContactMailIcon
+                    <ImportContactsOutlinedIcon
                       label="Directory"
-                      fontSize="large"
+                      fontSize="medium"
                       style={{
                         color: "white",
-                        marginLeft: "5px",
-                        marginTop: "5px"
+                        marginLeft: "15px",
+                        marginTop: "30px"
                       }}
                     />
                     <p
                       style={{
-                        marginTop: "-10px",
+                        marginTop: "0px",
                         color: "white",
                         fontWeight: "500",
-                        fontSize: "12px"
+                        fontSize: "14px",
+                        paddingBottom: "5px"
                       }}
                     >
                       Directory
@@ -173,25 +194,35 @@ const UnauthenticatedNavbar = () => {
                 </MenuItem>
               </Grid>
             </Link>
-            <Link to="/register" style={{ textDecoration: "none" }}>
+            <Link
+              to="/register"
+              style={{ textDecoration: "none", paddingTop: "0px" }}
+            >
               <Grid container>
-                <MenuItem>
+                <MenuItem
+                  style={{
+                    maxHeight: "70px",
+                    paddingLeft: "20px",
+                    paddingRight: "20px"
+                  }}
+                >
                   <Grid row>
                     <FingerprintOutlinedIcon
                       label="Register"
-                      fontSize="large"
+                      fontSize="medium"
                       style={{
                         color: "white",
-                        marginLeft: "5px",
-                        marginTop: "5px"
+                        marginLeft: "10px",
+                        marginTop: "30px"
                       }}
                     />
                     <p
                       style={{
-                        marginTop: "-10px",
+                        marginTop: "0px",
                         color: "white",
                         fontWeight: "500",
-                        fontSize: "12px"
+                        fontSize: "14px",
+                        paddingBottom: "5px"
                       }}
                     >
                       Register

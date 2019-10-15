@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import {
   IconButton,
-  Button,
   AppBar,
   Badge,
   MenuItem,
@@ -13,19 +12,17 @@ import {
   Grid
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import MailIcon from "@material-ui/icons/Mail";
 import SearchIcon from "@material-ui/icons/Search";
-import ContactMailIcon from "@material-ui/icons/ContactMail";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MenuBookIcon from "@material-ui/icons/Notifications";
-import MoreIcon from "@material-ui/icons/MoreVert";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../../actions/auth";
 import PropTypes from "prop-types";
 import NotificationsNoneSharpIcon from "@material-ui/icons/NotificationsNoneSharp";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
+import ImportContactsOutlinedIcon from "@material-ui/icons/ImportContactsOutlined";
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -39,10 +36,11 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       display: "block"
     },
-    marginRight: "20px",
+    // marginLeft: "30px",
+    // marginRight: "20px",
     fontWeight: "700",
-    fontSize: "24px",
-    opacity: ".75"
+    fontSize: "22px",
+    opacity: ".95"
   },
   search: {
     position: "relative",
@@ -115,9 +113,9 @@ const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
     handleMobileMenuClose();
   }
 
-  function handleMobileMenuOpen(event) {
-    setMobileMoreAnchorEl(event.currentTarget);
-  }
+  // function handleMobileMenuOpen(event) {
+  //   setMobileMoreAnchorEl(event.currentTarget);
+  // }
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -204,8 +202,8 @@ const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
 
   return (
     <Fragment>
-      <AppBar style={{ position: "static" }}>
-        <Toolbar style={{ minHeight: "10px", maxHeight: "90px" }}>
+      <AppBar style={{ position: "static", paddng: "0px" }}>
+        <Toolbar style={{ minHeight: "10px", maxHeight: "65px" }}>
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -221,40 +219,12 @@ const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
               to="/"
               style={{
                 textDecoration: "none",
-                color: "rgb(240,240,240)",
-                height: "100px"
+                color: "rgb(240,240,240)"
               }}
             >
               meZocliQ Online Portal
             </Link>
           </Typography>
-
-          <Link to="/directory" style={{ textDecoration: "none" }}>
-            <Grid container>
-              <MenuItem>
-                <Grid row>
-                  <ContactMailIcon
-                    fontSize="large"
-                    style={{
-                      color: "white",
-                      marginLeft: "5px",
-                      marginTop: "5px"
-                    }}
-                  />
-                  <p
-                    style={{
-                      marginTop: "-10px",
-                      color: "white",
-                      fontWeight: "500",
-                      fontSize: "12px"
-                    }}
-                  >
-                    Directory
-                  </p>
-                </Grid>
-              </MenuItem>
-            </Grid>
-          </Link>
 
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -271,41 +241,106 @@ const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <Link to="/dashboard" style={{ marginLeft: "10px" }}>
-              <MenuItem>
-                <p style={{ color: "white" }}>Dashboard</p>
+            <Link
+              to="/dashboard"
+              style={{
+                marginLeft: "10px",
+                textDecoration: "none"
+              }}
+            >
+              <MenuItem style={{ maxHeight: "70px" }}>
+                <p
+                  style={{
+                    color: "white",
+                    fontSize: "14x",
+                    fontWeight: "500",
+                    alignItems: "center"
+                  }}
+                >
+                  Dashboard
+                </p>
               </MenuItem>
             </Link>
 
-            <Link to="/ticket">
-              <MenuItem>
-                <p style={{ color: "white" }}>TicketHub</p>
+            <Link
+              to="/ticket"
+              style={{
+                marginLeft: "10px",
+                textDecoration: "none"
+              }}
+            >
+              <MenuItem style={{ maxHeight: "70px" }}>
+                <p
+                  style={{
+                    color: "white",
+                    fontSize: "14x",
+                    fontWeight: "500",
+                    alignItems: "center"
+                  }}
+                >
+                  TicketHub
+                </p>
               </MenuItem>
             </Link>
 
-            <Link to="/profile" color="white">
+            <Link to="/directory" color="white" style={{ paddingTop: "0px" }}>
               <Grid container>
-                <MenuItem>
+                <MenuItem
+                  style={{
+                    alignItems: "center",
+                    maxHeight: "70px",
+                    paddingRight: "10px",
+                    paddingLeft: "10px"
+                  }}
+                >
                   <Grid row>
-                    <IconButton aria-label="show 4 new mails" color="inherit">
-                      <Badge badgeContent={4} color="secondary">
-                        <NotificationsNoneSharpIcon
-                          fontSize="large"
-                          style={{
-                            color: "white",
-                            marginLeft: "5px",
-                            marginTop: "20px"
-                          }}
-                        />
-                      </Badge>
-                    </IconButton>
+                    <ImportContactsOutlinedIcon
+                      fontSize="medium"
+                      style={{
+                        color: "white",
+                        marginLeft: "15px",
+                        marginTop: "25px"
+                      }}
+                    />
                     <p
                       style={{
-                        // marginLeft: "20px",
-                        marginTop: "-15px",
+                        marginTop: "0px",
                         color: "white",
                         fontWeight: "500",
-                        fontSize: "12px"
+                        fontSize: "14px"
+                      }}
+                    >
+                      Directory
+                    </p>
+                  </Grid>
+                </MenuItem>
+              </Grid>
+            </Link>
+
+            <Link to="/profile" color="white" style={{ paddingTop: "0px" }}>
+              <Grid container>
+                <MenuItem
+                  style={{
+                    maxHeight: "70px",
+                    paddingRight: "10px",
+                    paddingLeft: "10px"
+                  }}
+                >
+                  <Grid row>
+                    <NotificationsNoneSharpIcon
+                      fontSize="medium"
+                      style={{
+                        color: "white",
+                        marginLeft: "25px",
+                        marginTop: "25px"
+                      }}
+                    />
+                    <p
+                      style={{
+                        marginTop: "0px",
+                        color: "white",
+                        fontWeight: "500",
+                        fontSize: "14px"
                       }}
                     >
                       Notifications
@@ -314,17 +349,25 @@ const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
                 </MenuItem>
               </Grid>
             </Link>
-
-            <Link to="/profile" style={{ textDecoration: "none" }}>
+            <Link
+              to="/profile"
+              style={{ textDecoration: "none", paddingTop: "0px" }}
+            >
               <Grid container>
-                <MenuItem>
+                <MenuItem
+                  style={{
+                    maxHeight: "70px",
+                    paddingRight: "15px",
+                    marginRight: "-10px"
+                  }}
+                >
                   <Grid row>
                     <AccountCircleOutlinedIcon
-                      fontSize="large"
+                      fontSize="medium"
                       style={{
                         color: "white",
-                        marginLeft: "5px",
-                        marginTop: "20px"
+                        marginLeft: "10px",
+                        marginTop: "25px"
                       }}
                     />
 
@@ -332,7 +375,7 @@ const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
                       style={{
                         color: "white",
                         fontWeight: "500",
-                        fontSize: "12px",
+                        fontSize: "14px",
                         marginLeft: "5px",
                         marginTop: "0px"
                       }}
