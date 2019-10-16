@@ -36,13 +36,12 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       display: "block"
     },
-    // marginLeft: "30px",
-    // marginRight: "20px",
     fontWeight: "700",
     fontSize: "22px",
     opacity: ".95"
   },
   search: {
+    fontSide: "10px",
     position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
@@ -52,14 +51,16 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: "100%",
+    height: "30px",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
       width: "auto"
     }
   },
   searchIcon: {
-    width: theme.spacing(5),
-    height: "100%",
+    marginLeft: "10px",
+    marginTop: "5px",
+    height: "25px",
     position: "absolute",
     pointerEvents: "none",
     display: "flex",
@@ -72,8 +73,6 @@ const useStyles = makeStyles(theme => ({
   inputInput: {
     padding: theme.spacing(1, 1, 1, 5),
     transition: theme.transitions.create("width"),
-    // marginLeft: "100px",
-    // width: "100%",
     [theme.breakpoints.up("md")]: {
       width: 200
     }
@@ -237,6 +236,7 @@ const AuthenticatedNavbar = ({
               <SearchIcon />
             </div>
             <InputBase
+              style={{ fontSize: "14px" }}
               placeholder="Search…"
               classes={{
                 root: classes.inputRoot,
@@ -257,10 +257,10 @@ const AuthenticatedNavbar = ({
             >
               <MenuItem
                 style={{
-                  maxHeight: "70px",
+                  maxHeight: "67px",
                   borderBottom:
                     window.location.href === "http://localhost:3000/dashboard"
-                      ? "3px solid grey"
+                      ? "3px inset #D3D3D3"
                       : ""
                 }}
               >
@@ -287,10 +287,10 @@ const AuthenticatedNavbar = ({
             >
               <MenuItem
                 style={{
-                  maxHeight: "70px",
+                  maxHeight: "68px",
                   borderBottom:
                     window.location.href === "http://localhost:3000/ticket"
-                      ? "3px solid grey"
+                      ? "3px inset #D3D3D3"
                       : ""
                 }}
               >
@@ -317,12 +317,12 @@ const AuthenticatedNavbar = ({
                 <MenuItem
                   style={{
                     alignItems: "center",
-                    maxHeight: "70px",
+                    maxHeight: "68px",
                     paddingRight: "10px",
                     paddingLeft: "10px",
                     borderBottom:
                       window.location.href === "http://localhost:3000/directory"
-                        ? "3px solid grey"
+                        ? "3px inset #D3D3D3"
                         : ""
                   }}
                 >
@@ -359,13 +359,13 @@ const AuthenticatedNavbar = ({
               <Grid container>
                 <MenuItem
                   style={{
-                    maxHeight: "70px",
+                    maxHeight: "68px",
                     paddingRight: "10px",
                     paddingLeft: "10px",
                     borderBottom:
                       window.location.href ===
                       "http://localhost:3000/notifications"
-                        ? "3px solid grey"
+                        ? "3px inset #D3D3D3"
                         : ""
                   }}
                 >
@@ -400,12 +400,12 @@ const AuthenticatedNavbar = ({
               <Grid container>
                 <MenuItem
                   style={{
-                    maxHeight: "70px",
+                    maxHeight: "68px",
                     paddingRight: "15px",
                     marginRight: "-10px",
                     borderBottom:
                       window.location.href === "http://localhost:3000/profile"
-                        ? "3px solid grey"
+                        ? "3px inset #D3D3D3"
                         : ""
                   }}
                 >

@@ -8,6 +8,7 @@ const { check, validationResult } = require("express-validator");
 
 const User = require("../../models/User");
 
+router.get("/test", (req, res) => res.send("Tests Route"));
 // @ route GET api/auth
 // @desc Test route
 // @access Public
@@ -77,6 +78,5 @@ router.post(
     }
   }
 );
-
 
 module.exports = router;

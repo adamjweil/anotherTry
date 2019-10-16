@@ -6,7 +6,7 @@ import {
   CssBaseline,
   TextField,
   FormControlLabel,
-  Checkbox,
+  // Checkbox,
   Grid,
   Typography,
   Box,
@@ -14,6 +14,7 @@ import {
   IconButton,
   Icon
 } from "@material-ui/core";
+import Checkbox from "material-ui/Checkbox";
 import EmailTwoToneIcon from "@material-ui/icons/EmailTwoTone";
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";

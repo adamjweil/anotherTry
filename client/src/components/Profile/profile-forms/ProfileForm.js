@@ -16,6 +16,7 @@ import { Form } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import SaveIcon from "@material-ui/icons/Save";
 import clsx from "clsx";
+import { DatePicker } from "@material-ui/pickers";
 
 import { createProfile } from "../../../actions/profile";
 import { loadCurrentProfile } from "../../../actions/profile";
@@ -85,9 +86,12 @@ const ProfileForm = ({
     lastName: "",
     handle: "",
     team: "",
-    title: ""
+    title: "",
+    middleInitial: ""
   });
-  const { firstName, lastName, handle, team, title } = formData;
+  const [hireDate, changeDate] = useState(new Date());
+
+  const { firstName, lastName, handle, team, title, middleInitial } = formData;
   const classes = useStyles();
 
   const onChange = e =>
@@ -103,138 +107,188 @@ const ProfileForm = ({
 
   return (
     <Grid container>
-      <Form className={classes.form} onSubmit={onSubmit}>
-        <Paper className={classes.paper}>
-          <Grid item xs={12} className={classes.message}>
-            <center>
-              <h2>Welcome to Online Portal!</h2>
-            </center>
-            <center>
-              <h4
+      <Grid item xs={12} sm={7}>
+        <form className={classes.form} onSubmit={onSubmit}>
+          <Paper className={classes.paper}>
+            <Grid item xs={12} className={classes.message}>
+              <center>
+                <h2>Welcome to Online Portal!</h2>
+              </center>
+              <center>
+                <h4
+                  style={{
+                    fontSize: "12px",
+                    marginTop: "-20px",
+                    marginBottom: "0px"
+                  }}
+                >
+                  Set Up Profile Below
+                </h4>
+              </center>
+            </Grid>
+            <Grid container>
+              <Grid item md={5}>
+                <FormControl style={{ marginLeft: "50px" }}>
+                  <TextField
+                    style={{
+                      width: "150px",
+                      display: "inLine"
+                    }}
+                    margin="normal"
+                    variant="standard"
+                    name="firstName"
+                    label="First Name"
+                    value={firstName}
+                    onChange={e => onChange(e)}
+                  />
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={12} md={1}>
+                <FormControl>
+                  <TextField
+                    style={{
+                      width: "80px",
+                      display: "inLine",
+                      position: "relative"
+                    }}
+                    margin="normal"
+                    variant="standard"
+                    name="middleInitial"
+                    label="Middle"
+                    value={middleInitial}
+                    onChange={e => onChange(e)}
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} md={5}>
+                <FormControl
+                  style={{
+                    marginLeft: "60px",
+                    position: "relative"
+                  }}
+                >
+                  <TextField
+                    display="inLine"
+                    style={{
+                      width: "150px",
+                      display: "inLine",
+                      position: "relative"
+                    }}
+                    margin="normal"
+                    variant="standard"
+                    name="lastName"
+                    label="Last Name"
+                    value={lastName}
+                    onChange={e => onChange(e)}
+                  />
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={12}>
+                <FormControl
+                  style={{
+                    marginLeft: "20px",
+                    position: "relative"
+                  }}
+                >
+                  <TextField
+                    style={{
+                      width: "170px",
+                      display: "inLine"
+                    }}
+                    label="Handle"
+                    name="handle"
+                    margin="normal"
+                    variant="filled"
+                    value={handle}
+                    onChange={e => onChange(e)}
+                    helperText="What do you go by?"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">@</InputAdornment>
+                      )
+                    }}
+                  />
+                </FormControl>
+                <FormControl
+                  style={{
+                    // width: "80%",
+                    // height: "300px",
+                    marginLeft: "100px",
+                    position: "relative"
+                  }}
+                >
+                  <DatePicker
+                    autoOk
+                    variant="static"
+                    openTo="year"
+                    value={hireDate}
+                    onChange={changeDate}
+                  />
+                </FormControl>
+              </Grid>
+              <FormControl
                 style={{
-                  fontSize: "12px",
-                  marginTop: "-20px",
-                  marginBottom: "0px"
+                  alignItems: "center",
+                  margin: "10px 10px 10px"
                 }}
               >
-                Set Up Profile Below
-              </h4>
-            </center>
-          </Grid>
-          <Grid container>
-            <Grid item xs={12} sm={5}>
-              <FormControl style={{ marginLeft: "20px" }}>
-                <TextField
-                  margin="normal"
-                  variant="outlined"
-                  name="firstName"
-                  label="First Name"
-                  value={firstName}
+                <InputLabel> Team</InputLabel>
+                <Select
+                  style={{ width: "350px" }}
+                  name="team"
                   onChange={e => onChange(e)}
-                />
+                  value={team}
+                >
+                  {TEAMS.map(team => (
+                    <MenuItem key={team} value={team}>
+                      {team}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
             </Grid>
-            <Grid item sm={2}></Grid>
-            <Grid item xs={12} sm={5}>
-              <FormControl>
-                <TextField
-                  style={{ marginRight: "10px" }}
-                  margin="normal"
-                  variant="outlined"
-                  name="lastName"
-                  label="Last Name"
-                  value={lastName}
-                  onChange={e => onChange(e)}
-                />
-              </FormControl>
-            </Grid>
-          </Grid>
-          <Grid item xs={12} sm={5}>
-            <FormControl>
-              <TextField
-                label="Handle"
-                name="handle"
-                margin="normal"
-                variant="filled"
-                value={handle}
-                onChange={e => onChange(e)}
-                helperText="What do you go by?"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">@</InputAdornment>
-                  )
+
+            <Grid item xs={12}>
+              <FormControl
+                style={{
+                  alignItems: "center",
+                  margin: "10px 10px 10px"
                 }}
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={6}></Grid>
-          <Grid item xs={12}>
-            <FormControl
-              style={{
-                alignItems: "center",
-                margin: "10px 10px 10px"
-              }}
-            >
-              <InputLabel> Team</InputLabel>
-              <Select
-                style={{ width: "350px" }}
-                name="team"
-                onChange={e => onChange(e)}
-                value={team}
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-
-                {TEAMS.map(team => (
-                  <MenuItem key={team} value={team}>
-                    {team}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs={12}>
-            <FormControl
-              style={{
-                alignItems: "center",
-                margin: "10px 10px 10px"
-              }}
-            >
-              <InputLabel>Title</InputLabel>
-              <Select
-                style={{ width: "350px" }}
-                name="title"
-                onChange={e => onChange(e)}
-                value={title}
+                <InputLabel>Title</InputLabel>
+                <Select
+                  style={{ width: "350px" }}
+                  name="title"
+                  onChange={e => onChange(e)}
+                  value={title}
+                >
+                  {TITLES.map(title => (
+                    <MenuItem key={title} value={title}>
+                      {title}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}></Grid>
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                variant="contained"
+                size="small"
+                className={classes.submit}
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-
-                {TITLES.map(title => (
-                  <MenuItem key={title} value={title}>
-                    {title}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={6}></Grid>
-          <Grid item xs={12}>
-            <Button
-              type="submit"
-              variant="contained"
-              size="small"
-              className={classes.submit}
-            >
-              <SaveIcon className={clsx(classes.leftIcon, classes.iconSmall)} />
-              Save
-            </Button>
-          </Grid>
-        </Paper>
-      </Form>
+                <SaveIcon
+                  className={clsx(classes.leftIcon, classes.iconSmall)}
+                />
+                Save
+              </Button>
+            </Grid>
+          </Paper>
+        </form>
+      </Grid>
     </Grid>
   );
 };

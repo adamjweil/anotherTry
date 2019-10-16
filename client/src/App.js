@@ -9,6 +9,7 @@ import InfoSnackbar from "./components/layout/Alerts/InfoSnackbar";
 import ErrorSnackbar from "./components/layout/Alerts/ErrorSnackbar";
 import Profile from "./components/Profile/Profile";
 import ProfileForm from "./components/Profile/profile-forms/ProfileForm";
+import NewProfileForm from "./components/Profile/profile-forms/NewProfileForm";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Tickets from "./components/Tickets/Tickets";
 import Directory from "./components/layout/Directory/Directory";
@@ -52,6 +53,7 @@ const App = () => {
             <Route exact path="/profile/:id" component={Profile} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path="/profileform" component={ProfileForm} />
+            <PrivateRoute exact path="/test" component={NewProfileForm} />
             <PrivateRoute exact path="/profile" component={Profile} />
             <PrivateRoute exact path="/profile/:id" component={Profile} />
             <PrivateRoute exact path="/ticket" component={Tickets} />
