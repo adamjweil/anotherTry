@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, MenuItem, Menu, IconButton, Grid } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import FingerprintOutlinedIcon from "@material-ui/icons/FingerprintOutlined";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import ImportContactsOutlinedIcon from "@material-ui/icons/ImportContactsOutlined";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,9 +42,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const UnauthenticatedNavbar = () => {
+const UnauthenticatedNavbar = ({ activeTab, setActiveTab }) => {
   const classes = useStyles();
 
+  const match = input => async dispatch => {
+    if (input === window.location.href) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const home = match;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -116,19 +125,27 @@ const UnauthenticatedNavbar = () => {
                 color: "rgb(240,240,240)"
               }}
             >
-              Online Portal
+              Online Portal{activeTab}
             </Link>
           </Typography>
 
           <div className={classes.root} />
           <div className={classes.sectionDesktop}>
-            <Link to="/" style={{ textDecoration: "none", paddingTop: "0px" }}>
+            <Link
+              onClick={setActiveTab()}
+              to="/"
+              style={{ textDecoration: "none", paddingTop: "0px" }}
+            >
               <Grid container>
                 <MenuItem
                   style={{
                     maxHeight: "70px",
                     paddingRight: "20px",
-                    paddingLeft: "20px"
+                    paddingLeft: "20px",
+                    borderBottom:
+                      window.location.href === "http://localhost:3000/"
+                        ? "3px solid grey"
+                        : ""
                   }}
                 >
                   <Grid row>
@@ -158,6 +175,7 @@ const UnauthenticatedNavbar = () => {
             </Link>
 
             <Link
+              onClick={setActiveTab()}
               to="/directory"
               style={{ textDecoration: "none", paddingTop: "0px" }}
             >
@@ -166,7 +184,11 @@ const UnauthenticatedNavbar = () => {
                   style={{
                     maxHeight: "70px",
                     paddingRight: "20px",
-                    paddingLeft: "20px"
+                    paddingLeft: "20px",
+                    borderBottom:
+                      window.location.href === "http://localhost:3000/directory"
+                        ? "3px solid grey"
+                        : ""
                   }}
                 >
                   <Grid row>
@@ -195,6 +217,7 @@ const UnauthenticatedNavbar = () => {
               </Grid>
             </Link>
             <Link
+              onClick={setActiveTab()}
               to="/register"
               style={{ textDecoration: "none", paddingTop: "0px" }}
             >
@@ -203,7 +226,11 @@ const UnauthenticatedNavbar = () => {
                   style={{
                     maxHeight: "70px",
                     paddingLeft: "20px",
-                    paddingRight: "20px"
+                    paddingRight: "20px",
+                    borderBottom:
+                      window.location.href === "http://localhost:3000/register"
+                        ? "3px solid grey"
+                        : ""
                   }}
                 >
                   <Grid row>
@@ -239,4 +266,7 @@ const UnauthenticatedNavbar = () => {
   );
 };
 
-export default UnauthenticatedNavbar;
+export default connect(
+  null,
+  {}
+)(UnauthenticatedNavbar);
