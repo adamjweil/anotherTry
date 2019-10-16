@@ -3,6 +3,7 @@ import { loadCurrentProfile } from "../../actions/profile";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid, Header } from "semantic-ui-react";
+
 // import Spinner from "../layout/Spinner";
 import ProfileCard from "../Profile/ProfileCard";
 import ProfileForm from "../Profile/profile-forms/ProfileForm";
@@ -21,8 +22,8 @@ const Dashboard = ({ profile, loading, user }) => {
           Welcome to the meZocliQ Online Portal, {user && user.email}!
         </Header>
       </Grid>
-      <Grid item xs={12} sm={6}>
-        {profile === null ? <ProfileForm /> : <ProfileCard />}
+      <Grid item xs={6} sm={6}>
+        <ProfileForm />
       </Grid>
     </Grid>
   );

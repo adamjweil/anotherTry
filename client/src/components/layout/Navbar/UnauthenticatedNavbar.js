@@ -45,16 +45,8 @@ const useStyles = makeStyles(theme => ({
 const UnauthenticatedNavbar = ({ activeTab, setActiveTab }) => {
   const classes = useStyles();
 
-  const match = input => async dispatch => {
-    if (input === window.location.href) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-  const home = match;
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -139,12 +131,13 @@ const UnauthenticatedNavbar = ({ activeTab, setActiveTab }) => {
               <Grid container>
                 <MenuItem
                   style={{
-                    maxHeight: "70px",
+                    maxHeight: "68px",
                     paddingRight: "20px",
                     paddingLeft: "20px",
+                    paddingBottom: "10px",
                     borderBottom:
                       window.location.href === "http://localhost:3000/"
-                        ? "3px solid grey"
+                        ? "3px inset #D3D3D3"
                         : ""
                   }}
                 >
@@ -182,12 +175,13 @@ const UnauthenticatedNavbar = ({ activeTab, setActiveTab }) => {
               <Grid container>
                 <MenuItem
                   style={{
-                    maxHeight: "70px",
-                    paddingRight: "20px",
-                    paddingLeft: "20px",
+                    maxHeight: "68px",
+                    paddingRight: "15px",
+                    paddingLeft: "15px",
+                    paddingBottom: "10px",
                     borderBottom:
                       window.location.href === "http://localhost:3000/directory"
-                        ? "3px solid grey"
+                        ? "3px inset #D3D3D3"
                         : ""
                   }}
                 >
@@ -224,12 +218,13 @@ const UnauthenticatedNavbar = ({ activeTab, setActiveTab }) => {
               <Grid container>
                 <MenuItem
                   style={{
-                    maxHeight: "70px",
-                    paddingLeft: "20px",
-                    paddingRight: "20px",
+                    maxHeight: "68px",
+                    paddingRight: "15px",
+                    paddingLeft: "15px",
+                    paddingBottom: "10px",
                     borderBottom:
                       window.location.href === "http://localhost:3000/register"
-                        ? "3px solid grey"
+                        ? "3px inset #D3D3D3"
                         : ""
                   }}
                 >
