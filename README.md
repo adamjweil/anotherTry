@@ -101,6 +101,13 @@ User Stories
 
 ---
 
+    #10/16
+
+
+    ---
+    -> Fix the CLEAR_SNACKBAR action / reducer because not working
+
+
     - Upon new user Registration, the user should be directed to the dashboard, where they can also fill out the Profile Form
     - Complete Ticket Form
       - Submit to DB
