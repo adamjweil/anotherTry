@@ -92,7 +92,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
+const AuthenticatedNavbar = ({
+  logout,
+  isAuthenticated,
+  loading,
+  activeTab,
+  setActiveTab
+}) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -242,13 +248,22 @@ const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <Link
+              onClick={setActiveTab()}
               to="/dashboard"
               style={{
                 marginLeft: "10px",
                 textDecoration: "none"
               }}
             >
-              <MenuItem style={{ maxHeight: "70px" }}>
+              <MenuItem
+                style={{
+                  maxHeight: "70px",
+                  borderBottom:
+                    window.location.href === "http://localhost:3000/dashboard"
+                      ? "3px solid grey"
+                      : ""
+                }}
+              >
                 <p
                   style={{
                     color: "white",
@@ -263,13 +278,22 @@ const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
             </Link>
 
             <Link
+              onClick={setActiveTab()}
               to="/ticket"
               style={{
                 marginLeft: "10px",
                 textDecoration: "none"
               }}
             >
-              <MenuItem style={{ maxHeight: "70px" }}>
+              <MenuItem
+                style={{
+                  maxHeight: "70px",
+                  borderBottom:
+                    window.location.href === "http://localhost:3000/ticket"
+                      ? "3px solid grey"
+                      : ""
+                }}
+              >
                 <p
                   style={{
                     color: "white",
@@ -283,14 +307,23 @@ const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
               </MenuItem>
             </Link>
 
-            <Link to="/directory" color="white" style={{ paddingTop: "0px" }}>
+            <Link
+              to="/directory"
+              color="white"
+              onClick={setActiveTab()}
+              style={{ paddingTop: "0px" }}
+            >
               <Grid container>
                 <MenuItem
                   style={{
                     alignItems: "center",
                     maxHeight: "70px",
                     paddingRight: "10px",
-                    paddingLeft: "10px"
+                    paddingLeft: "10px",
+                    borderBottom:
+                      window.location.href === "http://localhost:3000/directory"
+                        ? "3px solid grey"
+                        : ""
                   }}
                 >
                   <Grid row>
@@ -317,13 +350,23 @@ const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
               </Grid>
             </Link>
 
-            <Link to="/profile" color="white" style={{ paddingTop: "0px" }}>
+            <Link
+              to="/profile"
+              onClick={setActiveTab()}
+              color="white"
+              style={{ paddingTop: "0px" }}
+            >
               <Grid container>
                 <MenuItem
                   style={{
                     maxHeight: "70px",
                     paddingRight: "10px",
-                    paddingLeft: "10px"
+                    paddingLeft: "10px",
+                    borderBottom:
+                      window.location.href ===
+                      "http://localhost:3000/notifications"
+                        ? "3px solid grey"
+                        : ""
                   }}
                 >
                   <Grid row>
@@ -350,6 +393,7 @@ const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
               </Grid>
             </Link>
             <Link
+              onClick={setActiveTab()}
               to="/profile"
               style={{ textDecoration: "none", paddingTop: "0px" }}
             >
@@ -358,7 +402,11 @@ const AuthenticatedNavbar = ({ logout, isAuthenticated, loading }) => {
                   style={{
                     maxHeight: "70px",
                     paddingRight: "15px",
-                    marginRight: "-10px"
+                    marginRight: "-10px",
+                    borderBottom:
+                      window.location.href === "http://localhost:3000/profile"
+                        ? "3px solid grey"
+                        : ""
                   }}
                 >
                   <Grid row>

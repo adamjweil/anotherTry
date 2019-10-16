@@ -97,6 +97,7 @@ User Stories
     - Finished the design and implementation of the final NavBar for both Authenticated and Unauthenticated users
     - Forgot Password text is now different format than the click here button, which makes it look nicer
     - I've made the Registration Form to be in line with what the Login form is setup to look like, to bring some consistancy to the application
+    - Added conditionality to the NavBar pages, so that when you are on a particular page, the button will be underlined. Still working out styling, but the logic and configuration is set up and working
 
 ---
 
