@@ -35,7 +35,15 @@ router.post("/", auth, async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { firstName, lastName, handle, team, title } = req.body;
+  const {
+    firstName,
+    middleInitial,
+    lastName,
+    handle,
+    team,
+    title,
+    hireDate
+  } = req.body;
 
   // Build Profile object
   const profileFields = {};
@@ -46,6 +54,8 @@ router.post("/", auth, async (req, res) => {
   if (handle) profileFields.handle = handle;
   if (team) profileFields.team = team;
   if (title) profileFields.title = title;
+  if (hireDate) profileFields.hireDate = hireDate;
+  if (middleInitial) profileFields.middleInitial = middleInitial;
 
   try {
     // Update

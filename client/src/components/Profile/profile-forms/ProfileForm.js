@@ -12,12 +12,10 @@ import {
   Paper,
   InputAdornment
 } from "@material-ui/core";
-import { Form } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import SaveIcon from "@material-ui/icons/Save";
 import clsx from "clsx";
 import { DatePicker } from "@material-ui/pickers";
-
 import { createProfile } from "../../../actions/profile";
 import { loadCurrentProfile } from "../../../actions/profile";
 import { loadUser } from "../../../actions/user";
@@ -47,7 +45,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
     border: "1px shadow",
     borderColor: "#3f51b5",
-    boxShadow: " 0 4px 6px 0 hsla(0, 0%, 0%, 0.2)"
+    boxShadow: " 0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
   },
   message: {
     borderBottom: "3px solid #3f51b5"
@@ -92,12 +90,13 @@ const ProfileForm = ({
   const [hireDate, changeDate] = useState(new Date());
 
   const { firstName, lastName, handle, team, title, middleInitial } = formData;
+  formData.hireDate = hireDate;
   const classes = useStyles();
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
   const onSubmit = e => {
-    // e.preventDefault();
+    e.preventDefault();
     createProfile({ formData });
   };
   useEffect(() => {
@@ -112,22 +111,19 @@ const ProfileForm = ({
           <Paper className={classes.paper}>
             <Grid item xs={12} className={classes.message}>
               <center>
-                <h2>Welcome to Online Portal!</h2>
-              </center>
-              <center>
-                <h4
+                <h2
                   style={{
-                    fontSize: "12px",
+                    // fontSize: "12px",
                     marginTop: "-20px",
                     marginBottom: "0px"
                   }}
                 >
-                  Set Up Profile Below
-                </h4>
+                  SET PROFILE UP HERE
+                </h2>
               </center>
             </Grid>
             <Grid container>
-              <Grid item md={5}>
+              <Grid item xs={12} md={4}>
                 <FormControl style={{ marginLeft: "50px" }}>
                   <TextField
                     style={{
@@ -144,8 +140,13 @@ const ProfileForm = ({
                 </FormControl>
               </Grid>
 
-              <Grid item xs={12} md={1}>
-                <FormControl>
+              <Grid item xs={12} sm={3}>
+                <FormControl
+                  style={{
+                    marginLeft: "60px",
+                    position: "relative"
+                  }}
+                >
                   <TextField
                     style={{
                       width: "80px",
@@ -185,10 +186,10 @@ const ProfileForm = ({
                 </FormControl>
               </Grid>
 
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={3}>
                 <FormControl
                   style={{
-                    marginLeft: "20px",
+                    marginLeft: "50px",
                     position: "relative"
                   }}
                 >
@@ -211,68 +212,100 @@ const ProfileForm = ({
                     }}
                   />
                 </FormControl>
+              </Grid>
+              <Grid item sm={2}></Grid>
+              <Grid item xs={12} sm={7}>
                 <FormControl
                   style={{
-                    // width: "80%",
-                    // height: "300px",
-                    marginLeft: "100px",
+                    marginLeft: "50px",
+                    marginTop: "16px",
+                    position: "relative"
+                  }}
+                >
+                  <TextField
+                    variant="filled"
+                    name="hireDate"
+                    value={hireDate}
+                    onChange={e => onChange(e)}
+                    label="Hire Date"
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl
+                  style={{
+                    marginLeft: "10%",
+                    marginRight: "10%",
+                    justifyContent: "middle",
                     position: "relative"
                   }}
                 >
                   <DatePicker
-                    autoOk
                     variant="static"
-                    openTo="year"
+                    autoOk
+                    orientation="landscape"
+                    varient="static"
+                    openTo="date"
                     value={hireDate}
                     onChange={changeDate}
                   />
                 </FormControl>
               </Grid>
-              <FormControl
-                style={{
-                  alignItems: "center",
-                  margin: "10px 10px 10px"
-                }}
-              >
-                <InputLabel> Team</InputLabel>
-                <Select
-                  style={{ width: "350px" }}
-                  name="team"
-                  onChange={e => onChange(e)}
-                  value={team}
+              <Grid item xs={12}>
+                <FormControl
+                  style={{
+                    margin: "10px 50px 10px"
+                  }}
                 >
-                  {TEAMS.map(team => (
-                    <MenuItem key={team} value={team}>
-                      {team}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+                  <InputLabel>Team</InputLabel>
+                  <Select
+                    variant="outlined"
+                    style={{
+                      width: "350px",
+                      marginLeft: "20%",
+                      marginRight: "20%"
+                    }}
+                    name="team"
+                    onChange={e => onChange(e)}
+                    value={team}
+                  >
+                    {TEAMS.map(team => (
+                      <MenuItem key={team} value={team}>
+                        {team}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={12}>
+                <FormControl
+                  style={{
+                    margin: "10px 50px 10px"
+                  }}
+                >
+                  <InputLabel>Title</InputLabel>
+                  <Select
+                    variant="outlined"
+                    style={{
+                      width: "350px",
+                      marginLeft: "20%",
+                      marginRight: "20%"
+                    }}
+                    name="title"
+                    onChange={e => onChange(e)}
+                    value={title}
+                  >
+                    {TITLES.map(title => (
+                      <MenuItem key={title} value={title}>
+                        {title}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
             </Grid>
 
-            <Grid item xs={12}>
-              <FormControl
-                style={{
-                  alignItems: "center",
-                  margin: "10px 10px 10px"
-                }}
-              >
-                <InputLabel>Title</InputLabel>
-                <Select
-                  style={{ width: "350px" }}
-                  name="title"
-                  onChange={e => onChange(e)}
-                  value={title}
-                >
-                  {TITLES.map(title => (
-                    <MenuItem key={title} value={title}>
-                      {title}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={6}></Grid>
             <Grid item xs={12}>
               <Button
                 type="submit"
