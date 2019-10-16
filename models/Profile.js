@@ -12,6 +12,12 @@ const ProfileSchema = new mongoose.Schema({
   lastName: {
     type: String
   },
+  middleInitial: {
+    type: String
+  },
+  hireDate: {
+    type: Date
+  },
   handle: {
     type: String
   },

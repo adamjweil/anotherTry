@@ -6,7 +6,7 @@ import {
   CssBaseline,
   TextField,
   FormControlLabel,
-  // Checkbox,
+  Checkbox,
   Grid,
   Typography,
   Box,
@@ -14,7 +14,7 @@ import {
   IconButton,
   Icon
 } from "@material-ui/core";
-import Checkbox from "material-ui/Checkbox";
+// import Checkbox from "material-ui/Checkbox";
 import EmailTwoToneIcon from "@material-ui/icons/EmailTwoTone";
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
@@ -103,10 +103,6 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
         console.log(err);
       }
     }
-  };
-
-  const onCheck = e => {
-    toggleCheck(e);
   };
 
   // Redirect if logged in
@@ -249,9 +245,9 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
                   control={
                     <Checkbox
                       name="terms"
-                      onClick={e => onCheck(e)}
+                      onClick={toggleCheck}
                       value={terms}
-                      color="primary"
+                      color="success"
                     />
                   }
                   label="I agree to the Terms & Conditions"
