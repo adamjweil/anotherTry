@@ -14,7 +14,6 @@ export const setAlert = (msg, alertType, timeout = 5000) => dispatch => {
     type: SET_ALERT,
     payload: { msg, alertType, id }
   });
-  setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), timeout);
 };
 
 export const removeAlert = id => dispatch => {
@@ -39,5 +38,5 @@ export const showInfoSnackbar = (message, timeout = 5000) => dispatch => {
 };
 
 export const clearSnackbar = id => dispatch => {
-  dispatch({ type: SNACKBAR_CLEAR, id });
+  dispatch({ type: REMOVE_ALERT, id });
 };

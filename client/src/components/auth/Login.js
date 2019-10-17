@@ -96,8 +96,8 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
       <Box
         marginTop="50px"
         style={{
-          background: "#F8F8F8",
-          boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.2)"
+          // background: "#F8F8F8",
+          boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
         }}
       >
         <form

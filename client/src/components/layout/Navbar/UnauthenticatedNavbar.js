@@ -96,9 +96,16 @@ const UnauthenticatedNavbar = ({ activeTab, setActiveTab }) => {
   );
 
   return (
-    <div className={classes.root}>
-      <AppBar style={{ position: "static", padding: "0px" }}>
-        <Toolbar style={{ minHeight: "10px", maxHeight: "65px" }}>
+    <div className={classes.root} style={{ marginBottom: "50px" }}>
+      <AppBar
+        style={{
+          position: "fixed",
+          padding: "0px",
+          background: "#14171A",
+          opacity: ".7"
+        }}
+      >
+        <Toolbar style={{ minHeight: "10px", maxHeight: "50px" }}>
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -117,7 +124,7 @@ const UnauthenticatedNavbar = ({ activeTab, setActiveTab }) => {
                 color: "rgb(240,240,240)"
               }}
             >
-              Online Portal{activeTab}
+              Online Portal
             </Link>
           </Typography>
 
@@ -131,38 +138,33 @@ const UnauthenticatedNavbar = ({ activeTab, setActiveTab }) => {
               <Grid container>
                 <MenuItem
                   style={{
-                    maxHeight: "68px",
-                    paddingRight: "20px",
-                    paddingLeft: "20px",
-                    paddingBottom: "10px",
+                    maxHeight: "52px",
+                    paddingRight: "10px",
+                    paddingLeft: "10px",
                     borderBottom:
                       window.location.href === "http://localhost:3000/"
                         ? "3px inset #D3D3D3"
                         : ""
                   }}
                 >
-                  <Grid row>
-                    <HomeOutlinedIcon
-                      label="Home"
-                      fontSize="medium"
-                      style={{
-                        color: "white",
-                        marginTop: "30px",
-                        marginLeft: "5px"
-                      }}
-                    />
-                    <p
-                      style={{
-                        marginTop: "0px",
-                        color: "white",
-                        fontWeight: "500",
-                        fontSize: "14px",
-                        paddingBottom: "5px"
-                      }}
-                    >
-                      Home
-                    </p>
-                  </Grid>
+                  <HomeOutlinedIcon
+                    label="Home"
+                    fontSize="medium"
+                    style={{
+                      color: "white"
+                    }}
+                  />
+                  <p
+                    style={{
+                      paddingRight: "10px",
+                      marginLeft: "10px",
+                      color: "white",
+                      fontWeight: "500",
+                      fontSize: "14px"
+                    }}
+                  >
+                    Home
+                  </p>
                 </MenuItem>
               </Grid>
             </Link>
@@ -175,38 +177,33 @@ const UnauthenticatedNavbar = ({ activeTab, setActiveTab }) => {
               <Grid container>
                 <MenuItem
                   style={{
-                    maxHeight: "68px",
-                    paddingRight: "15px",
-                    paddingLeft: "15px",
-                    paddingBottom: "10px",
+                    maxHeight: "52px",
+                    paddingRight: "10px",
+                    paddingLeft: "10px",
                     borderBottom:
                       window.location.href === "http://localhost:3000/directory"
                         ? "3px inset #D3D3D3"
                         : ""
                   }}
                 >
-                  <Grid row>
-                    <ImportContactsOutlinedIcon
-                      label="Directory"
-                      fontSize="medium"
-                      style={{
-                        color: "white",
-                        marginLeft: "15px",
-                        marginTop: "30px"
-                      }}
-                    />
-                    <p
-                      style={{
-                        marginTop: "0px",
-                        color: "white",
-                        fontWeight: "500",
-                        fontSize: "14px",
-                        paddingBottom: "5px"
-                      }}
-                    >
-                      Directory
-                    </p>
-                  </Grid>
+                  <ImportContactsOutlinedIcon
+                    label="Directory"
+                    fontSize="medium"
+                    style={{
+                      color: "white"
+                    }}
+                  />
+                  <p
+                    style={{
+                      marginLeft: "10px",
+                      color: "white",
+                      fontWeight: "500",
+                      fontSize: "14px",
+                      paddingRight: "5px"
+                    }}
+                  >
+                    Directory
+                  </p>
                 </MenuItem>
               </Grid>
             </Link>
@@ -218,38 +215,34 @@ const UnauthenticatedNavbar = ({ activeTab, setActiveTab }) => {
               <Grid container>
                 <MenuItem
                   style={{
-                    maxHeight: "68px",
-                    paddingRight: "15px",
-                    paddingLeft: "15px",
-                    paddingBottom: "10px",
+                    maxHeight: "52px",
+                    paddingRight: "10px",
+                    paddingLeft: "10px",
                     borderBottom:
                       window.location.href === "http://localhost:3000/register"
                         ? "3px inset #D3D3D3"
                         : ""
                   }}
                 >
-                  <Grid row>
-                    <FingerprintOutlinedIcon
-                      label="Register"
-                      fontSize="medium"
-                      style={{
-                        color: "white",
-                        marginLeft: "10px",
-                        marginTop: "30px"
-                      }}
-                    />
-                    <p
-                      style={{
-                        marginTop: "0px",
-                        color: "white",
-                        fontWeight: "500",
-                        fontSize: "14px",
-                        paddingBottom: "5px"
-                      }}
-                    >
-                      Register
-                    </p>
-                  </Grid>
+                  <FingerprintOutlinedIcon
+                    label="Register"
+                    fontSize="medium"
+                    style={{
+                      color: "white"
+                    }}
+                  />
+                  <p
+                    style={{
+                      marginLeft: "10px",
+                      color: "white",
+                      fontWeight: "500",
+                      fontSize: "14px",
+                      paddingRight: "10px",
+                      paddingLeft: "5px"
+                    }}
+                  >
+                    Register
+                  </p>
                 </MenuItem>
               </Grid>
             </Link>

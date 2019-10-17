@@ -41,7 +41,7 @@ const SuccessSnackbar = ({
     >
       <MySnackbarContentWrapper
         className=""
-        onClose={handleClose}
+        onClose={handleClose()}
         variant="success"
         message={successSnackbarMessage}
       />
