@@ -23,6 +23,7 @@ import PropTypes from "prop-types";
 import NotificationsNoneSharpIcon from "@material-ui/icons/NotificationsNoneSharp";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
 import ImportContactsOutlinedIcon from "@material-ui/icons/ImportContactsOutlined";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -247,6 +248,7 @@ const AuthenticatedNavbar = ({
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            <Divider orientation="vertical" />
             <Link
               onClick={setActiveTab()}
               to="/dashboard"
@@ -258,6 +260,10 @@ const AuthenticatedNavbar = ({
               <MenuItem
                 style={{
                   maxHeight: "67px",
+                  opacity:
+                    window.location.href === "http://localhost:3000/dashboard"
+                      ? "1"
+                      : ".75",
                   borderBottom:
                     window.location.href === "http://localhost:3000/dashboard"
                       ? "3px inset #D3D3D3"
@@ -267,8 +273,14 @@ const AuthenticatedNavbar = ({
                 <p
                   style={{
                     color: "white",
-                    fontSize: "14x",
-                    fontWeight: "500",
+                    fontSize:
+                      window.location.href === "http://localhost:3000/dashboard"
+                        ? "18px"
+                        : "16px",
+                    fontWeight:
+                      window.location.href === "http://localhost:3000/dashboard"
+                        ? "700"
+                        : "400",
                     alignItems: "center"
                   }}
                 >
@@ -288,6 +300,10 @@ const AuthenticatedNavbar = ({
               <MenuItem
                 style={{
                   maxHeight: "68px",
+                  opacity:
+                    window.location.href === "http://localhost:3000/ticket"
+                      ? "1"
+                      : ".75",
                   borderBottom:
                     window.location.href === "http://localhost:3000/ticket"
                       ? "3px inset #D3D3D3"
@@ -297,9 +313,15 @@ const AuthenticatedNavbar = ({
                 <p
                   style={{
                     color: "white",
-                    fontSize: "14x",
-                    fontWeight: "500",
-                    alignItems: "center"
+                    alignItems: "center",
+                    fontSize:
+                      window.location.href === "http://localhost:3000/ticket"
+                        ? "18px"
+                        : "16px",
+                    fontWeight:
+                      window.location.href === "http://localhost:3000/ticket"
+                        ? "700"
+                        : "400"
                   }}
                 >
                   TicketHub
@@ -320,6 +342,10 @@ const AuthenticatedNavbar = ({
                     maxHeight: "68px",
                     paddingRight: "10px",
                     paddingLeft: "10px",
+                    opacity:
+                      window.location.href === "http://localhost:3000/directory"
+                        ? "1"
+                        : ".75",
                     borderBottom:
                       window.location.href === "http://localhost:3000/directory"
                         ? "3px inset #D3D3D3"
@@ -339,8 +365,16 @@ const AuthenticatedNavbar = ({
                       style={{
                         marginTop: "0px",
                         color: "white",
-                        fontWeight: "500",
-                        fontSize: "14px"
+                        fontSize:
+                          window.location.href ===
+                          "http://localhost:3000/directory"
+                            ? "15px"
+                            : "14px",
+                        fontWeight:
+                          window.location.href ===
+                          "http://localhost:3000/directory"
+                            ? "700"
+                            : "400"
                       }}
                     >
                       Directory
@@ -362,9 +396,12 @@ const AuthenticatedNavbar = ({
                     maxHeight: "68px",
                     paddingRight: "10px",
                     paddingLeft: "10px",
+                    opacity:
+                      window.location.href === "http://localhost:3000/form"
+                        ? "1"
+                        : ".75",
                     borderBottom:
-                      window.location.href ===
-                      "http://localhost:3000/notifications"
+                      window.location.href === "http://localhost:3000/form"
                         ? "3px inset #D3D3D3"
                         : ""
                   }}
@@ -382,8 +419,14 @@ const AuthenticatedNavbar = ({
                       style={{
                         marginTop: "0px",
                         color: "white",
-                        fontWeight: "500",
-                        fontSize: "14px"
+                        fontSize:
+                          window.location.href === "http://localhost:3000/form"
+                            ? "15px"
+                            : "14px",
+                        fontWeight:
+                          window.location.href === "http://localhost:3000/form"
+                            ? "700"
+                            : "400"
                       }}
                     >
                       Notifications
@@ -403,6 +446,10 @@ const AuthenticatedNavbar = ({
                     maxHeight: "68px",
                     paddingRight: "15px",
                     marginRight: "-10px",
+                    opacity:
+                      window.location.href === "http://localhost:3000/profile"
+                        ? "1"
+                        : ".75",
                     borderBottom:
                       window.location.href === "http://localhost:3000/profile"
                         ? "3px inset #D3D3D3"
@@ -422,10 +469,16 @@ const AuthenticatedNavbar = ({
                     <p
                       style={{
                         color: "white",
-                        fontWeight: "500",
-                        fontSize: "14px",
                         marginLeft: "5px",
-                        marginTop: "0px"
+                        marginTop: "0px",
+                        fontSize:
+                          window.location.href === "http://localhost:3000/form"
+                            ? "15px"
+                            : "14px",
+                        fontWeight:
+                          window.location.href === "http://localhost:3000/form"
+                            ? "700"
+                            : "400"
                       }}
                     >
                       Profile

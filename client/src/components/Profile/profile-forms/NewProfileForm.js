@@ -42,8 +42,10 @@ const useStyles = makeStyles(theme => ({
     fontSize: 20
   },
   form: {
-    width: "100%",
-    marginTop: theme.spacing(1),
+    // maxWidth: "700px",
+
+    marginTop: "100px",
+    paddingTop: "50px",
     border: "1px shadow",
     borderColor: "#3f51b5",
     boxShadow: " 0 4px 6px 0 hsla(0, 0%, 0%, 0.2)"

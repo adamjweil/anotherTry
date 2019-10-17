@@ -19,6 +19,7 @@ import { DatePicker } from "@material-ui/pickers";
 import { createProfile } from "../../../actions/profile";
 import { loadCurrentProfile } from "../../../actions/profile";
 import { loadUser } from "../../../actions/user";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,14 +42,17 @@ const useStyles = makeStyles(theme => ({
     fontSize: 20
   },
   form: {
-    width: "100%",
-    marginTop: theme.spacing(1),
-    border: "1px shadow",
-    borderColor: "#3f51b5",
+    width: "700px",
+    minWidth: "700px",
+    marginTop: theme.spacing(5),
+    marginLeft: theme.spacing(5),
+    padding: theme.spacing(5),
+    // border: "1px shadow",
+    // borderColor: "#3f51b5",
     boxShadow: " 0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
   },
   message: {
-    borderBottom: "3px solid #3f51b5"
+    // borderBottom: "3px solid #3f51b5"
   },
   submit: {
     margin: theme.spacing(1, 0, 2)
@@ -106,6 +110,7 @@ const ProfileForm = ({
 
   return (
     <Grid container>
+      //{" "}
       <Grid item xs={12} sm={7}>
         <form className={classes.form} onSubmit={onSubmit}>
           <Paper className={classes.paper}>
@@ -114,21 +119,23 @@ const ProfileForm = ({
                 <h2
                   style={{
                     // fontSize: "12px",
-                    marginTop: "-20px",
+                    // marginTop: "-20px",
                     marginBottom: "0px"
                   }}
                 >
                   SET PROFILE UP HERE
                 </h2>
               </center>
+              <Divider variant="fullWidth" style={{ margin: "24px auto" }} />
             </Grid>
             <Grid container>
-              <Grid item xs={12} md={4}>
-                <FormControl style={{ marginLeft: "50px" }}>
+              <Grid item xs={12} sm={4}>
+                <FormControl style={{}}>
                   <TextField
                     style={{
-                      width: "150px",
-                      display: "inLine"
+                      marginLeft: "30px"
+                      // width: "150px",
+                      // display: "inLine"
                     }}
                     margin="normal"
                     variant="standard"
@@ -140,16 +147,16 @@ const ProfileForm = ({
                 </FormControl>
               </Grid>
 
-              <Grid item xs={12} sm={3}>
+              <Grid item xs={12} sm={4}>
                 <FormControl
                   style={{
-                    marginLeft: "60px",
+                    // marginLeft: "60px",
                     position: "relative"
                   }}
                 >
                   <TextField
                     style={{
-                      width: "80px",
+                      // width: "80px",
                       display: "inLine",
                       position: "relative"
                     }}
@@ -162,17 +169,17 @@ const ProfileForm = ({
                   />
                 </FormControl>
               </Grid>
-              <Grid item xs={12} md={5}>
+              <Grid item xs={12} sm={4}>
                 <FormControl
                   style={{
-                    marginLeft: "60px",
+                    // marginLeft: "60px",
                     position: "relative"
                   }}
                 >
                   <TextField
                     display="inLine"
                     style={{
-                      width: "150px",
+                      // width: "150px",
                       display: "inLine",
                       position: "relative"
                     }}
@@ -254,7 +261,7 @@ const ProfileForm = ({
               <Grid item xs={12}>
                 <FormControl
                   style={{
-                    margin: "10px 50px 10px"
+                    margin: "10px 100px 10px"
                   }}
                 >
                   <InputLabel>Team</InputLabel>
@@ -262,8 +269,8 @@ const ProfileForm = ({
                     variant="outlined"
                     style={{
                       width: "350px",
-                      marginLeft: "20%",
-                      marginRight: "20%"
+                      marginLeft: "50px"
+                      // marginRight: "20%"
                     }}
                     name="team"
                     onChange={e => onChange(e)}
@@ -281,7 +288,7 @@ const ProfileForm = ({
               <Grid item xs={12}>
                 <FormControl
                   style={{
-                    margin: "10px 50px 10px"
+                    margin: "10px 100px 10px"
                   }}
                 >
                   <InputLabel>Title</InputLabel>
@@ -289,8 +296,8 @@ const ProfileForm = ({
                     variant="outlined"
                     style={{
                       width: "350px",
-                      marginLeft: "20%",
-                      marginRight: "20%"
+                      marginLeft: "50px"
+                      // marginRight: "20%"
                     }}
                     name="title"
                     onChange={e => onChange(e)}
@@ -322,6 +329,7 @@ const ProfileForm = ({
           </Paper>
         </form>
       </Grid>
+      //{" "}
     </Grid>
   );
 };
