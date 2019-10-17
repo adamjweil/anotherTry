@@ -113,12 +113,10 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
   return (
     <Container component="main" maxWidth="md" className={classes.main}>
       <CssBaseline />
-
       <Box
-        marginTop="50px"
+        marginTop="100px"
         style={{
-          background: "#F8F8F8",
-          boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.2)"
+          boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
         }}
       >
         <Form
@@ -140,11 +138,7 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
               />
             </center>
           </Grid>
-          <Grid container>
-            <Grid item xs={2}></Grid>
-            <Grid item xs={10}></Grid>
-            <Grid item xs={2}></Grid>
-          </Grid>
+
           <Typography
             component="h6"
             variant="h6"
@@ -219,9 +213,7 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
               />
             </Grid>
             <Grid item xs={1}></Grid>
-
             <Grid item xs={1}></Grid>
-
             <Grid item xs={10}>
               <TextField
                 variant="standard"
@@ -235,7 +227,6 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
                 required
                 fullWidth
               />
-
               <Grid item xs={1}></Grid>
             </Grid>
             <Grid container>

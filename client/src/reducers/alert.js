@@ -8,7 +8,12 @@ export default function(state = INITIAL_STATE, action) {
     case SET_ALERT:
       return [...state, payload];
     case REMOVE_ALERT:
-      return state.filter(alerts => alert.id !== payload.id);
+      return {
+        ...state,
+        successSnackbarOpen: false,
+        errorSnackbarOpen: false,
+        infoSnackbarOpen: false
+      };
     case "SNACKBAR_SUCCESS":
       return {
         ...state,
