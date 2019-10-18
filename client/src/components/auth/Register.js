@@ -67,6 +67,7 @@ const useStyles = makeStyles(theme => ({
 const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
   const [formData, setFormData] = useState({
     email: "",
+    username: "",
     password: "",
     password2: "",
     terms: true
@@ -75,7 +76,7 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
     showPassword: false
   });
   const classes = useStyles();
-  const { email, password, password2, terms } = formData;
+  const { email, password, password2, terms, username } = formData;
   const { showPassword } = values;
 
   const handleClickShowPassword = () => {
@@ -97,7 +98,7 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
       showErrorSnackbar("Please read and agree to our Terms and Conditions");
     } else {
       try {
-        await register({ email, terms, password });
+        await register({ email, username, terms, password });
       } catch (err) {
         showErrorSnackbar(err.msg);
         console.log(err);
@@ -177,6 +178,29 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
               />
             </Grid>
             <Grid item xs={1}></Grid>
+          </Grid>
+          <Grid container>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={7}>
+              <TextField
+                fullWidth
+                autoFocus
+                variant="filled"
+                margin="normal"
+                label="Username"
+                id="username"
+                name="username"
+                value={username}
+                onChange={e => onChange(e)}
+                helperText="What do you go by?"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">@</InputAdornment>
+                  )
+                }}
+              />
+            </Grid>
+            <Grid item xs={2}></Grid>
           </Grid>
           <Grid container>
             <Grid item xs={1}></Grid>
