@@ -103,7 +103,7 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
         <form
           style={{ padding: "30px" }}
           className={classes.form}
-          onSubmit={e => onSubmit(e)}
+          onSubmit={login}
           noValidate
         >
           <Grid container>

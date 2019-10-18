@@ -1,33 +1,39 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import { Icon } from "@material-ui/core";
 import { clearSnackbar } from "../../../actions/alert";
 import MySnackbarContentWrapper from "./MySnackbarContentWrapper";
 import { connect } from "react-redux";
-const SuccessSnackbar = ({
-  successSnackbarMessage,
-  successSnackbarOpen,
-  clearSnackbar
-}) => {
-  const handleClose = id => async dispatch => {
-    clearSnackbar(id);
-  };
 
+export default function SuccessSnackbar() {
+  const dispatch = useDispatch();
+
+  const { successSnackbarMessage, successSnackbarOpen } = useSelector(
+    state => state.alert
+  );
+
+  function handleClose() {
+    dispatch(clearSnackbar());
+  }
   return (
     <Snackbar
       anchorOrigin={{
         vertical: "bottom",
         horizontal: "left"
       }}
-      variant="success"
       stackable="true"
       open={successSnackbarOpen}
-      autoHideDuration={6000}
+      autoHideDuration={5000}
       onClose={handleClose}
       aria-describedby="client-snackbar"
-      message={<span id="client-snackbar">{successSnackbarMessage}</span>}
+      message={
+        <span id="client-snackbar">
+          <Icon key="success"></Icon>
+          {successSnackbarMessage}
+        </span>
+      }
       action={[
         <IconButton
           key="close"
@@ -35,25 +41,16 @@ const SuccessSnackbar = ({
           color="inherit"
           onClick={handleClose}
         >
-          <Icon>close</Icon>
+          <i className="close icon">close</i>
         </IconButton>
       ]}
     >
       <MySnackbarContentWrapper
-        className=""
-        onClose={handleClose()}
+        className="success message"
+        onClose={handleClose}
         variant="success"
         message={successSnackbarMessage}
       />
     </Snackbar>
   );
-};
-
-const mapStateToProps = state => {
-  return { alert: state.alerts };
-};
-
-export default connect(
-  mapStateToProps,
-  { clearSnackbar }
-)(SuccessSnackbar);
+}

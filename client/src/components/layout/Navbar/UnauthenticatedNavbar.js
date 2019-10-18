@@ -101,7 +101,8 @@ const UnauthenticatedNavbar = ({ activeTab, setActiveTab }) => {
         style={{
           position: "fixed",
           padding: "0px",
-          background: "#14171A",
+          // background: "#14171A",
+          background: "linear-gradient(#14171A, #000000)",
           opacity: ".7"
         }}
       >

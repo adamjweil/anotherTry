@@ -49,10 +49,6 @@ const useStyles = makeStyles(theme => ({
     "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25)
     },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: "100%",
-    height: "30px",
     [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(3),
       width: "auto"
@@ -223,18 +219,6 @@ const AuthenticatedNavbar = ({
               <MenuIcon />
             </IconButton>
 
-            <Typography className={classes.title} variant="h6" noWrap>
-              <Link
-                to="/"
-                style={{
-                  textDecoration: "none",
-                  color: "rgb(240,240,240)"
-                }}
-              >
-                meZocliQ Online Portal
-              </Link>
-            </Typography>
-
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -256,7 +240,6 @@ const AuthenticatedNavbar = ({
                 onClick={setActiveTab()}
                 to="/dashboard"
                 style={{
-                  // marginLeft: "10px",
                   textDecoration: "none"
                 }}
               >
@@ -370,7 +353,7 @@ const AuthenticatedNavbar = ({
                       <p
                         style={{
                           color: "white",
-                          marginTop: "-14px",
+                          marginTop: "-12px",
                           fontSize:
                             window.location.href ===
                             "http://localhost:3000/directory"
@@ -399,7 +382,7 @@ const AuthenticatedNavbar = ({
                 <Grid container>
                   <MenuItem
                     style={{
-                      maxHeight: "53px",
+                      maxHeight: "55px",
                       paddingRight: "10px",
                       paddingLeft: "10px",
                       opacity:
@@ -423,7 +406,7 @@ const AuthenticatedNavbar = ({
                       />
                       <p
                         style={{
-                          marginTop: "-14px",
+                          marginTop: "-12px",
                           color: "white",
                           fontSize:
                             window.location.href ===
@@ -448,9 +431,7 @@ const AuthenticatedNavbar = ({
                 onClick={setActiveTab()}
                 to="/profile"
                 style={{
-                  textDecoration: "none",
-                  paddingTop: "0px",
-                  paddingBotton: "5px"
+                  textDecoration: "none"
                 }}
               >
                 <Grid container>
@@ -469,7 +450,9 @@ const AuthenticatedNavbar = ({
                   >
                     <Grid
                       row
-                      style={{ maxHeight: "53px", marginBottom: "-2px" }}
+                      style={{
+                        maxHeight: "55px"
+                      }}
                     >
                       <AccountCircleOutlinedIcon
                         fontSize="medium"
@@ -482,9 +465,8 @@ const AuthenticatedNavbar = ({
                       <p
                         style={{
                           color: "white",
-                          marginLeft: "5px",
-                          marginTop: "-14px",
-
+                          marginTop: "-12px",
+                          paddingLeft: "-20px",
                           fontSize:
                             window.location.href ===
                             "http://localhost:3000/profile"
@@ -515,7 +497,9 @@ const AuthenticatedNavbar = ({
 
 AuthenticatedNavbar.propTypes = {
   logout: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
 };
 const mapStateToProps = state => ({
   auth: state.auth,
