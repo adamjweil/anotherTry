@@ -56,6 +56,11 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(1, 0, 2)
+  },
+  textField: {
+    marginLeft: theme.spacing(3),
+    marginRight: theme.spacing(3),
+    width: 200
   }
 }));
 
@@ -110,134 +115,112 @@ const ProfileForm = ({
 
   return (
     <Grid container>
-      //{" "}
       <Grid item xs={12} sm={7}>
         <form className={classes.form} onSubmit={onSubmit}>
           <Paper className={classes.paper}>
             <Grid item xs={12} className={classes.message}>
               <center>
-                <h2
-                  style={{
-                    // fontSize: "12px",
-                    // marginTop: "-20px",
-                    marginBottom: "0px"
-                  }}
-                >
-                  SET PROFILE UP HERE
-                </h2>
+                <h2>SET PROFILE UP HERE</h2>
               </center>
               <Divider variant="fullWidth" style={{ margin: "24px auto" }} />
             </Grid>
             <Grid container>
               <Grid item xs={12} sm={4}>
-                <FormControl style={{}}>
+                <FormControl>
                   <TextField
-                    style={{
-                      marginLeft: "30px"
-                      // width: "150px",
-                      // display: "inLine"
-                    }}
+                    className={classes.textField}
                     margin="normal"
-                    variant="standard"
+                    variant="filled"
+                    id="standard-name"
                     name="firstName"
                     label="First Name"
                     value={firstName}
                     onChange={e => onChange(e)}
-                  />
-                </FormControl>
-              </Grid>
-
-              <Grid item xs={12} sm={4}>
-                <FormControl
-                  style={{
-                    // marginLeft: "60px",
-                    position: "relative"
-                  }}
-                >
-                  <TextField
-                    style={{
-                      // width: "80px",
-                      display: "inLine",
-                      position: "relative"
-                    }}
-                    margin="normal"
-                    variant="standard"
-                    name="middleInitial"
-                    label="Middle"
-                    value={middleInitial}
-                    onChange={e => onChange(e)}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <FormControl
-                  style={{
-                    // marginLeft: "60px",
-                    position: "relative"
-                  }}
-                >
-                  <TextField
-                    display="inLine"
-                    style={{
-                      // width: "150px",
-                      display: "inLine",
-                      position: "relative"
-                    }}
-                    margin="normal"
-                    variant="standard"
-                    name="lastName"
-                    label="Last Name"
-                    value={lastName}
-                    onChange={e => onChange(e)}
-                  />
-                </FormControl>
-              </Grid>
-
-              <Grid item xs={12} sm={3}>
-                <FormControl
-                  style={{
-                    marginLeft: "50px",
-                    position: "relative"
-                  }}
-                >
-                  <TextField
-                    style={{
-                      width: "170px",
-                      display: "inLine"
-                    }}
-                    label="Handle"
-                    name="handle"
-                    margin="normal"
-                    variant="filled"
-                    value={handle}
-                    onChange={e => onChange(e)}
-                    helperText="What do you go by?"
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">@</InputAdornment>
+                        <InputAdornment position="start"></InputAdornment>
                       )
                     }}
                   />
                 </FormControl>
               </Grid>
-              <Grid item sm={2}></Grid>
-              <Grid item xs={12} sm={7}>
-                <FormControl
-                  style={{
-                    marginLeft: "50px",
-                    marginTop: "16px",
-                    position: "relative"
-                  }}
-                >
+              <Grid item xs={12} sm={4}>
+                <FormControl>
                   <TextField
+                    className={classes.textField}
+                    margin="normal"
                     variant="filled"
-                    name="hireDate"
-                    value={hireDate}
+                    name="middleInitial"
+                    label="Middle Name"
+                    value={middleInitial}
                     onChange={e => onChange(e)}
-                    label="Hire Date"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start"></InputAdornment>
+                      )
+                    }}
                   />
                 </FormControl>
               </Grid>
+              <Grid item xs={12} sm={4}>
+                <FormControl>
+                  <TextField
+                    className={classes.textField}
+                    margin="normal"
+                    variant="filled"
+                    name="lastName"
+                    label="Last Name"
+                    value={lastName}
+                    onChange={e => onChange(e)}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start"></InputAdornment>
+                      )
+                    }}
+                  />
+                </FormControl>
+              </Grid>
+
+              <Grid container style={{ marginTop: "20px" }}>
+                <Grid item xs={12} sm={3}>
+                  <FormControl>
+                    <TextField
+                      className={classes.textField}
+                      label="Handle"
+                      name="handle"
+                      margin="normal"
+                      variant="filled"
+                      value={handle}
+                      onChange={e => onChange(e)}
+                      helperText="What do you go by?"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">@</InputAdornment>
+                        )
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item sm={2}></Grid>
+                <Grid item xs={12} sm={7}>
+                  <FormControl
+                    style={{
+                      width: "350px",
+                      marginTop: "16px"
+                    }}
+                  >
+                    <TextField
+                      helperText="Select the date from the calendar chooser below!"
+                      variant="filled"
+                      name="hireDate"
+                      value={hireDate}
+                      onChange={e => onChange(e)}
+                      label="Hire Date"
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+
               <Grid item xs={12}>
                 <FormControl
                   style={{
@@ -266,11 +249,10 @@ const ProfileForm = ({
                 >
                   <InputLabel>Team</InputLabel>
                   <Select
-                    variant="outlined"
+                    variant="standard"
                     style={{
-                      width: "350px",
+                      width: "400px",
                       marginLeft: "50px"
-                      // marginRight: "20%"
                     }}
                     name="team"
                     onChange={e => onChange(e)}
@@ -284,7 +266,6 @@ const ProfileForm = ({
                   </Select>
                 </FormControl>
               </Grid>
-
               <Grid item xs={12}>
                 <FormControl
                   style={{
@@ -293,11 +274,10 @@ const ProfileForm = ({
                 >
                   <InputLabel>Title</InputLabel>
                   <Select
-                    variant="outlined"
+                    variant="standard"
                     style={{
-                      width: "350px",
+                      width: "400px",
                       marginLeft: "50px"
-                      // marginRight: "20%"
                     }}
                     name="title"
                     onChange={e => onChange(e)}
