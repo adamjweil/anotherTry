@@ -25,7 +25,7 @@ export default function InfoSnackbar() {
       }}
       stackable="true"
       open={infoSnackbarOpen}
-      autoHideDuration={6000}
+      autoHideDuration={5000}
       onClose={handleClose}
       aria-describedby="client-snackbar"
       message={
