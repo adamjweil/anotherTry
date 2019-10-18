@@ -2,11 +2,11 @@ import React from "react";
 import { loadCurrentProfile } from "../../actions/profile";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Grid, Header, Typography } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 // import Spinner from "../layout/Spinner";
-import ProfileCard from "../Profile/ProfileCard";
 import ProfileForm from "../Profile/profile-forms/ProfileForm";
+import DashboardHeader from "./DashboardHeader";
 
 const Dashboard = ({ profile, loading, user }) => {
   return (
@@ -16,12 +16,9 @@ const Dashboard = ({ profile, loading, user }) => {
       justify="flexStart"
       alignItems="flexEnd"
     >
-      <Grid>
-        <Typography as="h4" align="center" gutterButtom>
-          Welcome to the meZocliQ Online Portal, {user && user.email}!
-        </Typography>
+      <Grid item xs={12} style={{ marginTop: "100px" }}>
+        <DashboardHeader />
       </Grid>
-      // <Grid item sm={6}></Grid>
       <Grid container>
         <Grid item sm={4}></Grid>
         <Grid item sm={7}>

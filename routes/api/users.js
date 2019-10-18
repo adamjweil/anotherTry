@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { email, password, terms } = req.body;
+  const { email, password, terms, username } = req.body;
 
   try {
     let user = await User.findOne({ email });
@@ -35,6 +35,7 @@ router.post("/", async (req, res) => {
       terms,
       email,
       avatar,
+      username,
       password
     });
 
