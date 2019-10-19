@@ -22,6 +22,9 @@ import { loadUser } from "../../../actions/user";
 import Divider from "@material-ui/core/Divider";
 import { Router as browserHistory } from "react-router-dom";
 import { push } from "react-router-redux";
+// import history from "../../history";
+import { withRouter } from "react-router-dom";
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -116,9 +119,10 @@ const ProfileForm = ({
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
   const onSubmit = e => {
     e.preventDefault();
-    createProfile({ formData });
+    createProfile({ formData, history });
   };
   // useEffect(() => {
   //   loadCurrentProfile();
@@ -364,4 +368,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { createProfile, loadUser, loadCurrentProfile }
-)(ProfileForm);
+)(withRouter(ProfileForm));

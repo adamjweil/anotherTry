@@ -101,7 +101,12 @@ User Stories
 
 ---
 
-    #10/16
+    #10/16 - 10/18
+    - Learned how to properly redirect after an action is dispatched, utilizing the history tool proviced by react router dom.
+    - Profile Form is now complete, and it being displayed on the Dashboard Page when you login
+    - After completing the Profile Form, the redirect comes into play, because now yuo are being sent to your own new Profile Page.
+    - Updates to the ProfileCard have been made to include updated scheme for the ProfileModel
+    - The CLEAR_SNACKBAR action reducer are now working properly
 
 
     ---
