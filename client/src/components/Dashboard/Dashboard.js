@@ -3,12 +3,12 @@ import { loadCurrentProfile } from "../../actions/profile";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
-
+import { Redirect, Link } from "react-router-dom";
 // import Spinner from "../layout/Spinner";
 import ProfileForm from "../Profile/profile-forms/ProfileForm";
 import DashboardHeader from "./DashboardHeader";
 
-const Dashboard = ({ profile, loading, user }) => {
+const Dashboard = ({ profile, loading, user, submittedProfileForm }) => {
   return (
     <Grid
       container
@@ -20,10 +20,11 @@ const Dashboard = ({ profile, loading, user }) => {
         <DashboardHeader />
       </Grid>
       <Grid container>
-        <Grid item sm={4}></Grid>
+        <Grid item sm={2}></Grid>
         <Grid item sm={7}>
-          <ProfileForm />
+          {!submittedProfileForm ? <ProfileForm /> : ""}
         </Grid>
+        <Grid item sm={2}></Grid>
       </Grid>
     </Grid>
   );
@@ -37,7 +38,8 @@ Dashboard.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.profile
+  profile: state.profile,
+  submittedProfileForm: state.auth.submittedProfileForm
 });
 
 export default connect(

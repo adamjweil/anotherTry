@@ -20,17 +20,19 @@ import { createProfile } from "../../../actions/profile";
 import { loadCurrentProfile } from "../../../actions/profile";
 import { loadUser } from "../../../actions/user";
 import Divider from "@material-ui/core/Divider";
-
+import { Router as browserHistory } from "react-router-dom";
+import { push } from "react-router-redux";
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    boxShadow: ""
   },
   paper: {
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
-    width: "100%"
+    alignItems: "center"
+    // width: "100%"
   },
   leftIcon: {
     marginRight: theme.spacing(1)
@@ -44,11 +46,12 @@ const useStyles = makeStyles(theme => ({
   form: {
     width: "700px",
     minWidth: "700px",
-    marginTop: theme.spacing(5),
-    marginLeft: theme.spacing(5),
-    padding: theme.spacing(5),
-    // border: "1px shadow",
-    // borderColor: "#3f51b5",
+    marginTop: theme.spacing(3),
+    marginLeft: theme.spacing(3),
+    paddingTop: theme.spacing(2),
+    paddingRight: theme.spacing(5),
+    paddingLeft: theme.spacing(5),
+    paddingBottom: theme.spacing(5),
     boxShadow: " 0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
   },
   message: {
@@ -94,11 +97,20 @@ const ProfileForm = ({
     handle: "",
     team: "",
     title: "",
-    middleInitial: ""
+    middleInitial: "",
+    bio: ""
   });
   const [hireDate, changeDate] = useState(new Date());
 
-  const { firstName, lastName, handle, team, title, middleInitial } = formData;
+  const {
+    firstName,
+    lastName,
+    handle,
+    team,
+    title,
+    middleInitial,
+    bio
+  } = formData;
   formData.hireDate = hireDate;
   const classes = useStyles();
 
@@ -108,10 +120,10 @@ const ProfileForm = ({
     e.preventDefault();
     createProfile({ formData });
   };
-  useEffect(() => {
-    loadCurrentProfile();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   loadCurrentProfile();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <Grid container>
@@ -122,7 +134,7 @@ const ProfileForm = ({
               <center>
                 <h2>SET PROFILE UP HERE</h2>
               </center>
-              <Divider variant="fullWidth" style={{ margin: "24px auto" }} />
+              <Divider fullWidth style={{ margin: "auto", width: "425px" }} />
             </Grid>
             <Grid container>
               <Grid item xs={12} sm={4}>
@@ -224,10 +236,12 @@ const ProfileForm = ({
               <Grid item xs={12}>
                 <FormControl
                   style={{
+                    marginTop: "20px",
                     marginLeft: "10%",
                     marginRight: "10%",
                     justifyContent: "middle",
-                    position: "relative"
+                    position: "relative",
+                    border: "2px solid grey"
                   }}
                 >
                   <DatePicker
@@ -238,6 +252,7 @@ const ProfileForm = ({
                     openTo="date"
                     value={hireDate}
                     onChange={changeDate}
+                    style={{}}
                   />
                 </FormControl>
               </Grid>
@@ -292,6 +307,28 @@ const ProfileForm = ({
                 </FormControl>
               </Grid>
             </Grid>
+            <Grid item sm={12}>
+              <FormControl
+                style={{
+                  margin: "10px 100px 10px",
+                  width: "500px",
+                  marginLeft: "50px"
+                }}
+              >
+                <TextField
+                  fullWidth
+                  name="bio"
+                  value={bio}
+                  onChange={e => onChange(e)}
+                  placeholder="Two or three sentence brief bio"
+                  multiline={true}
+                  variant="outlined"
+                  rows={5}
+                  rowsMax={10}
+                />
+              </FormControl>
+            </Grid>
+            <Grid item sm={12}></Grid>
 
             <Grid item xs={12}>
               <Button

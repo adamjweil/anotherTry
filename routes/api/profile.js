@@ -42,7 +42,8 @@ router.post("/", auth, async (req, res) => {
     handle,
     team,
     title,
-    hireDate
+    hireDate,
+    bio
   } = req.body;
 
   // Build Profile object
@@ -56,6 +57,7 @@ router.post("/", auth, async (req, res) => {
   if (title) profileFields.title = title;
   if (hireDate) profileFields.hireDate = hireDate;
   if (middleInitial) profileFields.middleInitial = middleInitial;
+  if (bio) profileFields.bio = bio;
 
   try {
     // Update
@@ -115,7 +117,6 @@ router.delete("/", auth, async (req, res) => {
     await Profile.findOneAndRemove({ user: req.user.id });
     // Remove User
     await User.findOneAndRemove({ _id: req.user.id });
-
     res.json({ msg: "User deleted" });
   } catch (err) {
     console.error(err.message);

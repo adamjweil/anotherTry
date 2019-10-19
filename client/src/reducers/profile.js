@@ -13,14 +13,21 @@ const INITIAL_STATE = {
   repos: [],
   loading: true,
   error: {},
-  notification_count: 0
+  notification_count: 0,
+  submittedProfileForm: false
 };
 
 export default function(state = INITIAL_STATE, action) {
   const { type, payload } = action;
   switch (type) {
-    case GET_PROFILE:
     case CREATE_PROFILE:
+      return {
+        ...state,
+        profile: payload,
+        loading: false,
+        submittedProfileForm: true
+      };
+    case GET_PROFILE:
     case UPDATE_PROFILE:
       return {
         ...state,

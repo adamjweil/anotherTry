@@ -7,7 +7,8 @@ import {
   CLEAR_PROFILE,
   PROFILE_ERROR
 } from "./types";
-
+import { routerMiddleware, push } from "react-router-redux";
+import store from "../store";
 //LOAD profile
 export const loadCurrentProfile = () => async dispatch => {
   try {
@@ -73,7 +74,8 @@ export const createProfile = ({
       type: CREATE_PROFILE,
       payload: res.data
     });
-    dispatch(loadCurrentProfile());
+    store.dispatch(push("/profile"));
+
     dispatch(showSuccessSnackbar(edit ? "Profile Updated" : "Profile Created"));
   } catch (err) {
     console.log(err);
