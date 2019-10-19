@@ -5,6 +5,7 @@ import { Grid } from "@material-ui/core";
 import { loadCurrentProfile } from "../../actions/profile";
 import ProfileCard from "./ProfileCard";
 import ProfileForm from "./profile-forms/ProfileForm";
+import { withRouter } from "react-router-dom";
 
 const Profile = ({
   loadCurrentProfile,
@@ -19,16 +20,16 @@ const Profile = ({
   return (
     <Fragment>
       <Grid container>
-        <Grid item md={1}></Grid>
-        <Grid item xs={12} md={3} style={{ minWidth: "300px" }}>
+        <Grid
+          item
+          xs={12}
+          sm={3}
+          style={{ marginLeft: "30px", minWidth: "350px" }}
+        >
           <ProfileCard />
         </Grid>
         <Grid item md={1}></Grid>
-        <Grid item xs={12} md={5}>
-          <ProfileForm />
-        </Grid>
       </Grid>
-      <Grid container></Grid>
     </Fragment>
   );
 };
@@ -47,4 +48,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { loadCurrentProfile }
-)(Profile);
+)(withRouter(Profile));
