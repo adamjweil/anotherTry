@@ -7,9 +7,11 @@ import store from "./store";
 import history from "./history";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import { createBrowserHistory } from "history";
+export const browserHistory = createBrowserHistory();
 
 ReactDOM.render(
-  <Provider store={store} history={history}>
+  <Provider store={store}>
     <Router>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <App />

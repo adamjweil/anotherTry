@@ -18,6 +18,9 @@ import {
   showErrorSnackbar,
   showInfoSnackbar
 } from "./alert";
+import { push } from "react-router-redux";
+import store from "../store";
+import history from "../history";
 
 //Load User
 export const loadUser = (history, showErrorSnackbar) => async dispatch => {
@@ -57,7 +60,7 @@ export const register = ({
       type: REGISTER_SUCCESS,
       payload: res.data
     });
-    dispatch(loadUser());
+    store.dispatch(push("/profile"));
     dispatch(showSuccessSnackbar("Successfully Registered!"));
   } catch (err) {
     dispatch(showErrorSnackbar(err.msg));
