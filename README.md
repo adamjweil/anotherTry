@@ -86,45 +86,38 @@ User Stories
     - The Profile Card is now updating as expected when you submit the profile form. I wasn't de-structuring PROFILE object from the PROFILE array, and so all the values I was looking for were undefined. It was much harder to debug then I would have thought. Took a while to figure this out
 
     #10/10
-    - Set up Ticket Reducers, Actions, and routes. I had already had a model set up for Tickets, but it did need to be changed around slightly. Now that all of these variables are included in the application state, I need to make sure theyre saving correctly to the database.
-    - After reading a bunch of Medium articles on UX and some fundamental tools to become a better designer, and started to implement some of those. One example is throwing a box shadow the Login and Register Components, rather than having a Border width specific to each side (which was a super hacky alternative, that I didnt like at all). These box shadows look much better
-      - I also started to play around with using color and weight as a way to formulate my information heirarchy, rather than relying on font size all the time. This makes the site much much more visually appealing, and I plan on playing around with these ideas a lot more going forward
+    - Set up Ticket Reducers, Actions, and routes. I had already had a model set up for Tickets, but it did need to be changed around slightly. Now that all of these variables are included in the application state, I need to make sure they're saving correctly to the database.
+    - After reading a bunch of Medium articles on UX and some fundamental tools to become a better designer, and started to implement some of those. One example is throwing a box shadow the Login and Register Components, rather than having a Border width specific to each side (which was a super hacky alternative, that I didn't like at all). These box shadows look much better
+      - I also started to play around with using color and weight as a way to formulate my information hierarchy, rather than relying on font size all the time. This makes the site much much more visually appealing, and I plan on playing around with these ideas a lot more going forward
 
     #10/14
-    - Have had a busy few days, so haven't had as much time coding as id like to have. I was able to log in today to focus on cleaning on the Navbar buttons, so it it more visually appealing... since all functionality isnt there yet...
+    - Have had a busy few days, so haven't had as much time coding as id like to have. I was able to log in today to focus on cleaning on the Navbar buttons, so it it more visually appealing... since all functionality isn't there yet...
 
     #10/15
     - Finished the design and implementation of the final NavBar for both Authenticated and Unauthenticated users
     - Forgot Password text is now different format than the click here button, which makes it look nicer
-    - I've made the Registration Form to be in line with what the Login form is setup to look like, to bring some consistancy to the application
+    - I've made the Registration Form to be in line with what the Login form is setup to look like, to bring some consistency to the application
     - Added conditionality to the NavBar pages, so that when you are on a particular page, the button will be underlined. Still working out styling, but the logic and configuration is set up and working
 
 ---
 
     #10/16 - 10/18
-    - Learned how to properly redirect after an action is dispatched, utilizing the history tool proviced by react router dom.
+    - Learned how to properly redirect after an action is dispatched, utilizing the history tool provided by react router dom.
     - Profile Form is now complete, and it being displayed on the Dashboard Page when you login
-    - After completing the Profile Form, the redirect comes into play, because now yuo are being sent to your own new Profile Page.
+    - After completing the Profile Form, the redirect comes into play, because now you are being sent to your own new Profile Page.
     - Updates to the ProfileCard have been made to include updated scheme for the ProfileModel
     - The CLEAR_SNACKBAR action reducer are now working properly
+    - ProfileForm is now complete, and upon registering a new user, you are redirected to the Dashboard page, which will display the Profile Form, if there is no Profile for that User found
 
 
     ---
-    -> Fix the CLEAR_SNACKBAR action / reducer because not working
-
-
-    - Upon new user Registration, the user should be directed to the dashboard, where they can also fill out the Profile Form
-    - Complete Ticket Form
-      - Submit to DB
-
-
 
     ##TO DO
-    - Dropdown of Users from the database. I need to have the Users first + last name dispay, however, and those variables are stored on the Profile Object, which is indirectly atached to the User
+    - Complete Ticket Form
+    - Submit to DB
+    - Dropdown of Users from the database. I need to have the Users first + last name display, however, and those variables are stored on the Profile Object, which is indirectly attached to the User
     - Styling Ticket form
     - Fetching tickets
-    - DashBoard
-      - Get the layout wire-framed out
     - oAuth integration on top of in app authentication
 
       - Form for Creating Profile

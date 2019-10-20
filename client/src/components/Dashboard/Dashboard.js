@@ -16,7 +16,7 @@ const Dashboard = ({ profile, loading, user, submittedProfileForm }) => {
       justify="flexStart"
       alignItems="flexEnd"
     >
-      <Grid item xs={12} style={{ marginTop: "100px" }}>
+      <Grid item xs={12} style={{ marginTop: "75px" }}>
         <DashboardHeader />
       </Grid>
       <Grid container>

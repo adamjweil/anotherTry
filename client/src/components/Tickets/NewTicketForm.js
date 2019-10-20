@@ -16,6 +16,9 @@ import {
   Divider
 } from "@material-ui/core";
 import PropTypes from "prop-types";
+import { push } from "react-router-redux";
+import { Router as browserHistory } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 // Redux
 import { connect } from "react-redux";
 import { fetchUsers } from "../../actions/user";
@@ -421,7 +424,15 @@ const BUCKETS = [
   }
 ];
 
-const NewTicketForm = ({ users, user, fetchUsers, createTicket }) => {
+const NewTicketForm = ({
+  users,
+  user,
+  fetchUsers,
+  createTicket,
+  loadCurrentProfile,
+
+  history
+}) => {
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
@@ -439,6 +450,7 @@ const NewTicketForm = ({ users, user, fetchUsers, createTicket }) => {
     status: "",
     tester: "",
     standing: "",
+    ticketId: "",
     importance: ""
   });
 
@@ -464,15 +476,10 @@ const NewTicketForm = ({ users, user, fetchUsers, createTicket }) => {
       ...formData,
       [e.target.name]: e.target.value
     });
-  const onSubmit = async e => {
-    console.log({ formData });
+  const onSubmit = e => {
+    // console.log({ formData });
     e.preventDefault();
-    try {
-      await createTicket({ formData });
-    } catch (err) {
-      showErrorSnackbar(err.msg);
-      console.log(err);
-    }
+    createTicket({ formData, history });
   };
 
   return (
@@ -515,7 +522,7 @@ const NewTicketForm = ({ users, user, fetchUsers, createTicket }) => {
             weight: "700"
           }}
         />
-        <form onSubmit={e => onSubmit(e)}>
+        <form onSubmit={onSubmit}>
           <Grid container spacing={2}>
             <Grid item>
               <FormControl
@@ -832,4 +839,4 @@ export default connect(
     fetchUsers,
     createTicket
   }
-)(NewTicketForm);
+)(withRouter(NewTicketForm));
