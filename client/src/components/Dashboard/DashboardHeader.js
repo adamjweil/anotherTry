@@ -12,10 +12,10 @@ const DashboardHeader = ({ user, auth }) => {
         sm={9}
         style={{
           marginLeft: "100px",
-          borderBottom: "1px solid grey"
+          borderBottom: "3px solid #F8F8F8"
         }}
       >
-        <Header style={{ fontSize: "36px", fontWeight: "700" }}>
+        <Header style={{ fontSize: "36px", fontWeight: "550" }}>
           Dashboard
         </Header>
         <Typography as="h3">Welcome, {user && user.username}</Typography>

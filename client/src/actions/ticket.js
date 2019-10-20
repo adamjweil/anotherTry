@@ -1,6 +1,9 @@
 import axios from "axios";
 import { showSuccessSnackbar } from "./alert";
 import { CREATE_TICKET, GET_TICKETS, TICKET_ERROR } from "./types";
+import { routerMiddleware, push } from "react-router-redux";
+import store from "../store";
+import history from "../history";
 
 // LOAD all tickets
 export const loadTickets = () => async dispatch => {
@@ -21,7 +24,12 @@ export const loadTickets = () => async dispatch => {
 };
 
 // CREATE a ticket
-export const createTicket = ({ formData, edit = false }) => async dispatch => {
+export const createTicket = ({
+  formData,
+  edit = false,
+  history
+}) => async dispatch => {
+  console.log("trigered");
   try {
     const config = {
       headers: {

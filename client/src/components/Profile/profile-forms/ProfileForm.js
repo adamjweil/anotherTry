@@ -10,10 +10,11 @@ import {
   InputLabel,
   Button,
   Paper,
-  InputAdornment
+  InputAdornment,
+  Icon
 } from "@material-ui/core";
-import PropTypes from "prop-types";
 import SaveIcon from "@material-ui/icons/Save";
+import PropTypes from "prop-types";
 import clsx from "clsx";
 import { DatePicker } from "@material-ui/pickers";
 import { createProfile } from "../../../actions/profile";
@@ -22,20 +23,20 @@ import { loadUser } from "../../../actions/user";
 import Divider from "@material-ui/core/Divider";
 import { Router as browserHistory } from "react-router-dom";
 import { push } from "react-router-redux";
-// import history from "../../history";
 import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    boxShadow: ""
+    boxShadow: "",
+    color: "#F8F8F8"
   },
   paper: {
     marginTop: theme.spacing(2),
+
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
-    // width: "100%"
   },
   leftIcon: {
     marginRight: theme.spacing(1)
@@ -50,15 +51,14 @@ const useStyles = makeStyles(theme => ({
     width: "700px",
     minWidth: "700px",
     marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
     marginLeft: theme.spacing(3),
     paddingTop: theme.spacing(2),
     paddingRight: theme.spacing(5),
     paddingLeft: theme.spacing(5),
     paddingBottom: theme.spacing(5),
+    backgroundColor: "#424242",
     boxShadow: " 0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
-  },
-  message: {
-    // borderBottom: "3px solid #3f51b5"
   },
   submit: {
     margin: theme.spacing(1, 0, 2)
@@ -66,7 +66,11 @@ const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(3),
     marginRight: theme.spacing(3),
-    width: 200
+    width: 215
+  },
+  date: {
+    marginLeft: theme.spacing(3),
+    width: 350
   }
 }));
 
@@ -101,9 +105,10 @@ const ProfileForm = ({
     team: "",
     title: "",
     middleInitial: "",
-    bio: ""
+    bio: "",
+    hireDate: new Date()
   });
-  const [hireDate, changeDate] = useState(new Date());
+  const [hireDate, changeDate] = useState(formatDate(new Date()));
 
   const {
     firstName,
@@ -114,11 +119,17 @@ const ProfileForm = ({
     middleInitial,
     bio
   } = formData;
-  formData.hireDate = hireDate;
+
+  // formData.hireDate = hireDate;
   const classes = useStyles();
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  function formatDate(string) {
+    var options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(string).toLocaleDateString([], options);
+  }
 
   const onSubmit = e => {
     e.preventDefault();
@@ -136,12 +147,12 @@ const ProfileForm = ({
           <Paper className={classes.paper}>
             <Grid item xs={12} className={classes.message}>
               <center>
-                <h2>SET PROFILE UP HERE</h2>
+                <h2>Create Profile Below</h2>
               </center>
               <Divider fullWidth style={{ margin: "auto", width: "425px" }} />
             </Grid>
             <Grid container>
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={5}>
                 <FormControl>
                   <TextField
                     className={classes.textField}
@@ -160,25 +171,8 @@ const ProfileForm = ({
                   />
                 </FormControl>
               </Grid>
-              <Grid item xs={12} sm={4}>
-                <FormControl>
-                  <TextField
-                    className={classes.textField}
-                    margin="normal"
-                    variant="filled"
-                    name="middleInitial"
-                    label="Middle Name"
-                    value={middleInitial}
-                    onChange={e => onChange(e)}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start"></InputAdornment>
-                      )
-                    }}
-                  />
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={4}>
+
+              <Grid item xs={12} sm={5}>
                 <FormControl>
                   <TextField
                     className={classes.textField}
@@ -196,7 +190,25 @@ const ProfileForm = ({
                   />
                 </FormControl>
               </Grid>
-
+              <Grid item xs={12} sm={2}>
+                <FormControl>
+                  <TextField
+                    style={{ width: "100px", marginLeft: "-20px" }}
+                    className={classes.textField}
+                    margin="normal"
+                    variant="filled"
+                    name="middleInitial"
+                    label="Middle Initial"
+                    value={middleInitial}
+                    onChange={e => onChange(e)}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start"></InputAdornment>
+                      )
+                    }}
+                  />
+                </FormControl>
+              </Grid>
               <Grid container style={{ marginTop: "20px" }}>
                 <Grid item xs={12} sm={3}>
                   <FormControl>
@@ -221,11 +233,11 @@ const ProfileForm = ({
                 <Grid item xs={12} sm={7}>
                   <FormControl
                     style={{
-                      width: "350px",
                       marginTop: "16px"
                     }}
                   >
                     <TextField
+                      className={classes.date}
                       helperText="Select the date from the calendar chooser below!"
                       variant="filled"
                       name="hireDate"
@@ -241,11 +253,13 @@ const ProfileForm = ({
                 <FormControl
                   style={{
                     marginTop: "20px",
-                    marginLeft: "10%",
-                    marginRight: "10%",
+                    marginBottom: "15px",
+                    marginLeft: "20%",
+                    marginRight: "20%",
+
                     justifyContent: "middle",
                     position: "relative",
-                    border: "2px solid grey"
+                    boxShadow: " 0 4px 6px 0 hsla(0, 5%, 5%, 0.6)"
                   }}
                 >
                   <DatePicker
@@ -255,8 +269,8 @@ const ProfileForm = ({
                     varient="static"
                     openTo="date"
                     value={hireDate}
-                    onChange={changeDate}
-                    style={{}}
+                    onChange={e => changeDate(e)}
+                    name="hireDate"
                   />
                 </FormControl>
               </Grid>
@@ -313,44 +327,41 @@ const ProfileForm = ({
             </Grid>
             <Grid item sm={12}>
               <FormControl
+                fullWidth
                 style={{
-                  margin: "10px 100px 10px",
-                  width: "500px",
-                  marginLeft: "50px"
+                  width: "550px"
                 }}
               >
+                <InputLabel>Brief Bio:</InputLabel>
                 <TextField
                   fullWidth
                   name="bio"
                   value={bio}
                   onChange={e => onChange(e)}
-                  placeholder="Two or three sentence brief bio"
+                  placeholder="Two or three sentences is fine..."
                   multiline={true}
                   variant="outlined"
+                  style={{ marginTop: "50px" }}
                   rows={5}
                   rowsMax={10}
                 />
               </FormControl>
             </Grid>
             <Grid item sm={12}></Grid>
-
             <Grid item xs={12}>
               <Button
                 type="submit"
+                style={{ marginTop: "10px", marginBottom: "10px" }}
                 variant="contained"
-                size="small"
-                className={classes.submit}
+                color="primary"
+                size="medium"
               >
-                <SaveIcon
-                  className={clsx(classes.leftIcon, classes.iconSmall)}
-                />
-                Save
+                <SaveIcon style={{ marginRight: "5px" }} /> Save
               </Button>
             </Grid>
           </Paper>
         </form>
       </Grid>
-      //{" "}
     </Grid>
   );
 };

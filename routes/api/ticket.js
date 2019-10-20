@@ -11,10 +11,7 @@ const User = require("../../models/User");
 // @access Ptivate
 router.get("/", auth, async (req, res) => {
   try {
-    const tickets = await Ticket.find().populate("profile", [
-      "firstName",
-      "lastName"
-    ]);
+    const tickets = await Ticket.findById(req.user.id).select("-password");
     res.json(tickets);
   } catch (err) {
     console.error(err.message);
@@ -43,7 +40,8 @@ router.post("/", auth, async (req, res) => {
     status,
     tester,
     standing,
-    importance
+    importance,
+    ticketId
   } = req.body;
 
   const ticketFields = {};
