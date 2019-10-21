@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -135,10 +135,6 @@ const ProfileForm = ({
     e.preventDefault();
     createProfile({ formData, history });
   };
-  // useEffect(() => {
-  //   loadCurrentProfile();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   return (
     <Grid container>
@@ -149,7 +145,7 @@ const ProfileForm = ({
               <center>
                 <h2>Create Profile Below</h2>
               </center>
-              <Divider fullWidth style={{ margin: "auto", width: "425px" }} />
+              <Divider style={{ margin: "auto", width: "425px" }} />
             </Grid>
             <Grid container>
               <Grid item xs={12} sm={5}>
@@ -165,7 +161,7 @@ const ProfileForm = ({
                     onChange={e => onChange(e)}
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start"></InputAdornment>
+                        <InputAdornment position="start">{""}</InputAdornment>
                       )
                     }}
                   />
@@ -184,7 +180,7 @@ const ProfileForm = ({
                     onChange={e => onChange(e)}
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start"></InputAdornment>
+                        <InputAdornment position="start">{""}</InputAdornment>
                       )
                     }}
                   />
@@ -203,7 +199,7 @@ const ProfileForm = ({
                     onChange={e => onChange(e)}
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start"></InputAdornment>
+                        <InputAdornment position="start">{""}</InputAdornment>
                       )
                     }}
                   />

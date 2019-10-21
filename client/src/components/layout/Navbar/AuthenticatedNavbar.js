@@ -342,7 +342,7 @@ const AuthenticatedNavbar = ({
                   >
                     <Grid row style={{ maxHeight: "55px" }}>
                       <ImportContactsOutlinedIcon
-                        fontSize="medium"
+                        fontSize="default"
                         style={{
                           color: "white",
                           marginTop: "7px",
@@ -498,8 +498,8 @@ const AuthenticatedNavbar = ({
 AuthenticatedNavbar.propTypes = {
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
+  loading: PropTypes.bool,
+  isAuthenticated: PropTypes.bool
 };
 const mapStateToProps = state => ({
   auth: state.auth,

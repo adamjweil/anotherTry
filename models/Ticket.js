@@ -3,52 +3,52 @@ const User = require("./User");
 
 const TicketSchema = new mongoose.Schema({
   ticketType: {
-    Type: String
+    type: String
   },
   source: {
-    Type: String
+    type: String
   },
   environment: {
-    Type: String
+    type: String
   },
   bucket: {
-    Type: String
+    type: String
   },
   project: {
-    Type: String
+    type: String
   },
   release: {
-    Type: String
+    type: String
   },
   process: {
-    Type: String
+    type: String
   },
   ticketer: {
-    Type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "user"
   },
   fixer: {
-    Type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "user"
   },
   status: {
-    Type: String
+    type: String
   },
   tester: {
-    Type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "user"
   },
   standing: {
-    Type: String
+    type: String
   },
   importance: {
-    Type: String
+    type: String
   },
   ticketId: {
-    Type: String
+    type: String
   },
   date: {
-    Type: Date,
+    type: Date,
     default: Date.now
   }
 });
