@@ -3,8 +3,6 @@ import { loadCurrentProfile } from "../../actions/profile";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
-import { Redirect, Link } from "react-router-dom";
-// import Spinner from "../layout/Spinner";
 import ProfileForm from "../Profile/profile-forms/ProfileForm";
 import DashboardHeader from "./DashboardHeader";
 
@@ -16,7 +14,7 @@ const Dashboard = ({ profile, loading, user, submittedProfileForm }) => {
       justify="flex-start"
       alignItems="flex-end"
     >
-      <Grid item xs={12} style={{ marginTop: "75px" }}>
+      <Grid item xs={12} style={{ marginTop: "20px" }}>
         <DashboardHeader />
       </Grid>
       <Grid container>

@@ -9,7 +9,6 @@ import InfoSnackbar from "./components/layout/Alerts/InfoSnackbar";
 import ErrorSnackbar from "./components/layout/Alerts/ErrorSnackbar";
 import Profile from "./components/Profile/Profile";
 import ProfileForm from "./components/Profile/profile-forms/ProfileForm";
-import NewProfileForm from "./components/Profile/profile-forms/NewProfileForm";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Tickets from "./components/Tickets/Tickets";
 import Directory from "./components/layout/Directory/Directory";
@@ -47,13 +46,14 @@ const App = () => {
         </SnackbarProvider>
         <Switch>
           <Route exact path="/" component={Landing} />
-          <section className="container">
+          <section className="container" style={{ marginTop: "51px" }}>
             <Route exact path="/register" component={Register} />
             <Route exact path="/directory" component={Directory} />
             <Route exact path="/profile/:id" component={Profile} />
+            <Route exact path="/responsive" component={ResponsiveLayout} />
+            <Route exact path="/theming" component={ThemeingLayout} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <PrivateRoute exact path="/profileform" component={ProfileForm} />
-            <PrivateRoute exact path="/test" component={NewProfileForm} />
             <PrivateRoute exact path="/profile" component={Profile} />
             <PrivateRoute exact path="/profile/:id" component={Profile} />
             <PrivateRoute exact path="/ticket" component={Tickets} />

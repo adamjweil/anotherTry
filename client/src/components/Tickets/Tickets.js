@@ -2,23 +2,21 @@ import React from "react";
 import { Grid, Container } from "semantic-ui-react";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-
 import TicketHubLeftMenu from "./TicketHubLeftMenu";
 import NewTicketForm from "./NewTicketForm";
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    boxShadow: "",
-    color: "#F8F8F8"
+    backgroundColor: "#424242"
   }
 }));
 
 const Tickets = () => {
   const classes = useStyles();
   return (
-    <Grid container>
-      <Grid item xs={12} style={{ marginTop: "70px" }}>
+    <Grid container className={classes.root}>
+      <Grid item xs={12}>
         <NewTicketForm />
       </Grid>
     </Grid>

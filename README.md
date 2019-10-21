@@ -110,6 +110,12 @@ User Stories
     - ProfileForm is now complete, and upon registering a new user, you are redirected to the Dashboard page, which will display the Profile Form, if there is no Profile for that User found
 
 
+    $10/21
+    - User is now able to fill out the new ticket form, and sbumit it successfully. This includes the following:
+      - The onClick event is attached to an ActionCreator, which triggers the reducer to get dispatched
+        - This single action adds the ticket into the array of tickets held in my store
+        - The ticket is also asyncronycly posted to a mongoDB table where it can be persisted going forward
+      - A key point here is that my redux store always needs to be matching my database
     ---
 
     ##TO DO

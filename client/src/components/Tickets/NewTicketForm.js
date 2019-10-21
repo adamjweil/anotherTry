@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   Button,
@@ -11,21 +11,18 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Box,
   Typography,
   Divider,
   Paper
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import { push } from "react-router-redux";
-import { Router as browserHistory } from "react-router-dom";
-import { withRouter } from "react-router-dom";
+import { Router as browserHistory, withRouter } from "react-router-dom";
 // Redux
 import { connect } from "react-redux";
 import { fetchUsers } from "../../actions/user";
 import { createTicket } from "../../actions/ticket";
-import { showErrorSnackbar } from "../../actions/alert";
+// import { showErrorSnackbar } from "../../actions/alert";
 const PROJECTS = [
   {
     key: 0,
@@ -428,40 +425,20 @@ const BUCKETS = [
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
-    boxShadow: "",
-    color: "#F8F8F8"
+    flexGrow: 1
   },
   paper: {
-    marginTop: theme.spacing(2),
+    margin: theme.spacing(5),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    border: "1px solid grey",
-    padding: "15px",
-    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.4)",
-    marginLeft: theme.spacing(3),
-    marginRight: theme.spacing(3)
-  },
-  leftIcon: {
-    marginRight: theme.spacing(1)
-  },
-  rightIcon: {
-    marginLeft: theme.spacing(1)
-  },
-  iconSmall: {
-    fontSize: 20
+    padding: "25px",
+    boxShadow: "2px 4px 6px 0 hsla(0, 0%,0%, 0.6)"
   },
   form: {
-    width: "700px",
-    minWidth: "700px",
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
-    marginLeft: theme.spacing(3),
-    paddingTop: theme.spacing(2),
-    paddingRight: theme.spacing(5),
-    paddingLeft: theme.spacing(5),
-    paddingBottom: theme.spacing(5),
+    borderRadius: "20px",
+    margin: theme.spacing(1, 0, 3),
+    padding: theme.spacing(2, 5, 5),
     backgroundColor: "#424242",
     boxShadow: " 0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
   },
@@ -522,7 +499,9 @@ const NewTicketForm = ({
     ticketId,
     importance
   } = formData;
+
   const classes = useStyles();
+
   const onChange = e =>
     setFormData({
       ...formData,
@@ -534,7 +513,7 @@ const NewTicketForm = ({
   };
 
   return (
-    <Grid container>
+    <Grid container className={classes.root}>
       <Paper className={classes.paper}>
         <Grid item xs={12}>
           <Typography className={classes.message}>NEW TICKET FORM</Typography>
@@ -544,8 +523,8 @@ const NewTicketForm = ({
         </Grid>
         <Divider style={{ color: "black", margin: "auto", width: "425px" }} />
 
-        <form onSubmit={onSubmit}>
-          <Grid container spacing={2}>
+        <form onSubmit={onSubmit} className={classes.form}>
+          <Grid container spacing={3}>
             <Grid item>
               <FormControl
                 style={{
