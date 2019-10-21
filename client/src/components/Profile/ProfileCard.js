@@ -14,9 +14,8 @@ import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    marginTop: "100px",
+    marginTop: "20px",
     padding: "10px",
-
     boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
   },
   avatar: {
@@ -41,13 +40,19 @@ const useStyles = makeStyles(theme => ({
     marginTop: "15px",
     height: "100px",
     boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.1)"
+  },
+  spaceBetween: {
+    justifyContent: "space-between",
+    display: "flex"
+  },
+  spaceBetweenSpan: {
+    fontSize: "14px",
+    fontWeight: "600",
+    color: "#696969"
   }
 }));
 
 const ProfileCard = ({ user, profile: { profile }, loadCurrentProfile }) => {
-  useEffect(() => {
-    loadCurrentProfile();
-  }, [loadCurrentProfile]);
   const classes = useStyles();
 
   return (
@@ -65,10 +70,10 @@ const ProfileCard = ({ user, profile: { profile }, loadCurrentProfile }) => {
             <Divider
               variant="middle"
               style={{
+                marginLeft: "75px",
                 marginTop: "5px",
                 height: "1px",
-                color: "#F8F8F8",
-                weight: "700"
+                width: "200px"
               }}
             />
             <div className={classes.nameAndHandle}>
@@ -95,7 +100,7 @@ const ProfileCard = ({ user, profile: { profile }, loadCurrentProfile }) => {
             style={{ justifyContent: "space-between", display: "flex" }}
           >
             <span
-              style={{ fontSize: "14px", fontWeight: "600", color: "#696969" }}
+              style={{ fontSize: "16px", fontWeight: "600", color: "#696969" }}
             >
               Team:
             </span>
@@ -106,36 +111,24 @@ const ProfileCard = ({ user, profile: { profile }, loadCurrentProfile }) => {
             </span>
           </Grid>
 
-          <Grid
-            item
-            xs={12}
-            style={{ justifyContent: "space-between", display: "flex" }}
-          >
-            <span
-              style={{ fontSize: "14px", fontWeight: "600", color: "#696969" }}
-            >
-              Title:
-            </span>
+          <Grid item xs={12} className={classes.spaceBetween}>
             <span
               style={{ fontSize: "16px", fontWeight: "600", color: "#696969" }}
             >
+              Title:
+            </span>
+            <span lassName={classes.spaceBetweenSpan}>
               <span>{profile && profile.title}</span>
             </span>
           </Grid>
 
-          <Grid
-            item
-            xs={12}
-            style={{ justifyContent: "space-between", display: "flex" }}
-          >
-            <span
-              style={{ fontSize: "14px", fontWeight: "600", color: "#696969" }}
-            >
-              Notifications:
-            </span>
+          <Grid item xs={12} className={classes.spaceBetween}>
             <span
               style={{ fontSize: "16px", fontWeight: "600", color: "#696969" }}
             >
+              Notifications:
+            </span>
+            <span className={classes.spaceBetweenSpan}>
               <span>{user && user.notification_count}</span>
             </span>
           </Grid>

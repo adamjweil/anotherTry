@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   Button,
@@ -11,19 +11,18 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Box,
   Typography,
-  Divider
+  Divider,
+  Paper
 } from "@material-ui/core";
 import PropTypes from "prop-types";
-import { push } from "react-router-redux";
-import { Router as browserHistory } from "react-router-dom";
-import { withRouter } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import { Router as browserHistory, withRouter } from "react-router-dom";
 // Redux
 import { connect } from "react-redux";
 import { fetchUsers } from "../../actions/user";
 import { createTicket } from "../../actions/ticket";
-import { showErrorSnackbar } from "../../actions/alert";
+// import { showErrorSnackbar } from "../../actions/alert";
 const PROJECTS = [
   {
     key: 0,
@@ -424,6 +423,37 @@ const BUCKETS = [
   }
 ];
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    margin: theme.spacing(5),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "25px",
+    boxShadow: "2px 4px 6px 0 hsla(0, 0%,0%, 0.6)"
+  },
+  form: {
+    borderRadius: "20px",
+    margin: theme.spacing(1, 0, 3),
+    padding: theme.spacing(2, 5, 5),
+    backgroundColor: "#424242",
+    boxShadow: " 0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
+  },
+  message: {
+    fontSize: "36px",
+    fontWeight: "600"
+  },
+  subMessage: {
+    fontSize: "18px",
+    fontWeight: "500",
+    color: "#A9A9A9",
+    textAlign: "center"
+  }
+}));
+
 const NewTicketForm = ({
   users,
   user,
@@ -470,6 +500,8 @@ const NewTicketForm = ({
     importance
   } = formData;
 
+  const classes = useStyles();
+
   const onChange = e =>
     setFormData({
       ...formData,
@@ -481,47 +513,18 @@ const NewTicketForm = ({
   };
 
   return (
-    <Fragment>
-      <Box
-        style={{
-          border: "1px solid grey",
-          padding: "15px",
-          boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.2)"
-        }}
-      >
+    <Grid container className={classes.root}>
+      <Paper className={classes.paper}>
         <Grid item xs={12}>
-          <Typography
-            style={{
-              fontSize: "24px",
-              fontWeight: "700",
-              color: "#696969",
-              textAlign: "center"
-            }}
-          >
-            NEW TICKET FORM
-          </Typography>
-          <Typography
-            style={{
-              fontSize: "18px",
-              fontWeight: "500",
-              color: "#A9A9A9",
-              textAlign: "center"
-            }}
-          >
+          <Typography className={classes.message}>NEW TICKET FORM</Typography>
+          <Typography className={classes.subMessage}>
             Submit a New Ticket Below!
           </Typography>
         </Grid>
-        <Divider
-          variant="middle"
-          style={{
-            marginTop: "5px",
-            height: "1px",
-            color: "#F8F8F8",
-            weight: "700"
-          }}
-        />
-        <form onSubmit={onSubmit}>
-          <Grid container spacing={2}>
+        <Divider style={{ color: "black", margin: "auto", width: "425px" }} />
+
+        <form onSubmit={onSubmit} className={classes.form}>
+          <Grid container spacing={3}>
             <Grid item>
               <FormControl
                 style={{
@@ -814,8 +817,8 @@ const NewTicketForm = ({
             </Grid>
           </Grid>
         </form>
-      </Box>
-    </Fragment>
+      </Paper>
+    </Grid>
   );
 };
 

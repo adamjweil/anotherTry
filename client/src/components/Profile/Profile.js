@@ -1,11 +1,10 @@
 import React, { Fragment, useEffect } from "react";
-import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
 import { loadCurrentProfile } from "../../actions/profile";
 import ProfileCard from "./ProfileCard";
-import ProfileForm from "./profile-forms/ProfileForm";
-import { withRouter } from "react-router-dom";
 
 const Profile = ({
   loadCurrentProfile,

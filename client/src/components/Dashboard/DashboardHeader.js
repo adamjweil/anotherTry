@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Typography, Grid } from "@material-ui/core";
 import PropTypes from "prop-types";
-import { Header } from "semantic-ui-react";
+import { Typography, Grid } from "@material-ui/core";
+
 const DashboardHeader = ({ user, auth }) => {
   return (
     <Grid container>
@@ -15,9 +15,10 @@ const DashboardHeader = ({ user, auth }) => {
           borderBottom: "3px solid #F8F8F8"
         }}
       >
-        <Header style={{ fontSize: "36px", fontWeight: "550" }}>
+        <Typography style={{ fontSize: "36px", fontWeight: "550" }}>
           Dashboard
-        </Header>
+        </Typography>
+
         <Typography as="h3">Welcome, {user && user.username}</Typography>
       </Grid>
     </Grid>
@@ -30,7 +31,8 @@ DashboardHeader.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  user: state.auth.user
+  user: state.auth.user,
+  profile: state.profile.profile
 });
 
 export default connect(
