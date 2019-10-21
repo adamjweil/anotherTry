@@ -12,9 +12,9 @@ const Dashboard = ({ profile, loading, user, submittedProfileForm }) => {
   return (
     <Grid
       container
-      direction="rowReverse"
-      justify="flexStart"
-      alignItems="flexEnd"
+      direction="row-reverse"
+      justify="flex-start"
+      alignItems="flex-end"
     >
       <Grid item xs={12} style={{ marginTop: "75px" }}>
         <DashboardHeader />

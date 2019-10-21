@@ -18,7 +18,7 @@ export const loadTickets = () => async dispatch => {
     console.log(err);
     dispatch({
       type: TICKET_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: err
     });
   }
 };
@@ -26,10 +26,9 @@ export const loadTickets = () => async dispatch => {
 // CREATE a ticket
 export const createTicket = ({
   formData,
-  edit = false,
-  history
+  history,
+  edit = false
 }) => async dispatch => {
-  console.log("trigered");
   try {
     const config = {
       headers: {
@@ -37,13 +36,18 @@ export const createTicket = ({
       }
     };
     const res = await axios.post("/api/ticket", formData, config);
+    console.log("res");
+    console.log(res);
     dispatch({
       type: CREATE_TICKET,
       payload: res.data
     });
-    // dispatch(loadTickets());
     dispatch(showSuccessSnackbar(edit ? "Ticket Updated" : "Ticket Created"));
   } catch (err) {
     console.log(err);
+    dispatch({
+      type: TICKET_ERROR,
+      payload: err.msg
+    });
   }
 };

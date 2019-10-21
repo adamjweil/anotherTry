@@ -262,7 +262,7 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
                       name="terms"
                       onClick={toggleCheck}
                       value={terms}
-                      color="success"
+                      color="default"
                     />
                   }
                   label="I agree to the Terms & Conditions"

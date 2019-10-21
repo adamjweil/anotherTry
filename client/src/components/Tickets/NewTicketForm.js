@@ -430,7 +430,6 @@ const NewTicketForm = ({
   fetchUsers,
   createTicket,
   loadCurrentProfile,
-
   history
 }) => {
   useEffect(() => {
@@ -477,9 +476,8 @@ const NewTicketForm = ({
       [e.target.name]: e.target.value
     });
   const onSubmit = e => {
-    // console.log({ formData });
     e.preventDefault();
-    createTicket({ formData, history });
+    createTicket({ formData });
   };
 
   return (
@@ -809,7 +807,7 @@ const NewTicketForm = ({
                 type="submit"
                 color="primary"
                 variant="contained"
-                size="small"
+                size="medium"
               >
                 Submit
               </Button>

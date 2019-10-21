@@ -23,7 +23,7 @@ router.get("/", auth, async (req, res) => {
 // @desc   Create a new Ticket
 // @access Private
 router.post("/", auth, async (req, res) => {
-  const errors = valiationResult(req);
+  const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
@@ -63,7 +63,7 @@ router.post("/", auth, async (req, res) => {
 
   try {
     let ticket = await Ticket.findOneAndUpdate(
-      { ticketId: req.ticket.ticketId },
+      { ticketId: req.ticketId },
       { $set: ticketFields },
       { new: true, upsert: true }
     );
