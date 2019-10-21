@@ -1,8 +1,8 @@
 import React from "react";
-import { Grid, Container } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import TicketHubLeftMenu from "./TicketHubLeftMenu";
+// import TicketHubLeftMenu from "./TicketHubLeftMenu";
 import NewTicketForm from "./NewTicketForm";
 
 const useStyles = makeStyles(theme => ({

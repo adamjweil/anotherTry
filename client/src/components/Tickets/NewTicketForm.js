@@ -439,7 +439,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "20px",
     margin: theme.spacing(1, 0, 3),
     padding: theme.spacing(2, 5, 5),
-    backgroundColor: "#424242",
+    // backgroundColor: "#424242",
     boxShadow: " 0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
   },
   message: {
