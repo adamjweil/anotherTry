@@ -13,9 +13,11 @@ import {
   Select,
   Box,
   Typography,
-  Divider
+  Divider,
+  Paper
 } from "@material-ui/core";
 import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
 import { push } from "react-router-redux";
 import { Router as browserHistory } from "react-router-dom";
 import { withRouter } from "react-router-dom";
@@ -424,6 +426,57 @@ const BUCKETS = [
   }
 ];
 
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    boxShadow: "",
+    color: "#F8F8F8"
+  },
+  paper: {
+    marginTop: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    border: "1px solid grey",
+    padding: "15px",
+    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.4)",
+    marginLeft: theme.spacing(3),
+    marginRight: theme.spacing(3)
+  },
+  leftIcon: {
+    marginRight: theme.spacing(1)
+  },
+  rightIcon: {
+    marginLeft: theme.spacing(1)
+  },
+  iconSmall: {
+    fontSize: 20
+  },
+  form: {
+    width: "700px",
+    minWidth: "700px",
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    marginLeft: theme.spacing(3),
+    paddingTop: theme.spacing(2),
+    paddingRight: theme.spacing(5),
+    paddingLeft: theme.spacing(5),
+    paddingBottom: theme.spacing(5),
+    backgroundColor: "#424242",
+    boxShadow: " 0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
+  },
+  message: {
+    fontSize: "36px",
+    fontWeight: "600"
+  },
+  subMessage: {
+    fontSize: "18px",
+    fontWeight: "500",
+    color: "#A9A9A9",
+    textAlign: "center"
+  }
+}));
+
 const NewTicketForm = ({
   users,
   user,
@@ -469,7 +522,7 @@ const NewTicketForm = ({
     ticketId,
     importance
   } = formData;
-
+  const classes = useStyles();
   const onChange = e =>
     setFormData({
       ...formData,
@@ -481,45 +534,16 @@ const NewTicketForm = ({
   };
 
   return (
-    <Fragment>
-      <Box
-        style={{
-          border: "1px solid grey",
-          padding: "15px",
-          boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.2)"
-        }}
-      >
+    <Grid container>
+      <Paper className={classes.paper}>
         <Grid item xs={12}>
-          <Typography
-            style={{
-              fontSize: "24px",
-              fontWeight: "700",
-              color: "#696969",
-              textAlign: "center"
-            }}
-          >
-            NEW TICKET FORM
-          </Typography>
-          <Typography
-            style={{
-              fontSize: "18px",
-              fontWeight: "500",
-              color: "#A9A9A9",
-              textAlign: "center"
-            }}
-          >
+          <Typography className={classes.message}>NEW TICKET FORM</Typography>
+          <Typography className={classes.subMessage}>
             Submit a New Ticket Below!
           </Typography>
         </Grid>
-        <Divider
-          variant="middle"
-          style={{
-            marginTop: "5px",
-            height: "1px",
-            color: "#F8F8F8",
-            weight: "700"
-          }}
-        />
+        <Divider style={{ color: "black", margin: "auto", width: "425px" }} />
+
         <form onSubmit={onSubmit}>
           <Grid container spacing={2}>
             <Grid item>
@@ -814,8 +838,8 @@ const NewTicketForm = ({
             </Grid>
           </Grid>
         </form>
-      </Box>
-    </Fragment>
+      </Paper>
+    </Grid>
   );
 };
 
