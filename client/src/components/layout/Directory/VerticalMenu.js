@@ -8,7 +8,7 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     width: "90%",
-    marginTop: theme.spacing(15)
+    margin: theme.spacing(5, 1, 0)
   }
 }));
 

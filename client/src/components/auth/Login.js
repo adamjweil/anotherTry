@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
     marginRight: theme.spacing(1),
     padding: "10px",
-    border: "1px shadow gray"
+    border: "1px shadow grey"
   },
   submit: {
     margin: theme.spacing(1, 0, 2)
@@ -274,7 +274,7 @@ Login.propTypes = {
   login: PropTypes.func.isRequired,
   signIn: PropTypes.func.isRequired,
   setAlert: PropTypes.func.isRequired,
-  alerts: PropTypes.array.isRequired,
+  alerts: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool
 };

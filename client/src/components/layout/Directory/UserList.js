@@ -28,7 +28,7 @@ const UserList = ({ users, fetchUsers }) => {
   const classes = useStyles();
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [fetchUsers]);
   return users.map(user => {
     return (
       <Grid

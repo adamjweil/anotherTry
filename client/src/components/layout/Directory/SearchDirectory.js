@@ -3,9 +3,7 @@ import deburr from "lodash/deburr";
 import * as Autosuggest from "react-autosuggest";
 import match from "autosuggest-highlight/match";
 import parse from "autosuggest-highlight/parse";
-import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
-import MenuItem from "@material-ui/core/MenuItem";
+import { MenuItem, Paper, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const suggestions = [
@@ -125,7 +123,7 @@ const useStyles = makeStyles(theme => ({
     right: 0
   },
   suggestion: {
-    display: "block"
+    display: "inLine"
   },
   suggestionsList: {
     margin: 0,
@@ -172,7 +170,14 @@ const SearchDirectory = () => {
   };
 
   return (
-    <div className={classes.root}>
+    <div
+      className={classes.root}
+      style={{
+        margin: "0px 100px -180px",
+        paddingBottom: 0,
+        maxWidth: 900
+      }}
+    >
       <Autosuggest
         {...autosuggestProps}
         inputProps={{
@@ -181,6 +186,7 @@ const SearchDirectory = () => {
           label: "Search",
           placeholder: "Search a country (start with a)",
           value: state.single,
+          variant: "filled",
           onChange: handleChange("single")
         }}
         theme={{
