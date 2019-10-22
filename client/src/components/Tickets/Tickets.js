@@ -2,10 +2,9 @@ import React from "react";
 import { Grid } from "semantic-ui-react";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import { fetchProfile } from "../../actions/profile";
+import { fetchProfiles } from "../../actions/profile";
 // import TicketHubLeftMenu from "./TicketHubLeftMenu";
 import NewTicketForm from "./NewTicketForm";
-import ProfileMap from "../Profile/ProfileMap";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,13 +20,13 @@ const Tickets = ({ fetchProfiles }) => {
       <Grid item xs={12}>
         <NewTicketForm />
       </Grid>
-      <Grid item xs={12}>
-        <ProfileMap />
-      </Grid>
     </Grid>
   );
 };
 
 Tickets.propTypes = {};
 
-export default connect()(Tickets);
+export default connect(
+  null,
+  { fetchProfiles }
+)(Tickets);

@@ -11,7 +11,7 @@ import {
 } from "./types";
 import { push } from "react-router-redux";
 import store from "../store";
-
+import { loadUser } from "./user";
 //LOAD profile
 export const loadCurrentProfile = () => async dispatch => {
   try {
@@ -19,7 +19,7 @@ export const loadCurrentProfile = () => async dispatch => {
     console.log(res);
     dispatch({
       type: GET_PROFILE,
-      payload: res.data
+      payload: res
     });
   } catch (err) {
     console.log(err);
@@ -75,20 +75,25 @@ export const loadAllProfiles = () => async dispatch => {
 };
 
 // Create profile
-export const createProfile = ({ formData, edit = false }) => async dispatch => {
+export const createProfile = ({
+  formData,
+  history,
+  edit = false
+}) => async dispatch => {
   try {
     const config = {
       headers: {
         "Content-Type": "application/json"
       }
     };
-    const res = await axios.post("/api/profile", formData, config);
+    const res = await axios.post("/api/profiles", formData, config);
     dispatch({
       type: CREATE_PROFILE,
       payload: res.data
     });
     store.dispatch(push("/profile"));
     dispatch(showSuccessSnackbar(edit ? "Profile Updated" : "Profile Created"));
+    dispatch(loadUser());
   } catch (err) {
     console.log(err);
     const errors = err.response.data.errors;

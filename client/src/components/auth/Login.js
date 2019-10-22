@@ -238,28 +238,28 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
                 Login
               </Button>
             </Grid>
-            <Grid item xs={12} sm={5}>
-              <Link to="/register" style={{ textDecoration: "none" }}>
-                <Button
-                  renderas="button"
-                  fullWidth
-                  size="small"
-                  variant="outlined"
-                  color="primary"
-                  className={classes.submit}
-                  style={{
-                    textDecoration: "none"
-                  }}
-                >
-                  Register
-                </Button>
-              </Link>
-            </Grid>
+            <Grid container>
+              <Grid item xs={12} sm={5}>
+                <Link to="/register" style={{ textDecoration: "none" }}>
+                  <Button
+                    renderas="button"
+                    fullWidth
+                    size="small"
+                    variant="outlined"
+                    color="primary"
+                    className={classes.submit}
+                    style={{
+                      textDecoration: "none"
+                    }}
+                  >
+                    Register
+                  </Button>
+                </Link>
+              </Grid>
 
-            <Grid item sm={1}></Grid>
-
-            <Grid item xs={12} sm={6} className={classes.submit}>
-              <GoogleAuth />
+              <Grid item xs={12} sm={5}>
+                <GoogleAuth />
+              </Grid>
             </Grid>
           </Grid>
         </form>

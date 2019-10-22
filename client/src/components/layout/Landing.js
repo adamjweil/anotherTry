@@ -38,7 +38,7 @@ const Landing = ({ auth: { isAuthenticated }, history, login }) => {
     return <Redirect to="/dashboard" />;
   } else {
     return (
-      <Fragment style={{}}>
+      <Fragment>
         <Grid container className={classes.root}>
           <Grid item sm={2} md={3}></Grid>
           <Grid item xs={12} md={6}>
