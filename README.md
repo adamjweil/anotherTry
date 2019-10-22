@@ -18,6 +18,7 @@ User Stories:
 5. Users can view tickets
 6. Users can create tickets
 
+---
 
     #9/12
     - Switched from using Semantic-UI to Material-UI
@@ -98,8 +99,6 @@ User Stories:
     - Forgot Password text is now different format than the click here button, which makes it look nicer
     - I've made the Registration Form to be in line with what the Login form is setup to look like, to bring some consistency to the application
     - Added conditionality to the NavBar pages, so that when you are on a particular page, the button will be underlined. Still working out styling, but the logic and configuration is set up and working
-
----
 
     #10/16 - 10/18
     - Learned how to properly redirect after an action is dispatched, utilizing the history tool provided by react router dom.
