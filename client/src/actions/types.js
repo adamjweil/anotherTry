@@ -34,3 +34,5 @@ export const GET_ALL_PROFILES = "GET_ALL_PROFILES";
 export const CREATE_TICKET = "CREATE_TICKET";
 export const GET_TICKETS = "GET_TICKETS";
 export const TICKET_ERROR = "TICKET_ERROR";
+export const FETCH_PROFILES = "FETCH_PROFILES";
+export const FETCH_PROFILE = "FETCH_PROFILE";

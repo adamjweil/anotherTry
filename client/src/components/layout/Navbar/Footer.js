@@ -8,12 +8,9 @@ const Footer = () => {
     <div
       style={{
         position: "absolute",
-        display: "in-line",
         left: 0,
         bottom: 0,
-        right: 0,
-        // marginTop: "50px"
-        marginBottom: "20px"
+        backgroundColor: "#3f51b5"
       }}
     >
       <Divider style={{ margin: "24px auto" }} />

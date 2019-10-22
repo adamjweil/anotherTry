@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { withRouter, Router as browserHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
   FormControl,
@@ -11,20 +11,22 @@ import {
   Button,
   Paper,
   InputAdornment,
-  Icon
+  makeStyles,
+  Divider
 } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { DatePicker } from "@material-ui/pickers";
-import { createProfile } from "../../../actions/profile";
-import { loadCurrentProfile } from "../../../actions/profile";
-import { loadUser } from "../../../actions/user";
-import Divider from "@material-ui/core/Divider";
-import { Router as browserHistory } from "react-router-dom";
+import { createProfile, loadCurrentProfile } from "../../actions/profile";
+import { loadUser } from "../../actions/user";
 import { push } from "react-router-redux";
+<<<<<<< HEAD:client/src/components/Profile/ProfileForm.js
+
+=======
 import { withRouter } from "react-router-dom";
 import { fetchProfile } from "../../../actions/profile";
+>>>>>>> master:client/src/components/Profile/profile-forms/ProfileForm.js
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -33,7 +35,6 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     marginTop: theme.spacing(2),
-
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
@@ -48,25 +49,17 @@ const useStyles = makeStyles(theme => ({
     fontSize: 20
   },
   form: {
-    width: "700px",
-    minWidth: "700px",
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
-    marginLeft: theme.spacing(3),
-    paddingTop: theme.spacing(2),
-    paddingRight: theme.spacing(5),
-    paddingLeft: theme.spacing(5),
-    paddingBottom: theme.spacing(5),
+    minWidth: "800px",
+    margin: theme.spacing(2, 3, 1, 3),
+    padding: theme.spacing(2, 5, 5),
     backgroundColor: "#424242",
-    boxShadow: " 0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
+    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
   },
   submit: {
     margin: theme.spacing(1, 0, 2)
   },
   textField: {
-    marginLeft: theme.spacing(3),
-    marginRight: theme.spacing(3),
-    width: 215
+    margin: theme.spacing(1, 2, 0)
   },
   date: {
     marginLeft: theme.spacing(3),
@@ -139,7 +132,7 @@ const ProfileForm = ({
 
   return (
     <Grid container>
-      <Grid item xs={12} sm={7}>
+      <Grid item xs={12}>
         <form className={classes.form} onSubmit={onSubmit}>
           <Paper className={classes.paper}>
             <Grid item xs={12} className={classes.message}>
