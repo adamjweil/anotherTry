@@ -6,6 +6,7 @@ import {
   GET_ALL_PROFILES,
   CLEAR_PROFILE
 } from "../actions/types";
+import _ from "lodash";
 
 const INITIAL_STATE = {
   profile: null,
@@ -28,6 +29,7 @@ export default function(state = INITIAL_STATE, action) {
         submittedProfileForm: true
       };
     case GET_PROFILE:
+      return { ...state, ..._.mapKeys(action.payload, "ticketId") };
     case UPDATE_PROFILE:
       return {
         ...state,
@@ -41,15 +43,12 @@ export default function(state = INITIAL_STATE, action) {
         loading: false
       };
     case GET_ALL_PROFILES:
-      return {
-        ...state,
-        profiles: payload,
-        loading: false
-      };
+      return { ...state };
     case CLEAR_PROFILE:
       return {
         ...state,
         profile: null,
+        profiles: [],
         repos: [],
         loading: false
       };

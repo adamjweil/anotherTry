@@ -13,6 +13,7 @@ import {
   CardActionArea
 } from "@material-ui/core";
 import { fetchUsers } from "../../../actions/user";
+import { fetchProfiles } from "../../../actions/profile";
 
 const useStyles = makeStyles(theme => ({
   media: {
@@ -24,10 +25,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const UserList = ({ users, fetchUsers }) => {
+const UserList = ({ users, fetchUsers, fetchProfiles, profiles }) => {
   const classes = useStyles();
   useEffect(() => {
     fetchUsers();
+    fetchProfiles();
   }, [fetchUsers]);
   return users.map(user => {
     return (
@@ -55,7 +57,8 @@ const UserList = ({ users, fetchUsers }) => {
                   color: "#696969"
                 }}
               >
-                First Last
+                {user.profile && user.profile.firstName}{" "}
+                {user.profile && user.profile.lastName}
               </Typography>
               eMail:
               <Typography
@@ -88,10 +91,13 @@ UserList.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return { users: Object.values(state.users) };
+  return {
+    users: Object.values(state.users),
+    profiles: Object.values(state.profiles)
+  };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchUsers }
+  { fetchUsers, fetchProfiles }
 )(UserList);
