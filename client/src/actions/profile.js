@@ -5,11 +5,13 @@ import {
   GET_ALL_PROFILES,
   CREATE_PROFILE,
   CLEAR_PROFILE,
-  PROFILE_ERROR
+  PROFILE_ERROR,
+  FETCH_PROFILE,
+  FETCH_PROFILES
 } from "./types";
-import { routerMiddleware, push } from "react-router-redux";
+import { push } from "react-router-redux";
 import store from "../store";
-import history from "../history";
+
 //LOAD profile
 export const loadCurrentProfile = () => async dispatch => {
   try {
@@ -43,10 +45,21 @@ export const loadProfileById = id => async dispatch => {
   }
 };
 
-export const getAllProfiles = () => async dispatch => {
-  dispatch({ type: CLEAR_PROFILE });
+export const fetchProfiles = () => async dispatch => {
   try {
-    const res = await axios.get("/api/profile");
+    const res = await axios.get("/api/profiles");
+    dispatch({
+      type: FETCH_PROFILES,
+      payload: res.data
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getAllProfiles = () => async dispatch => {
+  try {
+    const res = await axios.get("/api/profiles");
     dispatch({
       type: GET_ALL_PROFILES,
       payload: res.data
@@ -59,11 +72,7 @@ export const getAllProfiles = () => async dispatch => {
   }
 };
 // Create profile
-export const createProfile = ({
-  formData,
-  history,
-  edit = false
-}) => async dispatch => {
+export const createProfile = ({ formData, edit = false }) => async dispatch => {
   try {
     const config = {
       headers: {
@@ -75,8 +84,7 @@ export const createProfile = ({
       type: CREATE_PROFILE,
       payload: res.data
     });
-    history.push("/profile");
-
+    store.dispatch(push("/profile"));
     dispatch(showSuccessSnackbar(edit ? "Profile Updated" : "Profile Created"));
   } catch (err) {
     console.log(err);

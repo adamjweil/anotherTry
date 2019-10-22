@@ -55,9 +55,10 @@ class GoogleAuth extends React.Component {
             <Button
               fullWidth
               size="small"
-              variant="contained"
+              variant="outlined"
+              color="primary"
               onClick={this.onSignInClick}
-              color="default"
+              style={{ color: "red" }}
             >
               Sign In with Google
             </Button>

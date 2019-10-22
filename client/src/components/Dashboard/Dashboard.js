@@ -3,7 +3,7 @@ import { loadCurrentProfile } from "../../actions/profile";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
-import ProfileForm from "../Profile/profile-forms/ProfileForm";
+import ProfileForm from "../Profile/ProfileForm";
 import DashboardHeader from "./DashboardHeader";
 
 const Dashboard = ({ profile, loading, user, submittedProfileForm }) => {
@@ -19,7 +19,7 @@ const Dashboard = ({ profile, loading, user, submittedProfileForm }) => {
       </Grid>
       <Grid container>
         <Grid item sm={2}></Grid>
-        <Grid item sm={7}>
+        <Grid item sm={8}>
           {!submittedProfileForm ? <ProfileForm /> : ""}
         </Grid>
         <Grid item sm={2}></Grid>

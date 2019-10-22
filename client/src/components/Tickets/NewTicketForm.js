@@ -21,6 +21,7 @@ import { Router as browserHistory, withRouter } from "react-router-dom";
 // Redux
 import { connect } from "react-redux";
 import { fetchUsers } from "../../actions/user";
+import { fetchProfiles } from "../../actions/profile";
 import { createTicket } from "../../actions/ticket";
 // import { showErrorSnackbar } from "../../actions/alert";
 const PROJECTS = [
@@ -458,6 +459,7 @@ const NewTicketForm = ({
   users,
   user,
   fetchUsers,
+  fetchProfiles,
   createTicket,
   loadCurrentProfile,
   history
@@ -838,6 +840,7 @@ export default connect(
   mapStateToProps,
   {
     fetchUsers,
-    createTicket
+    createTicket,
+    fetchProfiles
   }
 )(withRouter(NewTicketForm));

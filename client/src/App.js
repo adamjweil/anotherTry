@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import AuthenticatedNavbar from "./components/layout/Navbar/Navbar";
@@ -8,7 +8,7 @@ import SuccessSnackbar from "./components/layout/Alerts/SuccessSnackbar";
 import InfoSnackbar from "./components/layout/Alerts/InfoSnackbar";
 import ErrorSnackbar from "./components/layout/Alerts/ErrorSnackbar";
 import Profile from "./components/Profile/Profile";
-import ProfileForm from "./components/Profile/profile-forms/ProfileForm";
+import ProfileForm from "./components/Profile/ProfileForm";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Tickets from "./components/Tickets/Tickets";
 import Directory from "./components/layout/Directory/Directory";

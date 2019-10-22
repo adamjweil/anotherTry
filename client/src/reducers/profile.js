@@ -4,8 +4,11 @@ import {
   UPDATE_PROFILE,
   PROFILE_ERROR,
   GET_ALL_PROFILES,
-  CLEAR_PROFILE
+  CLEAR_PROFILE,
+  FETCH_PROFILES,
+  FETCH_PROFILE
 } from "../actions/types";
+import _ from "lodash";
 
 const INITIAL_STATE = {
   profile: null,
@@ -27,6 +30,10 @@ export default function(state = INITIAL_STATE, action) {
         loading: false,
         submittedProfileForm: true
       };
+    case FETCH_PROFILES:
+      return { ...state, ..._.mapKeys(action.payload, "_id") };
+    case FETCH_PROFILE:
+      return { ...state, [action.payload.id]: action.payload };
     case GET_PROFILE:
     case UPDATE_PROFILE:
       return {

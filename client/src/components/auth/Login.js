@@ -13,6 +13,7 @@ import {
   Typography,
   Box,
   IconButton,
+  Divider,
   Icon,
   InputAdornment,
   makeStyles
@@ -31,20 +32,20 @@ const useStyles = makeStyles(theme => ({
     }
   },
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(5),
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
   },
   avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    maxWidth: "100%",
+    // marginBottom: "-30px",
+    alignItems: "center"
   },
   form: {
     width: "100%",
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    padding: "10px",
+    margin: theme.spacing(1, 0, 1, 0),
+    padding: "30px",
     border: "1px shadow grey"
   },
   submit: {
@@ -55,6 +56,11 @@ const useStyles = makeStyles(theme => ({
   },
   main: {
     width: "540px"
+  },
+  textFields: {
+    width: "375px",
+    // textAlign: "center"
+    marginLeft: "20px"
   }
 }));
 
@@ -94,47 +100,37 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
     <Container component="main" maxWidth="md" className={classes.main}>
       <CssBaseline />
       <Box
-        marginTop="50px"
+        marginTop="40px"
         style={{
-          // background: "#F8F8F8",
+          background: "#F8F8F8",
           boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
         }}
       >
-        <form
-          style={{ padding: "30px" }}
-          className={classes.form}
-          onSubmit={login}
-          noValidate
-        >
+        <form className={classes.form} onSubmit={login} noValidate>
           <Grid container>
             <Grid item xs={2}></Grid>
             <Grid item xs={8}>
               <img
-                style={{
-                  maxWidth: "100%",
-                  marginBottom: "-30px",
-                  justifyContent: "center",
-                  align: "center",
-                  alignItems: "center",
-                  textAlign: "center"
-                }}
+                className={classes.avatar}
                 src={process.env.PUBLIC_URL + "../../img/logo.png"}
                 alt={process.env.PUBLIC_URL + "../../img/mezoLogo120px.png"}
               />
-
-              <br />
             </Grid>
             <Grid item xs={2}></Grid>
+            <Divider
+              style={{ color: "gray", margin: "auto", width: "225px" }}
+            />
           </Grid>
           <Typography
             component="h6"
             variant="h6"
+            color="primary"
             style={{
-              fontSize: "14px",
+              fontSize: "18x",
               fontWeight: "800",
-              marginTop: "10px",
-
-              marinLeft: "100px"
+              marinLeft: "100px",
+              marginBottom: "-10px",
+              marginTop: "5px"
             }}
           >
             Login Form
@@ -142,6 +138,7 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
 
           <TextField
             variant="standard"
+            className={classes.textFields}
             margin="normal"
             id="email"
             label="Email Address"
@@ -149,7 +146,7 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
             value={email}
             onChange={e => onChange(e)}
             required
-            fullWidth
+            // fullWidth
             autoFocus
             InputProps={{
               endAdornment: (
@@ -164,13 +161,14 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
 
           <TextField
             margin="normal"
+            className={classes.textFields}
             name="password"
             label="Password"
             type={showPassword ? "text" : "password"}
             value={password}
             onChange={e => onChange(e)}
             required
-            fullWidth
+            // fullWidth
             variant="standard"
             InputProps={{
               endAdornment: (
@@ -246,14 +244,14 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
                   renderas="button"
                   fullWidth
                   size="small"
-                  variant="contained"
-                  color="standard"
+                  variant="outlined"
+                  color="primary"
                   className={classes.submit}
                   style={{
                     textDecoration: "none"
                   }}
                 >
-                  REGISTER
+                  Register
                 </Button>
               </Link>
             </Grid>
