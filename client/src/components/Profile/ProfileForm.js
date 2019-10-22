@@ -21,7 +21,12 @@ import { DatePicker } from "@material-ui/pickers";
 import { createProfile, loadCurrentProfile } from "../../actions/profile";
 import { loadUser } from "../../actions/user";
 import { push } from "react-router-redux";
+<<<<<<< HEAD:client/src/components/Profile/ProfileForm.js
 
+=======
+import { withRouter } from "react-router-dom";
+import { fetchProfile } from "../../../actions/profile";
+>>>>>>> master:client/src/components/Profile/profile-forms/ProfileForm.js
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -83,8 +88,9 @@ const TITLES = [
 const ProfileForm = ({
   createProfile,
   loadCurrentProfile,
-  profile: { profile, loading },
-  history
+  fetchProfiles,
+  history,
+  profiles
 }) => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -357,10 +363,11 @@ ProfileForm.propTypes = {
 
 const mapStateToProps = state => ({
   users: Object.values(state.users),
-  profile: state.profile
+  profile: state.profile,
+  profiles: Object.values(state.profiles)
 });
 
 export default connect(
   mapStateToProps,
-  { createProfile, loadUser, loadCurrentProfile }
+  { createProfile, loadUser, loadCurrentProfile, fetchProfile }
 )(withRouter(ProfileForm));

@@ -30,7 +30,8 @@ export const loadCurrentProfile = () => async dispatch => {
   }
 };
 
-export const loadProfileById = id => async dispatch => {
+// Fetch specific Profile
+export const fetchProfile = id => async dispatch => {
   try {
     const res = await axios.get(`/api/profile/user/${id}`);
     dispatch({
@@ -45,6 +46,7 @@ export const loadProfileById = id => async dispatch => {
   }
 };
 
+<<<<<<< HEAD
 export const fetchProfiles = () => async dispatch => {
   try {
     const res = await axios.get("/api/profiles");
@@ -58,6 +60,10 @@ export const fetchProfiles = () => async dispatch => {
 };
 
 export const getAllProfiles = () => async dispatch => {
+=======
+// Fetch all Profiles
+export const fetchProfiles = () => async dispatch => {
+>>>>>>> master
   try {
     const res = await axios.get("/api/profiles");
     dispatch({
@@ -71,6 +77,7 @@ export const getAllProfiles = () => async dispatch => {
     });
   }
 };
+
 // Create profile
 export const createProfile = ({ formData, edit = false }) => async dispatch => {
   try {

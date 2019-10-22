@@ -35,6 +35,7 @@ export default function(state = INITIAL_STATE, action) {
     case FETCH_PROFILE:
       return { ...state, [action.payload.id]: action.payload };
     case GET_PROFILE:
+      return { ...state, ..._.mapKeys(action.payload, "ticketId") };
     case UPDATE_PROFILE:
       return {
         ...state,
@@ -48,15 +49,12 @@ export default function(state = INITIAL_STATE, action) {
         loading: false
       };
     case GET_ALL_PROFILES:
-      return {
-        ...state,
-        profiles: payload,
-        loading: false
-      };
+      return { ...state };
     case CLEAR_PROFILE:
       return {
         ...state,
         profile: null,
+        profiles: [],
         repos: [],
         loading: false
       };

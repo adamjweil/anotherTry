@@ -2,10 +2,15 @@ import React from "react";
 import { loadCurrentProfile } from "../../actions/profile";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+<<<<<<< HEAD
 import { Grid } from "@material-ui/core";
 import ProfileForm from "../Profile/ProfileForm";
+=======
+import { Grid, Select } from "@material-ui/core";
+import ProfileForm from "../Profile/profile-forms/ProfileForm";
+>>>>>>> master
 import DashboardHeader from "./DashboardHeader";
-
+import ProfileMap from "../Profile/profile-forms/ProfileMap";
 const Dashboard = ({ profile, loading, user, submittedProfileForm }) => {
   return (
     <Grid
