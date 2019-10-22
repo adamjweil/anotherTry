@@ -1,12 +1,12 @@
---> ###Project Management Tool for small to medium sized companies
+# Project Management Tool for small to medium sized companies
 
-Description
+### Description:
 
 # Tech Stack: ReactJS, Redux, Node, MongoDB, Custom Middleware
 
 ## Front End: Had originally used Semantic-UI to style everything, but as I continued to style components, I found increasing limitations. So I'm in the midst of using Material-UI instead
 
-User Stories
+User Stories:
 
 1. Users can register an account
    1a. Users are redirected to appropriate page after
@@ -116,11 +116,17 @@ User Stories
         - This single action adds the ticket into the array of tickets held in my store
         - The ticket is also asyncronycly posted to a mongoDB table where it can be persisted going forward
       - A key point here is that my redux store always needs to be matching my database
+
+    #10/22
+    - In order for Users to be able to create relationships between other users (ie, being on the same ticket) or referencing, I needed to make a Select component that retrieves all of the Profiles from state, and displayed them in a Dropdown for the User to select from
+    - Owner, Fixer, and Tested have beed added to the ticket form
+
     ---
 
     ##TO DO
     - Complete Ticket Form
-    - Submit to DB
+    - Build out the component that will be displaying all of the Tickets
+      - It can be of similar size to the one I created for ProfileForm
     - Dropdown of Users from the database. I need to have the Users first + last name display, however, and those variables are stored on the Profile Object, which is indirectly attached to the User
     - Styling Ticket form
     - Fetching tickets

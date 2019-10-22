@@ -36,8 +36,9 @@ export const createTicket = ({
       }
     };
     const res = await axios.post("/api/ticket", formData, config);
-    console.log("res");
     console.log(res);
+    // console.log("res");
+    // console.log(res);
     dispatch({
       type: CREATE_TICKET,
       payload: res.data

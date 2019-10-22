@@ -6,7 +6,7 @@ const config = require("config");
 const Ticket = require("../../models/Ticket");
 const User = require("../../models/User");
 
-// @ route GET api/ticket
+// @ route GET api/tickets
 // @desc   Get all Tickets
 // @access Ptivate
 router.get("/", auth, async (req, res) => {
@@ -35,9 +35,9 @@ router.post("/", auth, async (req, res) => {
     project,
     release,
     process,
+    status,
     owner,
     fixer,
-    status,
     tester,
     standing,
     importance,
@@ -53,9 +53,9 @@ router.post("/", auth, async (req, res) => {
   if (project) ticketFields.project = project;
   if (release) ticketFields.release = release;
   if (process) ticketFields.process = process;
+  if (status) ticketFields.status = status;
   if (owner) ticketFields.owner = owner;
   if (fixer) ticketFields.fixer = fixer;
-  if (status) ticketFields.status = status;
   if (tester) ticketFields.tester = tester;
   if (standing) ticketFields.standing = standing;
   if (ticketId) ticketFields.ticketId = ticketId;

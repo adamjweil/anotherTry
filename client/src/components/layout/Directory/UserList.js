@@ -29,7 +29,6 @@ const UserList = ({ users, fetchUsers, fetchProfiles, profiles }) => {
   const classes = useStyles();
   useEffect(() => {
     fetchUsers();
-    fetchProfiles();
   }, [fetchUsers]);
   return users.map(user => {
     return (
@@ -93,7 +92,7 @@ UserList.propTypes = {
 const mapStateToProps = state => {
   return {
     users: Object.values(state.users),
-    profiles: Object.values(state.profiles)
+    profiles: Object.values(state.profile.profiles)
   };
 };
 

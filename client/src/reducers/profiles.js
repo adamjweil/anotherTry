@@ -31,11 +31,14 @@ export default function(state = INITIAL_STATE, action) {
         submittedProfileForm: true
       };
     case FETCH_PROFILES:
-      return { ...state, ..._.mapKeys(action.payload, "_id") };
+      return {
+        ...state,
+        profiles: { ..._.mapKeys(payload, "_id") }
+      };
     case FETCH_PROFILE:
       return { ...state, [action.payload.id]: action.payload };
     case GET_PROFILE:
-      return { ...state, ..._.mapKeys(action.payload, "ticketId") };
+      return { ...state, [action.payload.id]: action.payload };
     case UPDATE_PROFILE:
       return {
         ...state,

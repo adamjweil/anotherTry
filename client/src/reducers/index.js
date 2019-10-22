@@ -8,7 +8,7 @@ import ticket from "./ticket";
 export default combineReducers({
   alert: alert,
   auth: auth,
-  profiles: profiles,
+  profile: profiles,
   users: users,
   ticket: ticket
 });

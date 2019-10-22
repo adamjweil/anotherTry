@@ -18,6 +18,7 @@ import ResponsiveLayout from "./components/layout/TestLayout/ResponsiveLayout";
 import "typeface-roboto";
 import { SnackbarProvider } from "notistack";
 import "./App.css";
+import { connect } from "react-redux";
 // Redux
 import store from "./store";
 import { loadUser } from "./actions/user";
@@ -29,12 +30,7 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-const App = () => {
-  useEffect(() => {
-    store.dispatch(loadUser());
-    store.dispatch(loadCurrentProfile());
-  }, []);
-
+const App = ({ loadUser }) => {
   return (
     <Provider store={store}>
       <Router>
@@ -64,4 +60,7 @@ const App = () => {
   );
 };
 
-export default App;
+export default connect(
+  null,
+  { loadUser }
+)(App);

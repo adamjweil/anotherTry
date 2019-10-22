@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import { Grid, Select } from "@material-ui/core";
 import ProfileForm from "../Profile/ProfileForm";
 import DashboardHeader from "./DashboardHeader";
-import ProfileMap from "../Profile/ProfileMap";
 
 const Dashboard = ({ profile, loading, user, submittedProfileForm }) => {
   return (
@@ -31,8 +30,7 @@ const Dashboard = ({ profile, loading, user, submittedProfileForm }) => {
 
 Dashboard.propTypes = {
   loadCurrentProfile: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

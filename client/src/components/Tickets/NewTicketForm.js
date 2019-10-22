@@ -439,9 +439,9 @@ const useStyles = makeStyles(theme => ({
   form: {
     borderRadius: "20px",
     margin: theme.spacing(1, 0, 3),
-    padding: theme.spacing(2, 5, 5),
+    padding: theme.spacing(2, 5, 5)
     // backgroundColor: "#424242",
-    boxShadow: " 0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
+    // boxShadow: " 0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
   },
   message: {
     fontSize: "36px",
@@ -480,8 +480,8 @@ const NewTicketForm = ({
     process: "",
     owner: "",
     fixer: "",
-    status: "",
     tester: "",
+    status: "",
     standing: "",
     ticketId: "",
     importance: ""
@@ -497,8 +497,8 @@ const NewTicketForm = ({
     process,
     owner,
     fixer,
-    status,
     tester,
+    status,
     standing,
     ticketId,
     importance
@@ -740,6 +740,7 @@ const NewTicketForm = ({
                 </Select>
               </FormControl>
             </Grid>
+
             <Grid item>
               <FormControl
                 style={{
@@ -808,7 +809,59 @@ const NewTicketForm = ({
                   />
                 </RadioGroup>
               </FormControl>
+
+              <FormControl
+                style={{
+                  width: "250px"
+                }}
+              >
+                <InputLabel>Owner:</InputLabel>
+                <Select name="owner" onChange={e => onChange(e)} value={owner}>
+                  {profiles.map(profile => (
+                    <MenuItem value={profile} key={profile}>
+                      {profile.firstName} {profile.lastName}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
+              <FormControl
+                style={{
+                  width: "250px",
+                  marginLeft: "20px"
+                }}
+              >
+                <InputLabel>Fixer:</InputLabel>
+                <Select name="fixer" onChange={e => onChange(e)} value={fixer}>
+                  {profiles.map(profile => (
+                    <MenuItem value={profile} key={profile}>
+                      {profile.firstName} {profile.lastName}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
+              <FormControl
+                style={{
+                  width: "250px",
+                  marginLeft: "20px"
+                }}
+              >
+                <InputLabel>Tester:</InputLabel>
+                <Select
+                  name="tester"
+                  onChange={e => onChange(e)}
+                  value={tester}
+                >
+                  {profiles.map(profile => (
+                    <MenuItem value={profile} key={profile}>
+                      {profile.firstName} {profile.lastName}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </Grid>
+
             <Grid item xs={12}>
               <Button
                 type="submit"
@@ -837,7 +890,7 @@ NewTicketForm.propTypes = {
 const mapStateToProps = state => ({
   users: Object.values(state.users),
   user: state.auth.user,
-  profiles: Object.values(state.profiles),
+  profiles: Object.values(state.profile.profiles),
   ticket: state.ticket
 });
 

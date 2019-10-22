@@ -3,15 +3,10 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
-import { loadCurrentProfile } from "../../actions/profile";
+import { loadCurrentProfile, fetchProfile } from "../../actions/profile";
 import ProfileCard from "./ProfileCard";
 
-const Profile = ({
-  loadCurrentProfile,
-  profile: { profile, loading },
-  auth,
-  match
-}) => {
+const Profile = ({ loadCurrentProfile, profile, auth, match }) => {
   useEffect(() => {
     loadCurrentProfile();
   }, []);

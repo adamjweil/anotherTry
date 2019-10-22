@@ -10,6 +10,7 @@ import {
   Box
 } from "@material-ui/core";
 import { loadCurrentProfile } from "../../actions/profile";
+import { loadUser } from "../../actions/user";
 import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({
@@ -52,7 +53,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProfileCard = ({ user, profile: { profile }, loadCurrentProfile }) => {
+const ProfileCard = ({
+  auth,
+  user,
+  loadUser,
+  profile: { profile },
+  loadCurrentProfile
+}) => {
+  useEffect(() => {
+    loadUser();
+    // loadCurrentProfile();
+  }, [loadUser]);
   const classes = useStyles();
 
   return (
@@ -87,7 +98,6 @@ const ProfileCard = ({ user, profile: { profile }, loadCurrentProfile }) => {
               <Typography className={classes.handle}>
                 <center>{profile && "@" + profile.handle}</center>
               </Typography>
-
               <Typography className={classes.email}>
                 <center>eMail: {user && user.email}</center>
               </Typography>
@@ -158,7 +168,7 @@ const ProfileCard = ({ user, profile: { profile }, loadCurrentProfile }) => {
 
 ProfileCard.propTypes = {
   profile: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+  // user: PropTypes.object.isRequired,
   loadCurrentProfile: PropTypes.func.isRequired
 };
 
@@ -169,5 +179,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loadCurrentProfile }
+  { loadCurrentProfile, loadUser }
 )(ProfileCard);
