@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchProfiles } from "../../../actions/profile";
+import { fetchProfiles } from "../../actions/profile";
 import { connect } from "react-redux";
 import {
   MenuItem,

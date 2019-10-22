@@ -461,7 +461,6 @@ const NewTicketForm = ({
   fetchUsers,
   fetchProfiles,
   createTicket,
-  fetchProfiles,
   profiles,
   loadCurrentProfile,
   history
@@ -847,7 +846,6 @@ export default connect(
   {
     fetchProfiles,
     fetchUsers,
-    createTicket,
-    fetchProfiles
+    createTicket
   }
 )(withRouter(NewTicketForm));

@@ -46,7 +46,6 @@ export const fetchProfile = id => async dispatch => {
   }
 };
 
-<<<<<<< HEAD
 export const fetchProfiles = () => async dispatch => {
   try {
     const res = await axios.get("/api/profiles");
@@ -59,11 +58,8 @@ export const fetchProfiles = () => async dispatch => {
   }
 };
 
-export const getAllProfiles = () => async dispatch => {
-=======
 // Fetch all Profiles
-export const fetchProfiles = () => async dispatch => {
->>>>>>> master
+export const loadAllProfiles = () => async dispatch => {
   try {
     const res = await axios.get("/api/profiles");
     dispatch({

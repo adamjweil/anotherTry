@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { fetchProfile } from "../../actions/profile";
 // import TicketHubLeftMenu from "./TicketHubLeftMenu";
 import NewTicketForm from "./NewTicketForm";
-import ProfileMap from "../Profile/profile-forms/ProfileMap";
+import ProfileMap from "../Profile/ProfileMap";
 
 const useStyles = makeStyles(theme => ({
   root: {

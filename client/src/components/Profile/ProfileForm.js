@@ -21,12 +21,8 @@ import { DatePicker } from "@material-ui/pickers";
 import { createProfile, loadCurrentProfile } from "../../actions/profile";
 import { loadUser } from "../../actions/user";
 import { push } from "react-router-redux";
-<<<<<<< HEAD:client/src/components/Profile/ProfileForm.js
+import { fetchProfile } from "../../actions/profile";
 
-=======
-import { withRouter } from "react-router-dom";
-import { fetchProfile } from "../../../actions/profile";
->>>>>>> master:client/src/components/Profile/profile-forms/ProfileForm.js
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
