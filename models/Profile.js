@@ -30,6 +30,10 @@ const ProfileSchema = new mongoose.Schema({
   bio: {
     type: String
   },
+  fixer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user"
+  },
   date: {
     type: Date,
     default: Date.now

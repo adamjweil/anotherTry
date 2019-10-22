@@ -32,7 +32,7 @@ DashboardHeader.propTypes = {
 const mapStateToProps = state => ({
   auth: state.auth,
   user: state.auth.user,
-  profile: state.profile.profile
+  profile: state.profile
 });
 
 export default connect(

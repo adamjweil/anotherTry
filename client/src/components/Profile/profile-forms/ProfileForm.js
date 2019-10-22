@@ -24,7 +24,7 @@ import Divider from "@material-ui/core/Divider";
 import { Router as browserHistory } from "react-router-dom";
 import { push } from "react-router-redux";
 import { withRouter } from "react-router-dom";
-
+import { fetchProfile } from "../../../actions/profile";
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -95,8 +95,9 @@ const TITLES = [
 const ProfileForm = ({
   createProfile,
   loadCurrentProfile,
-  profile: { profile, loading },
-  history
+  fetchProfiles,
+  history,
+  profiles
 }) => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -369,10 +370,11 @@ ProfileForm.propTypes = {
 
 const mapStateToProps = state => ({
   users: Object.values(state.users),
-  profile: state.profile
+  profile: state.profile,
+  profiles: Object.values(state.profiles)
 });
 
 export default connect(
   mapStateToProps,
-  { createProfile, loadUser, loadCurrentProfile }
+  { createProfile, loadUser, loadCurrentProfile, fetchProfile }
 )(withRouter(ProfileForm));

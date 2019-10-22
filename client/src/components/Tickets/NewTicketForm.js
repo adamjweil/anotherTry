@@ -21,6 +21,7 @@ import { Router as browserHistory, withRouter } from "react-router-dom";
 // Redux
 import { connect } from "react-redux";
 import { fetchUsers } from "../../actions/user";
+import { fetchProfiles } from "../../actions/profile";
 import { createTicket } from "../../actions/ticket";
 // import { showErrorSnackbar } from "../../actions/alert";
 const PROJECTS = [
@@ -459,11 +460,14 @@ const NewTicketForm = ({
   user,
   fetchUsers,
   createTicket,
+  fetchProfiles,
+  profiles,
   loadCurrentProfile,
   history
 }) => {
   useEffect(() => {
     fetchUsers();
+    fetchProfiles();
   }, [fetchUsers]);
 
   const [formData, setFormData] = useState({
@@ -825,18 +829,22 @@ const NewTicketForm = ({
 NewTicketForm.propTypes = {
   // users: PropTypes.array.isRequired,
   fetchUsers: PropTypes.func.isRequired,
-  createTicket: PropTypes.func.isRequired
+  createTicket: PropTypes.func.isRequired,
+  profiles: PropTypes.array.isRequired,
+  fetchProfiles: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   users: Object.values(state.users),
   user: state.auth.user,
+  profiles: Object.values(state.profiles),
   ticket: state.ticket
 });
 
 export default connect(
   mapStateToProps,
   {
+    fetchProfiles,
     fetchUsers,
     createTicket
   }
