@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { fetchProfiles } from "../../actions/profile";
 // import TicketHubLeftMenu from "./TicketHubLeftMenu";
 import NewTicketForm from "./NewTicketForm";
+import TicketList from "./TicketList";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,6 +20,9 @@ const Tickets = ({ fetchProfiles }) => {
     <Grid container className={classes.root}>
       <Grid item xs={12}>
         <NewTicketForm />
+      </Grid>
+      <Grid item xs={12}>
+        <TicketList />
       </Grid>
     </Grid>
   );

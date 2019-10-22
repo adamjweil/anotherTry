@@ -59,7 +59,6 @@ const useStyles = makeStyles(theme => ({
   },
   textFields: {
     width: "375px",
-    // textAlign: "center"
     marginLeft: "20px"
   }
 }));

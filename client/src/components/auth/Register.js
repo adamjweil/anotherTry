@@ -14,7 +14,6 @@ import {
   IconButton,
   Icon
 } from "@material-ui/core";
-// import Checkbox from "material-ui/Checkbox";
 import EmailTwoToneIcon from "@material-ui/icons/EmailTwoTone";
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
@@ -37,21 +36,14 @@ const useStyles = makeStyles(theme => ({
     }
   },
   paper: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(5),
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
   form: {
     width: "100%",
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    padding: "10px",
-    border: "1px shadow gray"
+    margin: theme.spacing(1, 0, 1, 0)
   },
   submit: {
     margin: theme.spacing(1, 0, 2)
@@ -117,10 +109,11 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
       <Box
         marginTop="100px"
         style={{
+          background: "#F8F8F8",
           boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
         }}
       >
-        <Form
+        <form
           style={{ padding: "30px" }}
           className={classes.form}
           onSubmit={onRegister}
@@ -143,11 +136,13 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
           <Typography
             component="h6"
             variant="h6"
+            color="primary"
             style={{
-              fontSize: "14px",
+              fontSize: "18px",
               fontWeight: "800",
-              marginTop: "-10px",
-              textAlign: "center"
+              marginTop: "5px",
+              marginBottom: "-10px"
+              // textAlign: "center"
             }}
           >
             Registration Form
@@ -285,7 +280,7 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
               </Grid>
             </Grid>
           </Grid>
-        </Form>
+        </form>
 
         <Grid container>
           <Grid item sm={1}></Grid>
