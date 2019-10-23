@@ -12,6 +12,7 @@ import {
 import { push } from "react-router-redux";
 import store from "../store";
 import { loadUser } from "./user";
+
 //LOAD profile
 export const loadCurrentProfile = () => async dispatch => {
   try {

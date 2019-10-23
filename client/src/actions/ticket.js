@@ -26,7 +26,7 @@ export const loadTickets = () => async dispatch => {
 //
 export const fetchTickets = () => async dispatch => {
   try {
-    const res = await axios.get("/api/ticket");
+    const res = await axios.get("/api/tickets");
     dispatch({
       type: GET_TICKETS,
       payload: res.data
@@ -34,7 +34,7 @@ export const fetchTickets = () => async dispatch => {
   } catch (err) {
     dispatch({
       type: TICKET_ERROR,
-      payload: err
+      payload: { err }
     });
   }
 };
@@ -50,10 +50,8 @@ export const createTicket = ({
         "Content-Type": "application/json"
       }
     };
-    const res = await axios.post("/api/ticket", formData, config);
+    const res = await axios.post("/api/tickets", formData, config);
     console.log(res);
-    // console.log("res");
-    // console.log(res);
     dispatch({
       type: CREATE_TICKET,
       payload: res.data

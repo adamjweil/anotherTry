@@ -22,7 +22,7 @@ import { Router as browserHistory, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { fetchUsers } from "../../actions/user";
 import { fetchProfiles } from "../../actions/profile";
-import { createTicket } from "../../actions/ticket";
+import { createTicket, fetchTickets } from "../../actions/ticket";
 // import { showErrorSnackbar } from "../../actions/alert";
 const PROJECTS = [
   {
@@ -426,7 +426,8 @@ const BUCKETS = [
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    backgroundColor: "#424242"
   },
   paper: {
     margin: theme.spacing(5),
@@ -440,8 +441,6 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "20px",
     margin: theme.spacing(1, 0, 3),
     padding: theme.spacing(2, 5, 5)
-    // backgroundColor: "#424242",
-    // boxShadow: " 0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
   },
   message: {
     fontSize: "36px",
@@ -511,7 +510,7 @@ const NewTicketForm = ({
       ...formData,
       [e.target.name]: e.target.value
     });
-  const onSubmit = e => {
+  const onSubmit = e => dispatch => {
     e.preventDefault();
     createTicket({ formData });
   };
