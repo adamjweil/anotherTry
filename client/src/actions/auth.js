@@ -31,6 +31,7 @@ export const loadUser = (history, showErrorSnackbar) => async dispatch => {
     const res = await axios.get("/api/auth");
     dispatch({
       type: USER_LOADED,
+      isAuthenticated: true,
       payload: res.data
     });
   } catch (err) {

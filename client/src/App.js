@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import AuthenticatedNavbar from "./components/layout/Navbar/Navbar";
+import Navbar from "./components/layout/Navbar/Navbar";
 import Register from "./components/auth/Register";
 import Landing from "./components/layout/Landing";
 import SuccessSnackbar from "./components/layout/Alerts/SuccessSnackbar";
@@ -34,7 +35,7 @@ const App = ({ loadUser }) => {
   return (
     <Provider store={store}>
       <Router>
-        <AuthenticatedNavbar />
+        <Navbar />
         <SnackbarProvider>
           <SuccessSnackbar />
           <InfoSnackbar />
@@ -60,7 +61,10 @@ const App = ({ loadUser }) => {
   );
 };
 
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
 export default connect(
-  null,
+  mapStateToProps,
   { loadUser }
 )(App);
