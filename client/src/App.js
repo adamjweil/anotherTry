@@ -1,70 +1,38 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import { Provider } from "react-redux";
-import AuthenticatedNavbar from "./components/layout/Navbar/Navbar";
 import Navbar from "./components/layout/Navbar/Navbar";
-import Register from "./components/auth/Register";
 import Landing from "./components/layout/Landing";
-import SuccessSnackbar from "./components/layout/Alerts/SuccessSnackbar";
-import InfoSnackbar from "./components/layout/Alerts/InfoSnackbar";
-import ErrorSnackbar from "./components/layout/Alerts/ErrorSnackbar";
-import Profile from "./components/Profile/Profile";
-import ProfileForm from "./components/Profile/ProfileForm";
-import Dashboard from "./components/Dashboard/Dashboard";
-import Tickets from "./components/Tickets/Tickets";
-import Directory from "./components/layout/Directory/Directory";
-import PrivateRoute from "./components/routing/PrivateRoute";
-import ThemeingLayout from "./components/layout/TestLayout/ThemeingLayout";
-import ResponsiveLayout from "./components/layout/TestLayout/ResponsiveLayout";
 import "typeface-roboto";
-import { SnackbarProvider } from "notistack";
 import "./App.css";
-import { connect } from "react-redux";
+import Routes from "./components/routing/Routes";
 // Redux
 import store from "./store";
 import { loadUser } from "./actions/user";
-import { loadCurrentProfile } from "./actions/profile";
 import setAuthToken from "./utils/setAuthToken";
-import { withRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-const App = ({ loadUser }) => {
+const App = () => {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
+
   return (
     <Provider store={store}>
       <Router>
-        <Navbar />
-        <SnackbarProvider>
-          <SuccessSnackbar />
-          <InfoSnackbar />
-          <ErrorSnackbar />
-        </SnackbarProvider>
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          <section className="container" style={{ marginTop: "51px" }}>
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/directory" component={Directory} />
-            <Route exact path="/profile/:id" component={Profile} />
-            <Route exact path="/responsive" component={ResponsiveLayout} />
-            <Route exact path="/theming" component={ThemeingLayout} />
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            <PrivateRoute exact path="/profileform" component={ProfileForm} />
-            <PrivateRoute exact path="/profile" component={Profile} />
-            <PrivateRoute exact path="/profile/:id" component={Profile} />
-            <PrivateRoute exact path="/ticket" component={Tickets} />
-          </section>
-        </Switch>
+        <Fragment>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route component={Routes} />
+          </Switch>
+        </Fragment>
       </Router>
     </Provider>
   );
 };
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
-});
-export default connect(
-  mapStateToProps,
-  { loadUser }
-)(App);
+export default App;

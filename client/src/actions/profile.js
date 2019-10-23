@@ -20,7 +20,7 @@ export const loadCurrentProfile = () => async dispatch => {
     console.log(res);
     dispatch({
       type: GET_PROFILE,
-      payload: res
+      payload: res.data
     });
   } catch (err) {
     console.log(err);
@@ -55,7 +55,10 @@ export const fetchProfiles = () => async dispatch => {
       payload: res.data
     });
   } catch (err) {
-    console.log(err);
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
   }
 };
 
@@ -64,7 +67,7 @@ export const loadAllProfiles = () => async dispatch => {
   try {
     const res = await axios.get("/api/profiles");
     dispatch({
-      type: GET_ALL_PROFILES,
+      type: FETCH_PROFILES,
       payload: res.data
     });
   } catch (err) {

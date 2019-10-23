@@ -4,9 +4,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Grid, makeStyles } from "@material-ui/core";
 import Login from "./../auth/Login";
-import Register from "./../auth/Register";
 import { login } from "../../actions/auth";
-import Footer from "./Navbar/Footer";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,12 +24,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Landing = ({ auth: { isAuthenticated }, history, login }) => {
-  const [values, setValues] = React.useState({
-    loginOrRegister: true
-  });
-  const showLoginOrRegister = () => {
-    setValues({ ...values, showLoginOrRegister: !values.showLoginOrRegister });
-  };
+  // const [values, setValues] = React.useState({
+  //   loginOrRegister: true
+  // });
+  // const showLoginOrRegister = () => {
+  //   setValues({ ...values, showLoginOrRegister: !values.showLoginOrRegister });
+  // };
 
   const classes = useStyles();
   if (isAuthenticated === true) {
@@ -43,11 +41,7 @@ const Landing = ({ auth: { isAuthenticated }, history, login }) => {
           <Grid item sm={2} md={3}></Grid>
           <Grid item xs={12} md={6}>
             <div className={classes.login}>
-              {showLoginOrRegister ? (
-                <Login showLoginOrRegister={showLoginOrRegister} />
-              ) : (
-                <Register />
-              )}
+              <Login />
             </div>
           </Grid>
           <Grid item sm={3}></Grid>

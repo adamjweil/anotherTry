@@ -17,12 +17,12 @@ import {
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import { Router as browserHistory, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 // Redux
 import { connect } from "react-redux";
 import { fetchUsers, loadUser } from "../../actions/user";
 import { fetchProfiles } from "../../actions/profile";
-import { createTicket, fetchTickets } from "../../actions/ticket";
+import { createTicket } from "../../actions/ticket";
 // import { showErrorSnackbar } from "../../actions/alert";
 const PROJECTS = [
   {
@@ -426,7 +426,8 @@ const BUCKETS = [
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    marginTop: theme.spacing(5)
     // backgroundColor: "#424242"
   },
   paper: {
@@ -435,8 +436,8 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center",
     padding: "25px",
-    backgroundColor: "#6782B4",
-    opacity: ".7",
+    backgroundColor:
+      "linear-gradient(left, rgba(226,226,226,1) 0%, rgba(219,219,219,1) 24%, rgba(209,209,209,1) 96%, rgba(254,254,254,1) 100%)",
     borderRadius: "25px",
     boxShadow: "2px 4px 6px 0 hsla(0, 0%,0%, 0.6)"
   },
@@ -471,7 +472,7 @@ const NewTicketForm = ({
   useEffect(() => {
     fetchUsers();
     fetchProfiles();
-  }, []);
+  }, [fetchUsers, fetchProfiles]);
 
   const [formData, setFormData] = useState({
     ticketType: "",
@@ -543,12 +544,7 @@ const NewTicketForm = ({
                   name="ticketType"
                   onChange={e => onChange(e)}
                   value={ticketType}
-                  style={{
-                    backgroundColor: "white",
-                    opacity: ".3",
-                    color: "grey"
-                  }}
-                  variant="outlined"
+                  variant="filled"
                 >
                   <MenuItem value="">Type</MenuItem>
                   {TICKETTYPES.map(type => (
@@ -570,8 +566,7 @@ const NewTicketForm = ({
                   name="source"
                   onChange={e => onChange(e)}
                   value={source}
-                  style={{ backgroundColor: "white", opacity: ".3" }}
-                  variant="outlined"
+                  variant="filled"
                 >
                   <MenuItem value="">Source</MenuItem>
                   {SOURCES.map(type => (
@@ -594,8 +589,7 @@ const NewTicketForm = ({
                   name="environment"
                   onChange={e => onChange(e)}
                   value={environment}
-                  style={{ backgroundColor: "white", opacity: ".3" }}
-                  variant="outlined"
+                  variant="filled"
                 >
                   {ENVIRONMENTS.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -616,8 +610,7 @@ const NewTicketForm = ({
                   name="bucket"
                   onChange={e => onChange(e)}
                   value={bucket}
-                  style={{ backgroundColor: "white", opacity: ".3" }}
-                  variant="outlined"
+                  variant="filled"
                 >
                   {BUCKETS.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -634,8 +627,7 @@ const NewTicketForm = ({
                   name="project"
                   onChange={e => onChange(e)}
                   value={project}
-                  style={{ backgroundColor: "white", opacity: ".3" }}
-                  variant="outlined"
+                  variant="filled"
                 >
                   {PROJECTS.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -657,8 +649,7 @@ const NewTicketForm = ({
                   name="release"
                   onChange={e => onChange(e)}
                   value={release}
-                  style={{ backgroundColor: "white", opacity: ".3" }}
-                  variant="outlined"
+                  variant="filled"
                 >
                   {RELEASES.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -679,8 +670,7 @@ const NewTicketForm = ({
                   name="process"
                   onChange={e => onChange(e)}
                   value={process}
-                  style={{ backgroundColor: "white", opacity: ".3" }}
-                  variant="outlined"
+                  variant="filled"
                 >
                   {PROCESSES.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -698,8 +688,7 @@ const NewTicketForm = ({
               >
                 <InputLabel> Owner: </InputLabel>
                 <Select
-                  style={{ backgroundColor: "white", opacity: ".3" }}
-                  variant="outlined"
+                  variant="filled"
                   name="owner"
                   onChange={e => onChange(e)}
                   value={owner}
@@ -720,8 +709,7 @@ const NewTicketForm = ({
               >
                 <InputLabel> Fixer: </InputLabel>
                 <Select
-                  style={{ backgroundColor: "white", opacity: ".3" }}
-                  variant="outlined"
+                  variant="filled"
                   name="fixer"
                   onChange={e => onChange(e)}
                   value={fixer}
@@ -746,30 +734,9 @@ const NewTicketForm = ({
                   name="status"
                   onChange={e => onChange(e)}
                   value={status}
-                  style={{ backgroundColor: "white", opacity: ".3" }}
-                  variant="outlined"
+                  variant="filled"
                 >
                   {STATUSVALUES.map(type => (
-                    <MenuItem value={type.text} key={type.key}>
-                      {type.text}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item>
-              <FormControl
-                style={{
-                  width: "175px"
-                }}
-              >
-                <InputLabel> Tester: </InputLabel>
-                <Select
-                  name="tester"
-                  onChange={e => onChange(e)}
-                  value={tester}
-                >
-                  {PEOPLE.map(type => (
                     <MenuItem value={type.text} key={type.key}>
                       {type.text}
                     </MenuItem>
@@ -789,6 +756,7 @@ const NewTicketForm = ({
                   name="standing"
                   onChange={e => onChange(e)}
                   value={standing}
+                  variant="filled"
                 >
                   {STANDINGVALUES.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -809,9 +777,7 @@ const NewTicketForm = ({
                   name="ticketId"
                   value={ticketId}
                   onChange={e => onChange(e)}
-                  variant="outlined"
-                  style={{ backgroundColor: "white", opacity: ".3" }}
-                  margin="normal"
+                  variant="filled"
                 />
               </FormControl>
             </Grid>
@@ -824,6 +790,7 @@ const NewTicketForm = ({
               >
                 <FormLabel commponent="legend"> Importance: </FormLabel>
                 <RadioGroup
+                  // variant="filled"
                   aria-label="importance"
                   name="importance"
                   value={importance}
@@ -854,7 +821,12 @@ const NewTicketForm = ({
                 }}
               >
                 <InputLabel>Owner:</InputLabel>
-                <Select name="owner" onChange={e => onChange(e)} value={owner}>
+                <Select
+                  variant="filled"
+                  name="owner"
+                  onChange={e => onChange(e)}
+                  value={owner}
+                >
                   {profiles.map(profile => (
                     <MenuItem value={profile} key={profile}>
                       {profile.firstName} {profile.lastName}
@@ -870,7 +842,12 @@ const NewTicketForm = ({
                 }}
               >
                 <InputLabel>Fixer:</InputLabel>
-                <Select name="fixer" onChange={e => onChange(e)} value={fixer}>
+                <Select
+                  variant="filled"
+                  name="fixer"
+                  onChange={e => onChange(e)}
+                  value={fixer}
+                >
                   {profiles.map(profile => (
                     <MenuItem value={profile} key={profile}>
                       {profile.firstName} {profile.lastName}
@@ -890,6 +867,7 @@ const NewTicketForm = ({
                   name="tester"
                   onChange={e => onChange(e)}
                   value={tester}
+                  variant="filled"
                 >
                   {profiles.map(profile => (
                     <MenuItem value={profile} key={profile}>
@@ -905,7 +883,7 @@ const NewTicketForm = ({
                 type="submit"
                 color="primary"
                 variant="contained"
-                size="medium"
+                size="large"
               >
                 Submit
               </Button>
@@ -918,18 +896,19 @@ const NewTicketForm = ({
 };
 
 NewTicketForm.propTypes = {
-  // users: PropTypes.array.isRequired,
   fetchUsers: PropTypes.func.isRequired,
   createTicket: PropTypes.func.isRequired,
   profiles: PropTypes.array.isRequired,
-  fetchProfiles: PropTypes.func.isRequired
+  fetchProfiles: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  tickets: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
-  users: Object.values(state.users),
-  user: state.auth.user,
+  user: state.user,
   profiles: Object.values(state.profile.profiles),
-  ticket: state.ticket
+  ticket: state.ticket,
+  tickets: Object.values(state.ticket.tickets)
 });
 
 export default connect(
