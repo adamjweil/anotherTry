@@ -11,7 +11,7 @@ const User = require("../../models/User");
 // @access Ptivate
 router.get("/", auth, async (req, res) => {
   try {
-    const tickets = await Ticket.findById(req.user.id).select("-password");
+    const tickets = await Ticket.find().populate("user", ["email", "avatar"]);
     res.json(tickets);
   } catch (err) {
     console.error(err.message);

@@ -1,4 +1,5 @@
 import { CREATE_TICKET, GET_TICKETS, TICKET_ERROR } from "../actions/types";
+import _ from "lodash";
 
 const INITIAL_STATE = {
   ticket: null,
@@ -19,8 +20,7 @@ export default function(state = INITIAL_STATE, action) {
     case GET_TICKETS:
       return {
         ...state,
-        tickets: payload,
-        loading: false
+        tickets: { ..._.mapKeys(payload, "_id") }
       };
     case TICKET_ERROR:
       return {
