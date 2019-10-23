@@ -8,7 +8,6 @@ import {
   Menu,
   Toolbar,
   InputBase,
-  Typography,
   Grid
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -345,7 +344,7 @@ const AuthenticatedNavbar = ({
                             : ""
                       }}
                     >
-                      <Grid row style={{ maxHeight: "55px" }}>
+                      <Grid row="true" style={{ maxHeight: "55px" }}>
                         <ImportContactsOutlinedIcon
                           fontSize="default"
                           style={{
@@ -400,9 +399,9 @@ const AuthenticatedNavbar = ({
                             : ""
                       }}
                     >
-                      <Grid row style={{ maxHeight: "55px" }}>
+                      <Grid row="true" style={{ maxHeight: "55px" }}>
                         <NotificationsNoneSharpIcon
-                          fontSize="medium"
+                          fontSize="default"
                           style={{
                             color: "white",
                             marginTop: "7px",
@@ -456,13 +455,13 @@ const AuthenticatedNavbar = ({
                       }}
                     >
                       <Grid
-                        row
+                        row="true"
                         style={{
                           maxHeight: "55px"
                         }}
                       >
                         <AccountCircleOutlinedIcon
-                          fontSize="medium"
+                          fontSize="default"
                           style={{
                             color: "white",
                             marginLeft: "10px",

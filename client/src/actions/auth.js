@@ -20,7 +20,6 @@ import {
 } from "./alert";
 import { push } from "react-router-redux";
 import store from "../store";
-import history from "../history";
 
 //Load User
 export const loadUser = (history, showErrorSnackbar) => async dispatch => {
@@ -98,12 +97,11 @@ export const login = (email, password) => async dispatch => {
 };
 
 // Toggle the T&C checkbox
-export const toggleCheck = terms => async dispatch => {
+export const toggleCheck = terms => dispatch =>
   dispatch({
     type: TOGGLE_TERMS,
     payload: terms
   });
-};
 
 // LOUTOUT A USER / CLEAR PROFILE
 export const logout = () => async dispatch => {

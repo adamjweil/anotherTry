@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withRouter, Router as browserHistory } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   Grid,
@@ -16,7 +16,6 @@ import {
 } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import PropTypes from "prop-types";
-import clsx from "clsx";
 import { DatePicker } from "@material-ui/pickers";
 import {
   createProfile,
@@ -24,7 +23,8 @@ import {
   fetchProfile
 } from "../../actions/profile";
 import { loadUser } from "../../actions/user";
-import { push } from "react-router-redux";
+// import { push } from "react-router-redux";
+// import clsx from "clsx";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -105,7 +105,6 @@ const ProfileForm = ({
     hireDate: new Date()
   });
   const [hireDateOrig, changeDate] = useState(formatDate(new Date()));
-
   const {
     firstName,
     lastName,
@@ -121,9 +120,7 @@ const ProfileForm = ({
     return new Date(string).toLocaleDateString([], options);
   }
 
-  const startDate = formatDate(hireDateOrig);
-  formData.hireDate = startDate;
-  console.log(formData);
+  formData.hireDate = formatDate(hireDateOrig);
   const classes = useStyles();
 
   const onChange = e =>
@@ -242,7 +239,7 @@ const ProfileForm = ({
                     helperText="Select the date from the calendar chooser below!"
                     variant="filled"
                     name="hireDate"
-                    value={startDate}
+                    value={hireDateOrig}
                     onChange={e => onChange(e)}
                     label="Hire Date"
                   />
@@ -267,7 +264,7 @@ const ProfileForm = ({
                         autoOk
                         orientation="landscape"
                         openTo="date"
-                        value={startDate}
+                        value={hireDateOrig}
                         onChange={e => changeDate(e)}
                         name="hireDate"
                       />
@@ -374,7 +371,7 @@ ProfileForm.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  users: Object.values(state.users),
+  users: state.users,
   user: state.auth.user,
   profile: state.profile.profile,
   profiles: Object.values(state.profile.profiles)

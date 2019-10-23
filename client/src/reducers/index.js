@@ -1,14 +1,14 @@
 import { combineReducers } from "redux";
 import alert from "./alert";
 import auth from "./auth";
-import profiles from "./profiles";
-import users from "./users";
+import profile from "./profile";
+import user from "./user";
 import ticket from "./ticket";
 
 export default combineReducers({
   alert: alert,
   auth: auth,
-  profile: profiles,
-  users: users,
+  profile: profile,
+  user: user,
   ticket: ticket
 });

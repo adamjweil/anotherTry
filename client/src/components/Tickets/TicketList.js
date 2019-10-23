@@ -12,7 +12,7 @@ import {
   Typography,
   Paper
 } from "@material-ui/core";
-import { fetchTickets } from "../../actions/ticket";
+import { fetchTickets, loadTickets } from "../../actions/ticket";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -46,16 +46,27 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TicketList = ({ users, tickets, fetchTickets }) => {
-  const classes = useStyles();
+const TicketList = ({ users, tickets, fetchTickets, loadTickets }) => {
   useEffect(() => {
     fetchTickets();
   }, []);
+  const classes = useStyles();
+
+  const now = Date.now();
+
+  let options = {};
+  const formatDate = input => {
+    let options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(input).toLocaleDateString([], options);
+  };
+
+  const x = formatDate(Date.now());
   return (
     <Grid container className={classes.root}>
       <Paper className={classes.paper}>
         <Grid item xs={12}>
-          <Typography className={classes.message}>Tickets</Typography>
+          <Typography className={classes.message}>Ticket Master</Typography>
+          <Typography className={classes.subMessage}>{x}</Typography>
         </Grid>
         <Grid item xs={12}>
           <Table className={classes.table}>
@@ -109,5 +120,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchTickets }
+  { fetchTickets, loadTickets }
 )(TicketList);

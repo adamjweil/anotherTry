@@ -1,7 +1,7 @@
 import axios from "axios";
 import { showSuccessSnackbar, showInfoSnackbar } from "./alert";
-import { CREATE_TICKET, GET_TICKETS, TICKET_ERROR } from "./types";
-import { routerMiddleware, push } from "react-router-redux";
+import { CREATE_TICKET, FETCH_TICKETS, TICKET_ERROR } from "./types";
+
 import store from "../store";
 import history from "../history";
 
@@ -10,7 +10,7 @@ export const loadTickets = () => async dispatch => {
   try {
     const res = await axios.get("/api/tickets");
     dispatch({
-      type: GET_TICKETS,
+      type: FETCH_TICKETS,
       payload: res.data
     });
   } catch (err) {
@@ -26,7 +26,7 @@ export const fetchTickets = () => async dispatch => {
   try {
     const res = await axios.get("/api/tickets");
     dispatch({
-      type: GET_TICKETS,
+      type: FETCH_TICKETS,
       payload: res.data
     });
   } catch (err) {
