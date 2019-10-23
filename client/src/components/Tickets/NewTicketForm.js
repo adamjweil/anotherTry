@@ -20,7 +20,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Router as browserHistory, withRouter } from "react-router-dom";
 // Redux
 import { connect } from "react-redux";
-import { fetchUsers } from "../../actions/user";
+import { fetchUsers, loadUser } from "../../actions/user";
 import { fetchProfiles } from "../../actions/profile";
 import { createTicket, fetchTickets } from "../../actions/ticket";
 // import { showErrorSnackbar } from "../../actions/alert";
@@ -426,8 +426,8 @@ const BUCKETS = [
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
-    backgroundColor: "#424242"
+    flexGrow: 1
+    // backgroundColor: "#424242"
   },
   paper: {
     margin: theme.spacing(5),
@@ -435,6 +435,9 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center",
     padding: "25px",
+    backgroundColor: "#6782B4",
+    opacity: ".7",
+    borderRadius: "25px",
     boxShadow: "2px 4px 6px 0 hsla(0, 0%,0%, 0.6)"
   },
   form: {
@@ -455,6 +458,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const NewTicketForm = ({
+  loadUser,
   users,
   user,
   fetchUsers,
@@ -467,7 +471,7 @@ const NewTicketForm = ({
   useEffect(() => {
     fetchUsers();
     fetchProfiles();
-  }, [fetchUsers]);
+  }, []);
 
   const [formData, setFormData] = useState({
     ticketType: "",
@@ -510,7 +514,7 @@ const NewTicketForm = ({
       ...formData,
       [e.target.name]: e.target.value
     });
-  const onSubmit = e => dispatch => {
+  const onSubmit = e => {
     e.preventDefault();
     createTicket({ formData });
   };
@@ -539,7 +543,14 @@ const NewTicketForm = ({
                   name="ticketType"
                   onChange={e => onChange(e)}
                   value={ticketType}
+                  style={{
+                    backgroundColor: "white",
+                    opacity: ".3",
+                    color: "grey"
+                  }}
+                  variant="outlined"
                 >
+                  <MenuItem value="">Type</MenuItem>
                   {TICKETTYPES.map(type => (
                     <MenuItem value={type.text} key={type.key}>
                       {type.text}
@@ -559,7 +570,10 @@ const NewTicketForm = ({
                   name="source"
                   onChange={e => onChange(e)}
                   value={source}
+                  style={{ backgroundColor: "white", opacity: ".3" }}
+                  variant="outlined"
                 >
+                  <MenuItem value="">Source</MenuItem>
                   {SOURCES.map(type => (
                     <MenuItem value={type.text} key={type.key}>
                       {type.text}
@@ -580,6 +594,8 @@ const NewTicketForm = ({
                   name="environment"
                   onChange={e => onChange(e)}
                   value={environment}
+                  style={{ backgroundColor: "white", opacity: ".3" }}
+                  variant="outlined"
                 >
                   {ENVIRONMENTS.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -600,6 +616,8 @@ const NewTicketForm = ({
                   name="bucket"
                   onChange={e => onChange(e)}
                   value={bucket}
+                  style={{ backgroundColor: "white", opacity: ".3" }}
+                  variant="outlined"
                 >
                   {BUCKETS.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -616,6 +634,8 @@ const NewTicketForm = ({
                   name="project"
                   onChange={e => onChange(e)}
                   value={project}
+                  style={{ backgroundColor: "white", opacity: ".3" }}
+                  variant="outlined"
                 >
                   {PROJECTS.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -637,6 +657,8 @@ const NewTicketForm = ({
                   name="release"
                   onChange={e => onChange(e)}
                   value={release}
+                  style={{ backgroundColor: "white", opacity: ".3" }}
+                  variant="outlined"
                 >
                   {RELEASES.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -657,6 +679,8 @@ const NewTicketForm = ({
                   name="process"
                   onChange={e => onChange(e)}
                   value={process}
+                  style={{ backgroundColor: "white", opacity: ".3" }}
+                  variant="outlined"
                 >
                   {PROCESSES.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -673,7 +697,13 @@ const NewTicketForm = ({
                 }}
               >
                 <InputLabel> Owner: </InputLabel>
-                <Select name="owner" onChange={e => onChange(e)} value={owner}>
+                <Select
+                  style={{ backgroundColor: "white", opacity: ".3" }}
+                  variant="outlined"
+                  name="owner"
+                  onChange={e => onChange(e)}
+                  value={owner}
+                >
                   {PEOPLE.map(type => (
                     <MenuItem value={type.text} key={type.key}>
                       {type.text}
@@ -689,7 +719,13 @@ const NewTicketForm = ({
                 }}
               >
                 <InputLabel> Fixer: </InputLabel>
-                <Select name="fixer" onChange={e => onChange(e)} value={fixer}>
+                <Select
+                  style={{ backgroundColor: "white", opacity: ".3" }}
+                  variant="outlined"
+                  name="fixer"
+                  onChange={e => onChange(e)}
+                  value={fixer}
+                >
                   {" "}
                   {PEOPLE.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -710,6 +746,8 @@ const NewTicketForm = ({
                   name="status"
                   onChange={e => onChange(e)}
                   value={status}
+                  style={{ backgroundColor: "white", opacity: ".3" }}
+                  variant="outlined"
                 >
                   {STATUSVALUES.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -771,7 +809,8 @@ const NewTicketForm = ({
                   name="ticketId"
                   value={ticketId}
                   onChange={e => onChange(e)}
-                  variant="filled"
+                  variant="outlined"
+                  style={{ backgroundColor: "white", opacity: ".3" }}
                   margin="normal"
                 />
               </FormControl>
@@ -896,6 +935,7 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
+    loadUser,
     fetchProfiles,
     fetchUsers,
     createTicket

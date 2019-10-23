@@ -203,295 +203,303 @@ const AuthenticatedNavbar = ({
   );
 
   return (
-    <AppBar
-      style={{ position: "fixed", padding: "0px", background: "#14171A" }}
-    >
-      <div>
-        <div className={classes.grow} stye={{ marginBottom: "50px" }}>
-          <Toolbar style={{ minHeight: "10px", maxHeight: "51px" }}>
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleProfileMenuOpen}
-            >
-              <MenuIcon />
-            </IconButton>
+    <Grid container>
+      <AppBar
+        style={{ position: "fixed", padding: "0px", background: "#14171A" }}
+      >
+        <div>
+          <div className={classes.grow} stye={{ marginBottom: "50px" }}>
+            <Toolbar style={{ minHeight: "10px", maxHeight: "51px" }}>
+              <IconButton
+                edge="start"
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleProfileMenuOpen}
+              >
+                <MenuIcon />
+              </IconButton>
 
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <InputBase
+                  style={{ fontSize: "14px" }}
+                  placeholder="Search…"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput
+                  }}
+                  inputProps={{ "aria-label": "search" }}
+                />
               </div>
-              <InputBase
-                style={{ fontSize: "14px" }}
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-                inputProps={{ "aria-label": "search" }}
-              />
-            </div>
-            <div className={classes.grow} />
-            <div className={classes.sectionDesktop}>
-              <Divider orientation="vertical" />
-              <Link
-                onClick={setActiveTab()}
-                to="/dashboard"
-                style={{
-                  textDecoration: "none"
-                }}
-              >
-                <MenuItem
+              <div className={classes.grow} />
+              <div className={classes.sectionDesktop}>
+                <Divider orientation="vertical" />
+                <Link
+                  onClick={setActiveTab()}
+                  to="/dashboard"
                   style={{
-                    maxHeight: "53px",
-                    opacity:
-                      window.location.href === "http://localhost:3000/dashboard"
-                        ? "1"
-                        : ".75",
-                    borderBottom:
-                      window.location.href === "http://localhost:3000/dashboard"
-                        ? "3px inset #D3D3D3"
-                        : ""
+                    textDecoration: "none"
                   }}
                 >
-                  <p
+                  <MenuItem
                     style={{
-                      color: "white",
-                      fontSize:
+                      maxHeight: "53px",
+                      opacity:
                         window.location.href ===
                         "http://localhost:3000/dashboard"
-                          ? "18px"
-                          : "16px",
-                      fontWeight:
+                          ? "1"
+                          : ".75",
+                      borderBottom:
                         window.location.href ===
                         "http://localhost:3000/dashboard"
-                          ? "700"
-                          : "400",
-                      alignItems: "center"
-                    }}
-                  >
-                    Dashboard
-                  </p>
-                </MenuItem>
-              </Link>
-
-              <Link
-                onClick={setActiveTab()}
-                to="/ticket"
-                style={{
-                  textDecoration: "none"
-                }}
-              >
-                <MenuItem
-                  style={{
-                    maxHeight: "53px",
-                    opacity:
-                      window.location.href === "http://localhost:3000/ticket"
-                        ? "1"
-                        : ".75",
-                    borderBottom:
-                      window.location.href === "http://localhost:3000/ticket"
-                        ? "3px inset #D3D3D3"
-                        : ""
-                  }}
-                >
-                  <p
-                    style={{
-                      color: "white",
-                      alignItems: "center",
-                      fontSize:
-                        window.location.href === "http://localhost:3000/ticket"
-                          ? "18px"
-                          : "16px",
-                      fontWeight:
-                        window.location.href === "http://localhost:3000/ticket"
-                          ? "700"
-                          : "400"
-                    }}
-                  >
-                    TicketHub
-                  </p>
-                </MenuItem>
-              </Link>
-
-              <Link
-                to="/directory"
-                color="white"
-                onClick={setActiveTab()}
-                style={{ paddingTop: "0px" }}
-              >
-                <Grid container>
-                  <MenuItem
-                    style={{
-                      maxHeight: "55px",
-                      paddingRight: "10px",
-                      paddingLeft: "10px",
-                      opacity:
-                        window.location.href ===
-                        "http://localhost:3000/directory"
-                          ? "1"
-                          : ".75",
-                      borderBottom:
-                        window.location.href ===
-                        "http://localhost:3000/directory"
                           ? "3px inset #D3D3D3"
                           : ""
                     }}
                   >
-                    <Grid row style={{ maxHeight: "55px" }}>
-                      <ImportContactsOutlinedIcon
-                        fontSize="default"
-                        style={{
-                          color: "white",
-                          marginTop: "7px",
-                          marginLeft: "15px"
-                        }}
-                      />
-
-                      <p
-                        style={{
-                          color: "white",
-                          marginTop: "-12px",
-                          fontSize:
-                            window.location.href ===
-                            "http://localhost:3000/directory"
-                              ? "15px"
-                              : "14px",
-                          fontWeight:
-                            window.location.href ===
-                            "http://localhost:3000/directory"
-                              ? "700"
-                              : "400"
-                        }}
-                      >
-                        Directory
-                      </p>
-                    </Grid>
-                  </MenuItem>
-                </Grid>
-              </Link>
-
-              <Link
-                to="/profile"
-                onClick={setActiveTab()}
-                color="white"
-                style={{ paddingTop: "0px" }}
-              >
-                <Grid container>
-                  <MenuItem
-                    style={{
-                      maxHeight: "55px",
-                      paddingRight: "10px",
-                      paddingLeft: "10px",
-                      opacity:
-                        window.location.href === "http://localhost:3000/form"
-                          ? "1"
-                          : ".75",
-                      borderBottom:
-                        window.location.href === "http://localhost:3000/form"
-                          ? "3px inset #D3D3D3"
-                          : ""
-                    }}
-                  >
-                    <Grid row style={{ maxHeight: "55px" }}>
-                      <NotificationsNoneSharpIcon
-                        fontSize="medium"
-                        style={{
-                          color: "white",
-                          marginTop: "7px",
-                          marginLeft: "22px"
-                        }}
-                      />
-                      <p
-                        style={{
-                          marginTop: "-12px",
-                          color: "white",
-                          fontSize:
-                            window.location.href ===
-                            "http://localhost:3000/form"
-                              ? "15px"
-                              : "14px",
-                          fontWeight:
-                            window.location.href ===
-                            "http://localhost:3000/form"
-                              ? "700"
-                              : "400"
-                        }}
-                      >
-                        Notifications
-                      </p>
-                    </Grid>
-                  </MenuItem>
-                </Grid>
-              </Link>
-
-              <Link
-                onClick={setActiveTab()}
-                to="/profile"
-                style={{
-                  textDecoration: "none"
-                }}
-              >
-                <Grid container>
-                  <MenuItem
-                    style={{
-                      maxHeight: "55px",
-                      opacity:
-                        window.location.href === "http://localhost:3000/profile"
-                          ? "1"
-                          : ".75",
-                      borderBottom:
-                        window.location.href === "http://localhost:3000/profile"
-                          ? "3px inset #D3D3D3"
-                          : ""
-                    }}
-                  >
-                    <Grid
-                      row
+                    <p
                       style={{
-                        maxHeight: "55px"
+                        color: "white",
+                        fontSize:
+                          window.location.href ===
+                          "http://localhost:3000/dashboard"
+                            ? "18px"
+                            : "16px",
+                        fontWeight:
+                          window.location.href ===
+                          "http://localhost:3000/dashboard"
+                            ? "700"
+                            : "400",
+                        alignItems: "center"
                       }}
                     >
-                      <AccountCircleOutlinedIcon
-                        fontSize="medium"
+                      Dashboard
+                    </p>
+                  </MenuItem>
+                </Link>
+
+                <Link
+                  onClick={setActiveTab()}
+                  to="/ticket"
+                  style={{
+                    textDecoration: "none"
+                  }}
+                >
+                  <MenuItem
+                    style={{
+                      maxHeight: "53px",
+                      opacity:
+                        window.location.href === "http://localhost:3000/ticket"
+                          ? "1"
+                          : ".75",
+                      borderBottom:
+                        window.location.href === "http://localhost:3000/ticket"
+                          ? "3px inset #D3D3D3"
+                          : ""
+                    }}
+                  >
+                    <p
+                      style={{
+                        color: "white",
+                        alignItems: "center",
+                        fontSize:
+                          window.location.href ===
+                          "http://localhost:3000/ticket"
+                            ? "18px"
+                            : "16px",
+                        fontWeight:
+                          window.location.href ===
+                          "http://localhost:3000/ticket"
+                            ? "700"
+                            : "400"
+                      }}
+                    >
+                      TicketHub
+                    </p>
+                  </MenuItem>
+                </Link>
+
+                <Link
+                  onClick={setActiveTab()}
+                  to="/directory"
+                  color="white"
+                  style={{ paddingTop: "0px" }}
+                >
+                  <Grid container>
+                    <MenuItem
+                      style={{
+                        maxHeight: "55px",
+                        paddingRight: "10px",
+                        paddingLeft: "10px",
+                        opacity:
+                          window.location.href ===
+                          "http://localhost:3000/directory"
+                            ? "1"
+                            : ".75",
+                        borderBottom:
+                          window.location.href ===
+                          "http://localhost:3000/directory"
+                            ? "3px inset #D3D3D3"
+                            : ""
+                      }}
+                    >
+                      <Grid row style={{ maxHeight: "55px" }}>
+                        <ImportContactsOutlinedIcon
+                          fontSize="default"
+                          style={{
+                            color: "white",
+                            marginTop: "7px",
+                            marginLeft: "15px"
+                          }}
+                        />
+
+                        <p
+                          style={{
+                            color: "white",
+                            marginTop: "-12px",
+                            fontSize:
+                              window.location.href ===
+                              "http://localhost:3000/directory"
+                                ? "15px"
+                                : "14px",
+                            fontWeight:
+                              window.location.href ===
+                              "http://localhost:3000/directory"
+                                ? "700"
+                                : "400"
+                          }}
+                        >
+                          Directory
+                        </p>
+                      </Grid>
+                    </MenuItem>
+                  </Grid>
+                </Link>
+
+                <Link
+                  onClick={setActiveTab()}
+                  to="/profile"
+                  color="white"
+                  style={{ paddingTop: "0px" }}
+                >
+                  <Grid container>
+                    <MenuItem
+                      style={{
+                        maxHeight: "55px",
+                        paddingRight: "10px",
+                        paddingLeft: "10px",
+                        opacity:
+                          window.location.href === "http://localhost:3000/form"
+                            ? "1"
+                            : ".75",
+                        borderBottom:
+                          window.location.href === "http://localhost:3000/form"
+                            ? "3px inset #D3D3D3"
+                            : ""
+                      }}
+                    >
+                      <Grid row style={{ maxHeight: "55px" }}>
+                        <NotificationsNoneSharpIcon
+                          fontSize="medium"
+                          style={{
+                            color: "white",
+                            marginTop: "7px",
+                            marginLeft: "22px"
+                          }}
+                        />
+                        <p
+                          style={{
+                            marginTop: "-12px",
+                            color: "white",
+                            fontSize:
+                              window.location.href ===
+                              "http://localhost:3000/form"
+                                ? "15px"
+                                : "14px",
+                            fontWeight:
+                              window.location.href ===
+                              "http://localhost:3000/form"
+                                ? "700"
+                                : "400"
+                          }}
+                        >
+                          Notifications
+                        </p>
+                      </Grid>
+                    </MenuItem>
+                  </Grid>
+                </Link>
+
+                <Link
+                  onClick={setActiveTab()}
+                  to="/profile"
+                  style={{
+                    textDecoration: "none"
+                  }}
+                >
+                  <Grid container>
+                    <MenuItem
+                      style={{
+                        maxHeight: "55px",
+                        opacity:
+                          window.location.href ===
+                          "http://localhost:3000/profile"
+                            ? "1"
+                            : ".75",
+                        borderBottom:
+                          window.location.href ===
+                          "http://localhost:3000/profile"
+                            ? "3px inset #D3D3D3"
+                            : ""
+                      }}
+                    >
+                      <Grid
+                        row
                         style={{
-                          color: "white",
-                          marginLeft: "10px",
-                          marginTop: "7px"
-                        }}
-                      />
-                      <p
-                        style={{
-                          color: "white",
-                          marginTop: "-12px",
-                          paddingLeft: "-20px",
-                          fontSize:
-                            window.location.href ===
-                            "http://localhost:3000/profile"
-                              ? "15px"
-                              : "14px",
-                          fontWeight:
-                            window.location.href ===
-                            "http://localhost:3000/profile"
-                              ? "700"
-                              : "400"
+                          maxHeight: "55px"
                         }}
                       >
-                        Profile
-                      </p>
-                    </Grid>
-                  </MenuItem>
-                </Grid>
-              </Link>
-            </div>
-          </Toolbar>
+                        <AccountCircleOutlinedIcon
+                          fontSize="medium"
+                          style={{
+                            color: "white",
+                            marginLeft: "10px",
+                            marginTop: "7px"
+                          }}
+                        />
+                        <p
+                          style={{
+                            color: "white",
+                            marginTop: "-12px",
+                            paddingLeft: "-20px",
+                            fontSize:
+                              window.location.href ===
+                              "http://localhost:3000/profile"
+                                ? "15px"
+                                : "14px",
+                            fontWeight:
+                              window.location.href ===
+                              "http://localhost:3000/profile"
+                                ? "700"
+                                : "400"
+                          }}
+                        >
+                          Profile
+                        </p>
+                      </Grid>
+                    </MenuItem>
+                  </Grid>
+                </Link>
+              </div>
+            </Toolbar>
+          </div>
         </div>
-      </div>
-      {renderMobileMenu}
-      {renderMenu}
-    </AppBar>
+        {renderMobileMenu}
+        {renderMenu}
+      </AppBar>
+    </Grid>
   );
 };
 

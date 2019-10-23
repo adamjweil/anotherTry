@@ -5,13 +5,9 @@ import AuthenticatedNavbar from "./AuthenticatedNavbar";
 import UnauthenticatedNavbar from "./UnauthenticatedNavbar";
 import { logout } from "../../../actions/auth";
 
-const location = window.location.href;
+// const location = window.location.href;
 
-const Navbar = ({
-  auth: { isAuthenticated, loading, isAdmin },
-  logout,
-  location
-}) => {
+const Navbar = ({ auth, isAuthenticated, loading, logout }) => {
   const [vals, setVals] = useState({
     activeTab: "home"
   });
@@ -51,7 +47,7 @@ Navbar.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  activeTab: state.activeTab
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(

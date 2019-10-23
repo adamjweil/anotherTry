@@ -1,5 +1,5 @@
 import axios from "axios";
-import { showSuccessSnackbar } from "./alert";
+import { showSuccessSnackbar, showInfoSnackbar } from "./alert";
 import { CREATE_TICKET, GET_TICKETS, TICKET_ERROR } from "./types";
 import { routerMiddleware, push } from "react-router-redux";
 import store from "../store";
@@ -8,14 +8,12 @@ import history from "../history";
 // LOAD all tickets
 export const loadTickets = () => async dispatch => {
   try {
-    const res = await axios.get("/api/ticket");
-    console.log(res);
+    const res = await axios.get("/api/tickets");
     dispatch({
       type: GET_TICKETS,
-      payload: res
+      payload: res.data
     });
   } catch (err) {
-    console.log(err);
     dispatch({
       type: TICKET_ERROR,
       payload: err
@@ -38,6 +36,7 @@ export const fetchTickets = () => async dispatch => {
     });
   }
 };
+
 // CREATE a ticket
 export const createTicket = ({
   formData,
@@ -56,9 +55,10 @@ export const createTicket = ({
       type: CREATE_TICKET,
       payload: res.data
     });
+    dispatch(loadTickets());
     dispatch(showSuccessSnackbar(edit ? "Ticket Updated" : "Ticket Created"));
   } catch (err) {
-    console.log(err);
+    dispatch(showInfoSnackbar(err.msg));
     dispatch({
       type: TICKET_ERROR,
       payload: err.msg

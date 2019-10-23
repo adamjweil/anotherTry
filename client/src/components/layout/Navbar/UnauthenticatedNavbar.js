@@ -131,8 +131,8 @@ const UnauthenticatedNavbar = ({ activeTab, setActiveTab }) => {
           <div className={classes.root} />
           <div className={classes.sectionDesktop}>
             <Link
-              onClick={setActiveTab()}
               to="/"
+              onClick={setActiveTab()}
               style={{ textDecoration: "none", paddingTop: "0px" }}
             >
               <Grid container>
