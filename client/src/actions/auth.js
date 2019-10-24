@@ -14,9 +14,9 @@ import {
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
 import {
-  showSuccessSnackbar,
-  showErrorSnackbar,
-  showInfoSnackbar,
+  // showSuccessSnackbar,
+  // showErrorSnackbar,
+  // showInfoSnackbar,
   showSnackbar
 } from "./alert";
 import { push } from "react-router-redux";
@@ -31,7 +31,6 @@ export const loadUser = (history, showErrorSnackbar) => async dispatch => {
     const res = await axios.get("/api/auth");
     dispatch({
       type: USER_LOADED,
-      isAuthenticated: true,
       payload: res.data
     });
   } catch (err) {
@@ -62,6 +61,7 @@ export const register = ({
       payload: res.data
     });
     store.dispatch(push("/profile"));
+    dispatch(loadUser());
     dispatch(showSnackbar("Successfully Registered!", "success"));
   } catch (err) {
     dispatch(showSnackbar(err.msg, "error"));

@@ -59,6 +59,10 @@ const useStyles = makeStyles(theme => ({
   textFields: {
     width: "375px",
     marginLeft: "20px"
+  },
+  box: {
+    background: "#F8F8F8",
+    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.6)"
   }
 }));
 
@@ -95,13 +99,7 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
   return (
     <Container component="main" maxWidth="md" className={classes.main}>
       <CssBaseline />
-      <Box
-        marginTop="40px"
-        style={{
-          background: "#F8F8F8",
-          boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
-        }}
-      >
+      <Box className={classes.box}>
         <form className={classes.form} onSubmit={login} noValidate>
           <Grid container>
             <Grid item xs={2}></Grid>

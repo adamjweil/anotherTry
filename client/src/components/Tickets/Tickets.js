@@ -11,7 +11,6 @@ import TicketList from "./TicketList";
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
-    // backgroundColor: "#424242"
   }
 }));
 
@@ -37,6 +36,7 @@ Tickets.propTypes = {
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
+
 export default connect(
   mapStateToProps,
   { fetchProfiles, loadUser }

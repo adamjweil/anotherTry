@@ -1,10 +1,6 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
-import {
-  showInfoSnackbar,
-  showErrorSnackbar,
-  showSuccessSnackbar
-} from "./alert";
+import { showInfoSnackbar, showSuccessSnackbar } from "./alert";
 import {
   AUTH_ERROR,
   USER_LOADED,
@@ -30,7 +26,6 @@ export const loadUser = (history, showErrorSnackbar) => async dispatch => {
     dispatch({
       type: AUTH_ERROR
     });
-    console.log(err);
   }
 };
 
