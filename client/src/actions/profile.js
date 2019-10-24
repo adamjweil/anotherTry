@@ -2,11 +2,11 @@ import axios from "axios";
 import { showSuccessSnackbar } from "./alert";
 import {
   GET_PROFILE,
-  GET_ALL_PROFILES,
+  // GET_ALL_PROFILES,
   CREATE_PROFILE,
-  CLEAR_PROFILE,
+  // CLEAR_PROFILE,
   PROFILE_ERROR,
-  FETCH_PROFILE,
+  // FETCH_PROFILE,
   FETCH_PROFILES
 } from "./types";
 import { push } from "react-router-redux";

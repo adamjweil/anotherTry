@@ -43,8 +43,9 @@ const useStyles = makeStyles(theme => ({
   },
   form: {
     width: "100%",
-    margin: theme.spacing(1, 0, 1, 0),
-    padding: "30px"
+    margin: theme.spacing(5, 0, 1, 0),
+    padding: "30px",
+    marginTop: "140px"
   },
   submit: {
     margin: theme.spacing(1, 0, 2)
@@ -53,7 +54,12 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1, 0, 1)
   },
   main: {
-    width: "600px"
+    width: "600px",
+    flexGrow: 1
+  },
+  box: {
+    background: "#F8F8F8",
+    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.6)"
   }
 }));
 
@@ -107,13 +113,7 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
   return (
     <Container component="main" maxWidth="md" className={classes.main}>
       <CssBaseline />
-      <Box
-        marginTop="100px"
-        style={{
-          background: "#F8F8F8",
-          boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.6)"
-        }}
-      >
+      <Box className={classes.box}>
         <form className={classes.form} onSubmit={onRegister}>
           <Grid container>
             <Grid item xs={2}></Grid>
@@ -127,13 +127,10 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
               />
             </Grid>
             <Grid item xs={2}></Grid>
+            <Divider
+              style={{ color: "gray", margin: "auto", width: "300px" }}
+            />
           </Grid>
-          <Divider
-            style={{
-              justifyContent: "center",
-              width: "250px"
-            }}
-          />
 
           <Typography
             component="h6"
@@ -209,7 +206,6 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
             </Grid>
             <Grid item xs={2}></Grid>
           </Grid>
-
           <Grid container>
             <Grid item xs={1}></Grid>
             <Grid item xs={10} sm={10}>
@@ -246,7 +242,6 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
             </Grid>
             <Grid item xs={1}></Grid>
           </Grid>
-
           <Grid container>
             <Grid item xs={1}></Grid>
             <Grid item xs={10} sm={10}>
@@ -279,7 +274,6 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
             </Grid>
             <Grid item xs={1}></Grid>
           </Grid>
-
           <Grid container>
             <Grid item xs={1}></Grid>
             <Grid item xs={11}>
@@ -336,14 +330,18 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
                   borderRadius: "20px",
                   height: "40px",
                   alignItems: "center",
-                  padding: "10px"
+                  padding: "10px 20px 20px 10px"
                 }}
               >
-                <Icon>
-                  <UndoOutlinedIcon />{" "}
-                </Icon>{" "}
-                <p style={{ marginLeft: "10px", marginTop: "-5px" }}>
-                  Go Back To Login
+                <Icon
+                  style={{
+                    marginRight: "15px"
+                  }}
+                >
+                  <UndoOutlinedIcon />
+                </Icon>
+                <p style={{ margin: "0px", fontWeight: "700" }}>
+                  Back To Login
                 </p>
               </Button>
             </Link>

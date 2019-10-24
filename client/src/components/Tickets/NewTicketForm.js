@@ -436,9 +436,9 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center",
     padding: "25px",
-    backgroundColor:
-      "linear-gradient(left, rgba(226,226,226,1) 0%, rgba(219,219,219,1) 24%, rgba(209,209,209,1) 96%, rgba(254,254,254,1) 100%)",
-    borderRadius: "25px",
+    border: "1px solid gray",
+    borderRadius: "5px",
+    backgroundColor: "#F8F8F8",
     boxShadow: "2px 4px 6px 0 hsla(0, 0%,0%, 0.6)"
   },
   form: {
