@@ -12,9 +12,11 @@ import {
   Box,
   InputAdornment,
   IconButton,
-  Icon
+  Icon,
+  Divider
 } from "@material-ui/core";
-import EmailTwoToneIcon from "@material-ui/icons/EmailTwoTone";
+import UndoOutlinedIcon from "@material-ui/icons/UndoOutlined";
+import AlternateEmailOutlinedIcon from "@material-ui/icons/AlternateEmailOutlined";
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { makeStyles } from "@material-ui/core/styles";
@@ -41,7 +43,8 @@ const useStyles = makeStyles(theme => ({
   },
   form: {
     width: "100%",
-    margin: theme.spacing(1, 0, 1, 0)
+    margin: theme.spacing(1, 0, 1, 0),
+    padding: "30px"
   },
   submit: {
     margin: theme.spacing(1, 0, 2)
@@ -50,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1, 0, 1)
   },
   main: {
-    width: "540px"
+    width: "600px"
   }
 }));
 
@@ -108,28 +111,29 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
         marginTop="100px"
         style={{
           background: "#F8F8F8",
-          boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
+          boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.6)"
         }}
       >
-        <form
-          style={{ padding: "30px" }}
-          className={classes.form}
-          onSubmit={onRegister}
-        >
-          <Grid item xs={12}>
-            <center>
+        <form className={classes.form} onSubmit={onRegister}>
+          <Grid container>
+            <Grid item xs={2}></Grid>
+            <Grid item xs={8}>
               <img
                 style={{
-                  justifyContent: "center",
-                  align: "center",
-                  alignItems: "center",
-                  width: "300px"
+                  maxWidth: "300px"
                 }}
                 src={process.env.PUBLIC_URL + "/img/mezologo1.png"}
-                alt=""
+                alt={process.env.PUBLIC_URL + "/img/mezologo1.png"}
               />
-            </center>
+            </Grid>
+            <Grid item xs={2}></Grid>
           </Grid>
+          <Divider
+            style={{
+              justifyContent: "center",
+              width: "250px"
+            }}
+          />
 
           <Typography
             component="h6"
@@ -139,8 +143,7 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
               fontSize: "18px",
               fontWeight: "800",
               marginTop: "5px",
-              marginBottom: "-10px"
-              // textAlign: "center"
+              marginBottom: "-5x"
             }}
           >
             Registration Form
@@ -149,7 +152,7 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
             <Grid item xs={1}></Grid>
             <Grid item xs={10} sm={10}>
               <TextField
-                variant="standard"
+                variant="outlined"
                 margin="normal"
                 id="email"
                 label="Email Address"
@@ -160,10 +163,10 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
                 fullWidth
                 autoFocus
                 InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <Icon edge="end">
-                        <EmailTwoToneIcon />
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Icon edge="end" style={{ opacity: ".5" }}>
+                        <AlternateEmailOutlinedIcon />
                       </Icon>
                     </InputAdornment>
                   )
@@ -174,41 +177,53 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
           </Grid>
           <Grid container>
             <Grid item xs={2}></Grid>
-            <Grid item xs={7}>
+            <Grid item xs={8}>
               <TextField
                 fullWidth
                 autoFocus
                 variant="filled"
                 margin="normal"
-                label="Username"
+                label="What do you go by?"
                 id="username"
                 name="username"
                 value={username}
                 onChange={e => onChange(e)}
-                helperText="What do you go by?"
+                helperText="(For ex... #ajweil)"
+                style={{ marginTop: "20px" }}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">@</InputAdornment>
+                    <InputAdornment position="start">
+                      <h4
+                        style={{
+                          opacity: ".5",
+                          color: "gray",
+                          fontSize: "24px"
+                        }}
+                      >
+                        #
+                      </h4>
+                    </InputAdornment>
                   )
                 }}
               />
             </Grid>
             <Grid item xs={2}></Grid>
           </Grid>
+
           <Grid container>
             <Grid item xs={1}></Grid>
-            <Grid item xs={10}>
+            <Grid item xs={10} sm={10}>
               <TextField
-                variant="standard"
-                margin="normal"
                 name="password"
-                label="Password"
-                type={showPassword ? "text" : "password"}
                 id="password"
                 value={password}
-                onChange={e => onChange(e)}
+                label="Password"
                 required
                 fullWidth
+                variant="outlined"
+                margin="normal"
+                type={showPassword ? "text" : "password"}
+                onChange={e => onChange(e)}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -230,59 +245,76 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
               />
             </Grid>
             <Grid item xs={1}></Grid>
+          </Grid>
+
+          <Grid container>
             <Grid item xs={1}></Grid>
-            <Grid item xs={10}>
+            <Grid item xs={10} sm={10}>
               <TextField
-                variant="standard"
-                margin="normal"
                 name="password2"
-                label="Confirm Password"
-                type={showPassword ? "text" : "password"}
                 id="password2"
                 value={password2}
+                label="Confirm Password"
+                variant="outlined"
+                margin="normal"
+                type={showPassword ? "text" : "password"}
                 onChange={e => onChange(e)}
                 required
                 fullWidth
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        edge="end"
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {" "}
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
               />
-              <Grid item xs={1}></Grid>
             </Grid>
-            <Grid container>
-              <Grid item xs={1}></Grid>
-              <Grid item xs={11}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      name="terms"
-                      onClick={toggleCheck}
-                      value={terms}
-                      color="default"
-                    />
-                  }
-                  label="I agree to the Terms & Conditions"
-                  className={classes.remember}
-                />
-              </Grid>
+            <Grid item xs={1}></Grid>
+          </Grid>
 
-              <Grid item sm={1}></Grid>
-              <Grid item xs={12} sm={4}>
-                <Button
-                  type="submit"
-                  fullWidth
-                  size="large"
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
-                >
-                  REGISTER
-                </Button>
-              </Grid>
+          <Grid container>
+            <Grid item xs={1}></Grid>
+            <Grid item xs={11}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    name="terms"
+                    onClick={toggleCheck}
+                    value={terms}
+                    color="default"
+                  />
+                }
+                label="I agree to the Terms & Conditions"
+                className={classes.remember}
+              />
+            </Grid>
+
+            <Grid item sm={1}></Grid>
+            <Grid item xs={12} sm={10}>
+              <Button
+                type="submit"
+                fullWidth
+                size="large"
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                REGISTER
+              </Button>
             </Grid>
           </Grid>
         </form>
 
         <Grid container>
           <Grid item sm={1}></Grid>
-
           <Grid
             item
             xs={12}
@@ -301,24 +333,18 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
                 className={classes.submit}
                 style={{
                   textDecoration: "none",
-                  borderRadius: "20px"
+                  borderRadius: "20px",
+                  height: "40px",
+                  alignItems: "center",
+                  padding: "10px"
                 }}
               >
-                <img
-                  style={{
-                    justifyContent: "center",
-                    align: "center",
-                    alignItems: "center",
-                    height: "20px",
-                    width: "20px"
-                  }}
-                  color="secondary"
-                  src={
-                    process.env.PUBLIC_URL + "/img/arrow_back_grey_192x192.png"
-                  }
-                  alt=""
-                />
-                Go Back To Login
+                <Icon>
+                  <UndoOutlinedIcon />{" "}
+                </Icon>{" "}
+                <p style={{ marginLeft: "10px", marginTop: "-5px" }}>
+                  Go Back To Login
+                </p>
               </Button>
             </Link>
           </Grid>

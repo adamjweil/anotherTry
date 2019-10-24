@@ -1,6 +1,13 @@
 import { SET_ALERT, REMOVE_ALERT } from "../actions/types";
 
-const INITIAL_STATE = {};
+const INITIAL_STATE = {
+  successSnackbarOpen: false,
+  errorSnackbarOpen: false,
+  infoSnackbarOpen: false,
+  successSnackbarMessage: "",
+  infoSnackbarMessage: "",
+  errorSnackbarMessage: ""
+};
 
 export default function(state = INITIAL_STATE, action) {
   const { type, payload } = action;

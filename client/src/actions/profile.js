@@ -48,18 +48,11 @@ export const fetchProfile = id => async dispatch => {
 };
 
 export const fetchProfiles = () => async dispatch => {
-  try {
-    const res = await axios.get("/api/profiles");
-    dispatch({
-      type: FETCH_PROFILES,
-      payload: res.data
-    });
-  } catch (err) {
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
-  }
+  const res = await axios.get("/api/profiles");
+  dispatch({
+    type: FETCH_PROFILES,
+    payload: res.data
+  });
 };
 
 // Fetch all Profiles

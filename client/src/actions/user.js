@@ -1,6 +1,11 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import {
+  showInfoSnackbar,
+  showErrorSnackbar,
+  showSuccessSnackbar
+} from "./alert";
+import {
   AUTH_ERROR,
   USER_LOADED,
   FETCH_USER,
@@ -26,7 +31,6 @@ export const loadUser = (history, showErrorSnackbar) => async dispatch => {
       type: AUTH_ERROR
     });
     console.log(err);
-    dispatch(showErrorSnackbar(err.msg));
   }
 };
 
@@ -36,10 +40,12 @@ export const incrementNotificationCount = () => async dispatch => {
     dispatch({
       type: NOTIFCATION_INCREMENT
     });
+    showSuccessSnackbar("Notification Incremented");
   } catch (err) {
     dispatch({
       type: AUTH_ERROR
     });
+    showInfoSnackbar("Increment Failed");
   }
 };
 
@@ -49,10 +55,12 @@ export const decrementNotificationCount = () => async dispatch => {
     dispatch({
       type: NOTIFCATION_DECREMENT
     });
+    showSuccessSnackbar("Notification Decremented");
   } catch (err) {
     dispatch({
       type: AUTH_ERROR
     });
+    showInfoSnackbar("Decrement Failed");
   }
 };
 
