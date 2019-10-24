@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
 import {
   Card,
   Grid,
@@ -30,6 +31,7 @@ const UserList = ({ users, fetchUsers, fetchProfiles, profiles }) => {
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
+
   return users.map(user => {
     return (
       <Grid
@@ -89,14 +91,13 @@ UserList.propTypes = {
   users: PropTypes.array.isRequired
 };
 
-const mapStateToProps = state => {
-  return {
-    users: Object.values(state.users),
-    profiles: Object.values(state.profile.profiles)
-  };
-};
+const mapStateToProps = state => ({
+  user: state.auth.user,
+  users: Object.values(state.users),
+  profiles: Object.values(state.profile.profiles)
+});
 
 export default connect(
   mapStateToProps,
   { fetchUsers, fetchProfiles }
-)(UserList);
+)(withRouter(UserList));

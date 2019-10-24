@@ -14,7 +14,7 @@ const Alert = ({ alerts, removeAlert }) => {
       alert.alertType === "danger" ? (
         <div className="ui negative danger message" key={alert.id}>
           <i className="close icon" onClick={onSubmit(alert.id)}></i>
-          <div className="header">{alert.msg}</div>
+          <div className="header">{alert.message}</div>
         </div>
       ) : (
         <div className="ui positive success message" key={alert.id}>

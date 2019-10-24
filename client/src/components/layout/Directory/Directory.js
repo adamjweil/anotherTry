@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
@@ -7,8 +7,12 @@ import VerticalMenu from "./VerticalMenu";
 import SearchDirectory from "./SearchDirectory";
 import UserList from "./UserList";
 import DirectoryHeader from "./DirectoryHeader";
+import { withRouter } from "react-router-dom";
 
 const Directory = ({ users, profiles, fetchUsers }) => {
+  useEffect(() => {
+    fetchUsers();
+  }, []);
   return (
     <Grid container>
       <Grid item xs={2}>
@@ -34,14 +38,14 @@ const Directory = ({ users, profiles, fetchUsers }) => {
 
 Directory.propTypes = {
   fetchUsers: PropTypes.func.isRequired,
-  users: PropTypes.array.isRequired
+  users: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
-  return { users: Object.values(state.users) };
-};
+const mapStateToProps = state => ({
+  users: state.users
+});
 
 export default connect(
   mapStateToProps,
   { fetchUsers }
-)(Directory);
+)(withRouter(Directory));

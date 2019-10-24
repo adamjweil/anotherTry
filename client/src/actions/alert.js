@@ -22,6 +22,22 @@ export const removeAlert = id => dispatch => {
   });
 };
 
+export const showSnackbar = (message, type, timeout = 5000) => dispatch => {
+  const id = uuid.v4();
+
+  if (type === "success") {
+    dispatch({ type: SNACKBAR_SUCCESS, payload: { message, id } });
+  }
+  if (type === "error") {
+    dispatch({ type: SNACKBAR_ERROR, payload: { message, id } });
+  }
+  if (type === "info") {
+    dispatch({ type: SNACKBAR_INFO, payload: { message, id } });
+  } else {
+    console.error("error");
+  }
+};
+
 export const showSuccessSnackbar = (message, timeout = 5000) => dispatch => {
   const id = uuid.v4();
   dispatch({ type: SNACKBAR_SUCCESS, payload: { message, id } });

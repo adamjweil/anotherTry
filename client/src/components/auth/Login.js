@@ -19,7 +19,7 @@ import {
   makeStyles
 } from "@material-ui/core";
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
-import EmailTwoToneIcon from "@material-ui/icons/EmailTwoTone";
+import AlternateEmailOutlinedIcon from "@material-ui/icons/AlternateEmailOutlined";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import { login, signIn } from "../../actions/auth";
 import { setAlert } from "../../actions/alert";
@@ -39,7 +39,6 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     maxWidth: "100%",
-    // marginBottom: "-30px",
     alignItems: "center"
   },
   form: {
@@ -86,10 +85,8 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
   const handleMouseDownPassword = e => {
     e.preventDefault();
   };
-
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-
   const onSubmit = async e => {
     e.preventDefault();
     login(email, password);
@@ -122,13 +119,10 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
           </Grid>
           <Typography
             component="h6"
-            variant="h6"
             color="primary"
             style={{
-              fontSize: "18x",
               fontWeight: "800",
               marinLeft: "100px",
-              marginBottom: "-10px",
               marginTop: "5px"
             }}
           >
@@ -136,22 +130,21 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
           </Typography>
 
           <TextField
-            variant="standard"
-            className={classes.textFields}
-            margin="normal"
-            id="email"
-            label="Email Address"
             name="email"
+            id="email"
+            className={classes.textFields}
             value={email}
+            label="Email Address"
+            variant="outlined"
+            margin="normal"
             onChange={e => onChange(e)}
             required
-            // fullWidth
             autoFocus
             InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Icon edge="end">
-                    <EmailTwoToneIcon />
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Icon edge="end" style={{ opacity: ".7" }}>
+                    <AlternateEmailOutlinedIcon />
                   </Icon>
                 </InputAdornment>
               )
@@ -159,16 +152,15 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
           />
 
           <TextField
-            margin="normal"
-            className={classes.textFields}
             name="password"
-            label="Password"
-            type={showPassword ? "text" : "password"}
+            className={classes.textFields}
             value={password}
-            onChange={e => onChange(e)}
+            label="Password"
             required
-            // fullWidth
-            variant="standard"
+            margin="normal"
+            type={showPassword ? "text" : "password"}
+            onChange={e => onChange(e)}
+            variant="outlined"
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -255,7 +247,7 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
                   </Button>
                 </Link>
               </Grid>
-
+              <Grid item sm={2}></Grid>
               <Grid item xs={12} sm={5}>
                 <GoogleAuth />
               </Grid>

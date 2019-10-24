@@ -16,7 +16,8 @@ import setAuthToken from "../utils/setAuthToken";
 import {
   showSuccessSnackbar,
   showErrorSnackbar,
-  showInfoSnackbar
+  showInfoSnackbar,
+  showSnackbar
 } from "./alert";
 import { push } from "react-router-redux";
 import store from "../store";
@@ -61,9 +62,9 @@ export const register = ({
       payload: res.data
     });
     store.dispatch(push("/profile"));
-    dispatch(showSuccessSnackbar("Successfully Registered!"));
+    dispatch(showSnackbar("Successfully Registered!", "success"));
   } catch (err) {
-    dispatch(showErrorSnackbar(err.msg));
+    dispatch(showSnackbar(err.msg, "error"));
     dispatch({
       type: REGISTER_FAIL
     });
@@ -87,9 +88,9 @@ export const login = (email, password) => async dispatch => {
       payload: res.data
     });
     dispatch(loadUser());
-    dispatch(showSuccessSnackbar("Successfully logged in"));
+    dispatch(showSnackbar("Successfully logged in", "success"));
   } catch (err) {
-    dispatch(showErrorSnackbar(err.msg));
+    dispatch(showSnackbar(err.msg, "error"));
     dispatch({
       type: LOGIN_FAIL
     });
@@ -108,10 +109,10 @@ export const logout = () => async dispatch => {
   dispatch({
     type: CLEAR_PROFILE
   });
+  dispatch(showSnackbar("Successfully logged out", "info"));
   dispatch({
     type: LOGOUT
   });
-  dispatch(showInfoSnackbar("Successfully logged out"));
 };
 
 // Sign in w GoogleAuth
