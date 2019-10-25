@@ -7,7 +7,6 @@ import {
   MenuItem,
   InputLabel,
   Button,
-  Paper,
   InputAdornment,
   makeStyles,
   Divider,
@@ -16,8 +15,6 @@ import {
   Select,
   Container
 } from "@material-ui/core";
-// import { Form, Field } from "react-final-form";
-// import { TextField, Checkbox, Radio, Select } from "final-form-material-ui";
 import SaveIcon from "@material-ui/icons/Save";
 import PropTypes from "prop-types";
 import { DatePicker } from "@material-ui/pickers";
@@ -37,14 +34,11 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     margin: theme.spacing(1, 1, 1, 2),
-    // display: "flex",
-    // flexDirection: "column",
     alignItems: "center",
     color: "#F8F8F8",
     borderRadius: "5px"
   },
   form: {
-    // width: "100%",
     margin: theme.spacing(1),
     padding: theme.spacing(3),
     backgroundColor: "#F8F8F8",
@@ -55,7 +49,6 @@ const useStyles = makeStyles(theme => ({
   },
   textField: {
     margin: theme.spacing(1)
-    // display: "inLine"
   },
   date: {
     marginLeft: theme.spacing(3),
