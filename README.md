@@ -131,5 +131,8 @@ User Stories:
     - Fetching tickets
     - oAuth integration on top of in app authentication
 
-      - Form for Creating Profile
+      #Form for Creating Profile
       https://material-ui.com/getting-started/templates/checkout/
+
+      #React Docs
+      https://reactjs.org/tutorial/tutorial.html
