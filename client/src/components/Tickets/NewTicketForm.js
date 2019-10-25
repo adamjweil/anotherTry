@@ -436,19 +436,18 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center",
     padding: "25px",
-    border: "1px solid gray",
-    borderRadius: "5px",
     backgroundColor: "#F8F8F8",
-    boxShadow: "2px 4px 6px 0 hsla(0, 0%,0%, 0.6)"
+    boxShadow: "0px 4px 6px 0 hsla(0, 0%,0%, 0.6)"
   },
   form: {
-    borderRadius: "20px",
+    borderRadius: "3px",
     margin: theme.spacing(1, 0, 3),
     padding: theme.spacing(2, 5, 5)
   },
   message: {
     fontSize: "36px",
-    fontWeight: "600"
+    fontWeight: "600",
+    color: "gray"
   },
   subMessage: {
     fontSize: "18px",
@@ -544,7 +543,7 @@ const NewTicketForm = ({
                   name="ticketType"
                   onChange={e => onChange(e)}
                   value={ticketType}
-                  variant="filled"
+                  variant="standard"
                 >
                   <MenuItem value="">Type</MenuItem>
                   {TICKETTYPES.map(type => (
@@ -566,7 +565,7 @@ const NewTicketForm = ({
                   name="source"
                   onChange={e => onChange(e)}
                   value={source}
-                  variant="filled"
+                  variant="standard"
                 >
                   <MenuItem value="">Source</MenuItem>
                   {SOURCES.map(type => (
@@ -589,7 +588,7 @@ const NewTicketForm = ({
                   name="environment"
                   onChange={e => onChange(e)}
                   value={environment}
-                  variant="filled"
+                  variant="standard"
                 >
                   {ENVIRONMENTS.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -610,7 +609,7 @@ const NewTicketForm = ({
                   name="bucket"
                   onChange={e => onChange(e)}
                   value={bucket}
-                  variant="filled"
+                  variant="standard"
                 >
                   {BUCKETS.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -627,7 +626,7 @@ const NewTicketForm = ({
                   name="project"
                   onChange={e => onChange(e)}
                   value={project}
-                  variant="filled"
+                  variant="standard"
                 >
                   {PROJECTS.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -649,7 +648,7 @@ const NewTicketForm = ({
                   name="release"
                   onChange={e => onChange(e)}
                   value={release}
-                  variant="filled"
+                  variant="standard"
                 >
                   {RELEASES.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -670,7 +669,7 @@ const NewTicketForm = ({
                   name="process"
                   onChange={e => onChange(e)}
                   value={process}
-                  variant="filled"
+                  variant="standard"
                 >
                   {PROCESSES.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -688,7 +687,7 @@ const NewTicketForm = ({
               >
                 <InputLabel> Owner: </InputLabel>
                 <Select
-                  variant="filled"
+                  variant="standard"
                   name="owner"
                   onChange={e => onChange(e)}
                   value={owner}
@@ -709,7 +708,7 @@ const NewTicketForm = ({
               >
                 <InputLabel> Fixer: </InputLabel>
                 <Select
-                  variant="filled"
+                  variant="standard"
                   name="fixer"
                   onChange={e => onChange(e)}
                   value={fixer}
@@ -734,7 +733,7 @@ const NewTicketForm = ({
                   name="status"
                   onChange={e => onChange(e)}
                   value={status}
-                  variant="filled"
+                  variant="standard"
                 >
                   {STATUSVALUES.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -756,7 +755,7 @@ const NewTicketForm = ({
                   name="standing"
                   onChange={e => onChange(e)}
                   value={standing}
-                  variant="filled"
+                  variant="standard"
                 >
                   {STANDINGVALUES.map(type => (
                     <MenuItem value={type.text} key={type.key}>
@@ -777,7 +776,7 @@ const NewTicketForm = ({
                   name="ticketId"
                   value={ticketId}
                   onChange={e => onChange(e)}
-                  variant="filled"
+                  variant="outlined"
                 />
               </FormControl>
             </Grid>
@@ -790,7 +789,7 @@ const NewTicketForm = ({
               >
                 <FormLabel commponent="legend"> Importance: </FormLabel>
                 <RadioGroup
-                  // variant="filled"
+                  // variant="standard"
                   aria-label="importance"
                   name="importance"
                   value={importance}
@@ -822,7 +821,7 @@ const NewTicketForm = ({
               >
                 <InputLabel>Owner:</InputLabel>
                 <Select
-                  variant="filled"
+                  variant="standard"
                   name="owner"
                   onChange={e => onChange(e)}
                   value={owner}
@@ -843,7 +842,7 @@ const NewTicketForm = ({
               >
                 <InputLabel>Fixer:</InputLabel>
                 <Select
-                  variant="filled"
+                  variant="standard"
                   name="fixer"
                   onChange={e => onChange(e)}
                   value={fixer}
@@ -867,7 +866,7 @@ const NewTicketForm = ({
                   name="tester"
                   onChange={e => onChange(e)}
                   value={tester}
-                  variant="filled"
+                  variant="standard"
                 >
                   {profiles.map(profile => (
                     <MenuItem value={profile} key={profile}>

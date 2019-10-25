@@ -19,6 +19,7 @@ import {
   // showInfoSnackbar,
   showSnackbar
 } from "./alert";
+import { fetchProfile } from "./profile";
 import { push } from "react-router-redux";
 import store from "../store";
 
@@ -33,6 +34,7 @@ export const loadUser = (history, showErrorSnackbar) => async dispatch => {
       type: USER_LOADED,
       payload: res.data
     });
+    dispatch(fetchProfile());
   } catch (err) {
     dispatch({
       type: AUTH_ERROR

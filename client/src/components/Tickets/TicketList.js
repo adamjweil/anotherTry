@@ -49,18 +49,15 @@ const useStyles = makeStyles(theme => ({
 const TicketList = ({ users, tickets, fetchTickets, loadTickets }) => {
   useEffect(() => {
     fetchTickets();
-  }, []);
+  }, [fetchTickets]);
   const classes = useStyles();
 
-  const now = Date.now();
-
-  let options = {};
   const formatDate = input => {
     let options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(input).toLocaleDateString([], options);
   };
-
   const x = formatDate(Date.now());
+
   return (
     <Grid container className={classes.root}>
       <Paper className={classes.paper}>

@@ -53,17 +53,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProfileCard = ({
-  auth,
-  user,
-  loadUser,
-  profile: { profile },
-  loadCurrentProfile
-}) => {
+const ProfileCard = ({ auth, user, loadUser, profile, loadCurrentProfile }) => {
   useEffect(() => {
-    loadUser();
-    // loadCurrentProfile();
-  }, [loadUser]);
+    loadCurrentProfile();
+  }, [loadCurrentProfile]);
   const classes = useStyles();
 
   return (
@@ -173,7 +166,7 @@ ProfileCard.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile,
+  profile: state.profile.profile,
   user: state.auth.user
 });
 
