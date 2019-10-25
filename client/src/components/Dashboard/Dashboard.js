@@ -18,11 +18,11 @@ const Dashboard = ({ profile, loading, user, submittedProfileForm }) => {
         <DashboardHeader />
       </Grid>
       <Grid container>
-        <Grid item sm={2}></Grid>
-        <Grid item sm={8}>
+        <Grid item sm={1}></Grid>
+        <Grid item sm={10}>
           <ProfileForm />
         </Grid>
-        <Grid item sm={2}></Grid>
+        <Grid item sm={1}></Grid>
       </Grid>
     </Grid>
   );

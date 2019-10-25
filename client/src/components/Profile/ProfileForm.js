@@ -4,16 +4,17 @@ import { connect } from "react-redux";
 import {
   Grid,
   FormControl,
-  TextField,
-  Select,
   MenuItem,
   InputLabel,
   Button,
   Paper,
   InputAdornment,
   makeStyles,
-  Divider
+  Divider,
+  Typography
 } from "@material-ui/core";
+import { Form, Field } from "react-final-form";
+import { TextField, Checkbox, Radio, Select } from "final-form-material-ui";
 import SaveIcon from "@material-ui/icons/Save";
 import PropTypes from "prop-types";
 import { DatePicker } from "@material-ui/pickers";
@@ -38,15 +39,14 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center",
     color: "#F8F8F8",
-    borderRadius: "20px"
+    borderRadius: "5px"
   },
   form: {
     minWidth: "800px",
-    margin: theme.spacing(1),
+    margin: theme.spacing(2),
     padding: theme.spacing(1),
-    backgroundColor: "#424242",
-    color: "#F8F8F8",
-    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
+    backgroundColor: "#F8F8F8",
+    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.6)"
   },
   submit: {
     margin: theme.spacing(3, 0, 3)
@@ -132,24 +132,28 @@ const ProfileForm = ({
   };
 
   return (
-    <Grid container>
+    <Grid container className={classes.root}>
       <Grid item xs={12}>
-        <form className={classes.form} onSubmit={onSubmit}>
-          <Paper className={classes.paper}>
-            <Grid item xs={12} className={classes.message}>
-              <center>
-                <h2>Create Profile Below</h2>
-                <Divider
-                  style={{
-                    marginBottom: "20px",
-                    marginTop: "-30px",
-                    width: "425px"
-                  }}
-                />
-              </center>
-            </Grid>
-            <Grid container>
-              <Grid item xs={12} sm={5}>
+        <Paper className={classes.paper}>
+          <Grid item xs={12} className={classes.message}>
+            <Typography variant="h4" align="center" component="h1" gutterBottom>
+              Set up a Profile!
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <center>
+              <Divider
+                style={{
+                  height: "3px",
+                  width: "425px"
+                }}
+              />
+            </center>
+          </Grid>
+
+          <Grid container>
+            <form inline={true} className={classes.form} onSubmit={onSubmit}>
+              <Grid item>
                 <FormControl>
                   <TextField
                     className={classes.textField}
@@ -170,7 +174,7 @@ const ProfileForm = ({
                 </FormControl>
               </Grid>
 
-              <Grid item xs={12} sm={4}>
+              <Grid item>
                 <FormControl>
                   <TextField
                     className={classes.textField}
@@ -209,8 +213,7 @@ const ProfileForm = ({
                   />
                 </FormControl>
               </Grid>
-            </Grid>
-            <Grid container style={{ marginTop: "30px" }}>
+
               <Grid item xs={12} sm={4}>
                 <FormControl>
                   <TextField
@@ -323,43 +326,44 @@ const ProfileForm = ({
                   </Select>
                 </FormControl>
               </Grid>
-            </Grid>
-            <Grid item sm={12}>
-              <FormControl
-                fullWidth
-                style={{
-                  width: "550px"
-                }}
-              >
-                <InputLabel>Brief Bio:</InputLabel>
-                <TextField
+
+              <Grid item sm={12}>
+                <FormControl
                   fullWidth
-                  name="bio"
-                  value={bio}
-                  onChange={e => onChange(e)}
-                  placeholder="Two or three sentences is fine..."
-                  multiline={true}
-                  variant="outlined"
-                  style={{ marginTop: "50px" }}
-                  rows={5}
-                  rowsMax={10}
-                />
-              </FormControl>
-            </Grid>
-            <Grid item sm={12}></Grid>
-            <Grid item xs={12}>
-              <Button
-                className={classes.submit}
-                type="submit"
-                variant="contained"
-                color="primary"
-                size="large"
-              >
-                <SaveIcon style={{ marginRight: "5px" }} /> Save
-              </Button>
-            </Grid>
-          </Paper>
-        </form>
+                  style={{
+                    width: "550px"
+                  }}
+                >
+                  <InputLabel>Brief Bio:</InputLabel>
+                  <TextField
+                    fullWidth
+                    name="bio"
+                    value={bio}
+                    onChange={e => onChange(e)}
+                    placeholder="Two or three sentences is fine..."
+                    multiline={true}
+                    variant="outlined"
+                    style={{ marginTop: "50px" }}
+                    rows={5}
+                    rowsMax={10}
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item sm={12}></Grid>
+              <Grid item xs={12}>
+                <Button
+                  className={classes.submit}
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                >
+                  <SaveIcon style={{ marginRight: "5px" }} /> Save
+                </Button>
+              </Grid>
+            </form>
+          </Grid>
+        </Paper>
       </Grid>
     </Grid>
   );
