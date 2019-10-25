@@ -8,11 +8,10 @@ const DashboardHeader = ({ user, auth }) => {
     <Grid container>
       <Grid
         item
-        xs={12}
-        sm={9}
+        xs={10}
         style={{
-          marginLeft: "100px",
-          borderBottom: "3px solid #F8F8F8"
+          marginLeft: "10px",
+          borderBottom: "1px solid black"
         }}
       >
         <Typography style={{ fontSize: "36px", fontWeight: "550" }}>
