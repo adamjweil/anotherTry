@@ -120,6 +120,12 @@ User Stories:
     - In order for Users to be able to create relationships between other users (ie, being on the same ticket) or referencing, I needed to make a Select component that retrieves all of the Profiles from state, and displayed them in a Dropdown for the User to select from
     - Owner, Fixer, and Tested have beed added to the ticket form
 
+    #10/26
+    - Directory page is now pulling in profiles
+      - Fixed
+    - Built component to display tickets
+    - Progress on TicketForm
+
     ---
 
     ##TO DO

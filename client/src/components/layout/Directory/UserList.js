@@ -26,16 +26,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const UserList = ({ users, fetchUsers, fetchProfiles, profiles }) => {
+const UserList = ({ fetchProfiles, profiles }) => {
   const classes = useStyles();
   useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
+    fetchProfiles();
+  }, [fetchProfiles]);
 
-  return users.map(user => {
+  return profiles.map(profile => {
     return (
       <Grid
-        key={user._id}
+        key={profile._id}
         item
         xs={12}
         sm={3}
@@ -46,7 +46,7 @@ const UserList = ({ users, fetchUsers, fetchProfiles, profiles }) => {
             <CardMedia
               className={classes.media}
               style={{ marginTop: "10px" }}
-              image={user.avatar}
+              image={profile.user.avatar}
               title="User Avatar"
             />
             <CardContent>
@@ -58,8 +58,7 @@ const UserList = ({ users, fetchUsers, fetchProfiles, profiles }) => {
                   color: "#696969"
                 }}
               >
-                {user.profile && user.profile.firstName}{" "}
-                {user.profile && user.profile.lastName}
+                {profile && profile.firstName} {profile && profile.lastName}
               </Typography>
               eMail:
               <Typography
@@ -69,7 +68,7 @@ const UserList = ({ users, fetchUsers, fetchProfiles, profiles }) => {
                   color: "#696969"
                 }}
               >
-                {user.email}
+                {profile && profile.user.email}
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -87,17 +86,17 @@ const UserList = ({ users, fetchUsers, fetchProfiles, profiles }) => {
 };
 
 UserList.propTypes = {
-  fetchUsers: PropTypes.func.isRequired,
-  users: PropTypes.array.isRequired
+  fetchProfiles: PropTypes.func.isRequired
+  // profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   user: state.auth.user,
-  users: Object.values(state.users),
+  profile: state.profile,
   profiles: Object.values(state.profile.profiles)
 });
 
 export default connect(
   mapStateToProps,
-  { fetchUsers, fetchProfiles }
+  { fetchProfiles }
 )(withRouter(UserList));

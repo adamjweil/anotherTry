@@ -62,7 +62,7 @@ router.post("/", auth, async (req, res) => {
   try {
     // Update
     let profile = await Profile.findOneAndUpdate(
-      { user: req.user.id },
+      { user: req.user._id },
       { $set: profileFields },
       { new: true, upsert: true }
     );
@@ -78,7 +78,11 @@ router.post("/", auth, async (req, res) => {
 // @access Public
 router.get("/", async (req, res) => {
   try {
-    const profiles = await Profile.find().populate("user", ["email", "avatar"]);
+    const profiles = await Profile.find().populate("user", [
+      "email",
+      "avatar",
+      "username"
+    ]);
     res.json(profiles);
   } catch (err) {
     console.error(err.message);

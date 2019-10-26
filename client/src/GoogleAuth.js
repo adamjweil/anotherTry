@@ -56,8 +56,8 @@ class GoogleAuth extends React.Component {
               fullWidth
               style={{ fontSize: "15px", color: "red" }}
               size="small"
-              color="information"
-              variant="filled"
+              color="inherit"
+              variant="contained"
               onClick={this.onSignInClick}
             >
               <img
