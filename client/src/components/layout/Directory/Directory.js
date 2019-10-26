@@ -18,13 +18,13 @@ const Directory = ({ users, profiles, fetchUsers }) => {
       <Grid item xs={2}>
         <VerticalMenu />
       </Grid>
-      <Grid item="row" xs={10}>
+      <Grid item xs={10}>
         <DirectoryHeader />
       </Grid>
       <Grid item sm={2}></Grid>
-      <Grid item="row" sm={10}>
+      <Grid item sm={10}>
         <SearchDirectory />
-        <Grid item="row" sm={12}>
+        <Grid item sm={12}>
           <div style={{ marginTop: "0px" }} className="ui celled list">
             <UserList />
           </div>
@@ -37,8 +37,7 @@ const Directory = ({ users, profiles, fetchUsers }) => {
 };
 
 Directory.propTypes = {
-  fetchUsers: PropTypes.func.isRequired,
-  users: PropTypes.object.isRequired
+  fetchUsers: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

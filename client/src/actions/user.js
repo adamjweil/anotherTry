@@ -17,7 +17,6 @@ export const loadUser = (history, showErrorSnackbar) => async dispatch => {
   }
   try {
     const res = await axios.get("/api/auth");
-    console.log(res);
     dispatch({
       type: USER_LOADED,
       payload: res.data
@@ -61,16 +60,20 @@ export const decrementNotificationCount = () => async dispatch => {
 
 // Fetch all Users
 export const fetchUsers = () => async dispatch => {
-  const res = await axios.get("/api/users");
-  dispatch({
-    type: FETCH_USERS,
-    payload: res.data
-  });
+  try {
+    const res = await axios.get("/api/users");
+    dispatch({
+      type: FETCH_USERS,
+      payload: res.data
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 // Fetch specific User
 export const fetchUser = id => async dispatch => {
-  const res = await axios.get(`api/users/${id}`);
+  const res = await axios.get(`/api/users/${id}`);
   dispatch({
     type: FETCH_USER,
     payload: res.data
