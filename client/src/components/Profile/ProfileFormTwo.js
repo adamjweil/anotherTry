@@ -23,7 +23,7 @@ import {
   loadCurrentProfile,
   fetchProfile
 } from "../../actions/profile";
-import { loadUser } from "../../actions/user";
+import { loadUser, fetchUsers } from "../../actions/user";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -114,6 +114,7 @@ const ProfileFormTwo = ({
   createProfile,
   loadCurrentProfile,
   fetchProfiles,
+  fetchUsers,
   history,
   profiles
 }) => {
@@ -151,7 +152,7 @@ const ProfileFormTwo = ({
 
   const onSubmit = e => {
     e.preventDefault();
-    createProfile({ formData }, history);
+    createProfile({ formData, history });
   };
 
   return (
@@ -285,7 +286,7 @@ const ProfileFormTwo = ({
                       helperText={
                         <FormHelperText
                           className={classes.dateHelperText}
-                          error="true"
+                          error={true}
                         >
                           (What do you go by??)
                         </FormHelperText>
@@ -329,7 +330,7 @@ const ProfileFormTwo = ({
                     helperText={
                       <FormHelperText
                         className={classes.dateHelperText}
-                        error="true"
+                        error={true}
                       >
                         (Select the date from the calendar chooser below!)
                       </FormHelperText>
@@ -391,5 +392,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createProfile, loadUser, loadCurrentProfile, fetchProfile }
+  { createProfile, loadUser, loadCurrentProfile, fetchProfile, fetchUsers }
 )(withRouter(ProfileFormTwo));

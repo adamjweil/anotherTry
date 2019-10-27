@@ -85,13 +85,12 @@ export const createProfile = ({
       }
     };
     const res = await axios.post("/api/profiles", formData, config);
-    dispatch({
+    await dispatch({
       type: CREATE_PROFILE,
       payload: res.data
     });
-    dispatch(loadCurrentProfile());
-    store.dispatch(push("/profile"));
     dispatch(showSuccessSnackbar(edit ? "Profile Updated" : "Profile Created"));
+    history.push("/profile");
   } catch (err) {
     console.log(err);
     const errors = err.response.data.errors;
