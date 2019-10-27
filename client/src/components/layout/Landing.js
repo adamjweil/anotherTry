@@ -23,7 +23,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Landing = ({ auth: { isAuthenticated }, history, login }) => {
+const Landing = ({
+  auth: { isAuthenticated },
+  profile: { submittedProfileForm },
+  history,
+  login
+}) => {
   // const [values, setValues] = React.useState({
   //   loginOrRegister: true
   // });
@@ -32,7 +37,9 @@ const Landing = ({ auth: { isAuthenticated }, history, login }) => {
   // };
 
   const classes = useStyles();
-  if (isAuthenticated === true) {
+  if (isAuthenticated === true && submittedProfileForm === true) {
+    return <Redirect to="/profile" />;
+  } else if (isAuthenticated === true) {
     return <Redirect to="/dashboard" />;
   } else {
     return (
@@ -69,7 +76,8 @@ Landing.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  profile: state.profile
 });
 
 export default connect(
