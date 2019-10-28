@@ -138,7 +138,13 @@ User Stories:
     - oAuth integration on top of in app authentication
 
       #Form for Creating Profile
-      https://material-ui.com/getting-started/templates/checkout/
+        https://material-ui.com/getting-started/templates/checkout/
 
       #React Docs
-      https://reactjs.org/tutorial/tutorial.html
+        https://reactjs.org/tutorial/tutorial.html
+
+      #GraphQL Docs
+        https://github.com/the-road-to-graphql/react-apollo-client-with-redux-example
+      Part #1 in 3-Part Tutorial
+        https://www.robinwieruch.de/react-apollo-client-example
+          (sing Apollo Client with GraphQL)

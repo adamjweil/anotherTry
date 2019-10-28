@@ -99,7 +99,7 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
       try {
         await register({ email, username, terms, password });
       } catch (err) {
-        showErrorSnackbar(err.msg);
+        showErrorSnackbar("Check Console...");
         console.log(err);
       }
     }

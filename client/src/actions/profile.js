@@ -17,8 +17,7 @@ import { loadUser } from "./user";
 //LOAD profile
 export const loadCurrentProfile = () => async dispatch => {
   try {
-    const res = await axios.get("/api/profile/me");
-    console.log(res);
+    const res = await axios.get("/api/profiles/me");
     dispatch({
       type: GET_PROFILE,
       payload: res.data
@@ -33,9 +32,25 @@ export const loadCurrentProfile = () => async dispatch => {
 };
 
 // Fetch specific Profile
-export const fetchProfile = id => async dispatch => {
+export const fetchProfileById = id => async dispatch => {
   try {
-    const res = await axios.get(`/api/profile/user/${id}`);
+    const res = await axios.get(`/api/profiles/user/${id}`);
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Fetch specific Profile
+export const fetchProfile = () => async dispatch => {
+  try {
+    const res = await axios.get("/api/profiles/me");
     dispatch({
       type: GET_PROFILE,
       payload: res.data
@@ -93,6 +108,7 @@ export const createProfile = ({
     history.push("/profile");
   } catch (err) {
     console.log(err);
+    debugger;
     const errors = err.response.data.errors;
     if (errors) {
       errors.forEach(error => dispatch(showSuccessSnackbar(error.msg)));

@@ -6,10 +6,10 @@ import { Grid } from "@material-ui/core";
 import { loadCurrentProfile } from "../../actions/profile";
 import ProfileCard from "./ProfileCard";
 
-const Profile = ({ fetchProfile, loadCurrentProfile, auth, match }) => {
+const Profile = ({ profile, loadCurrentProfile, auth, match }) => {
   useEffect(() => {
     loadCurrentProfile();
-  });
+  }, [loadCurrentProfile]);
 
   return (
     <Fragment>

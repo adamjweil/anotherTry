@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -54,9 +54,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ProfileCard = ({ auth, user, loadUser, profile, loadCurrentProfile }) => {
-  useEffect(() => {
-    loadCurrentProfile();
-  }, [loadCurrentProfile]);
+  // useEffect(() => {
+  //   loadCurrentProfile();
+  // }, []);
   const classes = useStyles();
 
   return (
@@ -81,18 +81,15 @@ const ProfileCard = ({ auth, user, loadUser, profile, loadCurrentProfile }) => {
               }}
             />
             <div className={classes.nameAndHandle}>
-              <Typography className={classes.name}>
-                <center>
-                  {profile && profile.firstName}{" "}
-                  {profile && profile.middleInitial}{" "}
-                  {profile && profile.lastName}
-                </center>
+              <Typography as="h3" className={classes.name} align="center">
+                {profile && profile.firstName}{" "}
+                {profile && profile.middleInitial} {profile && profile.lastName}
               </Typography>
-              <Typography className={classes.handle}>
-                <center>{profile && "@" + profile.handle}</center>
+              <Typography as="h3" className={classes.handle} align="center">
+                {profile && "@" + profile.handle}
               </Typography>
-              <Typography className={classes.email}>
-                <center>eMail: {user && user.email}</center>
+              <Typography as="h3" className={classes.email} align="center">
+                eMail: {user && user.email}
               </Typography>
             </div>
           </Grid>
@@ -120,7 +117,7 @@ const ProfileCard = ({ auth, user, loadUser, profile, loadCurrentProfile }) => {
             >
               Title:
             </span>
-            <span lassName={classes.spaceBetweenSpan}>
+            <span className={classes.spaceBetweenSpan}>
               <span>{profile && profile.title}</span>
             </span>
           </Grid>

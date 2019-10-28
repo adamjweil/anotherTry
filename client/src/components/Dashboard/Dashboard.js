@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { loadCurrentProfile } from "../../actions/profile";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
-// import ProfileForm from "../Profile/ProfileForm";
-import ProfileFormTwo from "../Profile/ProfileFormTwo";
+import ProfileForm from "../Profile/ProfileForm";
 import DashboardHeader from "./DashboardHeader";
+import DashboardInbox from "./DashboardInbox";
 
-const Dashboard = ({ profile, loading, user, submittedProfileForm }) => {
+const Dashboard = ({
+  loadCurrentProfile,
+  profile,
+  loading,
+  user,
+  submittedProfileForm
+}) => {
+  useEffect(() => {
+    loadCurrentProfile();
+  }, [loadCurrentProfile]);
   return (
     <Grid
       container
@@ -21,7 +30,11 @@ const Dashboard = ({ profile, loading, user, submittedProfileForm }) => {
       <Grid container>
         <Grid item sm={1}></Grid>
         <Grid item sm={10} style={{ marginTop: "50px" }}>
-          <ProfileFormTwo />
+          {submittedProfileForm === false ? (
+            <ProfileForm />
+          ) : (
+            <DashboardInbox />
+          )}
         </Grid>
         <Grid item sm={1}></Grid>
       </Grid>

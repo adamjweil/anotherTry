@@ -1,70 +1,95 @@
-import React, { useState } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import SaveAltIcon from "@material-ui/icons/SaveAlt";
 import {
   Grid,
   FormControl,
   MenuItem,
   InputLabel,
   Button,
+  Paper,
   InputAdornment,
   makeStyles,
-  Divider,
   Typography,
   TextField,
   Select,
-  Container
+  FormHelperText
 } from "@material-ui/core";
-import SaveIcon from "@material-ui/icons/Save";
 import PropTypes from "prop-types";
 import { DatePicker } from "@material-ui/pickers";
 import {
   createProfile,
   loadCurrentProfile,
-  fetchProfile
+  loadAllProfiles
 } from "../../actions/profile";
-import { loadUser } from "../../actions/user";
-// import { push } from "react-router-redux";
-// import clsx from "clsx";
+import { loadUser, fetchUsers } from "../../actions/user";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
-    color: "#F8F8F8"
+    flexGrow: 1
   },
   paper: {
     margin: theme.spacing(1, 1, 1, 2),
-    alignItems: "center",
     color: "#F8F8F8",
-    borderRadius: "5px"
-  },
-  form: {
-    margin: theme.spacing(1),
-    padding: theme.spacing(3),
-    backgroundColor: "#F8F8F8",
+    minWidth: "990px",
     boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.6)"
   },
-  submit: {
-    margin: theme.spacing(3, 0, 3)
+  form: {
+    padding: theme.spacing(5, 3, 5, 2),
+    borderRadius: "5px",
+    backgroundColor: "#F8F8F8",
+    minWidth: "650px",
+    margin: theme.spacing(0, 0, 10, 0)
   },
   textField: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    maxWidth: "200px",
+    backgroundColor: "white",
+    color: "black"
   },
-  date: {
-    marginLeft: theme.spacing(3),
-    width: 350
+  middleInitial: {
+    width: "120px",
+    margin: theme.spacing(1),
+    backgroundColor: "white"
+  },
+  submit: {
+    color: "green",
+    backgroundColor: "orange",
+    paddingLeft: "100px",
+    paddingRight: "100px",
+    marginTop: theme.spacing(5)
   },
   message: {
     color: "gray",
-    fontSize: "26px",
-    marginBottom: "-10px"
+    fontSize: "36px",
+    fontWeight: "600",
+    textAlign: "center",
+    paddingTop: "10px"
+  },
+  subMessage: {
+    fontSize: "16px",
+    fontWeight: "600",
+    color: "#A9A9A9",
+    marginBottom: "10px"
+  },
+  dateText: {
+    margin: theme.spacing(0, 0, 2, 10)
+  },
+  dateHelperText: {
+    fontWeight: "600",
+    marginTop: "-4px"
+  },
+  select: {
+    width: "400px",
+    maxWidth: "500px"
+  },
+  bio: {
+    backgroundColor: "white",
+    margin: theme.spacing(2, 0, 0, 0)
   },
   datePicker: {
-    alignItems: "center",
-    marginLeft: "500px"
-  },
-  inputLabel: {
-    marginRight: "20px"
+    border: "10px shadow #F8F8F8"
   }
 }));
 
@@ -89,10 +114,17 @@ const TITLES = [
 const ProfileForm = ({
   createProfile,
   loadCurrentProfile,
-  fetchProfiles,
+  loadAllProfiles,
+  fetchUsers,
   history,
-  profiles
+  profiles,
+  profile
 }) => {
+  useEffect(() => {
+    fetchUsers();
+    loadCurrentProfile();
+  }, [fetchUsers, loadCurrentProfile]);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -131,130 +163,193 @@ const ProfileForm = ({
   };
 
   return (
-    <Container className={classes.root}>
-      <Grid item xs={12} className={classes.message}>
-        <Typography variant="h4" align="center" component="h1" gutterBottom>
-          Set up a Profile!
-        </Typography>
+    <Fragment>
+      <div className={classes.root}>
+        <Paper className={classes.paper}>
+          <Grid item xs={12}>
+            <Typography align="center" className={classes.message}>
+              Setup YOUR Profile!
+            </Typography>
+            <Typography align="center" className={classes.subMessage}>
+              ...you can edit/update anything after creating
+            </Typography>
+          </Grid>
 
-        <center>
-          <Divider
-            style={{
-              height: "3px",
-              width: "425px"
-            }}
-          />
-        </center>
-      </Grid>
-
-      <Grid container>
-        <Grid item xs={12}>
           <form className={classes.form} onSubmit={onSubmit}>
-            <Grid item xs={5} sm={3}>
-              <FormControl>
-                <TextField
-                  className={classes.textField}
-                  margin="normal"
-                  variant="outlined"
-                  id="standard-name"
-                  name="firstName"
-                  label="First Name"
-                  value={firstName}
-                  onChange={e => onChange(e)}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">{""}</InputAdornment>
-                    )
-                  }}
-                />
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={5} sm={3}>
-              <FormControl>
-                <TextField
-                  className={classes.textField}
-                  margin="normal"
-                  variant="outlined"
-                  name="lastName"
-                  label="Last Name"
-                  value={lastName}
-                  onChange={e => onChange(e)}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">{""}</InputAdornment>
-                    )
-                  }}
-                />
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={5} sm={3}>
-              <FormControl>
-                <TextField
-                  className={classes.textField}
-                  margin="normal"
-                  variant="outlined"
-                  name="middleInitial"
-                  label="Middle Initial"
-                  value={middleInitial}
-                  onChange={e => onChange(e)}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">{""}</InputAdornment>
-                    )
-                  }}
-                />
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12} sm={4}>
-              <FormControl>
-                <TextField
-                  label="Handle"
-                  name="handle"
-                  margin="normal"
-                  variant="outlined"
-                  value={handle}
-                  onChange={e => onChange(e)}
-                  helperText="What do you go by?"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">@</InputAdornment>
-                    )
-                  }}
-                />
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12} sm={7}>
-              <FormControl>
-                <TextField
-                  helperText="Select the date from the calendar chooser below!"
-                  variant="filled"
-                  name="hireDate"
-                  value={hireDateOrig}
-                  onChange={e => onChange(e)}
-                  label="Hire Date"
-                />
-              </FormControl>
-              <Grid item sm={2}></Grid>
-            </Grid>
-
             <Grid container>
-              <Grid item xs={0} sm={2}></Grid>
-              <Grid item xs={12} sm={8}>
-                <FormControl
-                  style={{
-                    justifyContent: "middle",
-                    position: "relative",
-                    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.6)",
-                    marginTop: "30px"
-                  }}
-                >
-                  <center>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                style={{ marginLeft: "30px", marginRight: "10px" }}
+              >
+                <FormControl>
+                  <TextField
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    id="standard-name"
+                    name="firstName"
+                    label="First Name"
+                    value={firstName}
+                    onChange={e => onChange(e)}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">{""}</InputAdornment>
+                      )
+                    }}
+                  />
+                </FormControl>
+
+                <FormControl>
+                  <TextField
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    name="lastName"
+                    label="Last Name"
+                    value={lastName}
+                    onChange={e => onChange(e)}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">{""}</InputAdornment>
+                      )
+                    }}
+                  />
+                </FormControl>
+
+                <FormControl>
+                  <TextField
+                    className={classes.middleInitial}
+                    margin="normal"
+                    variant="outlined"
+                    name="middleInitial"
+                    label="Middle Initial"
+                    value={middleInitial}
+                    onChange={e => onChange(e)}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">{""}</InputAdornment>
+                      )
+                    }}
+                  />
+                </FormControl>
+
+                <Grid item xs={12}>
+                  <FormControl
+                    style={{
+                      margin: "10px 8px 10px"
+                    }}
+                  >
+                    <InputLabel>Team:</InputLabel>
+                    <Select
+                      variant="standard"
+                      className={classes.select}
+                      name="team"
+                      onChange={e => onChange(e)}
+                      value={team}
+                    >
+                      {TEAMS.map(team => (
+                        <MenuItem key={team} value={team}>
+                          {team}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControl
+                    style={{
+                      margin: "20px 8px 10px"
+                    }}
+                  >
+                    <InputLabel>Title</InputLabel>
+                    <Select
+                      className={classes.select}
+                      variant="standard"
+                      name="title"
+                      onChange={e => onChange(e)}
+                      value={title}
+                    >
+                      {TITLES.map(title => (
+                        <MenuItem key={title} value={title}>
+                          {title}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <FormControl style={{ marginLeft: "5px", marginTop: "10px" }}>
+                    <TextField
+                      style={{ backgroundColor: "white" }}
+                      label="Handle"
+                      name="handle"
+                      margin="normal"
+                      variant="filled"
+                      value={handle}
+                      onChange={e => onChange(e)}
+                      helperText=<FormHelperText
+                        className={classes.dateHelperText}
+                        error={true}
+                      >
+                        (What do you go by??)
+                      </FormHelperText>
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">@</InputAdornment>
+                        )
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControl
+                    fullWidth
+                    style={{
+                      maxWidth: "500px"
+                    }}
+                  >
+                    <TextField
+                      className={classes.bio}
+                      fullWidth
+                      name="bio"
+                      value={bio}
+                      onChange={e => onChange(e)}
+                      placeholder="Brief Bio...  Two or three sentences is fine..."
+                      multiline={true}
+                      variant="outlined"
+                      rows={5}
+                      rowsMax={10}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+
+              <Grid item xs={12} sm={5}>
+                <FormControl>
+                  <TextField
+                    className={classes.dateText}
+                    variant="standard"
+                    helperText=<FormHelperText
+                      className={classes.dateHelperText}
+                      error={true}
+                    >
+                      (Select the date from the calendar chooser below!)
+                    </FormHelperText>
+                    name="hireDate"
+                    value={hireDateOrig}
+                    onChange={e => onChange(e)}
+                    label="Hire Date"
+                  />
+                </FormControl>
+                <center>
+                  <FormControl>
                     <DatePicker
+                      className={classes.datePicker}
                       variant="static"
+                      disabled
                       autoOk
                       orientation="landscape"
                       openTo="date"
@@ -262,100 +357,27 @@ const ProfileForm = ({
                       onChange={e => changeDate(e)}
                       name="hireDate"
                     />
-                  </center>
-                </FormControl>
+                  </FormControl>
+                </center>
+                <center>
+                  <FormControl>
+                    <Button
+                      className={classes.submit}
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                    >
+                      <SaveAltIcon style={{ marginRight: "10px" }} /> Submit
+                    </Button>
+                  </FormControl>
+                </center>
               </Grid>
-              <Grid item xs={0} sm={2}></Grid>
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl
-                style={{
-                  margin: "10px 100px 10px"
-                }}
-              >
-                <InputLabel>Team</InputLabel>
-                <Select
-                  variant="standard"
-                  style={{
-                    width: "400px",
-                    marginLeft: "50px"
-                  }}
-                  name="team"
-                  onChange={e => onChange(e)}
-                  value={team}
-                >
-                  {TEAMS.map(team => (
-                    <MenuItem key={team} value={team}>
-                      {team}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl
-                style={{
-                  margin: "10px 100px 10px"
-                }}
-              >
-                <InputLabel>Title</InputLabel>
-                <Select
-                  variant="standard"
-                  style={{
-                    width: "400px",
-                    marginLeft: "50px"
-                  }}
-                  name="title"
-                  onChange={e => onChange(e)}
-                  value={title}
-                >
-                  {TITLES.map(title => (
-                    <MenuItem key={title} value={title}>
-                      {title}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
-
-            <Grid item sm={12}>
-              <FormControl
-                fullWidth
-                style={{
-                  width: "550px"
-                }}
-              >
-                <InputLabel>Brief Bio:</InputLabel>
-                <TextField
-                  fullWidth
-                  name="bio"
-                  value={bio}
-                  onChange={e => onChange(e)}
-                  placeholder="Two or three sentences is fine..."
-                  multiline={true}
-                  variant="outlined"
-                  style={{ marginTop: "50px" }}
-                  rows={5}
-                  rowsMax={10}
-                />
-              </FormControl>
-            </Grid>
-            <Grid item sm={12}></Grid>
-            <Grid item xs={12}>
-              <Button
-                className={classes.submit}
-                type="submit"
-                variant="contained"
-                color="primary"
-                size="large"
-              >
-                <SaveIcon style={{ marginRight: "5px" }} /> Save
-              </Button>
             </Grid>
           </form>
-        </Grid>
-      </Grid>
-    </Container>
+        </Paper>
+      </div>
+    </Fragment>
   );
 };
 
@@ -364,7 +386,7 @@ ProfileForm.propTypes = {
   users: PropTypes.array.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   users: state.users,
   user: state.auth.user,
   profile: state.profile.profile,
@@ -373,5 +395,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createProfile, loadUser, loadCurrentProfile, fetchProfile }
+  { createProfile, loadUser, loadCurrentProfile, fetchUsers, loadAllProfiles }
 )(withRouter(ProfileForm));
