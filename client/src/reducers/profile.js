@@ -6,12 +6,13 @@ import {
   GET_ALL_PROFILES,
   CLEAR_PROFILE,
   FETCH_PROFILES,
-  FETCH_PROFILE
+  FETCH_PROFILE,
+  FETCH_PROFILE_OLD
 } from "../actions/types";
 import _ from "lodash";
 
 const INITIAL_STATE = {
-  profile: null,
+  profile: {},
   profiles: [],
   repos: [],
   loading: true,
@@ -35,10 +36,16 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         profiles: { ..._.mapKeys(payload, "_id") }
       };
+    case FETCH_PROFILE_OLD:
+      return { ...state, [action.payload.id]: action.payload };
     case FETCH_PROFILE:
-      return { ...state, [action.payload.id]: action.payload };
     case GET_PROFILE:
-      return { ...state, [action.payload.id]: action.payload };
+      return {
+        ...state,
+        profile: payload,
+        submittedProfileForm: true,
+        loading: false
+      };
     case UPDATE_PROFILE:
       return {
         ...state,
