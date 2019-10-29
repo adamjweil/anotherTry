@@ -1,18 +1,17 @@
 const mongoose = require("mongoose");
-const User = require("./User");
 
 const TeamSchema = new mongoose.Schema({
-  ticketName: {
-    Type: String,
+  name: {
+    type: String,
+    required: true,
     unique: true
   },
-  employee: {
-    Type: mongoose.Schema.Types.ObjectId,
-    ref: "user"
+  description: {
+    type: String
   },
-  date: {
-    Type: Date,
-    default: Date.now
+  notifications: {
+    type: Number,
+    default: 0
   }
 });
 
