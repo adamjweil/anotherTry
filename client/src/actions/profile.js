@@ -2,17 +2,10 @@ import axios from "axios";
 import { showSuccessSnackbar } from "./alert";
 import {
   GET_PROFILE,
-  // GET_ALL_PROFILES,
   CREATE_PROFILE,
-  // CLEAR_PROFILE,
   PROFILE_ERROR,
-  // FETCH_PROFILE,
   FETCH_PROFILES
 } from "./types";
-import { push } from "react-router-redux";
-import store from "../store";
-import history from "../history";
-import { loadUser } from "./user";
 
 //LOAD profile
 export const loadCurrentProfile = () => async dispatch => {
@@ -107,12 +100,6 @@ export const createProfile = ({
     dispatch(showSuccessSnackbar(edit ? "Profile Updated" : "Profile Created"));
     history.push("/profile");
   } catch (err) {
-    console.log(err);
-    debugger;
-    const errors = err.response.data.errors;
-    if (errors) {
-      errors.forEach(error => dispatch(showSuccessSnackbar(error.msg)));
-    }
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }

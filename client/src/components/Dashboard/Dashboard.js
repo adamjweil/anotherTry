@@ -12,7 +12,7 @@ const Dashboard = ({
   profile,
   loading,
   user,
-  submittedProfileForm
+  profile: { submittedProfileForm }
 }) => {
   useEffect(() => {
     loadCurrentProfile();
@@ -30,11 +30,7 @@ const Dashboard = ({
       <Grid container>
         <Grid item sm={1}></Grid>
         <Grid item sm={10} style={{ marginTop: "50px" }}>
-          {submittedProfileForm === false ? (
-            <ProfileForm />
-          ) : (
-            <DashboardInbox />
-          )}
+          {!submittedProfileForm ? <ProfileForm /> : <DashboardInbox />}
         </Grid>
         <Grid item sm={1}></Grid>
       </Grid>
