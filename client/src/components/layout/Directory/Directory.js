@@ -34,7 +34,7 @@ const Directory = ({
         <Grid item sm={12}>
           {activeTab === "employees" ? <UserList /> : ""}
           {activeTab === "teams" ? <TeamList /> : ""}
-          {activeTab === "createTeamForm" ? <TeamList /> : ""}
+          {activeTab === "createTeamForm" ? <CreateTeamForm /> : ""}
         </Grid>
       </Grid>
 

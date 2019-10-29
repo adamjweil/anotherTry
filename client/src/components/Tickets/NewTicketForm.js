@@ -207,24 +207,6 @@ const PROJECTS = [
   }
 ];
 
-const PEOPLE = [
-  {
-    key: 0,
-    text: "Adam Weil",
-    value: "Adam Weil"
-  },
-  {
-    key: 1,
-    text: "Lindsay Weil",
-    value: "Lindsay Weil"
-  },
-  {
-    key: 2,
-    text: "Matt Weil",
-    value: "Matt Weil"
-  }
-];
-
 const RELEASES = [
   {
     key: 0,
@@ -474,8 +456,9 @@ const NewTicketForm = ({
   }, [fetchUsers, fetchProfiles]);
 
   const [formData, setFormData] = useState({
-    ticketType: "",
     source: "",
+    ticketer: "",
+    ticketType: "",
     environment: "",
     bucket: "",
     project: "",
@@ -487,14 +470,17 @@ const NewTicketForm = ({
     status: "",
     standing: "",
     ticketId: "",
-    importance: ""
+    importance: "",
+    summary: ""
   });
 
   const {
-    ticketType,
     source,
+    ticketer,
+    ticketType,
     environment,
     bucket,
+    summary,
     project,
     release,
     process,
@@ -504,7 +490,8 @@ const NewTicketForm = ({
     status,
     standing,
     ticketId,
-    importance
+    importance,
+    description
   } = formData;
 
   const classes = useStyles();
@@ -532,26 +519,17 @@ const NewTicketForm = ({
 
         <form onSubmit={onSubmit} className={classes.form}>
           <Grid container spacing={3}>
-            <Grid item>
-              <FormControl
-                style={{
-                  width: "150px"
-                }}
-              >
-                <InputLabel> Type </InputLabel>
-                <Select
-                  name="ticketType"
+            <Grid item xs={12}>
+              <FormControl fullWidth style={{ maxWidth: "1200px" }}>
+                <TextField
+                  fullWidth
+                  name="summary"
+                  value={summary}
                   onChange={e => onChange(e)}
-                  value={ticketType}
-                  variant="standard"
-                >
-                  <MenuItem value="">Type</MenuItem>
-                  {TICKETTYPES.map(type => (
-                    <MenuItem value={type.text} key={type.key}>
-                      {type.text}
-                    </MenuItem>
-                  ))}
-                </Select>
+                  placeholder="Ticket Summary"
+                  className={classes.ticketSummary}
+                  variant="outlined"
+                />
               </FormControl>
             </Grid>
             <Grid item>
@@ -579,6 +557,54 @@ const NewTicketForm = ({
             <Grid item>
               <FormControl
                 style={{
+                  width: "175px"
+                }}
+              >
+                <InputLabel> Ticketer: </InputLabel>
+                <Select
+                  variant="standard"
+                  name="ticketer"
+                  onChange={e => onChange(e)}
+                  value={ticketer}
+                >
+                  {" "}
+                  {profiles.map(profile => (
+                    <MenuItem value={profile._id} key={profile._id}>
+                      {profile.firstName}
+                      {""}
+                      {profile.lastName}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+
+            <Grid item>
+              <FormControl
+                style={{
+                  width: "150px"
+                }}
+              >
+                <InputLabel> Type </InputLabel>
+                <Select
+                  name="ticketType"
+                  onChange={e => onChange(e)}
+                  value={ticketType}
+                  variant="standard"
+                >
+                  <MenuItem value="">Type</MenuItem>
+                  {TICKETTYPES.map(type => (
+                    <MenuItem value={type.text} key={type.key}>
+                      {type.text}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+
+            <Grid item>
+              <FormControl
+                style={{
                   width: "90px"
                 }}
                 size="small"
@@ -598,27 +624,7 @@ const NewTicketForm = ({
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item>
-              <FormControl
-                style={{
-                  width: "100px"
-                }}
-              >
-                <InputLabel> Bucket: </InputLabel>
-                <Select
-                  name="bucket"
-                  onChange={e => onChange(e)}
-                  value={bucket}
-                  variant="standard"
-                >
-                  {BUCKETS.map(type => (
-                    <MenuItem value={type.text} key={type.key}>
-                      {type.text}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
+
             <Grid item>
               <FormControl style={{ width: "200px" }}>
                 <InputLabel> Project </InputLabel>
@@ -682,17 +688,17 @@ const NewTicketForm = ({
             <Grid item>
               <FormControl
                 style={{
-                  width: "175px"
+                  width: "150px"
                 }}
               >
-                <InputLabel> Owner: </InputLabel>
+                <InputLabel> Bucket </InputLabel>
                 <Select
-                  variant="standard"
-                  name="owner"
+                  name="bucket"
                   onChange={e => onChange(e)}
-                  value={owner}
+                  value={bucket}
+                  variant="standard"
                 >
-                  {PEOPLE.map(type => (
+                  {BUCKETS.map(type => (
                     <MenuItem value={type.text} key={type.key}>
                       {type.text}
                     </MenuItem>
@@ -700,28 +706,7 @@ const NewTicketForm = ({
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item>
-              <FormControl
-                style={{
-                  width: "175px"
-                }}
-              >
-                <InputLabel> Fixer: </InputLabel>
-                <Select
-                  variant="standard"
-                  name="fixer"
-                  onChange={e => onChange(e)}
-                  value={fixer}
-                >
-                  {" "}
-                  {PEOPLE.map(type => (
-                    <MenuItem value={type.text} key={type.key}>
-                      {type.text}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
+
             <Grid item>
               <FormControl
                 style={{
@@ -874,6 +859,23 @@ const NewTicketForm = ({
                     </MenuItem>
                   ))}
                 </Select>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={12}>
+              <FormControl fullWidth style={{ maxWidth: "1200px" }}>
+                <TextField
+                  className={classes.ticketDescription}
+                  fullWidth
+                  name="description"
+                  value={description}
+                  onChange={e => onChange(e)}
+                  placeholder="Pls provide full description of the ticket.."
+                  multiline={true}
+                  rows={7}
+                  rowsMax={15}
+                  variant="outlined"
+                />
               </FormControl>
             </Grid>
 
