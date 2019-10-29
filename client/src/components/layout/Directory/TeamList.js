@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
+
 import {
   Card,
   Grid,
@@ -13,7 +14,8 @@ import {
   CardActions,
   CardActionArea
 } from "@material-ui/core";
-import { fetchProfiles } from "../../../actions/profile";
+
+import { fetchTeams } from "../../../actions/team";
 
 const useStyles = makeStyles(theme => ({
   media: {
@@ -25,16 +27,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const UserList = ({ fetchProfiles, profiles }) => {
-  const classes = useStyles();
+const TeamList = ({ fetchTeams, teams }) => {
   useEffect(() => {
-    fetchProfiles();
-  }, [fetchProfiles]);
-
-  return profiles.map(profile => {
+    fetchTeams();
+  }, [fetchTeams]);
+  const classes = useStyles();
+  return teams.map(team => {
     return (
       <Grid
-        key={profile._id}
+        key={team.teamName}
         item
         xs={12}
         sm={3}
@@ -42,12 +43,7 @@ const UserList = ({ fetchProfiles, profiles }) => {
       >
         <Card>
           <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              style={{ marginTop: "10px" }}
-              image={profile.user.avatar}
-              title="User Avatar"
-            />
+            <CardMedia className={classes.media} title="Team Avatar" />
             <CardContent>
               <Typography
                 style={{
@@ -57,9 +53,9 @@ const UserList = ({ fetchProfiles, profiles }) => {
                   color: "#696969"
                 }}
               >
-                {profile && profile.firstName} {profile && profile.lastName}
+                {team && team.teamName}
               </Typography>
-              eMail:
+              Description:
               <Typography
                 style={{
                   fontSize: "14px",
@@ -67,14 +63,14 @@ const UserList = ({ fetchProfiles, profiles }) => {
                   color: "#696969"
                 }}
               >
-                {profile && profile.user.email}
+                {team && team.teamDescription}
               </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
             <center>
               <Button size="small" color="primary">
-                Send Message
+                View Team Members
               </Button>
             </center>
           </CardActions>
@@ -84,18 +80,14 @@ const UserList = ({ fetchProfiles, profiles }) => {
   });
 };
 
-UserList.propTypes = {
-  fetchProfiles: PropTypes.func.isRequired
-  // profile: PropTypes.object.isRequired
+TeamList.propTypes = {
+  fetchTeams: PropTypes.func.isRequired,
+  teams: PropTypes.array.isRequired
 };
-
 const mapStateToProps = state => ({
-  user: state.auth.user,
-  profile: state.profile,
-  profiles: Object.values(state.profile.profiles)
+  teams: Object.values(state.team.teams)
 });
-
 export default connect(
   mapStateToProps,
-  { fetchProfiles }
-)(withRouter(UserList));
+  { fetchTeams }
+)(withRouter(TeamList));

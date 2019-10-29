@@ -1,18 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
 import { fetchUsers } from "../../../actions/user";
+import { createTeam } from "../../../actions/team";
 import VerticalMenu from "./VerticalMenu";
 import SearchDirectory from "./SearchDirectory";
 import UserList from "./UserList";
+import TeamList from "./TeamList";
+import CreateTeamForm from "./CreateTeamForm";
 import DirectoryHeader from "./DirectoryHeader";
 import { withRouter } from "react-router-dom";
 
-const Directory = ({ users, profiles, fetchUsers }) => {
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+const Directory = ({
+  directory: { activeTab },
+  users,
+  profiles,
+  teams,
+  fetchUsers,
+  createTeam
+}) => {
   return (
     <Grid container>
       <Grid item xs={2}>
@@ -25,9 +32,9 @@ const Directory = ({ users, profiles, fetchUsers }) => {
       <Grid item sm={10}>
         <SearchDirectory />
         <Grid item sm={12}>
-          <div style={{ marginTop: "0px" }} className="ui celled list">
-            <UserList />
-          </div>
+          {activeTab === "employees" ? <UserList /> : ""}
+          {activeTab === "teams" ? <TeamList /> : ""}
+          {activeTab === "createTeamForm" ? <TeamList /> : ""}
         </Grid>
       </Grid>
 
@@ -41,7 +48,8 @@ Directory.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  users: state.users
+  // users: state.users,
+  directory: state.directory
 });
 
 export default connect(

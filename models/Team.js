@@ -1,17 +1,20 @@
 const mongoose = require("mongoose");
 
 const TeamSchema = new mongoose.Schema({
-  name: {
+  teamName: {
     type: String,
-    required: true,
     unique: true
   },
-  description: {
+  teamDescription: {
     type: String
   },
   notifications: {
     type: Number,
     default: 0
+  },
+  date: {
+    type: Date,
+    default: Date.now
   }
 });
 

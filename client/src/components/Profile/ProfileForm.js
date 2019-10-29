@@ -24,6 +24,7 @@ import {
   loadAllProfiles
 } from "../../actions/profile";
 import { loadUser, fetchUsers } from "../../actions/user";
+import { fetchTeams } from "../../actions/team";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -93,15 +94,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TEAMS = [
-  "LogiQ",
-  "Dev - Backend",
-  "Dev - Frontend",
-  "Integration",
-  "Project Management",
-  "Tech Experts",
-  "Ops"
-];
+// const TEAMS = [
+//   "LogiQ",
+//   "Dev - Backend",
+//   "Dev - Frontend",
+//   "Integration",
+//   "Project Management",
+//   "Tech Experts",
+//   "Ops"
+// ];
 
 const TITLES = [
   "Intern",
@@ -118,12 +119,15 @@ const ProfileForm = ({
   fetchUsers,
   history,
   profiles,
-  profile
+  profile,
+  fetchTeams,
+  teams
 }) => {
   useEffect(() => {
     fetchUsers();
     loadCurrentProfile();
-  }, [fetchUsers, loadCurrentProfile]);
+    fetchTeams();
+  }, [fetchUsers, fetchTeams, loadCurrentProfile]);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -249,9 +253,9 @@ const ProfileForm = ({
                       onChange={e => onChange(e)}
                       value={team}
                     >
-                      {TEAMS.map(team => (
-                        <MenuItem key={team} value={team}>
-                          {team}
+                      {teams.map(team => (
+                        <MenuItem key={team._id} value={team}>
+                          {team.teamName}
                         </MenuItem>
                       ))}
                     </Select>
@@ -390,10 +394,18 @@ const mapStateToProps = (state, ownProps) => ({
   users: state.users,
   user: state.auth.user,
   profile: state.profile.profile,
-  profiles: Object.values(state.profile.profiles)
+  profiles: Object.values(state.profile.profiles),
+  teams: Object.values(state.team.teams)
 });
 
 export default connect(
   mapStateToProps,
-  { createProfile, loadUser, loadCurrentProfile, fetchUsers, loadAllProfiles }
+  {
+    createProfile,
+    loadUser,
+    loadCurrentProfile,
+    fetchUsers,
+    loadAllProfiles,
+    fetchTeams
+  }
 )(withRouter(ProfileForm));

@@ -31,12 +31,15 @@ router.post("/", auth, async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { name, description } = req.body;
+  const { teamName, teamDescription } = req.body;
+  const teamFields = {};
+  if (teamName) teamFields.teamName = teamName;
+  if (teamDescription) teamFields.teamDescription = teamDescription;
 
   try {
     let team = await Team.findOneAndUpdate(
-      { name: name },
-      { $set: { name, description } },
+      { team: teamName },
+      { $set: teamFields },
       { new: true, upsert: true }
     );
     res.json(team);
