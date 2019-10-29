@@ -41,7 +41,9 @@ router.post("/", auth, async (req, res) => {
     tester,
     standing,
     importance,
-    ticketId
+    ticketId,
+    summary,
+    description
   } = req.body;
 
   const ticketFields = {};
@@ -60,10 +62,12 @@ router.post("/", auth, async (req, res) => {
   if (standing) ticketFields.standing = standing;
   if (ticketId) ticketFields.ticketId = ticketId;
   if (importance) ticketFields.importance = importance;
+  if (summary) ticketFields.summary = summary;
+  if (description) ticketFields.description = description;
 
   try {
     let ticket = await Ticket.findOneAndUpdate(
-      { ticketId: req.ticketId },
+      { ticket: req.body.ticketId },
       { $set: ticketFields },
       { new: true, upsert: true }
     );

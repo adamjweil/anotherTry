@@ -47,6 +47,12 @@ const TicketSchema = new mongoose.Schema({
   ticketId: {
     type: String
   },
+  summary: {
+    type: String
+  },
+  description: {
+    type: String
+  },
   date: {
     type: Date,
     default: Date.now
