@@ -141,7 +141,6 @@ CreateTeamForm.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  team: state.team,
   teams: Object.values(state.team.teams)
 });
 

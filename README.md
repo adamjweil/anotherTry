@@ -126,6 +126,14 @@ User Stories:
     - Built component to display tickets
     - Progress on TicketForm
 
+    #10/30
+    - Enhanced ticket form (now includes the correct fields, including summary and description)
+      - Submitting to server sometimes but other times running into errors
+      - Not updating the ticket list below when it submits
+    - Added Teams collection into database, and seeded it with all of the teams I run into here.
+      - The User can now select a DB-ID object on the ProfileForm when selecting a team, rather than just a string
+    - ProfileCard component has been refactored and simplified
+    - Removed duped actions, like loadCurrentProfile and fetchProfile
     ---
 
     ##TO DO
@@ -136,6 +144,7 @@ User Stories:
     - Styling Ticket form
     - Fetching tickets
     - oAuth integration on top of in app authentication
+    - GraphQL Integration
 
       #Form for Creating Profile
         https://material-ui.com/getting-started/templates/checkout/

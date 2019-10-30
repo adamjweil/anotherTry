@@ -2,7 +2,7 @@ import { CREATE_TEAM, FETCH_TEAMS, TEAM_ERROR } from "../actions/types";
 import _ from "lodash";
 
 const INITIAL_STATE = {
-  team: null,
+  team: {},
   teams: [],
   loading: true,
   error: {}
@@ -14,7 +14,8 @@ export default function(state = INITIAL_STATE, action) {
     case CREATE_TEAM:
       return {
         ...state,
-        team: payload
+        team: payload,
+        loading: false
       };
     case FETCH_TEAMS:
       return {

@@ -20,7 +20,7 @@ import PropTypes from "prop-types";
 import { DatePicker } from "@material-ui/pickers";
 import {
   createProfile,
-  loadCurrentProfile,
+  fetchProfile,
   loadAllProfiles
 } from "../../actions/profile";
 import { loadUser, fetchUsers } from "../../actions/user";
@@ -114,7 +114,7 @@ const TITLES = [
 
 const ProfileForm = ({
   createProfile,
-  loadCurrentProfile,
+  fetchProfile,
   loadAllProfiles,
   fetchUsers,
   history,
@@ -125,9 +125,9 @@ const ProfileForm = ({
 }) => {
   useEffect(() => {
     fetchUsers();
-    loadCurrentProfile();
+    fetchProfile();
     fetchTeams();
-  }, [fetchUsers, fetchTeams, loadCurrentProfile]);
+  }, [fetchUsers, fetchTeams, fetchProfile]);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -387,7 +387,7 @@ const ProfileForm = ({
 
 ProfileForm.propTypes = {
   createProfile: PropTypes.func.isRequired,
-  users: PropTypes.array.isRequired
+  fetchProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -403,7 +403,7 @@ export default connect(
   {
     createProfile,
     loadUser,
-    loadCurrentProfile,
+    fetchProfile,
     fetchUsers,
     loadAllProfiles,
     fetchTeams

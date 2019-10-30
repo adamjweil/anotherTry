@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
-import { loadCurrentProfile } from "../../actions/profile";
+import { fetchProfiles } from "../../actions/profile";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
 import ProfileForm from "../Profile/ProfileForm";
 import DashboardHeader from "./DashboardHeader";
-import DashboardInbox from "./DashboardInbox";
+// import DashboardInbox from "./DashboardInbox";
 
 const Dashboard = ({
-  loadCurrentProfile,
+  fetchProfiles,
   profile,
   loading,
   user,
   profile: { submittedProfileForm }
 }) => {
   useEffect(() => {
-    loadCurrentProfile();
-  }, [loadCurrentProfile]);
+    fetchProfiles();
+  }, [fetchProfiles]);
   return (
     <Grid
       container
@@ -30,7 +30,7 @@ const Dashboard = ({
       <Grid container>
         <Grid item sm={1}></Grid>
         <Grid item sm={10} style={{ marginTop: "50px" }}>
-          {!submittedProfileForm ? <ProfileForm /> : <DashboardInbox />}
+          <ProfileForm />
         </Grid>
         <Grid item sm={1}></Grid>
       </Grid>
@@ -39,7 +39,7 @@ const Dashboard = ({
 };
 
 Dashboard.propTypes = {
-  loadCurrentProfile: PropTypes.func.isRequired,
+  fetchProfiles: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 };
 
@@ -50,5 +50,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loadCurrentProfile }
+  { fetchProfiles }
 )(Dashboard);

@@ -1,14 +1,6 @@
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
-import { showInfoSnackbar, showSuccessSnackbar } from "./alert";
-import {
-  AUTH_ERROR,
-  USER_LOADED,
-  FETCH_USER,
-  FETCH_USERS,
-  NOTIFCATION_INCREMENT,
-  NOTIFCATION_DECREMENT
-} from "./types";
+import { AUTH_ERROR, USER_LOADED, FETCH_USER, FETCH_USERS } from "./types";
 
 // LOAD USER
 export const loadUser = (history, showErrorSnackbar) => async dispatch => {
@@ -28,36 +20,6 @@ export const loadUser = (history, showErrorSnackbar) => async dispatch => {
   }
 };
 
-// Increment the notification counter
-export const incrementNotificationCount = () => async dispatch => {
-  try {
-    dispatch({
-      type: NOTIFCATION_INCREMENT
-    });
-    showSuccessSnackbar("Notification Incremented");
-  } catch (err) {
-    dispatch({
-      type: AUTH_ERROR
-    });
-    showInfoSnackbar("Increment Failed");
-  }
-};
-
-// Decrement the notification counter
-export const decrementNotificationCount = () => async dispatch => {
-  try {
-    dispatch({
-      type: NOTIFCATION_DECREMENT
-    });
-    showSuccessSnackbar("Notification Decremented");
-  } catch (err) {
-    dispatch({
-      type: AUTH_ERROR
-    });
-    showInfoSnackbar("Decrement Failed");
-  }
-};
-
 // Fetch all Users
 export const fetchUsers = () => async dispatch => {
   try {
@@ -72,7 +34,7 @@ export const fetchUsers = () => async dispatch => {
 };
 
 // Fetch specific User
-export const fetchUser = id => async dispatch => {
+export const fetchUserById = id => async dispatch => {
   const res = await axios.get(`/api/users/${id}`);
   dispatch({
     type: FETCH_USER,

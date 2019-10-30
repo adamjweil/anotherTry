@@ -6,6 +6,7 @@ const { check, validationResult } = require("express-validator");
 const config = require("config");
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
+const Team = require("../../models/Team");
 
 // @ route GET api/profile/me
 // @desc   Get current users profile
@@ -14,7 +15,9 @@ router.get("/me", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.user.id
-    }).populate("user", ["avatar"]);
+    })
+      .populate("user", ["avatar", "email", "username"])
+      .populate("team", ["teamName", "teamDescription"]);
 
     if (!profile) {
       return res.status(400).json({ msg: "There is no profile for this user" });
@@ -53,8 +56,8 @@ router.post("/", auth, async (req, res) => {
   if (firstName) profileFields.firstName = firstName;
   if (lastName) profileFields.lastName = lastName;
   if (handle) profileFields.handle = handle;
-  if (team) profileFields.team = team;
   if (title) profileFields.title = title;
+  if (team) profileFields.team = team;
   if (hireDate) profileFields.hireDate = hireDate;
   if (middleInitial) profileFields.middleInitial = middleInitial;
   if (bio) profileFields.bio = bio;
@@ -83,6 +86,7 @@ router.get("/", async (req, res) => {
       "avatar",
       "username"
     ]);
+
     res.json(profiles);
   } catch (err) {
     console.error(err.message);

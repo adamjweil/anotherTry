@@ -3,13 +3,13 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
-import { loadCurrentProfile } from "../../actions/profile";
+import { fetchProfile } from "../../actions/profile";
 import ProfileCard from "./ProfileCard";
 
-const Profile = ({ profile, loadCurrentProfile, auth, match }) => {
+const Profile = ({ profile, fetchProfile, auth, match }) => {
   useEffect(() => {
-    loadCurrentProfile();
-  }, [loadCurrentProfile]);
+    fetchProfile();
+  }, [fetchProfile]);
 
   return (
     <Fragment>
@@ -31,15 +31,16 @@ const Profile = ({ profile, loadCurrentProfile, auth, match }) => {
 Profile.propTypes = {
   auth: PropTypes.object.isRequired,
   profile: PropTypes.isRequired,
-  loadCurrentProfile: PropTypes.func.isRequired
+  fetchProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  user: state.auth.user,
   profile: state.profile.profile
 });
 
 export default connect(
   mapStateToProps,
-  { loadCurrentProfile }
+  { fetchProfile }
 )(withRouter(Profile));

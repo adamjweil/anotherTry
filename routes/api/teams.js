@@ -38,7 +38,7 @@ router.post("/", auth, async (req, res) => {
 
   try {
     let team = await Team.findOneAndUpdate(
-      { team: teamName },
+      { teamName: req.body.teamName },
       { $set: teamFields },
       { new: true, upsert: true }
     );
