@@ -68,7 +68,7 @@ router.post("/", auth, async (req, res) => {
 
   try {
     let ticket = await Ticket.findOneAndUpdate(
-      { _id: req.body._id },
+      { ticketId: req.body.ticketId },
       { $set: ticketFields },
       { new: true, upsert: true }
     );
