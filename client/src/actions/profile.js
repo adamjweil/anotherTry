@@ -4,15 +4,16 @@ import {
   GET_PROFILE,
   CREATE_PROFILE,
   PROFILE_ERROR,
-  FETCH_PROFILES
+  FETCH_PROFILES,
+  FETCH_PROFILE
 } from "./types";
 
-//LOAD profile
-export const loadCurrentProfile = () => async dispatch => {
+// Fetch current Profile
+export const fetchProfile = () => async dispatch => {
   try {
     const res = await axios.get("/api/profiles/me");
     dispatch({
-      type: GET_PROFILE,
+      type: FETCH_PROFILE,
       payload: res.data
     });
   } catch (err) {
@@ -28,22 +29,6 @@ export const loadCurrentProfile = () => async dispatch => {
 export const fetchProfileById = id => async dispatch => {
   try {
     const res = await axios.get(`/api/profiles/user/${id}`);
-    dispatch({
-      type: GET_PROFILE,
-      payload: res.data
-    });
-  } catch (err) {
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
-  }
-};
-
-// Fetch specific Profile
-export const fetchProfile = () => async dispatch => {
-  try {
-    const res = await axios.get("/api/profiles/me");
     dispatch({
       type: GET_PROFILE,
       payload: res.data

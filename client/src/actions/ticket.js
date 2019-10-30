@@ -2,8 +2,8 @@ import axios from "axios";
 import { showSuccessSnackbar, showInfoSnackbar } from "./alert";
 import { CREATE_TICKET, FETCH_TICKETS, TICKET_ERROR } from "./types";
 
-import store from "../store";
-import history from "../history";
+// import store from "../store";
+// import history from "../history";
 
 // LOAD all tickets
 export const loadTickets = () => async dispatch => {

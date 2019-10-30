@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("./User");
+const Team = require("./Team");
 
 const ProfileSchema = new mongoose.Schema({
   user: {
@@ -25,14 +26,11 @@ const ProfileSchema = new mongoose.Schema({
     type: String
   },
   team: {
-    type: String
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "team"
   },
   bio: {
     type: String
-  },
-  fixer: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "user"
   },
   date: {
     type: Date,
