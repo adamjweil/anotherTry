@@ -5,6 +5,7 @@ import { ApolloProvider } from "react-apollo";
 import { ApolloClient } from "apollo-client";
 import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
+import { RestLink } from "apollo-link-rest";
 
 import { Provider } from "react-redux";
 import App from "./App";
@@ -17,8 +18,7 @@ import { createBrowserHistory } from "history";
 
 export const browserHistory = createBrowserHistory();
 
-const cache = new InMemoryCache();
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "http://localhost:5000/graphql";
 
 const httpLink = new HttpLink({
   uri: BASE_URL,
@@ -29,7 +29,7 @@ const httpLink = new HttpLink({
 
 const client = new ApolloClient({
   link: httpLink,
-  cache
+  cache: new InMemoryCache()
 });
 
 ReactDOM.render(
