@@ -43,11 +43,11 @@ router.post("/", auth, async (req, res) => {
     importance,
     ticketId,
     summary,
-    description
+    description,
+    ticketer
   } = req.body;
 
   const ticketFields = {};
-  ticketFields.ticketer = req.user.id;
   if (ticketType) ticketFields.ticketType = ticketType;
   if (source) ticketFields.source = source;
   if (environment) ticketFields.environment = environment;
@@ -64,10 +64,11 @@ router.post("/", auth, async (req, res) => {
   if (importance) ticketFields.importance = importance;
   if (summary) ticketFields.summary = summary;
   if (description) ticketFields.description = description;
+  if (ticketer) ticketFields.ticketer = ticketer;
 
   try {
     let ticket = await Ticket.findOneAndUpdate(
-      { ticket: req.body.ticketId },
+      { _id: req.body._id },
       { $set: ticketFields },
       { new: true, upsert: true }
     );

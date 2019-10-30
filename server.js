@@ -3,6 +3,10 @@ require("dotenv").config();
 const express = require("express");
 const connectDB = require("./config/db");
 
+// const graphqlHTTP = require("express-graphql");
+// const schema = require("./Models/Profile");
+// const cors = require("cors");
+
 const app = express();
 
 // Connect Database
