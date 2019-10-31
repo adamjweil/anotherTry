@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import {
   Card,
   Grid,
@@ -72,11 +72,17 @@ const UserList = ({ fetchProfiles, profiles }) => {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <center>
-              <Button size="small" color="primary">
-                Send Message
-              </Button>
-            </center>
+            <Button size="small" color="primary">
+              <center>
+                <Link
+                  style={{ textDecoration: "none", color: "#37474f" }}
+                  to={`/profile/${profile._id}`}
+                  ckassName="btn btn-primary"
+                >
+                  View Profile
+                </Link>
+              </center>
+            </Button>
           </CardActions>
         </Card>
       </Grid>

@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Grid } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import { fetchUsers } from "../../actions/user";
-import { createTeam } from "../../actions/team";
-import VerticalMenu from "./VerticalMenu";
 import SearchDirectory from "./SearchDirectory";
 import UserList from "./UserList";
 import TeamList from "./TeamList";
-import CreateTeamForm from "./CreateTeamForm";
+// import CreateTeamForm from "./CreateTeamForm";
 import DirectoryHeader from "./DirectoryHeader";
 import { withRouter } from "react-router-dom";
 
@@ -20,24 +18,54 @@ const Directory = ({
   fetchUsers,
   createTeam
 }) => {
+  const [formData, setFormData] = useState({
+    display: true
+  });
+
+  const { display } = formData;
+
+  const toggle = e => {
+    e.preventDefault();
+    setFormData({ ...formData, display: !display });
+  };
   return (
     <Grid container>
-      <Grid item xs={2}>
-        <VerticalMenu />
-      </Grid>
-      <Grid item xs={10}>
+      <Grid item xs={12}>
         <DirectoryHeader />
       </Grid>
-      <Grid item sm={2}></Grid>
-      <Grid item sm={10}>
-        <SearchDirectory />
+
+      <Grid item xs={1}></Grid>
+      <Grid item xs={4}>
+        <Button
+          onClick={toggle}
+          variant="outlined"
+          color="primary"
+          size="small"
+          fullWidth
+          style={{ fontSize: "18px", fontWeight: "700" }}
+        >
+          Employees
+        </Button>
       </Grid>
-      <Grid item sm={2}></Grid>
-      <Grid item sm={10}>
-        <center>
-          {" "}
-          <TeamList />{" "}
-        </center>
+      <Grid item xs={1}></Grid>
+
+      <Grid item xs={4}>
+        <Button
+          onClick={toggle}
+          variant="outlined"
+          color="primary"
+          size="small"
+          fullWidth
+          style={{ fontSize: "18px", fontWeight: "700" }}
+        >
+          Teams
+        </Button>
+      </Grid>
+      <Grid item xs={1}></Grid>
+      <br />
+
+      <Grid item sm={12}>
+        <center>{display ? <UserList /> : <TeamList />}</center>
       </Grid>
 
       <div className="ui celled list"></div>
@@ -51,6 +79,7 @@ Directory.propTypes = {
 
 const mapStateToProps = state => ({
   // users: state.users,
+  display: state.display,
   directory: state.directory
 });
 

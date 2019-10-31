@@ -174,8 +174,7 @@ const SearchDirectory = () => {
       className={classes.root}
       style={{
         margin: "0px 100px -180px",
-        paddingBottom: 0,
-        maxWidth: 900
+        paddingBottom: 5
       }}
     >
       <Autosuggest

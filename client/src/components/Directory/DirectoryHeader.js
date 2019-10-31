@@ -7,15 +7,15 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   paper: {
-    border: "2px shadow grey",
-    margin: theme.spacing(5, 3, 1),
-    padding: theme.spacing(1, 1, 1)
+    margin: theme.spacing(5, 2, 5, 2),
+    padding: theme.spacing(1, 1, 1),
+    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.8)"
   },
   header: {
     fontSize: "36px",
     fontWeight: "600",
     textAlign: "center",
-    padding: theme.spacing(0, 1, 3)
+    padding: theme.spacing(1, 1, 3)
   },
   subHeader: {
     fontSize: "18px",

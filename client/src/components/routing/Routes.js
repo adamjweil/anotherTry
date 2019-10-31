@@ -29,7 +29,7 @@ const Routes = () => {
       <Switch>
         <Route exact path="/register" component={Register} />
         <Route exact path="/directory" component={Directory} />
-        <Route exact path="/profile/:id" component={Profile} />
+        <Route exact path="/profile/me" component={Profile} />
         <Route exact path="/profiles" component={Profiles} />
         <Route exact path="/responsive" component={ResponsiveLayout} />
         <Route exact path="/theming" component={ThemeingLayout} />

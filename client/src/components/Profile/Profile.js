@@ -6,7 +6,13 @@ import { Grid } from "@material-ui/core";
 import { fetchProfile, fetchProfileById } from "../../actions/profile";
 import ProfileCard from "./ProfileCard";
 
-const Profile = ({ profile, fetchProfile, fetchProfileById, auth, match }) => {
+const Profile = ({
+  fetchProfile,
+  profile: { profile, loading },
+  fetchProfileById,
+  auth,
+  match
+}) => {
   useEffect(() => {
     fetchProfileById(match.params.id);
   }, [fetchProfileById, match.params.id]);
@@ -31,16 +37,16 @@ const Profile = ({ profile, fetchProfile, fetchProfileById, auth, match }) => {
 Profile.propTypes = {
   auth: PropTypes.object.isRequired,
   profile: PropTypes.isRequired,
-  fetchProfile: PropTypes.func.isRequired
+  fetchProfileById: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
   user: state.auth.user,
-  profile: state.profile.profile
+  profile: state.profile
 });
 
 export default connect(
   mapStateToProps,
-  { fetchProfile, fetchProfileById }
+  { fetchProfileById }
 )(withRouter(Profile));
