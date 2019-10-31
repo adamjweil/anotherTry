@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Paper, MenuItem, MenuList } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import { setActiveTab } from "../../../actions/directory";
+import { setActiveTab } from "../../actions/directory";
 import PropTypes from "prop-types";
 
 const useStyles = makeStyles(theme => ({

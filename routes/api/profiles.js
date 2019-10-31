@@ -99,11 +99,11 @@ router.get("/", async (req, res) => {
 // @ route GET api/profile/user/:user_id
 // @desc   Get a specific Profile
 // @access Private
-router.get("/user/:user_id", async (req, res) => {
+router.get("/profile/:profile_id", async (req, res) => {
   try {
     const profile = await Profile.findOne({
-      user: req.params.user_id
-    }).populate("user", ["name", "avatar"]);
+      profile: req.params.profile_id
+    }).populate("user", ["email", "username", "avatar"]);
 
     if (!profile) {
       return res.status(400).json({ msg: "There is no profile for this user" });

@@ -12,7 +12,7 @@ import Profiles from "../../components/Profile/Profiles";
 import ProfileForm from "../../components/Profile/ProfileForm";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import Tickets from "../../components/Tickets/Tickets";
-import Directory from "../../components/layout/Directory/Directory";
+import Directory from "../../components/Directory/Directory";
 import PrivateRoute from "../../components/routing/PrivateRoute";
 import NotFound from "../../components/layout/NotFound";
 import ThemeingLayout from "../../components/layout/TestLayout/ThemeingLayout";
