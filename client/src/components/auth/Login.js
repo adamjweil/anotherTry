@@ -45,7 +45,8 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     margin: theme.spacing(1, 0, 1, 0),
     padding: "30px",
-    border: "1px shadow grey"
+    border: "1px shadow grey",
+    borderRadius: "25px"
   },
   submit: {
     margin: theme.spacing(1, 0, 2)
@@ -62,7 +63,8 @@ const useStyles = makeStyles(theme => ({
   },
   box: {
     background: "#F8F8F8",
-    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.6)"
+    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.8)",
+    borderRadius: "25px"
   }
 }));
 
@@ -139,9 +141,9 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
             required
             autoFocus
             InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Icon edge="end" style={{ opacity: ".7" }}>
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Icon edge="start" style={{ opacity: ".7" }}>
                     <AlternateEmailOutlinedIcon />
                   </Icon>
                 </InputAdornment>
@@ -216,8 +218,8 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
 
             <Grid item xs={12}>
               <Button
-                type="submit"
                 fullWidth
+                type="submit"
                 size="large"
                 variant="contained"
                 color="primary"
@@ -245,8 +247,8 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
                   </Button>
                 </Link>
               </Grid>
-              <Grid item sm={2}></Grid>
-              <Grid item xs={12} sm={5}>
+              <Grid item sm={1}></Grid>
+              <Grid item xs={12} sm={6}>
                 <GoogleAuth />
               </Grid>
             </Grid>

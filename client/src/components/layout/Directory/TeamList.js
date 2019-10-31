@@ -12,7 +12,8 @@ import {
   Typography,
   Button,
   CardActions,
-  CardActionArea
+  CardActionArea,
+  Divider
 } from "@material-ui/core";
 
 import { fetchTeams } from "../../../actions/team";
@@ -22,8 +23,28 @@ const useStyles = makeStyles(theme => ({
     verticalAlign: "center",
     alignItems: "center",
     margin: "0 10% 0",
-    height: 140,
     borderRadius: "5px"
+  },
+  cardContent: {
+    minHeight: "200px",
+    maxWidth: "250px",
+    backgroundColor: "#bbdefb"
+  },
+  description: {
+    color: "#448aff",
+    fontSize: "14px",
+    fontWeight: "700",
+    margin: theme.spacing(1, 0, 0, 0)
+  },
+  descriptionContent: {
+    fontSize: "14px",
+    fontWeight: "500",
+    // color: "#696969",
+    color: "#0d47a1",
+    margin: theme.spacing(0, 1, 1, 1)
+  },
+  card: {
+    border: "2px solid #bbdefb"
   }
 }));
 
@@ -41,39 +62,52 @@ const TeamList = ({ fetchTeams, teams }) => {
         sm={3}
         style={{ display: "inLine-block", margin: "15px" }}
       >
-        <Card>
+        <Card className={classes.card}>
           <CardActionArea>
-            <CardMedia className={classes.media} title="Team Avatar" />
-            <CardContent>
+            <CardContent className={classes.cardContent}>
               <Typography
                 style={{
                   fontSize: "18px",
                   fontWeight: "700",
                   textAlign: "center",
-                  color: "#696969"
+                  marginTop: "-5px",
+                  marginBottom: "5px",
+                  color: "#0d47a1"
                 }}
               >
                 {team && team.teamName}
               </Typography>
-              Description:
-              <Typography
-                style={{
-                  fontSize: "14px",
-                  fontWeight: "600",
-                  color: "#696969"
-                }}
-              >
+              <center>
+                {" "}
+                <Divider
+                  style={{
+                    width: "200px",
+                    height: "3px",
+                    backgroundColor: "#e3f2fd"
+                  }}
+                />
+              </center>
+              <Typography as="h3" className={classes.description}>
+                Description:
+              </Typography>
+
+              <Typography className={classes.descriptionContent}>
                 {team && team.teamDescription}
               </Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions>
-            <center>
-              <Button size="small" color="primary">
+          <center>
+            <CardActions>
+              <Button
+                style={{ textAlign: "center" }}
+                fullWidth
+                size="large"
+                color="primary"
+              >
                 View Team Members
               </Button>
-            </center>
-          </CardActions>
+            </CardActions>
+          </center>
         </Card>
       </Grid>
     );

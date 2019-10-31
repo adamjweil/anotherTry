@@ -31,11 +31,13 @@ const Directory = ({
       <Grid item sm={2}></Grid>
       <Grid item sm={10}>
         <SearchDirectory />
-        <Grid item sm={12}>
-          {activeTab === "employees" ? <UserList /> : ""}
-          {activeTab === "teams" ? <TeamList /> : ""}
-          {activeTab === "createTeamForm" ? <CreateTeamForm /> : ""}
-        </Grid>
+      </Grid>
+      <Grid item sm={2}></Grid>
+      <Grid item sm={10}>
+        <center>
+          {" "}
+          <TeamList />{" "}
+        </center>
       </Grid>
 
       <div className="ui celled list"></div>
