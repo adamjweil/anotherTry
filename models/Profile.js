@@ -19,8 +19,8 @@ const ProfileSchema = new mongoose.Schema({
   hireDate: {
     type: Date
   },
-  handle: {
-    type: String
+  skills: {
+    type: [String]
   },
   title: {
     type: String

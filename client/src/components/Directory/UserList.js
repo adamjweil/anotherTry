@@ -13,7 +13,7 @@ import {
   CardActions,
   CardActionArea
 } from "@material-ui/core";
-import { fetchProfiles } from "../../../actions/profile";
+import { fetchProfiles } from "../../actions/profile";
 
 const useStyles = makeStyles(theme => ({
   media: {

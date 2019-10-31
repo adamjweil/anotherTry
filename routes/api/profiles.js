@@ -42,7 +42,7 @@ router.post("/", auth, async (req, res) => {
     firstName,
     middleInitial,
     lastName,
-    handle,
+    skills,
     team,
     title,
     hireDate,
@@ -55,12 +55,14 @@ router.post("/", auth, async (req, res) => {
 
   if (firstName) profileFields.firstName = firstName;
   if (lastName) profileFields.lastName = lastName;
-  if (handle) profileFields.handle = handle;
   if (title) profileFields.title = title;
   if (team) profileFields.team = team;
   if (hireDate) profileFields.hireDate = hireDate;
   if (middleInitial) profileFields.middleInitial = middleInitial;
   if (bio) profileFields.bio = bio;
+  if (skills) {
+    profileFields.skills = skills.split(",").map(skill => skill.trim());
+  }
 
   try {
     // Update

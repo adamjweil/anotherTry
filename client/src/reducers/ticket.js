@@ -20,7 +20,8 @@ export default function(state = INITIAL_STATE, action) {
     case FETCH_TICKETS:
       return {
         ...state,
-        tickets: { ..._.mapKeys(payload, "_id") }
+        tickets: { ..._.mapKeys(payload, "_id") },
+        loading: false
       };
     case TICKET_ERROR:
       return {

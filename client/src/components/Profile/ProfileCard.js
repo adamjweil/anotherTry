@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -10,7 +11,7 @@ import {
   Box
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+// import ProfileSkills from "./ProfileSkills";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -39,8 +40,8 @@ const useStyles = makeStyles(theme => ({
   profileBox: {
     padding: "10px",
     marginTop: "15px",
-    height: "100px",
-    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.1)"
+    height: "140px",
+    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.4)"
   },
   spaceBetween: {
     justifyContent: "space-between",
@@ -57,14 +58,32 @@ const useStyles = makeStyles(theme => ({
   },
   spanContent: {
     fontSize: "16px",
-    fontWeight: "600",
+    fontWeight: "500",
     color: "#696969"
+  },
+  bioContent: {
+    fontSize: "15px",
+    fontWeight: "500",
+    margin: theme.spacing(1, 1, 1, 1),
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+    color: "#696969"
+  },
+  bioHeader: {
+    fontSize: "16px",
+    fontWeight: "600",
+    paddingTop: theme.spacing(2),
+    paddingLeft: theme.spacing(1)
+  },
+  bioDivider: {
+    width: "200px",
+    height: "2px",
+    margin: theme.spacing(1, 0, 1, 0)
   }
 }));
 
 const ProfileCard = ({ auth, user, profile, team }) => {
   const classes = useStyles();
-
   return (
     <Fragment>
       <Paper className={classes.paper}>
@@ -97,7 +116,7 @@ const ProfileCard = ({ auth, user, profile, team }) => {
                 {profile && profile.middleInitial} {profile && profile.lastName}
               </Typography>
               <Typography as="h3" className={classes.handle} align="center">
-                {profile && "@" + profile.handle}
+                {user && "@" + user.username}
               </Typography>
             </div>
           </Grid>
@@ -161,21 +180,26 @@ const ProfileCard = ({ auth, user, profile, team }) => {
           </Grid>
         </Grid>
       </Paper>
+
+      {/* Bio Box section */}
+
       <Box className={classes.profileBox}>
         <Grid container>
           <Grid item xs={12}>
+            <span className={classes.bioHeader}>Quick Bio:</span>
+            <br />
+            <span className={classes.bioContent}>{profile && profile.bio}</span>
+          </Grid>
+          <Grid item xs={12}>
             <center>
-              <span
-                style={{
-                  fontSize: "14px",
-                  fontWeight: "400",
-                  color: "#696969"
-                }}
-              >
-                Short Bio:
-              </span>
-              <p>{profile && profile.bio}</p>
+              <Divider className={classes.bioDivider} align="center" />
             </center>
+          </Grid>
+          {/* Skills Box section */}
+          <Grid item xs={12}>
+            <span className={classes.bioHeader}>Skills:</span>
+            <br />
+            <span className={classes.bioContent}>SKILLS PLACEHOLDER </span>
           </Grid>
         </Grid>
       </Box>

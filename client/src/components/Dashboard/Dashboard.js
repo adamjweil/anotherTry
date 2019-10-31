@@ -4,20 +4,16 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
 import ProfileForm from "../Profile/ProfileForm";
+import Spinner from "../layout/Spinner";
 import DashboardHeader from "./DashboardHeader";
-// import DashboardInbox from "./DashboardInbox";
 
-const Dashboard = ({
-  fetchProfiles,
-  profile,
-  loading,
-  user,
-  profile: { submittedProfileForm }
-}) => {
+const Dashboard = ({ fetchProfiles, user, profile: { loading, profile } }) => {
   useEffect(() => {
     fetchProfiles();
   }, [fetchProfiles]);
-  return (
+  return loading ? (
+    <Spinner />
+  ) : (
     <Grid
       container
       direction="row-reverse"

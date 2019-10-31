@@ -28,13 +28,13 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         profile: payload,
-        loading: false,
-        submittedProfileForm: true
+        loading: false
       };
     case FETCH_PROFILES:
       return {
         ...state,
-        profiles: { ..._.mapKeys(payload, "_id") }
+        profiles: { ..._.mapKeys(payload, "_id") },
+        loading: false
       };
     case FETCH_PROFILE_OLD:
       return { ...state, [action.payload.id]: action.payload };
@@ -59,7 +59,7 @@ export default function(state = INITIAL_STATE, action) {
         loading: false
       };
     case GET_ALL_PROFILES:
-      return { ...state };
+      return { ...state, loading: false };
     case CLEAR_PROFILE:
       return {
         ...state,
