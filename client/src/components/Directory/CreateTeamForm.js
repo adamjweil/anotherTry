@@ -13,8 +13,7 @@ import {
   TextField
 } from "@material-ui/core";
 import PropTypes from "prop-types";
-import { createTeam, fetchTeams } from "../../../actions/team";
-import { setActiveTab } from "../../../actions/directory";
+import { createTeam, fetchTeams } from "../../actions/team";
 
 const useStyles = makeStyles(theme => ({
   root: {

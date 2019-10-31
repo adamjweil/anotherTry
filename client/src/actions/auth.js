@@ -62,7 +62,7 @@ export const register = ({
       type: REGISTER_SUCCESS,
       payload: res.data
     });
-    store.dispatch(push("/profile"));
+    store.dispatch(push("/dashboard"));
     dispatch(loadUser());
     dispatch(showSnackbar("Successfully Registered!", "success"));
   } catch (err) {
@@ -74,17 +74,15 @@ export const register = ({
 };
 
 // LOGIN USER
-export const login = (email, password) => async dispatch => {
+export const login = (email, password, history) => async dispatch => {
   const config = {
     headers: {
       "Content-Type": "application/json"
     }
   };
   const body = JSON.stringify({ email, password });
-
   try {
     const res = await axios.post("/api/auth", body, config);
-
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data

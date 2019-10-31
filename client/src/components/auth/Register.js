@@ -59,7 +59,8 @@ const useStyles = makeStyles(theme => ({
   },
   box: {
     background: "#F8F8F8",
-    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.6)"
+    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.8)",
+    borderRadius: "25px"
   }
 }));
 

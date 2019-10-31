@@ -85,6 +85,7 @@ const useStyles = makeStyles(theme => ({
     width: "400px",
     maxWidth: "500px"
   },
+
   bio: {
     backgroundColor: "white",
     margin: theme.spacing(2, 0, 0, 0)
@@ -93,16 +94,6 @@ const useStyles = makeStyles(theme => ({
     border: "10px shadow #F8F8F8"
   }
 }));
-
-// const TEAMS = [
-//   "LogiQ",
-//   "Dev - Backend",
-//   "Dev - Frontend",
-//   "Integration",
-//   "Project Management",
-//   "Tech Experts",
-//   "Ops"
-// ];
 
 const TITLES = [
   "Intern",
@@ -131,22 +122,22 @@ const ProfileForm = ({
 
   const [formData, setFormData] = useState({
     firstName: "",
+    middleInitial: "",
     lastName: "",
-    handle: "",
     team: "",
     title: "",
-    middleInitial: "",
     bio: "",
+    skills: [],
     hireDate: new Date()
   });
   const [hireDateOrig, changeDate] = useState(formatDate(new Date()));
   const {
     firstName,
+    middleInitial,
     lastName,
-    handle,
+    skills,
     team,
     title,
-    middleInitial,
     bio
   } = formData;
 
@@ -285,29 +276,27 @@ const ProfileForm = ({
                 </Grid>
 
                 <Grid item xs={12}>
-                  <FormControl style={{ marginLeft: "5px", marginTop: "10px" }}>
+                  <FormControl
+                    fullWidth
+                    style={{
+                      maxWidth: "500px"
+                    }}
+                  >
                     <TextField
-                      style={{ backgroundColor: "white" }}
-                      label="Handle"
-                      name="handle"
-                      margin="normal"
-                      variant="filled"
-                      value={handle}
+                      className={classes.bio}
+                      fullWidth
+                      name="skills"
+                      value={skills}
                       onChange={e => onChange(e)}
-                      helperText=<FormHelperText
-                        className={classes.dateHelperText}
-                        error={true}
-                      >
-                        (What do you go by??)
-                      </FormHelperText>
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">@</InputAdornment>
-                        )
-                      }}
+                      placeholder="Pls enter your skills as comma seperated values (eg, html,css,config,servers.. etc)"
+                      multiline={true}
+                      variant="outlined"
+                      rows={2}
+                      rowsMax={5}
                     />
                   </FormControl>
                 </Grid>
+
                 <Grid item xs={12}>
                   <FormControl
                     fullWidth
