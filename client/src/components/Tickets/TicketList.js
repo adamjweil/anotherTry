@@ -70,29 +70,40 @@ const TicketList = ({ users, tickets, fetchTickets, loadTickets }) => {
             <TableHead>
               <TableRow>
                 <TableCell className={classes.headers} align="left">
+                  Source
+                </TableCell>
+                <TableCell className={classes.headers} align="left">
+                  Type
+                </TableCell>
+                <TableCell className={classes.headers} align="left">
                   Ticketer
                 </TableCell>
                 <TableCell className={classes.headers} align="left">
-                  Projects
+                  Summary
                 </TableCell>
                 <TableCell className={classes.headers} align="left">
-                  Buckets
+                  Fixer
                 </TableCell>
                 <TableCell className={classes.headers} align="left">
-                  Process
-                </TableCell>
-                <TableCell className={classes.headers} align="left">
-                  status
+                  Status
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {tickets.map(ticket => (
-                <TableRow key={ticket.ticketId}>
-                  <TableCell align="left">{ticket.ticketer}</TableCell>
+                <TableRow key={ticket.ticketId} value={ticket}>
+                  <TableCell align="left">{ticket.source}</TableCell>
+                  <TableCell align="left">{ticket.ticketType}</TableCell>
+                  <TableCell align="left">
+                    {ticket.ticketer.firstName} {ticket.ticketer.lastName}
+                  </TableCell>
+                  <TableCell align="left">{ticket.summary}</TableCell>
+                  <TableCell align="left">
+                    {ticket.fixer.firstName} {ticket.fixer.lastName}
+                  </TableCell>
+                  <TableCell align="left">{ticket.status}</TableCell>
                   <TableCell align="left">{ticket.project}</TableCell>
                   <TableCell align="left">{ticket.process}</TableCell>
-                  <TableCell align="left">{ticket.status}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

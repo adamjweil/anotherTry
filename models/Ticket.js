@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("./User");
+const Profile = require("./Profile");
 
 const TicketSchema = new mongoose.Schema({
   ticketType: {
@@ -25,18 +26,22 @@ const TicketSchema = new mongoose.Schema({
   },
   ticketer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "user"
+    ref: "profile"
   },
   fixer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "user"
+    ref: "profile"
   },
   status: {
     type: String
   },
-  tester: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user"
+  },
+  tester: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "profile"
   },
   standing: {
     type: String
@@ -45,7 +50,8 @@ const TicketSchema = new mongoose.Schema({
     type: String
   },
   ticketId: {
-    type: String
+    type: String,
+    required: true
   },
   summary: {
     type: String

@@ -529,6 +529,7 @@ const NewTicketForm = ({
                   placeholder="Ticket Summary"
                   className={classes.ticketSummary}
                   variant="outlined"
+                  style={{ backgroundColor: "white" }}
                 />
               </FormControl>
             </Grid>
@@ -569,7 +570,7 @@ const NewTicketForm = ({
                 >
                   {" "}
                   {profiles.map(profile => (
-                    <MenuItem value={profile._id} key={profile._id}>
+                    <MenuItem value={profile} key={profile._id}>
                       {profile.firstName}
                       {""}
                       {profile.lastName}
@@ -756,12 +757,13 @@ const NewTicketForm = ({
                   width: "150px"
                 }}
               >
-                <InputLabel>Ticket ID:</InputLabel>
                 <TextField
                   name="ticketId"
                   value={ticketId}
                   onChange={e => onChange(e)}
                   variant="outlined"
+                  label="Ticket ID"
+                  style={{ backgroundColor: "white" }}
                 />
               </FormControl>
             </Grid>
@@ -812,7 +814,7 @@ const NewTicketForm = ({
                   value={owner}
                 >
                   {profiles.map(profile => (
-                    <MenuItem value={profile} key={profile}>
+                    <MenuItem value={profile} key={profile._id}>
                       {profile.firstName} {profile.lastName}
                     </MenuItem>
                   ))}
@@ -833,7 +835,7 @@ const NewTicketForm = ({
                   value={fixer}
                 >
                   {profiles.map(profile => (
-                    <MenuItem value={profile} key={profile}>
+                    <MenuItem value={profile} key={profile._id}>
                       {profile.firstName} {profile.lastName}
                     </MenuItem>
                   ))}
@@ -854,7 +856,7 @@ const NewTicketForm = ({
                   variant="standard"
                 >
                   {profiles.map(profile => (
-                    <MenuItem value={profile} key={profile}>
+                    <MenuItem value={profile} key={profile._id}>
                       {profile.firstName} {profile.lastName}
                     </MenuItem>
                   ))}
@@ -875,6 +877,7 @@ const NewTicketForm = ({
                   rows={7}
                   rowsMax={15}
                   variant="outlined"
+                  style={{ backgroundColor: "white" }}
                 />
               </FormControl>
             </Grid>
