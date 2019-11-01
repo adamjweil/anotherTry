@@ -1,7 +1,6 @@
 import axios from "axios";
 import { showSuccessSnackbar } from "./alert";
 import {
-  GET_PROFILE,
   CREATE_PROFILE,
   PROFILE_ERROR,
   FETCH_PROFILES,
@@ -11,7 +10,7 @@ import {
 // Fetch current Profile
 export const fetchProfile = () => async dispatch => {
   try {
-    const res = await axios.get("/api/profiles/me");
+    const res = await axios.get("/api/profile/me");
     dispatch({
       type: FETCH_PROFILE,
       payload: res.data
@@ -28,7 +27,7 @@ export const fetchProfile = () => async dispatch => {
 // Fetch specific Profile
 export const fetchProfileById = id => async dispatch => {
   try {
-    const res = await axios.get(`/api/profile/${id}`);
+    const res = await axios.get(`/api/profile/user/${id}`);
     console.log(res);
     dispatch({
       type: FETCH_PROFILE,
@@ -43,7 +42,7 @@ export const fetchProfileById = id => async dispatch => {
 };
 
 export const fetchProfiles = () => async dispatch => {
-  const res = await axios.get("/api/profiles");
+  const res = await axios.get("/api/profile");
   dispatch({
     type: FETCH_PROFILES,
     payload: res.data
@@ -53,7 +52,7 @@ export const fetchProfiles = () => async dispatch => {
 // Fetch all Profiles
 export const loadAllProfiles = () => async dispatch => {
   try {
-    const res = await axios.get("/api/profiles");
+    const res = await axios.get("/api/profile");
     dispatch({
       type: FETCH_PROFILES,
       payload: res.data
@@ -78,7 +77,7 @@ export const createProfile = ({
         "Content-Type": "application/json"
       }
     };
-    const res = await axios.post("/api/profiles", formData, config);
+    const res = await axios.post("/api/profile", formData, config);
     await dispatch({
       type: CREATE_PROFILE,
       payload: res.data

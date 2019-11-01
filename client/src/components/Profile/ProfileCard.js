@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,6 +12,8 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 // import ProfileSkills from "./ProfileSkills";
+import { fetchProfile } from "../../actions/profile";
+import { loadUser } from "../../actions/user";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -82,7 +84,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProfileCard = ({ auth, user, profile, team }) => {
+const ProfileCard = ({ auth, user, profile, team, fetchProfile, loadUser }) => {
+  useEffect(() => {
+    fetchProfile();
+    loadUser();
+  }, []);
   const classes = useStyles();
   return (
     <Fragment>
@@ -209,8 +215,7 @@ const ProfileCard = ({ auth, user, profile, team }) => {
 
 ProfileCard.propTypes = {
   profile: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
-  fetchProfile: PropTypes.func.isRequired
+  user: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -219,4 +224,7 @@ const mapStateToProps = state => ({
   user: state.auth.user
 });
 
-export default connect(mapStateToProps)(ProfileCard);
+export default connect(
+  mapStateToProps,
+  { fetchProfile, loadUser }
+)(ProfileCard);

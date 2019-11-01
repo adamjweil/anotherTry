@@ -16,9 +16,7 @@ const INITIAL_STATE = {
   profiles: [],
   repos: [],
   loading: true,
-  error: {},
-  notification_count: 0,
-  submittedProfileForm: false
+  error: {}
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -33,6 +31,7 @@ export default function(state = INITIAL_STATE, action) {
     case FETCH_PROFILES:
       return {
         ...state,
+        profile: state.profile,
         profiles: { ..._.mapKeys(payload, "_id") },
         loading: false
       };
@@ -43,7 +42,6 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         profile: payload,
-        submittedProfileForm: true,
         loading: false
       };
     case UPDATE_PROFILE:
