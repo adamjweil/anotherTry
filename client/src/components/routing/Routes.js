@@ -10,6 +10,7 @@ import ErrorSnackbar from "../../components/layout/Alerts/ErrorSnackbar";
 import Profile from "../../components/Profile/Profile";
 import Profiles from "../../components/Profile/Profiles";
 import ProfileForm from "../../components/Profile/ProfileForm";
+import ProfileEditForm from "../../components/Profile/ProfileEditForm";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import Tickets from "../../components/Tickets/Tickets";
 import Directory from "../../components/Directory/Directory";
@@ -35,6 +36,7 @@ const Routes = () => {
         <Route exact path="/theming" component={ThemeingLayout} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/profileform" component={ProfileForm} />
+        <PrivateRoute exact path="/edit-profile" component={ProfileEditForm} />
         <PrivateRoute exact path="/profile" component={Profile} />
         <PrivateRoute exact path="/profile/:id" component={Profile} />
         <PrivateRoute exact path="/ticket" component={Tickets} />

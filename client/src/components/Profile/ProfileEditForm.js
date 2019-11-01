@@ -103,10 +103,9 @@ const TITLES = [
   "Director"
 ];
 
-const ProfileForm = ({
+const ProfileEditForm = ({
   createProfile,
-  loadAllProfiles,
-  fetchUsers,
+  fetchProfile,
   history,
   profiles,
   profile: { profile, loading },
@@ -114,9 +113,8 @@ const ProfileForm = ({
   teams
 }) => {
   useEffect(() => {
-    fetchUsers();
     fetchTeams();
-  }, [fetchUsers, fetchTeams]);
+  }, [fetchTeams]);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -129,6 +127,21 @@ const ProfileForm = ({
     hireDate: new Date()
   });
   const [hireDateOrig, changeDate] = useState(formatDate(new Date()));
+
+  useEffect(() => {
+    fetchProfile();
+    setFormData({
+      firstName: loading || !profile.firstName ? "" : profile.firstName,
+      middleInitial:
+        loading || !profile.middleInitial ? "" : profile.middleInitial,
+      lastName: loading || !profile.lastName ? "" : profile.lastName,
+      skills: loading || !profile.skills ? "" : profile.skills,
+      team: loading || !profile.team ? "" : profile.team,
+      title: loading || !profile.title ? "" : profile.title,
+      bio: loading || !profile.bio ? "" : profile.bio
+    });
+  }, [loading]);
+
   const {
     firstName,
     middleInitial,
@@ -374,7 +387,7 @@ const ProfileForm = ({
   );
 };
 
-ProfileForm.propTypes = {
+ProfileEditForm.propTypes = {
   createProfile: PropTypes.func.isRequired,
   fetchProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
@@ -383,7 +396,7 @@ ProfileForm.propTypes = {
 const mapStateToProps = (state, ownProps) => ({
   users: state.users,
   user: state.auth.user,
-  profile: state.profile.profile,
+  profile: state.profile,
   profiles: Object.values(state.profile.profiles),
   teams: Object.values(state.team.teams)
 });
@@ -398,4 +411,4 @@ export default connect(
     loadAllProfiles,
     fetchTeams
   }
-)(withRouter(ProfileForm));
+)(withRouter(ProfileEditForm));
