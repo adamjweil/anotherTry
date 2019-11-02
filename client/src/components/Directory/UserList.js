@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -22,70 +22,78 @@ const useStyles = makeStyles(theme => ({
     margin: "0 10% 0",
     height: 140,
     borderRadius: "5px"
+  },
+  card: {
+    border: "2px solid #bbdefb"
+  },
+  cardContent: {
+    minWidth: "200px"
   }
 }));
 
 const UserList = ({ fetchProfiles, profiles }) => {
-  const classes = useStyles();
   useEffect(() => {
     fetchProfiles();
   }, [fetchProfiles]);
-
+  const classes = useStyles();
   return profiles.map(profile => {
     return (
-      <Grid
-        key={profile._id}
-        item
-        xs={12}
-        sm={3}
-        style={{ display: "inLine-block", margin: "15px" }}
-      >
-        <Card>
-          <CardActionArea>
+      <Fragment>
+        <Grid
+          key={profile._id}
+          item
+          xs={12}
+          sm={6}
+          style={{ display: "inLine-block", margin: "15px" }}
+        >
+          <Card className={classes.card}>
+            <Typography
+              style={{
+                fontSize: "18px",
+                fontWeight: "700",
+                textAlign: "center",
+                color: "#696969"
+              }}
+            >
+              {profile && profile.firstName} {profile && profile.lastName}
+            </Typography>
             <CardMedia
               className={classes.media}
               style={{ marginTop: "10px" }}
               image={profile.user.avatar}
               title="User Avatar"
             />
-            <CardContent>
-              <Typography
-                style={{
-                  fontSize: "18px",
-                  fontWeight: "700",
-                  textAlign: "center",
-                  color: "#696969"
-                }}
-              >
-                {profile && profile.firstName} {profile && profile.lastName}
-              </Typography>
-              eMail:
-              <Typography
-                style={{
-                  fontSize: "14px",
-                  fontWeight: "600",
-                  color: "#696969"
-                }}
-              >
-                {profile && profile.user.email}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-          <CardActions>
-            <Button size="small" color="primary">
-              <center>
-                <Link
-                  style={{ textDecoration: "none", color: "#37474f" }}
-                  to={`/profile/${profile._id}`}
-                  ckassName="btn btn-primary"
+            <CardActionArea>
+              <CardContent className={classes.cardContent}>
+                eMail:
+                <Typography
+                  style={{
+                    fontSize: "14px",
+                    fontWeight: "600",
+                    color: "#696969"
+                  }}
                 >
-                  View Profile
-                </Link>
-              </center>
-            </Button>
-          </CardActions>
-        </Card>
-      </Grid>
+                  {profile && profile.user.email}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+
+            <CardActions>
+              <Button size="small" color="primary">
+                <center>
+                  <Link
+                    style={{ textDecoration: "none", color: "#37474f" }}
+                    to={`/profile/${profile._id}`}
+                    ckassName="btn btn-primary"
+                  >
+                    View Profile
+                  </Link>
+                </center>
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
+      </Fragment>
     );
   });
 };
