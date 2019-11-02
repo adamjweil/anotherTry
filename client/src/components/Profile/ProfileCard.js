@@ -173,7 +173,7 @@ const ProfileCard = ({ auth, user, profile, team, fetchProfile, loadUser }) => {
 
             <span className={classes.spaceBetweenSpan}>
               <Link
-                to="/profile"
+                to="/edit-profile"
                 style={{
                   fontSize: "16px",
                   fontWeight: "300",

@@ -157,3 +157,5 @@ User Stories:
       Part #1 in 3-Part Tutorial
         https://www.robinwieruch.de/react-apollo-client-example
           (sing Apollo Client with GraphQL)
+
+    https://www.youtube.com/watch?v=NWod5SFW13s
