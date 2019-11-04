@@ -33,6 +33,7 @@
     "mui-layout": "^1.2.9",
     "react-router-redux": "^4.0.8",
     "react-web-tabs": "^1.0.1",
+    "redux-logger": "^3.0.6",
     "redux-starter-kit": "^0.6.3",
     "request": "^2.88.0",
     "semantic-ui-react": "^0.88.0"

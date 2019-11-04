@@ -48,6 +48,56 @@ const UserType = new GraphQLObjectType({
   })
 });
 
+const TicketType = new GraphQLObjectType({
+  name: "Ticket",
+  fields: () => ({
+    _id: { type: GraphQLID },
+    summary: { type: GraphQLString },
+    description: { type: GraphQLString },
+    source: { type: GraphQLString },
+    type: { type: GraphQLString },
+    environment: { type: GraphQLString },
+    project: { type: GraphQLString },
+    release: { type: GraphQLString },
+    process: { type: GraphQLString },
+    bucket: { type: GraphQLString },
+    status: { type: GraphQLString },
+    standing: { type: GraphQLString },
+    ticketId: { type: GraphQLString },
+    importance: { type: GraphQLString },
+    owner: {
+      type: ProfileType,
+      resolve(parent, args) {
+        return Profile.findById(parent.profile);
+      }
+    },
+    fixer: {
+      type: ProfileType,
+      resolve(parent, args) {
+        return Profile.findById(parent.profile);
+      }
+    },
+    tester: {
+      type: ProfileType,
+      resolve(parent, args) {
+        return Profile.findOne(parent.profile);
+      }
+    },
+    ticketer: {
+      type: ProfileType,
+      resolve(parent, args) {
+        return Profile.findById(parent.profile._id);
+      }
+    },
+    user: {
+      type: ProfileType,
+      resolve(parents, args) {
+        return User.findOne(parent.user);
+      }
+    }
+  })
+});
+
 const TeamType = new GraphQLObjectType({
   name: "Team",
   fields: () => ({
@@ -90,6 +140,19 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(UserType),
       resolve(parent, args) {
         return User.find();
+      }
+    },
+    ticket: {
+      type: TicketType,
+      args: { _id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Profile.findOne(args.id);
+      }
+    },
+    tickets: {
+      type: new GraphQLList(TicketType),
+      resolve(parent, args) {
+        return Ticket.find();
       }
     },
     team: {

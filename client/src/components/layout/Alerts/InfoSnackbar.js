@@ -5,7 +5,6 @@ import IconButton from "@material-ui/core/IconButton";
 import { Icon } from "@material-ui/core";
 import { clearSnackbar } from "../../../actions/alert";
 import MySnackbarContentWrapper from "./MySnackbarContentWrapper";
-import { connect } from "react-redux";
 
 export default function InfoSnackbar() {
   const dispatch = useDispatch();

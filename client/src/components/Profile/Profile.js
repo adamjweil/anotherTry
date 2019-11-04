@@ -36,7 +36,7 @@ const Profile = ({
 
 Profile.propTypes = {
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.isRequired,
+  profile: PropTypes.object.isRequired,
   fetchProfileById: PropTypes.func.isRequired
 };
 
@@ -48,5 +48,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchProfileById }
+  { fetchProfileById, fetchProfile }
 )(withRouter(Profile));

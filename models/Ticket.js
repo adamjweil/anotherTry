@@ -3,7 +3,7 @@ const User = require("./User");
 const Profile = require("./Profile");
 
 const TicketSchema = new mongoose.Schema({
-  ticketType: {
+  type: {
     type: String
   },
   source: {

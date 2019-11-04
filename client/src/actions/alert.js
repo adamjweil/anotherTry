@@ -4,8 +4,7 @@ import {
   REMOVE_ALERT,
   SNACKBAR_SUCCESS,
   SNACKBAR_ERROR,
-  SNACKBAR_INFO,
-  SNACKBAR_CLEAR
+  SNACKBAR_INFO
 } from "./types";
 
 export const setAlert = (msg, alertType, timeout = 5000) => dispatch => {

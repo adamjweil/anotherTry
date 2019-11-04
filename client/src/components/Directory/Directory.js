@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid, Button } from "@material-ui/core";
 import { fetchUsers } from "../../actions/user";
-import SearchDirectory from "./SearchDirectory";
+// import SearchDirectory from "./SearchDirectory";
 import UserList from "./UserList";
 import TeamList from "./TeamList";
 // import CreateTeamForm from "./CreateTeamForm";
