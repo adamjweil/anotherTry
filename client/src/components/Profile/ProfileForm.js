@@ -109,6 +109,7 @@ const ProfileForm = ({
   fetchUsers,
   history,
   profiles,
+  fetchProfile,
   profile: { profile, loading },
   fetchTeams,
   teams

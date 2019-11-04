@@ -134,6 +134,14 @@ User Stories:
       - The User can now select a DB-ID object on the ProfileForm when selecting a team, rather than just a string
     - ProfileCard component has been refactored and simplified
     - Removed duped actions, like loadCurrentProfile and fetchProfile
+
+    #11/04
+    - I took a brief couple of days learning how to really integrate GraphQL into the project, as it seemed like a very nice solution to a lot of the API quueries I was running.
+      - Ive since wired up the application with GraphQL
+      - Am able to access the GraphQL User Interface @ localhost:5000/graphql
+      - Set up ObjectTypes for Profile, Team, and User
+      - Set up Queries for Profile, Profiles, User, Users, Team, and Teams
+      - Set up Mutation to add a Profile
     ---
 
     ##TO DO
