@@ -5,7 +5,7 @@ import { ApolloProvider } from "react-apollo";
 import { ApolloClient } from "apollo-client";
 import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { RestLink } from "apollo-link-rest";
+// import { RestLink } from "apollo-link-rest";
 
 import { Provider } from "react-redux";
 import App from "./App";

@@ -35,6 +35,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-form": "^8.2.6",
     "redux-form-material-ui": "^4.3.4",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.88.0",
     "thunk": "0.0.1",

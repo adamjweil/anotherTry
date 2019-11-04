@@ -329,6 +329,7 @@ const ProfileForm = ({
                     helperText=<FormHelperText
                       className={classes.dateHelperText}
                       error={true}
+                      component="span"
                     >
                       (Select the date from the calendar chooser below!)
                     </FormHelperText>

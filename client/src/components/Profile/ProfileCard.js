@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
@@ -85,10 +85,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ProfileCard = ({ auth, user, profile, team, fetchProfile, loadUser }) => {
-  useEffect(() => {
-    fetchProfile();
-    loadUser();
-  }, []);
+  // useEffect(() => {
+  //   fetchProfile();
+  //   loadUser();
+  // }, [fetchProfile, loadUser]);
   const classes = useStyles();
   return (
     <Fragment>

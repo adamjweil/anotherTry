@@ -458,7 +458,7 @@ const NewTicketForm = ({
   const [formData, setFormData] = useState({
     source: "",
     ticketer: "",
-    ticketType: "",
+    type: "",
     environment: "",
     bucket: "",
     project: "",
@@ -477,7 +477,7 @@ const NewTicketForm = ({
   const {
     source,
     ticketer,
-    ticketType,
+    type,
     environment,
     bucket,
     summary,
@@ -590,7 +590,7 @@ const NewTicketForm = ({
                 <Select
                   name="ticketType"
                   onChange={e => onChange(e)}
-                  value={ticketType}
+                  value={type}
                   variant="standard"
                 >
                   <MenuItem value="">Type</MenuItem>
