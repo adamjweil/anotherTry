@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Profile = require("./Profile");
 
 const UserSchema = new mongoose.Schema({
   email: {
@@ -26,6 +27,10 @@ const UserSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  profile: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "profile"
   }
 });
 

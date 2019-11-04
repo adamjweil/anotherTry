@@ -21,19 +21,17 @@ const ProfileType = new GraphQLObjectType({
     user: {
       type: UserType,
       resolve(parent, args) {
-        // console.log(parent);
-        // return _.find(users, { _id: parent.user });
+        return User.findById(parent.user);
       }
     },
     team: {
       type: TeamType,
       resolve(parent, args) {
-        // return _.find(teams, { _id: parent.team });
+        return Team.findById(parent.team);
       }
     },
     firstName: { type: GraphQLString },
     lastName: { type: GraphQLString },
-    team: { type: GraphQLString },
     title: { type: GraphQLString },
     bio: { type: GraphQLString }
   })
@@ -43,12 +41,6 @@ const UserType = new GraphQLObjectType({
   name: "User",
   fields: () => ({
     _id: { type: GraphQLID },
-    profile: {
-      type: ProfileType,
-      resolve(parent, args) {
-        // return _.find(profiles, { _id: parent.profileId });
-      }
-    },
     email: { type: GraphQLString },
     terms: { type: GraphQLBoolean },
     password: { type: GraphQLString },
@@ -65,7 +57,7 @@ const TeamType = new GraphQLObjectType({
     profiles: {
       type: new GraphQLList(ProfileType),
       resolve(parent, args) {
-        // return _.filter(profiles, { teamId: parent._id });
+        return Profile.find(parent.team);
       }
     }
   })
@@ -78,42 +70,39 @@ const RootQuery = new GraphQLObjectType({
       type: ProfileType,
       args: { _id: { type: GraphQLID } },
       resolve(parent, args) {
-        // Code to get data from db
-        // return _.find(profiles, { _id: args._id });
+        return Profile.findOne(args.id);
       }
     },
     profiles: {
       type: new GraphQLList(ProfileType),
       resolve(parent, args) {
-        // return profiles;
+        return Profile.find();
       }
     },
     user: {
       type: UserType,
       args: { _id: { type: GraphQLID } },
       resolve(parent, args) {
-        // code to get data from db
-        // return _.find(users, { _id: args._id });
+        return User.findOne(args.id);
       }
     },
     users: {
       type: new GraphQLList(UserType),
       resolve(parent, args) {
-        // return users;
+        return User.find();
       }
     },
     team: {
       type: TeamType,
       args: { _id: { type: GraphQLID } },
       resolve(parent, args) {
-        // code to get data from db
-        // return _.find(teams, { _id: args._id });
+        return Team.findOne(args.id);
       }
     },
     teams: {
       type: new GraphQLList(TeamType),
       resolve(parent, args) {
-        // return teams;
+        return Team.find();
       }
     }
   }
@@ -140,7 +129,7 @@ const Mutations = new GraphQLObjectType({
           bio: args.bio
         });
         profile.save();
-        return args.firstName;
+        return profile;
       }
     }
   }

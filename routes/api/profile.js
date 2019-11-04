@@ -60,7 +60,7 @@ router.post("/", auth, async (req, res) => {
   if (hireDate) profileFields.hireDate = hireDate;
   if (middleInitial) profileFields.middleInitial = middleInitial;
   if (bio) profileFields.bio = bio;
-  if (skills) {
+  if (skills.length > 0) {
     profileFields.skills = skills.split(",").map(skill => skill.trim());
   }
 
