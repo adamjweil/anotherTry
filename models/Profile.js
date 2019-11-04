@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const User = require("./User");
 const Team = require("./Team");
+const Schema = mongoose.Schema;
 
 const ProfileSchema = new mongoose.Schema({
   user: {

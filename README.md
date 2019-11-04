@@ -159,3 +159,6 @@ User Stories:
           (sing Apollo Client with GraphQL)
 
     https://www.youtube.com/watch?v=NWod5SFW13s
+
+https://www.youtube.com/watch?v=DU77lbBPfBI
+mongodb+srv://brad123:brad123@devconnector-cfb3y.mongodb.net/test?retryWrites=true&w=majority
