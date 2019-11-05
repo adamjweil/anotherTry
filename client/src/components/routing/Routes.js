@@ -14,6 +14,7 @@ import ProfileEditForm from "../../components/Profile/ProfileEditForm";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import Tickets from "../../components/Tickets/Tickets";
 import Directory from "../../components/Directory/Directory";
+import DirectoryWithApollo from "../../components/Directory/DirectoryWithApollo";
 import PrivateRoute from "../../components/routing/PrivateRoute";
 import NotFound from "../../components/layout/NotFound";
 import ThemeingLayout from "../../components/layout/TestLayout/ThemeingLayout";
@@ -29,7 +30,7 @@ const Routes = () => {
       </SnackbarProvider>
       <Switch>
         <Route exact path="/register" component={Register} />
-        <Route exact path="/directory" component={Directory} />
+        <Route exact path="/directory" component={DirectoryWithApollo} />
         <Route exact path="/profile/me" component={Profile} />
         <Route exact path="/profiles" component={Profiles} />
         <Route exact path="/responsive" component={ResponsiveLayout} />

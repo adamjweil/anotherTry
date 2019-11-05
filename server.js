@@ -3,13 +3,13 @@ const graphqlHTTP = require("express-graphql");
 const express = require("express");
 const connectDB = require("./config/db");
 const schema = require("./graphqlSchema/schema");
-
+const cors = require("cors");
 // const graphqlHTTP = require("express-graphql");
 // const schema = require("./Models/Profile");
 // const cors = require("cors");
 
 const app = express();
-
+app.use(cors());
 // Connect Database
 connectDB();
 
