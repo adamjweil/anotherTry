@@ -3,10 +3,8 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid, Button } from "@material-ui/core";
 import { fetchUsers } from "../../actions/user";
-// import SearchDirectory from "./SearchDirectory";
-import UserList from "./UserList";
-import TeamList from "./TeamList";
-// import CreateTeamForm from "./CreateTeamForm";
+import ProfilesWrapper from "./ProfilesWrapper";
+import TeamsWrapper from "./TeamsWrapper";
 import DirectoryHeader from "./DirectoryHeader";
 import { withRouter } from "react-router-dom";
 
@@ -65,7 +63,7 @@ const Directory = ({
       <br />
 
       <Grid item sm={12}>
-        <center>{display ? <UserList /> : <TeamList />}</center>
+        <center>{display ? <ProfilesWrapper /> : <TeamsWrapper />}</center>
       </Grid>
 
       <div className="ui celled list"></div>
