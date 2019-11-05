@@ -44,7 +44,8 @@ const UserType = new GraphQLObjectType({
     email: { type: GraphQLString },
     terms: { type: GraphQLBoolean },
     password: { type: GraphQLString },
-    username: { type: GraphQLString }
+    username: { type: GraphQLString },
+    avatar: { type: GraphQLString }
   })
 });
 

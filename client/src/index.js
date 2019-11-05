@@ -21,10 +21,7 @@ export const browserHistory = createBrowserHistory();
 const BASE_URL = "http://localhost:5000/graphql";
 
 const httpLink = new HttpLink({
-  uri: BASE_URL,
-  headers: {
-    content_type: "Application/json"
-  }
+  uri: BASE_URL
 });
 
 const client = new ApolloClient({
