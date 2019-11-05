@@ -13,7 +13,6 @@ const Directory = ({
   users,
   profiles,
   teams,
-  fetchUsers,
   createTeam
 }) => {
   const [formData, setFormData] = useState({
@@ -72,16 +71,13 @@ const Directory = ({
 };
 
 Directory.propTypes = {
-  fetchUsers: PropTypes.func.isRequired
+  display: PropTypes.bool,
+  directory: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  // users: state.users,
   display: state.display,
   directory: state.directory
 });
 
-export default connect(
-  mapStateToProps,
-  { fetchUsers }
-)(withRouter(Directory));
+export default connect(mapStateToProps)(withRouter(Directory));

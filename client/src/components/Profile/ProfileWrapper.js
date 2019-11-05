@@ -1,33 +1,29 @@
 import React from "react";
 import { gql } from "apollo-boost";
 import { Query } from "react-apollo";
-import TeamList from "./TeamList";
+import ProfileCard from "./Profile";
 import Spinner from "../layout/Spinner";
 
-const TEAMS_QUERY = gql`
+const PROFILE_QUERY = gql`
   {
-    teams {
+    profile(_id: $_id) {
+      lastName
+      firstName
       _id
-      teamName
-      teamDescription
-      profiles {
-        _id
-        firstName
-        lastName
-      }
+      team
     }
   }
 `;
 
-class TeamsWrapper extends React.Component {
+class ProfileWrapper extends React.Component {
   render() {
     return (
-      <Query query={TEAMS_QUERY}>
+      <Query query={PROFILE_QUERY}>
         {({ loading, error, data }) => {
           if (loading) {
             return <Spinner />;
           } else {
-            return <TeamList teams={data.teams} />;
+            return <ProfileCard />;
           }
         }}
       </Query>
@@ -35,4 +31,4 @@ class TeamsWrapper extends React.Component {
   }
 }
 
-export default TeamsWrapper;
+export default ProfileWrapper;

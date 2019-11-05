@@ -148,11 +148,15 @@ User Stories:
     - Complete Ticket Form
     - Build out the component that will be displaying all of the Tickets
       - It can be of similar size to the one I created for ProfileForm
-    - Dropdown of Users from the database. I need to have the Users first + last name display, however, and those variables are stored on the Profile Object, which is indirectly attached to the User
     - Styling Ticket form
     - Fetching tickets
     - oAuth integration on top of in app authentication
     - GraphQL Integration
+    - Back button from Update Profile page
+    - Merge the Dashboard and Profile Pages
+
+    ##DONE
+    - Dropdown of Users from the database. I need to have the Users first + last name display, however, and those variables are stored on the Profile Object, which is indirectly attached to the User
 
       #Form for Creating Profile
         https://material-ui.com/getting-started/templates/checkout/

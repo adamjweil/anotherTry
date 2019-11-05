@@ -37,10 +37,8 @@ const Landing = ({
   // };
 
   const classes = useStyles();
-  if (isAuthenticated === true && submittedProfileForm === true) {
+  if (isAuthenticated === true) {
     return <Redirect to="/profile" />;
-  } else if (isAuthenticated === true) {
-    return <Redirect to="/dashboard" />;
   } else {
     return (
       <Fragment>

@@ -16,7 +16,8 @@ const INITIAL_STATE = {
   profiles: [],
   repos: [],
   loading: true,
-  error: {}
+  error: {},
+  isSaved: false
 };
 
 export default function(state = INITIAL_STATE, action) {
@@ -26,7 +27,8 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         profile: payload,
-        loading: false
+        loading: false,
+        isSaved: true
       };
     case FETCH_PROFILES:
       return {
@@ -42,19 +44,22 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         profile: payload,
-        loading: false
+        loading: false,
+        isSaved: true
       };
     case UPDATE_PROFILE:
       return {
         ...state,
         profile: payload,
-        loading: false
+        loading: false,
+        isSaved: true
       };
     case PROFILE_ERROR:
       return {
         ...state,
         error: payload,
-        loading: false
+        loading: false,
+        isSaved: false
       };
     case GET_ALL_PROFILES:
       return { ...state, loading: false };
