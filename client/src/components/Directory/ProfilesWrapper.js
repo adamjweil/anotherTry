@@ -26,10 +26,9 @@ const PROFILE_QUERY = gql`
 
 class ProfilesWrapper extends React.Component {
   render() {
-    // const classes = useStyles();
     return (
       <Query query={PROFILE_QUERY}>
-        {({ loading, error, data }) => {
+        {({ loading, error, data, fetchMore }) => {
           if (loading) {
             return <Spinner />;
           } else {

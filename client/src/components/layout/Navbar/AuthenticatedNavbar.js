@@ -139,11 +139,7 @@ const AuthenticatedNavbar = ({
           Tickets
         </Link>
       </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <Link to="/dashboard" style={{ textDecoration: "none" }}>
-          Dashboard
-        </Link>
-      </MenuItem>
+
       <MenuItem onClick={handleMenuClose}>
         <Link to="/directory" style={{ textDecoration: "none" }}>
           Directory
@@ -207,6 +203,7 @@ const AuthenticatedNavbar = ({
         style={{ position: "fixed", padding: "0px", background: "#14171A" }}
       >
         <div>
+          {/* Dropdown button with navlinks */}
           <div className={classes.grow} stye={{ marginBottom: "50px" }}>
             <Toolbar style={{ minHeight: "10px", maxHeight: "51px" }}>
               <IconButton
@@ -219,6 +216,7 @@ const AuthenticatedNavbar = ({
                 <MenuIcon />
               </IconButton>
 
+              {/* Search Section */}
               <div className={classes.search}>
                 <div className={classes.searchIcon}>
                   <SearchIcon />
@@ -236,48 +234,6 @@ const AuthenticatedNavbar = ({
               <div className={classes.grow} />
               <div className={classes.sectionDesktop}>
                 <Divider orientation="vertical" />
-                <Link
-                  onClick={setActiveTab()}
-                  to="/dashboard"
-                  style={{
-                    textDecoration: "none"
-                  }}
-                >
-                  <MenuItem
-                    style={{
-                      maxHeight: "53px",
-                      opacity:
-                        window.location.href ===
-                        "http://localhost:3000/dashboard"
-                          ? "1"
-                          : ".75",
-                      borderBottom:
-                        window.location.href ===
-                        "http://localhost:3000/dashboard"
-                          ? "3px inset #D3D3D3"
-                          : ""
-                    }}
-                  >
-                    <p
-                      style={{
-                        color: "white",
-                        fontSize:
-                          window.location.href ===
-                          "http://localhost:3000/dashboard"
-                            ? "18px"
-                            : "16px",
-                        fontWeight:
-                          window.location.href ===
-                          "http://localhost:3000/dashboard"
-                            ? "700"
-                            : "400",
-                        alignItems: "center"
-                      }}
-                    >
-                      Dashboard
-                    </p>
-                  </MenuItem>
-                </Link>
 
                 <Link
                   onClick={setActiveTab()}

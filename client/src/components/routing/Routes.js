@@ -10,6 +10,7 @@ import ErrorSnackbar from "../../components/layout/Alerts/ErrorSnackbar";
 import Profile from "../../components/Profile/Profile";
 import Profiles from "../../components/Profile/Profiles";
 import ProfileForm from "../../components/Profile/ProfileForm";
+import ProfileWrapper from "../../components/Profile/ProfileWrapper";
 import ProfileEditForm from "../../components/Profile/ProfileEditForm";
 import Dashboard from "../../components/Dashboard/Dashboard";
 import Tickets from "../../components/Tickets/Tickets";
@@ -30,14 +31,14 @@ const Routes = () => {
       <Switch>
         <Route exact path="/register" component={Register} />
         <Route exact path="/directory" component={Directory} />
-        <Route exact path="/profile/me" component={Profile} />
+        <Route exact path="/profile/me" component={ProfileWrapper} />
         <Route exact path="/profiles" component={Profiles} />
         <Route exact path="/responsive" component={ResponsiveLayout} />
         <Route exact path="/theming" component={ThemeingLayout} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/profileform" component={ProfileForm} />
         <PrivateRoute exact path="/edit-profile" component={ProfileEditForm} />
-        <PrivateRoute exact path="/profile" component={Profile} />
+        <PrivateRoute exact path="/profile" component={ProfileWrapper} />
         <PrivateRoute exact path="/profile/:id" component={Profile} />
         <PrivateRoute exact path="/ticket" component={Tickets} />
         <Route component={NotFound} />

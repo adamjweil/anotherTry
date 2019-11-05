@@ -110,7 +110,8 @@ const ProfileForm = ({
   history,
   profiles,
   fetchProfile,
-  profile: { profile, loading },
+  profile,
+  loading,
   fetchTeams,
   teams
 }) => {
