@@ -38,7 +38,7 @@ const Landing = ({
 
   const classes = useStyles();
   if (isAuthenticated === true) {
-    return <Redirect to="/profile" />;
+    return <Redirect to="/profile/me" />;
   } else {
     return (
       <Fragment>
