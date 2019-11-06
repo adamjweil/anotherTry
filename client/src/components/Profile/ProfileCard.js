@@ -141,7 +141,7 @@ const ProfileCard = ({ auth, user, profile, team, fetchProfile, loadUser }) => {
               style={{ fontSize: "16px", fontWeight: "600", color: "#696969" }}
             >
               <span className={classes.spanContent}>
-                {team && team.teamName}
+                {profile.team && profile.team.teamName}
               </span>
             </span>
           </Grid>
@@ -227,7 +227,6 @@ ProfileCard.propTypes = {
 
 const mapStateToProps = state => ({
   profile: state.profile.profile,
-  team: state.profile.profile.team,
   user: state.auth.user
 });
 

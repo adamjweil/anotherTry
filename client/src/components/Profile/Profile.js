@@ -5,8 +5,9 @@ import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
 import { fetchProfile, fetchProfileById } from "../../actions/profile";
 import ProfileCard from "./ProfileCard";
+import ProfileForm from "./ProfileForm";
 
-const Profile = ({ fetchProfile, fetchProfileById, auth, match }) => {
+const Profile = ({ fetchProfile, fetchProfileById, auth, match, isSaved }) => {
   useEffect(() => {
     fetchProfile();
   }, [fetchProfile]);
@@ -17,11 +18,14 @@ const Profile = ({ fetchProfile, fetchProfileById, auth, match }) => {
           item
           xs={12}
           sm={3}
-          style={{ marginLeft: "30px", minWidth: "350px" }}
+          style={{ marginLeft: "30px", minWidth: "350px", maxWidth: "375px" }}
         >
           <ProfileCard />
         </Grid>
-        <Grid item md={1}></Grid>
+
+        <Grid item sm={8} style={{ marginLeft: "30px", marginTop: "20px" }}>
+          {!isSaved ? <ProfileForm /> : ""}
+        </Grid>
       </Grid>
     </Fragment>
   );
