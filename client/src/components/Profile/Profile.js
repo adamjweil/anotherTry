@@ -6,42 +6,49 @@ import { Grid } from "@material-ui/core";
 import { fetchProfile, fetchProfileById } from "../../actions/profile";
 import ProfileCard from "./ProfileCard";
 import ProfileForm from "./ProfileForm";
-
-const Profile = ({ fetchProfile, fetchProfileById, auth, match, isSaved }) => {
+import Spinner from "../layout/Spinner";
+const Profile = ({
+  fetchProfileById,
+  profile: { profile, loading },
+  auth,
+  match
+}) => {
   useEffect(() => {
-    fetchProfile();
-  }, [fetchProfile]);
+    fetchProfileById(match.params.id);
+  }, [fetchProfileById, match.params.id]);
+
   return (
     <Fragment>
-      <Grid container>
-        <Grid
-          item
-          xs={12}
-          sm={3}
-          style={{ marginLeft: "30px", minWidth: "350px", maxWidth: "375px" }}
-        >
-          <ProfileCard />
+      {loading || profile === null ? (
+        <Spinner />
+      ) : (
+        <Grid container>
+          <Grid
+            item
+            xs={12}
+            sm={3}
+            style={{ marginLeft: "30px", minWidth: "350px", maxWidth: "375px" }}
+          >
+            <ProfileCard />
+          </Grid>
         </Grid>
-
-        <Grid item sm={8} style={{ marginLeft: "30px", marginTop: "20px" }}>
-          {!isSaved ? <ProfileForm /> : ""}
-        </Grid>
-      </Grid>
+      )}
     </Fragment>
   );
 };
 
 Profile.propTypes = {
-  auth: PropTypes.object.isRequired,
+  fetchProfileById: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
-  fetchProfileById: PropTypes.func.isRequired
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  isSaved: state.profile.isSaved
+  profile: state.profile,
+  auth: state.auth
 });
 
 export default connect(
   mapStateToProps,
-  { fetchProfileById, fetchProfile }
+  { fetchProfileById }
 )(withRouter(Profile));

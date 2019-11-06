@@ -64,7 +64,7 @@ export const register = ({
     });
     dispatch(loadUser("/profile"));
     dispatch(showSnackbar("Successfully Registered!", "success"));
-    store.dispatch(push("/profile"));
+    store.dispatch(push("/profile/me"));
   } catch (err) {
     dispatch(showSnackbar(err.msg, "error"));
     dispatch({

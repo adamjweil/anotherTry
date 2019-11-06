@@ -83,7 +83,7 @@ export const createProfile = ({
       payload: res.data
     });
     dispatch(showSuccessSnackbar(edit ? "Profile Updated" : "Profile Created"));
-    history.push("/profile");
+    history.push("/profile/me");
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,

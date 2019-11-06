@@ -130,7 +130,7 @@ const AuthenticatedNavbar = ({
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <Link to="/profile" style={{ textDecoration: "none" }}>
+        <Link to="/profile/me" style={{ textDecoration: "none" }}>
           Profile
         </Link>
       </MenuItem>
@@ -335,7 +335,7 @@ const AuthenticatedNavbar = ({
 
                 <Link
                   onClick={setActiveTab()}
-                  to="/profile"
+                  to="/profile/me"
                   color="white"
                   style={{ paddingTop: "0px" }}
                 >
@@ -389,7 +389,7 @@ const AuthenticatedNavbar = ({
 
                 <Link
                   onClick={setActiveTab()}
-                  to="/profile"
+                  to="/profile/me"
                   style={{
                     textDecoration: "none"
                   }}
@@ -400,12 +400,12 @@ const AuthenticatedNavbar = ({
                         maxHeight: "55px",
                         opacity:
                           window.location.href ===
-                          "http://localhost:3000/profile"
+                          "http://localhost:3000/profile/me"
                             ? "1"
                             : ".75",
                         borderBottom:
                           window.location.href ===
-                          "http://localhost:3000/profile"
+                          "http://localhost:3000/profile/me"
                             ? "3px inset #D3D3D3"
                             : ""
                       }}
@@ -431,12 +431,12 @@ const AuthenticatedNavbar = ({
                             paddingLeft: "-20px",
                             fontSize:
                               window.location.href ===
-                              "http://localhost:3000/profile"
+                              "http://localhost:3000/profile/me"
                                 ? "15px"
                                 : "14px",
                             fontWeight:
                               window.location.href ===
-                              "http://localhost:3000/profile"
+                              "http://localhost:3000/profile/me"
                                 ? "700"
                                 : "400"
                           }}

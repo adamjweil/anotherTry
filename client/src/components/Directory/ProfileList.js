@@ -6,10 +6,12 @@ import {
   CardActionArea,
   CardContent,
   Divider,
-  CardMedia
+  CardMedia,
+  Button
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
-const ProfileList = ({ profiles }) => {
+const ProfileList = ({ profiles, users }) => {
   return profiles.map(profile => {
     return (
       <Grid key={profile._id} item style={{ display: "inLine-block" }}>
@@ -139,6 +141,24 @@ const ProfileList = ({ profiles }) => {
               </Grid>
             </CardContent>
           </CardActionArea>
+
+          <Link
+            to={`/profile/${profile._id}`}
+            style={{ textDecoration: "none" }}
+          >
+            <Button
+              renderas="button"
+              fullWidth
+              size="small"
+              variant="outlined"
+              color="primary"
+              style={{
+                textDecoration: "none"
+              }}
+            >
+              View Profile
+            </Button>
+          </Link>
         </Card>
       </Grid>
     );

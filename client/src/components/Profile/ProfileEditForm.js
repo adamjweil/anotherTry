@@ -14,9 +14,12 @@ import {
   Typography,
   TextField,
   Select,
-  FormHelperText
+  FormHelperText,
+  Icon
 } from "@material-ui/core";
+import UndoOutlinedIcon from "@material-ui/icons/UndoOutlined";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { DatePicker } from "@material-ui/pickers";
 import {
   createProfile,
@@ -25,6 +28,7 @@ import {
 } from "../../actions/profile";
 import { loadUser, fetchUsers } from "../../actions/user";
 import { fetchTeams } from "../../actions/team";
+import Spinner from "../layout/Spinner";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -168,7 +172,7 @@ const ProfileEditForm = ({
   };
 
   return loading && profile === null ? (
-    <Redirect to="/dashboard" />
+    <Spinner />
   ) : (
     <Fragment>
       <Grid container>
@@ -392,6 +396,42 @@ const ProfileEditForm = ({
                   </Grid>
                 </Grid>
               </form>
+              <Grid item xs={12}>
+                <Link to="/profile/me" style={{ textDecoration: "none" }}>
+                  <Button
+                    renderas="button"
+                    size="small"
+                    color="secondary"
+                    style={{
+                      textDecoration: "none",
+                      borderRadius: "20px",
+                      height: "40px",
+                      alignItems: "center",
+                      padding: "0px 20px 20px 20px",
+                      marginTop: "-90px",
+                      marginLeft: "40px",
+                      color: "black"
+                    }}
+                  >
+                    <Icon
+                      style={{
+                        marginRight: "15px"
+                      }}
+                    >
+                      <UndoOutlinedIcon />
+                    </Icon>
+                    <p
+                      style={{
+                        margin: "0px",
+                        fontWeight: "700",
+                        fontSize: "18px"
+                      }}
+                    >
+                      Back To Profile
+                    </p>
+                  </Button>
+                </Link>
+              </Grid>
             </Paper>
           </div>
         </Grid>

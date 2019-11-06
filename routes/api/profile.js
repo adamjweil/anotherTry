@@ -99,10 +99,10 @@ router.get("/", async (req, res) => {
 // @ route GET api/profile/user/:user_id
 // @desc   Get a specific Profile
 // @access Private
-router.get("/profile/:profile_id", async (req, res) => {
+router.get("/profile/:user_id", async (req, res) => {
   try {
     const profile = await Profile.findOne({
-      profile: req.params.profile_id
+      user: req.params.user_id
     }).populate("user", ["email", "username", "avatar"]);
 
     if (!profile) {
@@ -127,6 +127,7 @@ router.delete("/", auth, async (req, res) => {
     await Profile.findOneAndRemove({ user: req.user.id });
     // Remove User
     await User.findOneAndRemove({ _id: req.user.id });
+
     res.json({ msg: "User deleted" });
   } catch (err) {
     console.error(err.message);
