@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { fetchProfiles } from "../../actions/profile";
 import { loadUser } from "../../actions/user";
 import NewTicketForm from "./NewTicketForm";
-import TicketList from "./TicketList";
+import TicketListWrapper from "./TicketListWrapper";
 import TicketHubHeader from "./TicketHubHeader";
 
 const useStyles = makeStyles(theme => ({
@@ -26,7 +26,7 @@ const Tickets = ({ loadUser, isAuthenticated, fetchProfiles }) => {
         <NewTicketForm />
       </Grid>
       <Grid item="row" xs={12}>
-        <TicketList />
+        <TicketListWrapper />
       </Grid>
     </Grid>
   );

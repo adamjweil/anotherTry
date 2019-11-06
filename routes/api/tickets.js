@@ -43,8 +43,8 @@ router.post("/", auth, async (req, res) => {
     tester,
     standing,
     importance,
-    ticketId,
     summary,
+    ticketId,
     description,
     ticketer
   } = req.body;
@@ -58,6 +58,7 @@ router.post("/", auth, async (req, res) => {
   if (release) ticketFields.release = release;
   if (process) ticketFields.process = process;
   if (status) ticketFields.status = status;
+  if (ticketId) ticketFields.ticketId = ticketId;
   if (owner) ticketFields.owner = owner;
   if (fixer) ticketFields.fixer = fixer;
   if (tester) ticketFields.tester = tester;

@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
@@ -12,7 +10,6 @@ import {
   Typography,
   Paper
 } from "@material-ui/core";
-import { fetchTickets, loadTickets } from "../../actions/ticket";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -46,10 +43,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TicketList = ({ users, tickets, fetchTickets, loadTickets }) => {
-  useEffect(() => {
-    fetchTickets();
-  }, [fetchTickets]);
+const TicketList = ({ tickets }) => {
   const classes = useStyles();
 
   const formatDate = input => {
@@ -91,15 +85,16 @@ const TicketList = ({ users, tickets, fetchTickets, loadTickets }) => {
             </TableHead>
             <TableBody>
               {tickets.map(ticket => (
-                <TableRow key={ticket.ticketId} value={ticket}>
+                <TableRow key={ticket.ticketId} value={ticket.ticket}>
                   <TableCell align="left">{ticket.source}</TableCell>
-                  <TableCell align="left">{ticket.ticketType}</TableCell>
+                  <TableCell align="left">{ticket.type}</TableCell>
                   <TableCell align="left">
-                    {ticket.ticketer.firstName} {ticket.ticketer.lastName}
+                    {ticket.ticketer && ticket.ticketer.firstName}{" "}
                   </TableCell>
                   <TableCell align="left">{ticket.summary}</TableCell>
                   <TableCell align="left">
-                    {ticket.fixer.firstName} {ticket.fixer.lastName}
+                    {ticket.fixer && ticket.fixer.firstName}{" "}
+                    {ticket.fixer && ticket.fixer.lastName}
                   </TableCell>
                   <TableCell align="left">{ticket.status}</TableCell>
                   <TableCell align="left">{ticket.project}</TableCell>
@@ -114,19 +109,4 @@ const TicketList = ({ users, tickets, fetchTickets, loadTickets }) => {
   );
 };
 
-TicketList.propTypes = {
-  isAuthenticated: PropTypes.bool,
-  tickets: PropTypes.array.isRequired,
-  fetchTickets: PropTypes.func.isRequired
-};
-
-const mapStateToProps = state => {
-  return {
-    tickets: Object.values(state.ticket.tickets)
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  { fetchTickets, loadTickets }
-)(TicketList);
+export default TicketList;

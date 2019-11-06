@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid, Button } from "@material-ui/core";
-import { fetchUsers } from "../../actions/user";
 import ProfilesWrapper from "./ProfilesWrapper";
 import TeamsWrapper from "./TeamsWrapper";
 import DirectoryHeader from "./DirectoryHeader";

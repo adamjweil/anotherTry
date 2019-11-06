@@ -50,8 +50,7 @@ const TicketSchema = new mongoose.Schema({
     type: String
   },
   ticketId: {
-    type: String,
-    required: true
+    type: String
   },
   summary: {
     type: String
