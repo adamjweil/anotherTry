@@ -81,14 +81,16 @@ const useStyles = makeStyles(theme => ({
     width: "200px",
     height: "2px",
     margin: theme.spacing(1, 0, 1, 0)
+  },
+  skills: {
+    fontSize: "16px",
+    fontWeight: "800",
+    color: "green",
+    padding: theme.spacing(0, 0, 0, 3)
   }
 }));
 
 const ProfileCard = ({ auth, user, profile, team, fetchProfile, loadUser }) => {
-  // useEffect(() => {
-  //   fetchProfile();
-  //   loadUser();
-  // }, [fetchProfile, loadUser]);
   const classes = useStyles();
   return (
     <Fragment>
@@ -205,7 +207,12 @@ const ProfileCard = ({ auth, user, profile, team, fetchProfile, loadUser }) => {
           <Grid item xs={12}>
             <span className={classes.bioHeader}>Skills:</span>
             <br />
-            <span className={classes.bioContent}>SKILLS PLACEHOLDER </span>
+            <span className={classes.skills}>
+              {profile.skills &&
+                profile.skills.map(skill => {
+                  return skill.toUpperCase() + "  /  ";
+                })}
+            </span>
           </Grid>
         </Grid>
       </Box>
