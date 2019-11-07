@@ -142,6 +142,12 @@ User Stories:
       - Set up ObjectTypes for Profile, Team, and User
       - Set up Queries for Profile, Profiles, User, Users, Team, and Teams
       - Set up Mutation to add a Profile
+
+    #11/07
+     - Fix the Edit Profile form
+      - Add button to allow user to go back to profile
+      - Make sure Team is populating correctly
+      - View other profile pages
     ---
 
     ##TO DO

@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 // import ProfileSkills from "./ProfileSkills";
 import { fetchProfile } from "../../actions/profile";
 import { loadUser } from "../../actions/user";
+import Spinner from "../layout/Spinner";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -90,14 +91,24 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ProfileCard = ({ auth, user, profile, team, fetchProfile, loadUser }) => {
+const ProfileCard = ({
+  auth,
+  user,
+  profile,
+  loading,
+  team,
+  fetchProfile,
+  loadUser
+}) => {
   const classes = useStyles();
-  return (
+
+  return loading ? (
+    <Spinner />
+  ) : (
     <Fragment>
       <Paper className={classes.paper}>
         <Grid container justify="center">
           {/*Avatar Section */}
-
           <Grid item xs={12}>
             <center>
               <Avatar
@@ -108,16 +119,13 @@ const ProfileCard = ({ auth, user, profile, team, fetchProfile, loadUser }) => {
             </center>
             <center>
               <Divider
-                variant="middle"
                 style={{
                   height: "2px",
                   width: "200px"
                 }}
               />
             </center>
-
             {/*Name and Handle Section */}
-
             <div className={classes.nameAndHandle}>
               <Typography as="h3" className={classes.name} align="center">
                 {profile && profile.firstName}{" "}
@@ -128,9 +136,7 @@ const ProfileCard = ({ auth, user, profile, team, fetchProfile, loadUser }) => {
               </Typography>
             </div>
           </Grid>
-
           {/*Team Section */}
-
           <Grid
             item
             xs={12}
@@ -145,9 +151,7 @@ const ProfileCard = ({ auth, user, profile, team, fetchProfile, loadUser }) => {
               </span>
             </span>
           </Grid>
-
           {/*Title Section */}
-
           <Grid item xs={12} className={classes.spaceBetween}>
             <span className={classes.spanLabels}>Title:</span>
             <span className={classes.spaceBetweenSpan}>
@@ -208,10 +212,11 @@ const ProfileCard = ({ auth, user, profile, team, fetchProfile, loadUser }) => {
             <span className={classes.bioHeader}>Skills:</span>
             <br />
             <span className={classes.skills}>
-              {profile.skills &&
-                profile.skills.map(skill => {
-                  return skill.toUpperCase() + "  /  ";
-                })}
+              {profile && profile.skills
+                ? profile.skills.map(skill => {
+                    return skill.toUpperCase() + "  /  ";
+                  })
+                : ""}
             </span>
           </Grid>
         </Grid>
@@ -227,6 +232,7 @@ ProfileCard.propTypes = {
 
 const mapStateToProps = state => ({
   profile: state.profile.profile,
+
   user: state.auth.user
 });
 

@@ -19,7 +19,7 @@ export const fetchProfile = () => async dispatch => {
     console.log(err);
     dispatch({
       type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: err
     });
   }
 };
@@ -78,16 +78,19 @@ export const createProfile = ({
       }
     };
     const res = await axios.post("/api/profile", formData, config);
+
     await dispatch({
       type: CREATE_PROFILE,
       payload: res.data
     });
     dispatch(showSuccessSnackbar(edit ? "Profile Updated" : "Profile Created"));
-    history.push("/profile/me");
+    if (!edit) {
+      history.push("/profile");
+    }
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: err
     });
   }
 };
