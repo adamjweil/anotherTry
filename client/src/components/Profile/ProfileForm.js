@@ -33,24 +33,26 @@ const useStyles = makeStyles(theme => ({
   paper: {
     margin: theme.spacing(1, 1, 1, 2),
     color: "#F8F8F8",
-    minWidth: "990px",
-    boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.6)"
+    minWidth: "1100px",
+    // boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.6)",
+    border: '1px solid #d4edda',
+    borderRadius: '.5rem'
   },
   form: {
     padding: theme.spacing(5, 3, 5, 2),
     borderRadius: "5px",
     backgroundColor: "#F8F8F8",
-    minWidth: "650px",
+    minWidth: "1000px",
     margin: theme.spacing(0, 0, 10, 0)
   },
   textField: {
     margin: theme.spacing(1),
-    maxWidth: "200px",
+    maxWidth: "180px",
     backgroundColor: "white",
     color: "black"
   },
   middleInitial: {
-    width: "120px",
+    width: "100px",
     margin: theme.spacing(1),
     backgroundColor: "white"
   },
@@ -82,10 +84,9 @@ const useStyles = makeStyles(theme => ({
     marginTop: "-4px"
   },
   select: {
-    width: "400px",
+    width: "475px",
     maxWidth: "500px"
   },
-
   bio: {
     backgroundColor: "white",
     margin: theme.spacing(2, 0, 0, 0)
@@ -198,22 +199,7 @@ const ProfileForm = ({
                   />
                 </FormControl>
 
-                <FormControl>
-                  <TextField
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                    name="lastName"
-                    label="Last Name"
-                    value={lastName}
-                    onChange={e => onChange(e)}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">{""}</InputAdornment>
-                      )
-                    }}
-                  />
-                </FormControl>
+                {/* Middle Initial */}
 
                 <FormControl>
                   <TextField
@@ -232,6 +218,26 @@ const ProfileForm = ({
                   />
                 </FormControl>
 
+                {/* Last Name  */}
+
+                <FormControl>
+                  <TextField
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    name="lastName"
+                    label="Last Name"
+                    value={lastName}
+                    onChange={e => onChange(e)}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">{""}</InputAdornment>
+                      )
+                    }}
+                  />
+                </FormControl>
+
+                  {/* Team  */}
                 <Grid item xs={12}>
                   <FormControl
                     style={{
@@ -254,6 +260,8 @@ const ProfileForm = ({
                     </Select>
                   </FormControl>
                 </Grid>
+
+                  {/* Title  */}
                 <Grid item xs={12}>
                   <FormControl
                     style={{
@@ -277,6 +285,7 @@ const ProfileForm = ({
                   </FormControl>
                 </Grid>
 
+                {/* Skills  */}
                 <Grid item xs={12}>
                   <FormControl
                     fullWidth
@@ -299,6 +308,7 @@ const ProfileForm = ({
                   </FormControl>
                 </Grid>
 
+                {/* Bio  */}
                 <Grid item xs={12}>
                   <FormControl
                     fullWidth
@@ -335,7 +345,7 @@ const ProfileForm = ({
                       (Select the date from the calendar chooser below!)
                     </FormHelperText>
                     name="hireDate"
-                    value={hireDateOrig}
+                    value={formData.hireDate}
                     onChange={e => onChange(e)}
                     label="Hire Date"
                   />
@@ -349,7 +359,7 @@ const ProfileForm = ({
                       autoOk
                       orientation="landscape"
                       openTo="date"
-                      value={hireDateOrig}
+                      value={formData.hireDate}
                       onChange={e => changeDate(e)}
                       name="hireDate"
                     />

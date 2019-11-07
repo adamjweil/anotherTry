@@ -62,7 +62,7 @@ export const register = ({
       type: REGISTER_SUCCESS,
       payload: res.data
     });
-    dispatch(loadUser("/profile"));
+    dispatch(loadUser("/profile/me"));
     dispatch(showSnackbar("Successfully Registered!", "success"));
     store.dispatch(push("/profile/me"));
   } catch (err) {
