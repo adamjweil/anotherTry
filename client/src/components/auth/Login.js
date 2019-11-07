@@ -55,11 +55,10 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1, 0, 1)
   },
   main: {
-    width: "540px"
+    width: "440px"
   },
   textFields: {
-    width: "375px",
-    marginLeft: "20px"
+    width: "310px"
   },
   box: {
     background: "#F8F8F8",
@@ -122,6 +121,7 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
             color="primary"
             style={{
               fontWeight: "800",
+              fontSize: "16px",
               marinLeft: "100px",
               marginTop: "5px"
             }}
@@ -182,14 +182,21 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
           />
 
           <Grid container>
-            <Grid item>
+            <Grid item xs={12} sm={6}>
               <FormControlLabel
-                style={{ fontSize: "5px" }}
+                style={{ marginTop: "-5px", marginLeft: "-10px" }}
                 control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+                label={<p style={{ fontSize: "16px" }}>Remember me</p>}
                 className={classes.remember}
               />
-
+            </Grid>
+            <Grid item sm={1}></Grid>
+            <Grid
+              item
+              xs={12}
+              sm={5}
+              style={{ marginTop: "-10px", marginBottom: "10px" }}
+            >
               <Link
                 to="#"
                 style={{
@@ -201,18 +208,21 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
                   marginLeft: "50px"
                 }}
               >
-                <span
-                  style={{
-                    display: "inLine",
-                    textDecoration: "none",
-                    color: "grey",
-                    fontStyle: "italic",
-                    fontWeight: "400"
-                  }}
-                >
-                  Forgot password?{" "}
-                </span>
-                Click Here!!
+                <Grid item="row">
+                  <span
+                    style={{
+                      display: "inLine-block",
+                      textDecoration: "none",
+                      textAlign: "center",
+                      color: "grey",
+                      fontStyle: "italic",
+                      fontWeight: "400"
+                    }}
+                  >
+                    Forgot password?
+                  </span>
+                </Grid>
+                <Grid item="row">Click Here!!</Grid>
               </Link>
             </Grid>
 
@@ -220,7 +230,7 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
               <Button
                 fullWidth
                 type="submit"
-                size="large"
+                size="small"
                 variant="contained"
                 color="primary"
                 className={classes.submit}
@@ -237,10 +247,11 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
                     fullWidth
                     size="small"
                     variant="outlined"
-                    color="primary"
+                    color="inherit"
                     className={classes.submit}
                     style={{
-                      textDecoration: "none"
+                      textDecoration: "none",
+                      fontSize: "11px"
                     }}
                   >
                     Register

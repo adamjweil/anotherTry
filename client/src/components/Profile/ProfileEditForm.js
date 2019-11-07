@@ -119,25 +119,26 @@ const ProfileEditForm = ({
     fetchProfile();
     fetchTeams();
     setFormData({
-      firstName: loading || !profile.firstName ? '' : profile.firstName,
-      lastName: loading || !profile.lastName ? '' : profile.lastName,
-      user: loading || !profile.user ? '' : profile.user,
-      title: loading || !profile.title ? '' : profile.title,
-      bio: loading || !profile.bio ? '' : profile.bio,
-      skills: loading || !profile.skills ? '' : profile.skills,
-      hireDate: loading || !profile.hireDate ? '' : profile.hireDate,
-    })
+      firstName: loading || !profile.firstName ? "" : profile.firstName,
+      lastName: loading || !profile.lastName ? "" : profile.lastName,
+      user: loading || !profile.user ? "" : profile.user,
+      title: loading || !profile.title ? "" : profile.title,
+      team: loading || !profile.team ? "" : profile.team,
+      bio: loading || !profile.bio ? "" : profile.bio,
+      skills: loading || !profile.skills ? "" : profile.skills,
+      hireDate: loading || !profile.hireDate ? "" : profile.hireDate
+    });
   }, [loading]);
 
   const [formData, setFormData] = useState({
     firstName: "",
     middleInitial: "",
     lastName: "",
-    team: "",
     title: "",
     bio: "",
-    skills: [],
-    hireDate: new Date()
+    skills: "",
+    team: "",
+    hireDate: ""
   });
   const [hireDateOrig, changeDate] = useState(formatDate(new Date()));
   const {
@@ -145,10 +146,12 @@ const ProfileEditForm = ({
     middleInitial,
     lastName,
     skills,
-    team,
     title,
+    team,
+    hireDate,
     bio
   } = formData;
+  formData.team = team;
 
   function formatDate(string) {
     let options = { year: "numeric", month: "long", day: "numeric" };
@@ -163,7 +166,7 @@ const ProfileEditForm = ({
 
   const onSubmit = e => {
     e.preventDefault();
-    createProfile({ formData, history });
+    createProfile(formData, history, true);
   };
 
   return (
@@ -174,7 +177,6 @@ const ProfileEditForm = ({
             <Typography align="center" className={classes.message}>
               Edit Your Profile Here!
             </Typography>
-
           </Grid>
 
           <form className={classes.form} onSubmit={onSubmit}>
@@ -252,7 +254,7 @@ const ProfileEditForm = ({
                       value={team}
                     >
                       {teams.map(team => (
-                        <MenuItem key={team._id} value={team}>
+                        <MenuItem key={team} value={team}>
                           {team.teamName}
                         </MenuItem>
                       ))}
@@ -339,7 +341,7 @@ const ProfileEditForm = ({
                       (Select the date from the calendar chooser below!)
                     </FormHelperText>
                     name="hireDate"
-                    value={hireDateOrig}
+                    value={hireDate}
                     onChange={e => onChange(e)}
                     label="Hire Date"
                   />
@@ -353,7 +355,7 @@ const ProfileEditForm = ({
                       autoOk
                       orientation="landscape"
                       openTo="date"
-                      value={hireDateOrig}
+                      value={hireDate}
                       onChange={e => changeDate(e)}
                       name="hireDate"
                     />
@@ -391,7 +393,8 @@ const mapStateToProps = (state, ownProps) => ({
   user: state.auth.user,
   profile: state.profile,
   profiles: Object.values(state.profile.profiles),
-  teams: Object.values(state.team.teams)
+  teams: Object.values(state.team.teams),
+  team: state.team.teamName
 });
 
 export default connect(

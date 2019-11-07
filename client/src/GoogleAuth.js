@@ -54,16 +54,16 @@ class GoogleAuth extends React.Component {
           <Grid item xs={12}>
             <Button
               fullWidth
-              style={{ marginTop: "8px", fontSize: "13px", color: "blue" }}
+              style={{ marginTop: "8px", fontSize: "11px", color: "blue" }}
               size="small"
               color="inherit"
-              variant="contained"
+              variant="outlined"
               onClick={this.onSignInClick}
             >
               <img
                 style={{
                   height: "20px",
-                  marginLeft: "-25px",
+                  marginLeft: "-5px",
                   marginRight: "10px",
                   padding: "0px",
                   borderRadius: "10px",
@@ -72,7 +72,7 @@ class GoogleAuth extends React.Component {
                 src={process.env.PUBLIC_URL + "../../img/gLogo.jpg"}
                 alt={process.env.PUBLIC_URL + "../../img/mezoLogo120px.png"}
               />
-              Sign In with Google
+              Sign-in w/ Google
             </Button>
           </Grid>
         </Grid>
