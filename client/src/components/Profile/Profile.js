@@ -6,10 +6,12 @@ import { Grid } from "@material-ui/core";
 import { fetchProfile, fetchProfileById } from "../../actions/profile";
 import ProfileCard from "./ProfileCard";
 import ProfileForm from "./ProfileForm";
+import ProfileHeaderAlert from "./ProfileHeaderAlert";
 import Spinner from "../layout/Spinner";
+
 const Profile = ({
   fetchProfileById,
-  profile: { profile, loading },
+  profile: { profile, loading, isSaved },
   auth,
   match
 }) => {
@@ -19,10 +21,13 @@ const Profile = ({
 
   return (
     <Fragment>
-      {loading || profile === null ? (
-        <Spinner />
-      ) : (
+      <Grid conntainer>
+        {loading ? (
+          <Spinner />
+        ) : ""}
+        {isSaved ? (
         <Grid container>
+
           <Grid
             item
             xs={12}
@@ -32,7 +37,18 @@ const Profile = ({
             <ProfileCard />
           </Grid>
         </Grid>
-      )}
+        ) : ""}
+        {isSaved ? "" : (
+          <Grid container>
+            <Grid item xs={12}>
+              <ProfileHeaderAlert />
+            </Grid>
+            <Grid item style={{margin: "10px 30px 0px"}} xs={12} sm={12}>
+              <ProfileForm />
+            </Grid>
+          </Grid>
+        )}
+        </Grid>
     </Fragment>
   );
 };

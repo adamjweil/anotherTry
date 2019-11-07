@@ -59,7 +59,6 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         error: payload,
         loading: false,
-        isSaved: false
       };
     case GET_ALL_PROFILES:
       return { ...state, loading: false };

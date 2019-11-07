@@ -1,7 +1,8 @@
 import React from "react";
 import { gql } from "apollo-boost";
 import { Query } from "react-apollo";
-import ProfileCard from "./Profile";
+// import ProfileCard from "./Profile";
+import Profile from "./Profile";
 import Spinner from "../layout/Spinner";
 
 const PROFILE_QUERY = gql`
@@ -10,7 +11,10 @@ const PROFILE_QUERY = gql`
       lastName
       firstName
       _id
-      team
+      team {
+        _id
+        teamName
+      }
     }
   }
 `;
@@ -23,7 +27,7 @@ class ProfileWrapper extends React.Component {
           if (loading) {
             return <Spinner />;
           } else {
-            return <ProfileCard />;
+            return <Profile />;
           }
         }}
       </Query>
