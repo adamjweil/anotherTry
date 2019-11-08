@@ -5,7 +5,9 @@ import {
   PROFILE_ERROR,
   FETCH_PROFILES,
   FETCH_PROFILE,
-  FETCH_PROFILE_START
+  FETCH_PROFILE_START,
+  ADD_MEMBER,
+  FETCH_PROFILE_SUCCESS
 } from "./types";
 
 // Fetch current Profile
@@ -45,6 +47,7 @@ export const fetchProfileById = id => async dispatch => {
 
 export const fetchProfiles = () => async dispatch => {
   const res = await axios.get("/api/profile");
+  dispatch({ type: FETCH_PROFILE_START });
   dispatch({
     type: FETCH_PROFILES,
     payload: res.data
@@ -55,6 +58,7 @@ export const fetchProfiles = () => async dispatch => {
 export const loadAllProfiles = () => async dispatch => {
   try {
     const res = await axios.get("/api/profile");
+    dispatch({ type: FETCH_PROFILE_START });
     dispatch({
       type: FETCH_PROFILES,
       payload: res.data
@@ -80,9 +84,13 @@ export const createProfile = ({
       }
     };
     const res = await axios.post("/api/profile", formData, config);
-
+    dispatch({ type: FETCH_PROFILE_START });
     dispatch({
       type: CREATE_PROFILE,
+      payload: res.data
+    });
+    dispatch({
+      type: ADD_MEMBER,
       payload: res.data
     });
     dispatch(showSuccessSnackbar(edit ? "Profile Updated" : "Profile Created"));
@@ -95,4 +103,10 @@ export const createProfile = ({
       payload: err
     });
   }
+};
+
+export const fetchProfileSuccess = dispatch => {
+  dispatch({
+    type: FETCH_PROFILE_SUCCESS
+  });
 };

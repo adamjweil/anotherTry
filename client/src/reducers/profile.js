@@ -8,7 +8,8 @@ import {
   FETCH_PROFILES,
   FETCH_PROFILE,
   FETCH_PROFILE_OLD,
-  FETCH_PROFILE_START
+  FETCH_PROFILE_START,
+  FETCH_PROFILE_SUCCESS
 } from "../actions/types";
 import _ from "lodash";
 
@@ -45,14 +46,20 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         profile: payload,
-        profileLoading: false,
+        profileLoading: true,
         isSaved: true
+      };
+    case FETCH_PROFILE_SUCCESS:
+      return {
+        ...state,
+        profileLoading: false
       };
     case FETCH_PROFILE_START:
       return {
         ...state,
         profileLoading: true
       };
+
     case UPDATE_PROFILE:
       return {
         ...state,

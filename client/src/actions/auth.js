@@ -34,7 +34,6 @@ export const loadUser = (history, showErrorSnackbar) => async dispatch => {
       type: USER_LOADED,
       payload: res.data
     });
-    dispatch(fetchProfile(res.data.auth.user._ud));
   } catch (err) {
     dispatch({
       type: AUTH_ERROR

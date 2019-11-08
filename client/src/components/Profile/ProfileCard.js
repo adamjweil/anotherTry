@@ -92,9 +92,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ProfileCard = ({
-  auth,
   user,
   profile,
+  auth,
+  profile: { profileLoading },
+  auth: { authLoading },
   loading,
   team,
   fetchProfile,
@@ -230,13 +232,4 @@ ProfileCard.propTypes = {
   user: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  profile: state.profile.profile,
-
-  user: state.auth.user
-});
-
-export default connect(
-  mapStateToProps,
-  { fetchProfile, loadUser }
-)(ProfileCard);
+export default ProfileCard;

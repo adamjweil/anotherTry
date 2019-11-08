@@ -208,7 +208,7 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
                   marginLeft: "50px"
                 }}
               >
-                <Grid item="row">
+                <Grid item>
                   <span
                     style={{
                       display: "inLine-block",
@@ -222,7 +222,7 @@ const Login = ({ showLoginOrRegister, isAuthenticated, login, setAlert }) => {
                     Forgot password?
                   </span>
                 </Grid>
-                <Grid item="row">Click Here!!</Grid>
+                <Grid item>Click Here!!</Grid>
               </Link>
             </Grid>
 

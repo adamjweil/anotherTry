@@ -5,17 +5,17 @@ import { Query } from "react-apollo";
 import Profile from "./Profile";
 import Spinner from "../layout/Spinner";
 
-const getProfileQuery = _id => `
-{
-  
-}
-`;
 const PROFILE_QUERY = gql`
-  {
+  query profile($_id: ID!) {
     profile(_id: $_id) {
-      lastName
-      firstName
       _id
+      firstName
+      lastName
+      bio
+      user {
+        username
+        _id
+      }
       team {
         _id
         teamName
