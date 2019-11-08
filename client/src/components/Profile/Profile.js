@@ -11,8 +11,8 @@ import Spinner from "../layout/Spinner";
 
 const Profile = ({
   fetchProfileById,
-  profileLoading,
-  profile: { profile, isSaved },
+  profile: { profile, profileLoading, isSaved },
+  auth,
   auth: { user, authLoading },
   match
 }) => {
@@ -20,10 +20,11 @@ const Profile = ({
     fetchProfileById(match.params.id);
   }, [fetchProfileById, match.params.id]);
 
-  return (
+  return profileLoading || authLoading ? (
+    <Spinner />
+  ) : (
     <Fragment>
-      <Grid conntainer>
-        {profileLoading || authLoading ? <Spinner /> : ""}
+      <Grid conntainer="true">
         {isSaved ? (
           <Grid container>
             <Grid
@@ -36,7 +37,7 @@ const Profile = ({
                 maxWidth: "375px"
               }}
             >
-              <ProfileCard />
+              <ProfileCard profile={profile} user={user} auth={auth} />
             </Grid>
           </Grid>
         ) : (
@@ -67,6 +68,7 @@ Profile.propTypes = {
 
 const mapStateToProps = state => ({
   profile: state.profile,
+  user: state.auth.user,
   auth: state.auth
 });
 

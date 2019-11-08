@@ -108,8 +108,13 @@ const TeamType = new GraphQLObjectType({
     members: {
       type: new GraphQLList(ProfileType),
       resolve(parent, args) {
-        console.log(parent);
-        return Profile.find(team === args);
+        console.log(args);
+        // let profiles = [];
+        // const members = Profile.find();
+        let team = Team.findById(parent._id);
+        return Profile.find(team._id);
+        // let profiles = Profile.find();
+        // return profiles.filter(profiles => profile.team._id === parent.team);
       }
     }
   })
@@ -135,7 +140,8 @@ const RootQuery = new GraphQLObjectType({
       type: UserType,
       args: { _id: { type: GraphQLID } },
       resolve(parent, args) {
-        return User.findOne(args.id);
+        console.log(parent);
+        return User.findOne(args._id);
       }
     },
     users: {

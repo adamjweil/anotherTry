@@ -1,4 +1,9 @@
-import { CREATE_TEAM, FETCH_TEAMS, TEAM_ERROR } from "../actions/types";
+import {
+  CREATE_TEAM,
+  FETCH_TEAMS,
+  TEAM_ERROR,
+  ADD_MEMBER
+} from "../actions/types";
 import _ from "lodash";
 
 const INITIAL_STATE = {
@@ -26,6 +31,12 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         error: payload,
+        loading: false
+      };
+    case ADD_MEMBER:
+      return {
+        ...state,
+        ...payload,
         loading: false
       };
     default:

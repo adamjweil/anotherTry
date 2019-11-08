@@ -17,7 +17,7 @@ router.get("/me", auth, async (req, res) => {
       user: req.user.id
     })
       .populate("user", ["avatar", "email", "username"])
-      .populate("team", ["teamName", "teamDescription"]);
+      .populate("team", ["_id", "teamName", "teamDescription"]);
 
     if (!profile) {
       return res.status(400).json({ msg: "There is no profile for this user" });
@@ -71,6 +71,8 @@ router.post("/", auth, async (req, res) => {
       { $set: profileFields },
       { new: true, upsert: true }
     );
+    let team = await Team.findById(profileFields.team);
+    team.members.push(profile);
     res.json(profile);
   } catch (err) {
     console.error(err.message);
