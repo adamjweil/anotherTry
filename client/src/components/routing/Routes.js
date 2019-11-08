@@ -40,6 +40,7 @@ const Routes = () => {
         <PrivateRoute exact path="/edit-profile" component={ProfileEditForm} />
         <PrivateRoute exact path="/profile" component={ProfileWrapper} />
         <PrivateRoute exact path="/profile/:id" component={Profile} />
+        <PrivateRoute exact path="/user/:id" component={Dashboard} />
         <PrivateRoute exact path="/ticket" component={Tickets} />
         <Route component={NotFound} />
       </Switch>

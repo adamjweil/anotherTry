@@ -7,7 +7,8 @@ import {
   CLEAR_PROFILE,
   FETCH_PROFILES,
   FETCH_PROFILE,
-  FETCH_PROFILE_OLD
+  FETCH_PROFILE_OLD,
+  FETCH_PROFILE_START
 } from "../actions/types";
 import _ from "lodash";
 
@@ -15,7 +16,7 @@ const INITIAL_STATE = {
   profile: {},
   profiles: [],
   repos: [],
-  loading: true,
+  profileLoading: false,
   error: {},
   isSaved: false
 };
@@ -27,7 +28,7 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         profile: payload,
-        loading: false,
+        profileLoading: true,
         isSaved: true
       };
     case FETCH_PROFILES:
@@ -35,7 +36,7 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         profile: state.profile,
         profiles: { ..._.mapKeys(payload, "_id") },
-        loading: false
+        profileLoading: true
       };
     case FETCH_PROFILE_OLD:
       return { ...state, [action.payload.id]: action.payload };
@@ -44,21 +45,26 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         profile: payload,
-        loading: false,
+        profileLoading: false,
         isSaved: true
+      };
+    case FETCH_PROFILE_START:
+      return {
+        ...state,
+        profileLoading: true
       };
     case UPDATE_PROFILE:
       return {
         ...state,
         profile: payload,
-        loading: false,
+        profileLoading: true,
         isSaved: true
       };
     case PROFILE_ERROR:
       return {
         ...state,
         error: payload,
-        loading: false,
+        profileLoading: false
       };
     case GET_ALL_PROFILES:
       return { ...state, loading: false };
@@ -68,7 +74,7 @@ export default function(state = INITIAL_STATE, action) {
         profile: null,
         profiles: [],
         repos: [],
-        loading: false
+        profileLoading: false
       };
     default:
       return state;

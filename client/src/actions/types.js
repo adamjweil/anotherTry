@@ -42,3 +42,4 @@ export const TAB_ERROR = "TAB_ERROR";
 export const FETCH_TEAMS = "FETCH_TEAMS";
 export const CREATE_TEAM = "CREATE_TEAM";
 export const TEAM_ERROR = "TEAM_ERROR";
+export const FETCH_PROFILE_START = "FETCH_PROFILE_START";

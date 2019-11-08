@@ -17,7 +17,7 @@ import {
 const INITIAL_STATE = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
-  loading: true,
+  authLoading: false,
   user: null
 };
 
@@ -30,7 +30,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        loading: false,
+        authLoading: false,
         user: payload
       };
     case GOOGLE_SIGNIN_SUCCESS:
@@ -46,7 +46,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         ...payload,
         isAuthenticated: true,
-        loading: false
+        authLoading: false
       };
     case REGISTER_FAIL:
     case AUTH_ERROR:
@@ -57,7 +57,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         token: null,
         isAuthenticated: false,
-        loading: false
+        authLoading: false
       };
     case TOGGLE_TERMS:
       state.terms = !state.terms;
@@ -73,7 +73,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         user: payload,
         isAuthenticated: true,
-        loading: false
+        authLoading: false
       };
     default:
       return state;

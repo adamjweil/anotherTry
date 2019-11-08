@@ -5,6 +5,11 @@ import { Query } from "react-apollo";
 import Profile from "./Profile";
 import Spinner from "../layout/Spinner";
 
+const getProfileQuery = _id => `
+{
+  
+}
+`;
 const PROFILE_QUERY = gql`
   {
     profile(_id: $_id) {

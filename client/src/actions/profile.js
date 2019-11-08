@@ -4,13 +4,15 @@ import {
   CREATE_PROFILE,
   PROFILE_ERROR,
   FETCH_PROFILES,
-  FETCH_PROFILE
+  FETCH_PROFILE,
+  FETCH_PROFILE_START
 } from "./types";
 
 // Fetch current Profile
 export const fetchProfile = () => async dispatch => {
   try {
     const res = await axios.get("/api/profile/me");
+    dispatch({ type: FETCH_PROFILE_START });
     dispatch({
       type: FETCH_PROFILE,
       payload: res.data
@@ -28,7 +30,7 @@ export const fetchProfile = () => async dispatch => {
 export const fetchProfileById = id => async dispatch => {
   try {
     const res = await axios.get(`/api/profile/user/${id}`);
-    console.log(res);
+    dispatch({ type: FETCH_PROFILE_START });
     dispatch({
       type: FETCH_PROFILE,
       payload: res.data
@@ -79,7 +81,7 @@ export const createProfile = ({
     };
     const res = await axios.post("/api/profile", formData, config);
 
-    await dispatch({
+    dispatch({
       type: CREATE_PROFILE,
       payload: res.data
     });

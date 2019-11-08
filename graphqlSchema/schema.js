@@ -105,10 +105,11 @@ const TeamType = new GraphQLObjectType({
     _id: { type: GraphQLID },
     teamName: { type: GraphQLString },
     teamDescription: { type: GraphQLString },
-    profiles: {
+    members: {
       type: new GraphQLList(ProfileType),
       resolve(parent, args) {
-        return Profile.find(parent.team);
+        console.log(parent);
+        return Profile.find(team === args);
       }
     }
   })
@@ -160,6 +161,7 @@ const RootQuery = new GraphQLObjectType({
       type: TeamType,
       args: { _id: { type: GraphQLID } },
       resolve(parent, args) {
+        console.log(parent);
         return Team.findOne(args.id);
       }
     },
