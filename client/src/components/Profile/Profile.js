@@ -11,8 +11,9 @@ import Spinner from "../layout/Spinner";
 
 const Profile = ({
   fetchProfileById,
-  profile: { profile, loading, isSaved },
-  auth,
+  profileLoading,
+  profile: { profile, isSaved },
+  auth: { user, authLoading },
   match
 }) => {
   useEffect(() => {
@@ -22,33 +23,38 @@ const Profile = ({
   return (
     <Fragment>
       <Grid conntainer>
-        {loading ? (
-          <Spinner />
-        ) : ""}
+        {profileLoading || authLoading ? <Spinner /> : ""}
         {isSaved ? (
-        <Grid container>
-
-          <Grid
-            item
-            xs={12}
-            sm={3}
-            style={{ marginLeft: "30px", minWidth: "350px", maxWidth: "375px" }}
-          >
-            <ProfileCard />
+          <Grid container>
+            <Grid
+              item
+              xs={12}
+              sm={3}
+              style={{
+                marginLeft: "30px",
+                minWidth: "350px",
+                maxWidth: "375px"
+              }}
+            >
+              <ProfileCard />
+            </Grid>
           </Grid>
-        </Grid>
-        ) : ""}
-        {isSaved ? "" : (
+        ) : (
+          ""
+        )}
+        {isSaved ? (
+          ""
+        ) : (
           <Grid container>
             <Grid item xs={12}>
               <ProfileHeaderAlert />
             </Grid>
-            <Grid item style={{margin: "10px 30px 0px"}} xs={12} sm={12}>
+            <Grid item style={{ margin: "10px 30px 0px" }} xs={12} sm={12}>
               <ProfileForm />
             </Grid>
           </Grid>
         )}
-        </Grid>
+      </Grid>
     </Fragment>
   );
 };
@@ -64,7 +70,11 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
+const mapDispatchToProps = dispatch => ({
+  fetchProfileById: () => dispatch(fetchProfileById())
+});
+
 export default connect(
   mapStateToProps,
-  { fetchProfileById }
+  mapDispatchToProps
 )(withRouter(Profile));

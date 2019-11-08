@@ -102,7 +102,7 @@ const ProfileCard = ({
 }) => {
   const classes = useStyles();
 
-  return loading ? (
+  return loading && profile ? (
     <Spinner />
   ) : (
     <Fragment>

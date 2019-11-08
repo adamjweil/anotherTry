@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Profile = require("./Profile");
 
 const TeamSchema = new mongoose.Schema({
   teamName: {
@@ -11,6 +12,10 @@ const TeamSchema = new mongoose.Schema({
   notifications: {
     type: Number,
     default: 0
+  },
+  members: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "profile"
   },
   date: {
     type: Date,

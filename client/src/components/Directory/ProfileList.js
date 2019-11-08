@@ -143,7 +143,7 @@ const ProfileList = ({ profiles, users }) => {
           </CardActionArea>
 
           <Link
-            to={`/profile/${profile._id}`}
+            to={`/profile/${profile.user._id}`}
             style={{ textDecoration: "none" }}
           >
             <Button
