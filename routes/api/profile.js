@@ -15,14 +15,12 @@ router.get("/me", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.user.id
-    })
-      .populate("user", ["avatar", "email", "username"])
-      .populate("team", ["_id", "teamName", "teamDescription"]);
+    }).populate("user", ["avatar", "email", "username"]);
 
     if (!profile) {
       return res.status(400).json({ msg: "There is no profile for this user" });
     }
-    res.json(profile);
+    return res.json(profile);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -51,7 +49,7 @@ router.post("/", auth, async (req, res) => {
 
   // Build Profile object
   const profileFields = {};
-  profileFields.user = req.user.id;
+  profileFields.user = req.user._id;
 
   if (firstName) profileFields.firstName = firstName;
   if (lastName) profileFields.lastName = lastName;
@@ -73,7 +71,7 @@ router.post("/", auth, async (req, res) => {
     );
     let team = await Team.findById(profileFields.team);
     team.members.push(profile);
-    res.json(profile);
+    return res.json(profile);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -101,7 +99,7 @@ router.get("/", async (req, res) => {
 // @ route GET api/profile/user/:user_id
 // @desc   Get a specific Profile
 // @access Private
-router.get("/user/:user_id", async (req, res) => {
+router.get("/:user_id", async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.params.user_id
