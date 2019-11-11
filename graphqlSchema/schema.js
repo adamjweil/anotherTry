@@ -33,7 +33,9 @@ const ProfileType = new GraphQLObjectType({
     firstName: { type: GraphQLString },
     lastName: { type: GraphQLString },
     title: { type: GraphQLString },
-    bio: { type: GraphQLString }
+    bio: { type: GraphQLString },
+    skills: { type: GraphQLList },
+    hireDate: { type: GraphQLString }
   })
 });
 

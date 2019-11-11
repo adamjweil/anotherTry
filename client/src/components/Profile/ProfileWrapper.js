@@ -10,8 +10,11 @@ const PROFILE_QUERY = gql`
     profile(_id: $_id) {
       _id
       firstName
+      middleInitial
       lastName
       bio
+      skills
+      title
       user {
         username
         _id
@@ -32,7 +35,8 @@ class ProfileWrapper extends React.Component {
           if (loading) {
             return <Spinner />;
           } else {
-            return <Profile />;
+            console.log({ data });
+            return <Profile profile={data} />;
           }
         }}
       </Query>

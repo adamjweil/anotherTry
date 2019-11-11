@@ -29,7 +29,7 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         profile: payload,
-        profileLoading: true,
+        profileLoading: false,
         isSaved: true
       };
     case FETCH_PROFILES:
@@ -37,7 +37,7 @@ export default function(state = INITIAL_STATE, action) {
         ...state,
         profile: state.profile,
         profiles: { ..._.mapKeys(payload, "_id") },
-        profileLoading: true
+        profileLoading: false
       };
     case FETCH_PROFILE_OLD:
       return { ...state, [action.payload.id]: action.payload };
@@ -46,7 +46,7 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         profile: payload,
-        profileLoading: true,
+        profileLoading: false,
         isSaved: true
       };
     case FETCH_PROFILE_SUCCESS:
@@ -64,7 +64,7 @@ export default function(state = INITIAL_STATE, action) {
       return {
         ...state,
         profile: payload,
-        profileLoading: true,
+        profileLoading: false,
         isSaved: true
       };
     case PROFILE_ERROR:
