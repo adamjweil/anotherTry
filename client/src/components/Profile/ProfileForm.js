@@ -35,8 +35,8 @@ const useStyles = makeStyles(theme => ({
     color: "#F8F8F8",
     minWidth: "1100px",
     // boxShadow: "0 4px 6px 0 hsla(0, 0%, 0%, 0.6)",
-    border: "1px solid #d4edda",
-    borderRadius: ".5rem"
+    border: '1px solid #d4edda',
+    borderRadius: '.5rem'
   },
   form: {
     padding: theme.spacing(5, 3, 5, 2),
@@ -237,7 +237,7 @@ const ProfileForm = ({
                   />
                 </FormControl>
 
-                {/* Team  */}
+                  {/* Team  */}
                 <Grid item xs={12}>
                   <FormControl
                     style={{
@@ -253,7 +253,7 @@ const ProfileForm = ({
                       value={team}
                     >
                       {teams.map(team => (
-                        <MenuItem key={team} value={team}>
+                        <MenuItem key={team._id} value={team}>
                           {team.teamName}
                         </MenuItem>
                       ))}
@@ -261,7 +261,7 @@ const ProfileForm = ({
                   </FormControl>
                 </Grid>
 
-                {/* Title  */}
+                  {/* Title  */}
                 <Grid item xs={12}>
                   <FormControl
                     style={{

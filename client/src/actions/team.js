@@ -36,5 +36,3 @@ export const createTeam = ({
     dispatch(showInfoSnackbar(err.message));
   }
 };
-
-export const addMember = profile => async dispatch => {};

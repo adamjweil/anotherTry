@@ -10,16 +10,15 @@ import ProfileHeaderAlert from "./ProfileHeaderAlert";
 import Spinner from "../layout/Spinner";
 
 const Profile = ({
-  fetchProfile,
+  fetchProfileById,
   profile: { profile, profileLoading, isSaved },
-  team,
   auth,
   auth: { user, authLoading },
   match
 }) => {
   useEffect(() => {
-    fetchProfile();
-  }, [fetchProfile]);
+    fetchProfileById(match.params.id);
+  }, [fetchProfileById, match.params.id]);
 
   return profileLoading || authLoading ? (
     <Spinner />
@@ -38,12 +37,7 @@ const Profile = ({
                 maxWidth: "375px"
               }}
             >
-              <ProfileCard
-                profile={profile}
-                team={team}
-                user={user}
-                auth={auth}
-              />
+              <ProfileCard profile={profile} user={user} auth={auth} />
             </Grid>
           </Grid>
         ) : (
@@ -67,7 +61,7 @@ const Profile = ({
 };
 
 Profile.propTypes = {
-  fetchProfile: PropTypes.func.isRequired,
+  fetchProfileById: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 };
@@ -75,12 +69,11 @@ Profile.propTypes = {
 const mapStateToProps = state => ({
   profile: state.profile,
   user: state.auth.user,
-  auth: state.auth,
-  team: state.profile.profile.team
+  auth: state.auth
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchProfile: () => dispatch(fetchProfile())
+  fetchProfileById: () => dispatch(fetchProfileById())
 });
 
 export default connect(

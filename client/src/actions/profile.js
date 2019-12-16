@@ -13,8 +13,8 @@ import {
 // Fetch current Profile
 export const fetchProfile = () => async dispatch => {
   try {
-    dispatch({ type: FETCH_PROFILE_START });
     const res = await axios.get("/api/profile/me");
+    dispatch({ type: FETCH_PROFILE_START });
     dispatch({
       type: FETCH_PROFILE,
       payload: res.data
@@ -31,8 +31,8 @@ export const fetchProfile = () => async dispatch => {
 // Fetch specific Profile
 export const fetchProfileById = id => async dispatch => {
   try {
+    const res = await axios.get(`/api/profile/user/${id}`);
     dispatch({ type: FETCH_PROFILE_START });
-    const res = await axios.get(`/api/profile/${id}`);
     dispatch({
       type: FETCH_PROFILE,
       payload: res.data
@@ -40,14 +40,14 @@ export const fetchProfileById = id => async dispatch => {
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
-      payload: err
+      payload: { msg: err.response.statusText, status: err.response.status }
     });
   }
 };
 
 export const fetchProfiles = () => async dispatch => {
-  dispatch({ type: FETCH_PROFILE_START });
   const res = await axios.get("/api/profile");
+  dispatch({ type: FETCH_PROFILE_START });
   dispatch({
     type: FETCH_PROFILES,
     payload: res.data
@@ -83,10 +83,14 @@ export const createProfile = ({
         "Content-Type": "application/json"
       }
     };
-    dispatch({ type: FETCH_PROFILE_START });
     const res = await axios.post("/api/profile", formData, config);
+    dispatch({ type: FETCH_PROFILE_START });
     dispatch({
       type: CREATE_PROFILE,
+      payload: res.data
+    });
+    dispatch({
+      type: ADD_MEMBER,
       payload: res.data
     });
     dispatch(showSuccessSnackbar(edit ? "Profile Updated" : "Profile Created"));
