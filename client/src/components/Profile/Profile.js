@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
-import { fetchProfile, fetchProfileById } from "../../actions/profile";
+import { fetchProfileById } from "../../actions/profile";
 import ProfileCard from "./ProfileCard";
 import ProfileForm from "./ProfileForm";
 import ProfileHeaderAlert from "./ProfileHeaderAlert";
