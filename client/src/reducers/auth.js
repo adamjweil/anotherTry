@@ -11,19 +11,45 @@ import {
   GET_USER,
   SIGN_IN,
   SIGN_OUT,
-  GOOGLE_SIGNIN_SUCCESS
+  GOOGLE_SIGNIN_SUCCESS,
+  AUTHENTICATION_START,
+  AUTHENTICATION_SUCCESS,
+  AUTHENTICATION_FAILURE,
 } from "../actions/types";
 
 const INITIAL_STATE = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
   authLoading: false,
-  user: null
+  user: null,
+  error: null
 };
 
 export default (state = INITIAL_STATE, action) => {
   const { type, payload } = action;
   switch (type) {
+    case AUTHENTICATION_START: {
+      return {
+        ...state,
+        error: null, 
+        authLoading: true,
+      };
+    }
+    case AUTHENTICATION_SUCCESS: {
+      return {
+        ...state,
+        error: null, 
+        authLoading: false,
+        token: payload.token,
+      };
+    }
+    case AUTHENTICATION_FAILURE: {
+      return {
+        ...state,
+        error: payload.error, 
+        authLoading: false,
+      };
+    }
     case SIGN_OUT:
       return { ...state, isAuthenticated: false, user: null };
     case USER_LOADED:

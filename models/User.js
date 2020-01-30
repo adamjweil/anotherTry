@@ -7,19 +7,9 @@ const UserSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  username: {
-    type: String
-  },
   password: {
     type: String,
     required: true
-  },
-  avatar: {
-    type: String
-  },
-  notification_count: {
-    type: Number,
-    default: 0
   },
   terms: {
     type: Boolean
@@ -28,10 +18,14 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  profile: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "profile"
+  admin: {
+    type: Boolean,
+    default: false
   }
+  // profile: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "profile"
+  // }
 });
 
 module.exports = User = mongoose.model("user", UserSchema);

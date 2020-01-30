@@ -18,7 +18,7 @@ import { createBrowserHistory } from "history";
 
 export const browserHistory = createBrowserHistory();
 
-const BASE_URL = "http://localhost:5000/graphql";
+const BASE_URL = process.env.DB_URI;
 
 const httpLink = new HttpLink({
   uri: BASE_URL
