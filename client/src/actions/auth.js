@@ -10,7 +10,10 @@ import {
   TOGGLE_TERMS,
   SIGN_OUT,
   AUTH_ERROR,
-  GOOGLE_SIGNIN_SUCCESS
+  GOOGLE_SIGNIN_SUCCESS,
+  AUTHENTICATION_START,
+  AUTHENTICATION_SUCCESS,
+  AUTHENTICATION_FAILURE,
 } from "./types";
 import setAuthToken from "../utils/setAuthToken";
 import {
@@ -22,6 +25,24 @@ import {
 import { fetchProfile } from "./profile";
 import { push } from "react-router-redux";
 import store from "../store";
+
+export const authenticationStart = () => ({
+  type: AUTHENTICATION_START,
+});
+
+export const authenticationSuccess = (token) => ({
+  type: AUTHENTICATION_SUCCESS,
+  payload: {
+    token,
+  },
+});
+
+export const authenticationFailure = (error) => ({
+  type: AUTHENTICATION_FAILURE,
+  payload: {
+    error,
+  },
+});
 
 //Load User
 export const loadUser = (history, showErrorSnackbar) => async dispatch => {
@@ -46,28 +67,31 @@ export const register = ({
   email,
   terms,
   password,
-  username
+  username,
+  admin
 }) => async dispatch => {
+
   const config = {
     headers: {
       "Content-Type": "application/json"
     }
   };
-  const body = JSON.stringify({ email, username, terms, password });
-
+  
+  const body = JSON.stringify({ email, username, terms, password, admin });
+  dispatch(authenticationStart());
   try {
     const res = await axios.post("/api/users", body, config);
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data
     });
-    dispatch(loadUser("/profile/me"));
+    // dispatch(loadUser("/profile/me"));
     dispatch(showSnackbar("Successfully Registered!", "success"));
-    store.dispatch(push("/profile/me"));
+    // store.dispatch(push("/profile/me"));
   } catch (err) {
     dispatch(showSnackbar(err.msg, "error"));
     dispatch({
-      type: REGISTER_FAIL
+      type: authenticationFailure(err)
     });
   }
 };

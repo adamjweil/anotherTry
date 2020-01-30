@@ -91,6 +91,7 @@ const AuthenticatedNavbar = ({
   logout,
   isAuthenticated,
   loading,
+  admin,
   activeTab,
   setActiveTab
 }) => {

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import dotenv from 'dotenv';
+
 import {
   Button,
   Container,
@@ -26,7 +28,8 @@ import { login, register, toggleCheck } from "../../actions/auth";
 import {
   showInfoSnackbar,
   showErrorSnackbar,
-  showSuccessSnackbar
+  showSuccessSnackbar,
+  showSnackbar
 } from "../../actions/alert";
 
 const useStyles = makeStyles(theme => ({
@@ -67,16 +70,16 @@ const useStyles = makeStyles(theme => ({
 const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
   const [formData, setFormData] = useState({
     email: "",
-    username: "",
     password: "",
     password2: "",
-    terms: true
+    terms: true,
+    admin: false,
   });
   const [values, setValues] = React.useState({
     showPassword: false
   });
   const classes = useStyles();
-  const { email, password, password2, terms, username } = formData;
+  const { email, password, password2, terms, admin } = formData;
   const { showPassword } = values;
 
   const handleClickShowPassword = () => {
@@ -87,18 +90,21 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
     e.preventDefault();
   };
 
+
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onRegister = async e => {
     e.preventDefault();
+   
     if (password !== password2) {
       showInfoSnackbar("Passwords do not match");
     } else if (terms !== true) {
       showErrorSnackbar("Please read and agree to our Terms and Conditions");
-    } else {
+    } 
+    else {
       try {
-        await register({ email, username, terms, password });
+        await register({ email, terms, password, admin });
       } catch (err) {
         showErrorSnackbar("Check Console...");
         console.log(err);
@@ -173,40 +179,7 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
             </Grid>
             <Grid item xs={1}></Grid>
           </Grid>
-          <Grid container>
-            <Grid item xs={2}></Grid>
-            <Grid item xs={8}>
-              <TextField
-                fullWidth
-                autoFocus
-                variant="filled"
-                margin="normal"
-                label="What do you go by?"
-                id="username"
-                name="username"
-                value={username}
-                onChange={e => onChange(e)}
-                helperText="(For ex... #ajweil)"
-                style={{ marginTop: "20px" }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <h4
-                        style={{
-                          opacity: ".5",
-                          color: "gray",
-                          fontSize: "24px"
-                        }}
-                      >
-                        #
-                      </h4>
-                    </InputAdornment>
-                  )
-                }}
-              />
-            </Grid>
-            <Grid item xs={2}></Grid>
-          </Grid>
+          
           <Grid container>
             <Grid item xs={1}></Grid>
             <Grid item xs={10} sm={10}>
@@ -293,6 +266,22 @@ const Register = ({ setAlert, register, isAuthenticated, toggleCheck }) => {
             </Grid>
 
             <Grid item sm={1}></Grid>
+            <Grid item xs={12} sm={10}>
+            <TextField
+                name="admin"
+                id="admin"
+                value={admin}
+                label="Admin Password"
+                variant="outlined"
+                margin="normal"
+                // type={showPassword ? "text" : "password"}
+                onChange={e => onChange(e)}
+                
+                fullWidth
+    
+              />
+
+            </Grid>
             <Grid item xs={12} sm={10}>
               <Button
                 type="submit"

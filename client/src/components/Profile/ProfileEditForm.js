@@ -128,7 +128,7 @@ const ProfileEditForm = ({
       skills: loading || !profile.skills ? "" : profile.skills,
       hireDate: loading || !profile.hireDate ? "" : profile.hireDate
     });
-  }, [loading]);
+  });
 
   const [formData, setFormData] = useState({
     firstName: "",
