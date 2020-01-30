@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import dotenv from 'dotenv';
+// import dotenv from 'dotenv';
 
 import {
   Button,
@@ -29,7 +29,7 @@ import {
   showInfoSnackbar,
   showErrorSnackbar,
   showSuccessSnackbar,
-  showSnackbar
+  // showSnackbar
 } from "../../actions/alert";
 
 const useStyles = makeStyles(theme => ({

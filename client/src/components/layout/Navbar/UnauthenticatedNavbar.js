@@ -46,10 +46,10 @@ const UnauthenticatedNavbar = ({ activeTab, setActiveTab }) => {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [ setMobileMoreAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  // const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const menuId = "primary-search-account-menu";
   function handleProfileMenuOpen(event) {
     setAnchorEl(event.currentTarget);

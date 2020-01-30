@@ -2,7 +2,7 @@ import axios from "axios";
 import {
   LOGIN_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL,
+  // REGISTER_FAIL,
   LOGIN_FAIL,
   USER_LOADED,
   LOGOUT,
@@ -22,9 +22,9 @@ import {
   // showInfoSnackbar,
   showSnackbar
 } from "./alert";
-import { fetchProfile } from "./profile";
-import { push } from "react-router-redux";
-import store from "../store";
+// import { fetchProfile } from "./profile";
+// import { push } from "react-router-redux";
+// import store from "../store";
 
 export const authenticationStart = () => ({
   type: AUTHENTICATION_START,
