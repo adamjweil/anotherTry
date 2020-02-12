@@ -29,8 +29,10 @@ class ProfileWrapper extends React.Component {
     return (
       <Query query={PROFILE_QUERY}>
         {({ loading, error, data }) => {
+          console.log(data)
           if (loading) {
             return <Spinner />;
+          if (error) return <div>error</div>;
           } else {
             return <Profile />;
           }

@@ -8,19 +8,22 @@ import ProfileCard from "./ProfileCard";
 import ProfileForm from "./ProfileForm";
 import ProfileHeaderAlert from "./ProfileHeaderAlert";
 import Spinner from "../layout/Spinner";
-
+import { fetchProfile } from '../../actions/profile';
+import store from "./../../store";
 const Profile = ({
   fetchProfileById,
   profile: { profile, profileLoading, isSaved },
   auth,
-  auth: { user, authLoading },
+  auth: { user },
   match
 }) => {
   useEffect(() => {
-    fetchProfileById(match.params.id);
-  }, [fetchProfileById, match.params.id]);
+    store.dispatch(fetchProfile());
+    // fetchProfileById(match.params.id);
+  }, []);
+  // }, [fetchProfileById, match.params.id]);
 
-  return profileLoading || authLoading ? (
+  return profileLoading ? (
     <Spinner />
   ) : (
     <Fragment>

@@ -22,7 +22,7 @@ router.get("/me", auth, async (req, res) => {
     if (!profile) {
       return res.status(400).json({ msg: "There is no profile for this user" });
     }
-    res.json(profile);
+    return res.json(profile);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -72,7 +72,7 @@ router.post("/", auth, async (req, res) => {
       { new: true, upsert: true }
     );
     let team = await Team.findById(profileFields.team);
-    team.members.push(profile);
+
     res.json(profile);
   } catch (err) {
     console.error(err.message);

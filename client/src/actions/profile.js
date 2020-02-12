@@ -6,7 +6,6 @@ import {
   FETCH_PROFILES,
   FETCH_PROFILE,
   FETCH_PROFILE_START,
-  ADD_MEMBER,
   FETCH_PROFILE_SUCCESS
 } from "./types";
 
@@ -17,8 +16,10 @@ export const fetchProfile = () => async dispatch => {
     dispatch({ type: FETCH_PROFILE_START });
     dispatch({
       type: FETCH_PROFILE,
-      payload: res.data
+      profile: res.data,
+      // payload: res.data
     });
+    dispatch({ type: FETCH_PROFILE_SUCCESS })
   } catch (err) {
     console.log(err);
     dispatch({
@@ -87,10 +88,6 @@ export const createProfile = ({
     dispatch({ type: FETCH_PROFILE_START });
     dispatch({
       type: CREATE_PROFILE,
-      payload: res.data
-    });
-    dispatch({
-      type: ADD_MEMBER,
       payload: res.data
     });
     dispatch(showSuccessSnackbar(edit ? "Profile Updated" : "Profile Created"));

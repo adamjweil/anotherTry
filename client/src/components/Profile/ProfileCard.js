@@ -95,7 +95,6 @@ const ProfileCard = ({
   user,
   profile,
   auth,
-  profile: { profileLoading },
   auth: { authLoading },
   loading,
   team,

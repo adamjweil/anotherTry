@@ -8,7 +8,6 @@ import Routes from "./components/routing/Routes";
 // Redux
 import store from "./store";
 import { loadUser } from "./actions/user";
-import { fetchProfile } from "./actions/profile";
 import setAuthToken from "./utils/setAuthToken";
 import { connect } from "react-redux";
 
@@ -19,7 +18,6 @@ if (localStorage.token) {
 const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
-    store.dispatch(fetchProfile());
   }, []);
 
   return (

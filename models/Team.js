@@ -13,10 +13,6 @@ const TeamSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  members: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "profile"
-  },
   date: {
     type: Date,
     default: Date.now

@@ -76,7 +76,7 @@ export const register = ({
       "Content-Type": "application/json"
     }
   };
-  
+
   const body = JSON.stringify({ email, username, terms, password, admin });
   dispatch(authenticationStart());
   try {
@@ -85,9 +85,7 @@ export const register = ({
       type: REGISTER_SUCCESS,
       payload: res.data
     });
-    // dispatch(loadUser("/profile/me"));
     dispatch(showSnackbar("Successfully Registered!", "success"));
-    // store.dispatch(push("/profile/me"));
   } catch (err) {
     dispatch(showSnackbar(err.msg, "error"));
     dispatch({
