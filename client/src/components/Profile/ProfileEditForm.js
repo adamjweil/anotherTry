@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment, useEffect, useReducer } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import SaveAltIcon from "@material-ui/icons/SaveAlt";
@@ -110,7 +110,7 @@ const ProfileEditForm = ({
   fetchUsers,
   history,
   profiles,
-  profile: { profile, loading },
+  profile: { profile, profileLoading },
   fetchTeams,
   teams
 }) => {
@@ -118,17 +118,8 @@ const ProfileEditForm = ({
     fetchUsers();
     fetchProfile();
     fetchTeams();
-    setFormData({
-      firstName: loading || !profile.firstName ? "" : profile.firstName,
-      lastName: loading || !profile.lastName ? "" : profile.lastName,
-      user: loading || !profile.user ? "" : profile.user,
-      title: loading || !profile.title ? "" : profile.title,
-      team: loading || !profile.team ? "" : profile.team,
-      bio: loading || !profile.bio ? "" : profile.bio,
-      skills: loading || !profile.skills ? "" : profile.skills,
-      hireDate: loading || !profile.hireDate ? "" : profile.hireDate
-    });
-  }, [fetchUsers, fetchProfile, fetchTeams, loading, profile.firstName, profile.lastName, profile.user, profile.title, profile.team, profile.bio, profile.skills, profile.hireDate]);
+    setFormData();
+  }, [fetchUsers, fetchProfile, fetchTeams, profileLoading]);
 
   const [formData, setFormData] = useState({
     firstName: "",

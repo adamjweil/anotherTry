@@ -21,11 +21,12 @@ const UserSchema = new mongoose.Schema({
   admin: {
     type: Boolean,
     default: false
+  },
+
+  profile: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "profile"
   }
-  // profile: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "profile"
-  // }
 });
 
 module.exports = User = mongoose.model("user", UserSchema);

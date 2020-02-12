@@ -22,7 +22,8 @@ const INITIAL_STATE = {
   isAuthenticated: null,
   authLoading: false,
   user: null,
-  error: null
+  error: null,
+  profileSaved: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -31,14 +32,14 @@ export default (state = INITIAL_STATE, action) => {
     case AUTHENTICATION_START: {
       return {
         ...state,
-        error: null, 
+        error: null,
         authLoading: true,
       };
     }
     case AUTHENTICATION_SUCCESS: {
       return {
         ...state,
-        error: null, 
+        error: null,
         authLoading: false,
         token: payload.token,
       };
@@ -46,7 +47,7 @@ export default (state = INITIAL_STATE, action) => {
     case AUTHENTICATION_FAILURE: {
       return {
         ...state,
-        error: payload.error, 
+        error: payload.error,
         authLoading: false,
       };
     }
